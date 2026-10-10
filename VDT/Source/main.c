@@ -140,7 +140,7 @@ int main(void)
 	
 	// initialize peripherals
 	BEEPER_Init(); 							// Piezo Beeper
-	BEEPER_PlayTones(tones_startup);	
+	BEEPER_PlayTones(tones_startup);
 	VINC_Init(); 							// Vinculum
 	LED_Init(); 							// LED Display
 	KBD_Init(); 							// Keys

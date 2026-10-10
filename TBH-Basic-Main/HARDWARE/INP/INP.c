@@ -7,51 +7,51 @@ extern u8 Inp1_Rise; 										// 位置传感器上升沿标志
 void INP_Init(void)
 {
 	GPIO_InitTypeDef  GPIO_InitStructure;
-	NVIC_InitTypeDef  NVIC_InitStructure; 					// Gavin, 2023-03-20 周一 11:16:46
-	EXTI_InitTypeDef  EXTI_InitStructure;
-	
+	//NVIC_InitTypeDef  NVIC_InitStructure; 					// Gavin, 2023-03-20 周一 11:16:46
+	//EXTI_InitTypeDef  EXTI_InitStructure;
+
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE); 		// 使能GPIOB时钟
- 
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0|GPIO_Pin_1; 			// PB0,1
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN; 							// 普通输入模式
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz; 				// 100M
-  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP; 							// 上拉
-  
-  GPIO_Init(GPIOB, &GPIO_InitStructure); 										// 初始化GPIOB0,1
-	
-	
+
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0|GPIO_Pin_1; 			// PB0,1
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN; 							// 普通输入模式
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz; 				// 100M
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP; 							// 上拉
+
+	GPIO_Init(GPIOB, &GPIO_InitStructure); 										// 初始化GPIOB0,1
+
 	// 外部中断初始化，Gavin，2023-03-20 周一 11:18:12
+	/*
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE); 		// 使能SYSCFG时钟
-	
+
 	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB, EXTI_PinSource0); // PB0 连接到中断线0
 	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB, EXTI_PinSource1); // PB1 连接到中断线1
-	
+
 	// 配置EXTI_Line0，1
-  EXTI_InitStructure.EXTI_Line = EXTI_Line0 | EXTI_Line1; 	// LINE0,1
-  EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt; 			// 中断事件
-  //EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising; 		// 上升沿触发 
-  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling; // 上升和下降沿触发
-  EXTI_InitStructure.EXTI_LineCmd = ENABLE; 								// 使能LINE0
-  EXTI_Init(&EXTI_InitStructure); 													// 配置
-  
+	EXTI_InitStructure.EXTI_Line = EXTI_Line0 | EXTI_Line1; 	// LINE0,1
+	EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt; 			// 中断事件
+	//EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising; 		// 上升沿触发 
+	EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling; // 上升和下降沿触发
+	EXTI_InitStructure.EXTI_LineCmd = ENABLE; 								// 使能LINE0
+	EXTI_Init(&EXTI_InitStructure); 													// 配置
+
 	//NVIC_InitStructure.NVIC_IRQChannel = EXTI0_IRQn | EXTI1_IRQn | EXTI3_IRQn | EXTI4_IRQn; // 外部中断0
 	//NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x00; 				// 抢占优先级0
 	//NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x02; 							// 子优先级2
 	//NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; 										// 使能外部中断通道
 	//NVIC_Init(&NVIC_InitStructure); 																		// 配置
-  
+
 	NVIC_InitStructure.NVIC_IRQChannel = EXTI0_IRQn; // 外部中断0
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x02; 				// 抢占优先级0
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x02; 							// 子优先级2
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; 										// 使能外部中断通道
 	NVIC_Init(&NVIC_InitStructure); 																		// 配置
-	
+
 	NVIC_InitStructure.NVIC_IRQChannel = EXTI1_IRQn; // 外部中断1
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x02; 				// 抢占优先级0
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x02; 							// 子优先级2
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; 										// 使能外部中断通道
 	NVIC_Init(&NVIC_InitStructure); 																		// 配置
-	
+	*/
 }
 
 // 外部中断0服务程序

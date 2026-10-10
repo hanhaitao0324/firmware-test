@@ -219,8 +219,8 @@ int main(void)
 	GUI_Init();
 	WM_MULTIBUF_Enable(1); 								// 开启STemWin多缓冲，RGB屏可能会用到
 	
-	RTC_Init(); 													// 初始化RTC
-	RTC_Set_WakeUp(RTC_WAKEUPCLOCK_CK_SPRE_16BITS,0); 				// 配置WAKE UP中断,1秒钟中断一次  
+	//RTC_Init(); 													// 初始化RTC
+	//RTC_Set_WakeUp(RTC_WAKEUPCLOCK_CK_SPRE_16BITS,0); 				// 配置WAKE UP中断,1秒钟中断一次  
 	
 	POINT_COLOR=RED; 
 	sprintf((char*)lcd_id,"LCD ID:%04X",lcddev.id); // 将LCD ID打印到lcd_id数组。	
@@ -1270,7 +1270,4 @@ void StartBootloader(void)
 	NVIC_SystemReset();
 	while(1);
 }
-
-
-
 

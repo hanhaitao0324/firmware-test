@@ -122,6 +122,7 @@ void InitEEPROM(unsigned char mode)
 	writinteep(Platform_Data->Penetration_inverse, ADRPENETRATION_INVERSE);//Invertierung der Penetration Phase speichern
   //	writinteep(1, ADRAUTOPRINT);// bug penetration overwritten V2.02
 	writeeeprom(1, ADRAUTOPRINT);
+	writeeeprom(0, ADRLOCKPARA);
 
 	tMode=0;
 	writinteep(tMode, ADRTMODE);

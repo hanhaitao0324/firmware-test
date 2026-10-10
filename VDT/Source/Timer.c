@@ -5,9 +5,11 @@
 
 volatile TTimer timers[TIMER_NUM_TIMERS];
 uint16_t CCR1_Val;
-extern bool CountFree, MessFlg, FirstReached, PresReduced;
+extern bool CountFree, MessFlg, FirstReached;
+extern char PresReduced;
 extern int tMode, ablZeitL, ablZeitH, intervall, aktPress, tmpVacuum;
 extern osThreadId LicTask;													/* assigned task id of task:  LicTask */
+extern int Vacuum;
 
 //------------------------------------------------------------------------------
 // TIMER_Init - init module
@@ -103,7 +105,7 @@ void TIM2_IRQHandler(void)
 {
   uint8_t i;
   static uint32_t counter1OneSec=0, counter2OneSec= 0, counter_Lic=0;
-	static unsigned int reduce_counter, lastPress;
+	static unsigned int reduce_counter, lastPress,reduce_counter2;
 	uint16_t capture = 0;
 
   if (TIM_GetITStatus(TIM2, TIM_IT_CC1) != RESET)
@@ -125,32 +127,54 @@ void TIM2_IRQHandler(void)
 		counter2OneSec++;
 				
 		//------- timeout für Druckanstieg, falls Druck nicht steigt -------
-		if (counter1OneSec>= TO_100MSEC){
-				if(MessFlg && !PresReduced && !CountFree) { // wenn Messung läuft, wenn noch kein timeout, wenn zeit nicht läuft
-					if(reduce_counter++>PRESSURE_RISE) {
-						if(aktPress >= lastPress+3) {						// war > 3 Druck muss steigen
+		if (counter1OneSec>= TO_100MSEC)
+		{
+				if(MessFlg && PresReduced == 0 && !CountFree) 
+				{ // wenn Messung läuft, wenn noch kein timeout, wenn zeit nicht läuft
+					if(reduce_counter++>PRESSURE_RISE) 
+					{
+						if(aktPress >= lastPress+3) 
+						{						// war > 3 Druck muss steigen
 							reduce_counter = 0;										// zähler zurücksetzen
-						}	else {
-							PresReduced = true;										// timeout true
+						}	
+						else 
+						{
+							PresReduced = 1;										// timeout true ???????60?
 						}
 						lastPress = aktPress;
-					}												
-				}	else {
+					}
+
+					if(reduce_counter2++>1200) 
+					{
+						if(aktPress <= Vacuum+3)
+						{
+							PresReduced = 2;
+						}
+					}
+				}
+				else 
+				{
 					reduce_counter = 0;
+					reduce_counter2 = 0;
 					lastPress = 0;
 				}
-			counter1OneSec = 0;				
+			counter1OneSec = 0;
 		}		
 		//------- timeout für Druckanstieg, falls Druck nicht steigt -------
 
-		if (counter2OneSec>= ((tMode)? TIMER_ONE_SEC_COUNTER*60:TIMER_ONE_SEC_COUNTER)){
-
-			if(CountFree) {
+		if (counter2OneSec>= ((tMode)? TIMER_ONE_SEC_COUNTER*60:TIMER_ONE_SEC_COUNTER))
+		{
+			if(CountFree) 
+			{
 				//------- Sekunden counter (Messung) -------
-				if(ablZeitL>0) {
+				if(ablZeitL>0) 
+				{
 					ablZeitL--;
-				}	else {
-					if(ablZeitH>0) {
+				}	
+				else 
+				{
+					if(ablZeitH>0) 
+					{
 						ablZeitH--;
 						ablZeitL=59;
 					}

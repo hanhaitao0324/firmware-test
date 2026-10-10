@@ -104,7 +104,7 @@ void VINC_Init(void)
 // The FTDI Commands are available in all Firmware codes except VDFC Firmware
 // Die VDAP Firmware muss geladen sein !
 void VINC_Reset(void)
-{	
+{
 	long i;
 	
 	VincHand=0;

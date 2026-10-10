@@ -91,11 +91,11 @@ void Get_ChipID(void);
 // 验证重置密码激活码 --------------------------------------
 char VerifyCode(char *);
 
-extern void Display_Handler(void);
-extern void Communicate_Handler(void);
-extern void RS485_Handler(void);
-extern void Balance_Handler(void);
-extern void Print_Handler(void);
+void Display_Handler(void);
+void Communicate_Handler(void);
+void RS485_Handler(void);
+void Balance_Handler(void);
+void Print_Handler(void);
 
 void Display_thread(void const *args);
 void Communicate_thread(void const *args);
@@ -448,7 +448,7 @@ int main(void)
 		SysPwIndex = 0;
 		writeeeprom(SysPwIndex,ADRSysPwIndex);
 	}
-
+	
 	// 读取内部参数 end------------------------------------------------------------------------
 
 	u8dat = lwip_comm_init();
@@ -538,6 +538,7 @@ char VerifyCode(char *temKeyStr)
 	}
 	return 0;
 }
+
 
 // End -----------------------------------------------------
 

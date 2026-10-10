@@ -37,7 +37,7 @@ extern unsigned int Vinc_Query(unsigned int port);
 extern void Vinc_Dir(char *erg);
 extern void Vinc_QD(unsigned int num,char *erg);
 extern int StartPrinter(void);
-extern void SendPrinter(char *str);
+extern void SendPrinter(const char *str);
 extern int VincErase(void);
 extern unsigned int Vinc_StartProg(void);
 extern int Vinc_Prog_Block(int block,unsigned char *buf,unsigned int size);

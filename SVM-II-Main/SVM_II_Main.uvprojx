@@ -49,7 +49,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\FLASH\RELEASE\</OutputDirectory>
-          <OutputName>SVM_II_Main_v117</OutputName>
+          <OutputName>SVM_II_Main_v118</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -916,8 +916,8 @@
             <nStopB2X>0</nStopB2X>
           </BeforeMake>
           <AfterMake>
-            <RunUserProg1>1</RunUserProg1>
-            <RunUserProg2>1</RunUserProg2>
+            <RunUserProg1>0</RunUserProg1>
+            <RunUserProg2>0</RunUserProg2>
             <UserProg1Name>CopyHex_Flash.bat</UserProg1Name>
             <UserProg2Name>fromelf.exe --bin -o ./@L.bin !L</UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
@@ -1111,7 +1111,7 @@
               </OCR_RVCT3>
               <OCR_RVCT4>
                 <Type>1</Type>
-                <StartAddress>0x8010000</StartAddress>
+                <StartAddress>0x8000000</StartAddress>
                 <Size>0x70000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>

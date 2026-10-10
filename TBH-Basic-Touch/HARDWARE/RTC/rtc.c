@@ -19,7 +19,7 @@ HAL_StatusTypeDef RTC_Set_Time(u8 hour,u8 min,u8 sec,u8 ampm)
 	RTC_TimeStructure.TimeFormat=ampm;
 	RTC_TimeStructure.DayLightSaving=RTC_DAYLIGHTSAVING_NONE;
     RTC_TimeStructure.StoreOperation=RTC_STOREOPERATION_RESET;
-	return HAL_RTC_SetTime(&RTC_Handler,&RTC_TimeStructure,RTC_FORMAT_BIN);	
+	return HAL_RTC_SetTime(&RTC_Handler,&RTC_TimeStructure,RTC_FORMAT_BIN);
 }
 
 //RTC日期设置
@@ -48,7 +48,7 @@ u8 RTC_Init(void)
 	// 下面输入的整型数据越小时钟越快，越大时钟越慢；
 	RTC_Handler.Init.AsynchPrediv=0X7F;           //RTC异步分频系数(1~0X7F)
 	//RTC_Handler.Init.SynchPrediv=0XFF;            //RTC同步分频系数(0~7FFF)   // 3天多3.5小时，慢了3：30
-	RTC_Handler.Init.SynchPrediv=0XFE;            //RTC同步分频系数(0~7FFF)   // 初始慢3秒
+	RTC_Handler.Init.SynchPrediv=0XFF;            //RTC同步分频系数(0~7FFF)   // 初始慢3秒
 	
 	RTC_Handler.Init.OutPut=RTC_OUTPUT_DISABLE;     
 	RTC_Handler.Init.OutPutPolarity=RTC_OUTPUT_POLARITY_HIGH;
@@ -56,11 +56,11 @@ u8 RTC_Init(void)
 	if(HAL_RTC_Init(&RTC_Handler)!=HAL_OK) return 2;
 	
 	// 需要依赖重新写程序修改时间时，可把0x5050修改一下即可；
-	if(HAL_RTCEx_BKUPRead(&RTC_Handler,RTC_BKP_DR0)!=0X5050)//是否第一次配置
+	if(HAL_RTCEx_BKUPRead(&RTC_Handler,RTC_BKP_DR0)!=0X5051)//是否第一次配置
 	{ 
-		RTC_Set_Time(14,29,00,RTC_HOURFORMAT12_PM);	        //设置时间 ,根据实际时间修改
-		RTC_Set_Date(20,7,2,4);		                    //设置日期
-		HAL_RTCEx_BKUPWrite(&RTC_Handler,RTC_BKP_DR0,0X5050);//标记已经初始化过了
+		RTC_Set_Time(8,20,00,RTC_HOURFORMAT12_AM);	        //设置时间 ,根据实际时间修改
+		RTC_Set_Date(26,8,25,2);		                    //设置日期
+		HAL_RTCEx_BKUPWrite(&RTC_Handler,RTC_BKP_DR0,0X5051);//标记已经初始化过了
 	}
 	return 0;
 }
@@ -92,7 +92,7 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef* hrtc)
 //week:星期几(1~7) @ref  RTC_WeekDay_Definitions
 //hour,min,sec:小时,分钟,秒钟
 void RTC_Set_AlarmA(u8 week,u8 hour,u8 min,u8 sec)
-{ 
+{
     RTC_AlarmTypeDef RTC_AlarmSturuct;
     
     RTC_AlarmSturuct.AlarmTime.Hours=hour;  //小时

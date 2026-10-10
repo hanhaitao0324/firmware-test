@@ -61,13 +61,6 @@ u8 HotFflag = 0; 												// 热点刷新标志
 //--------------------------------------2021/10/25 星期一 17:37:11
 u8 Passwordflag = 0;										// 密码保护标志
 
-//--------------------------------------
-//u8 mmenu_state = 0; 										// 管理菜单状态；
-//u8 mmenu_flag = 0; 											// 管理菜单刷新标志；
-
-//u8 HelpMenu = 0; 												// 帮助菜单状态；
-//u8 help_flag = 0;
-
 u8 Quali_Menu = 0; 											// Qulification Menu菜单状态
 u8 ConPan_Menu = 0; 										// Control Panel Menu菜单状态
 
@@ -114,7 +107,6 @@ uint8_t ReportsIp = 0; 									// 最新测试报告指针，保存前先+1，超限回0；
 uint16_t tmpReportsIp = 0; 							// 临时变量
 uint16_t Adr_ReportTmp[REPORT_MAX]; 		// 重新排序的地址组
 
-
 //......................................
 char DeviceSerialNb[10]; 								// 设备序列号
 uint8_t DeviceID = 0; 									// 设备ID号, 121/122/221/222/223
@@ -122,7 +114,6 @@ uint8_t DeviceIDtmp = 0; 								// 设备ID号，临时
 
 char ConfigCode[20]; 										// 配置激活码
 char ConfigCodeSv[20]; 									// 配置激活码，临时设定值
-
 
 RTC_TimeTypeDef RTC_TimeStruct; 				// 实时时间，结构变量，报告打印函数使用，RTC显示函数使用
 RTC_DateTypeDef RTC_DateStruct; 				// 实时日期，结构变量
@@ -137,12 +128,12 @@ char SetDateStr[20]; 										// 设置日期，字符串
 char SetTimeStr[20]; 										// 设置时间，字符串
 
 u8 DaylightTimeSv = 0; 									// 夏令时临时设定值
-u8 DaylightTime = 0; 										// 夏令时
+//u8 DaylightTime = 0; 										// 夏令时
 u8 DateFormatSv = 0; 										// 日期格式临时设定值
 u8 DateFormat = 0; 											// 日期格式
-s8 TimeZoneNb = 0; 											// 时区辅助位置条
-s8 TimeZoneSv = 0; 											// 时区临时设定值
-s8 TimeZone = 0; 												// 时区
+//s8 TimeZoneNb = 0; 											// 时区辅助位置条
+//s8 TimeZoneSv = 0; 											// 时区临时设定值
+//s8 TimeZone = 0; 												// 时区
 u8 PrintType = 0; 											// 打印类型，0：USB；1：LAN；Gavin，2023-01-30 周一 14:54:34
 u8 PrintFormat = 0; 										// 打印格式，0：PCL；1：ASC-II
 u8 tmpPT = 0; 													// 临时变量
@@ -198,7 +189,7 @@ u8 PrtIP[4]; 														// 网络打印机IP地址
 u8 tmpIP[4];
 
 // 零位在14
-const char * TimeZoneList[38][2] = 
+/*const char * TimeZoneList[38][2] = 
 {
 	{"UTC-12:00","Baker Island,Howland Island"},
 	{"UTC-11:00","Jarvis Island,Kingman Reef,Midway Atoll"},
@@ -238,7 +229,7 @@ const char * TimeZoneList[38][2] =
 	{"UTC+12:45","Chatham Islands"},
 	{"UTC+13:00","Phoenix Islands,Tokelau,Samoa,Tonga"},
 	{"UTC+14:00","Line Islands"},
-};
+};*/
 
 const Platform_Data_s SYSTEM_Default = 
 {
@@ -268,24 +259,45 @@ const Platform_Data_s SYSTEM_Default =
 	0                    //CRC32
 };
 
+// const uint16_t RUN_CYC[16] = 
+// {
+// 	0, 													// 0
+// 	10, 												// 1
+// 	10+500, 										// 2
+// 	10+500+1250, 								// 3
+// 	1760+1*1250, 								// 4
+// 	1760+2*1250, 								// 5
+// 	1760+3*1250, 								// 6
+// 	1760+4*1250, 								// 7
+// 	1760+5*1250, 								// 8
+// 	1760+6*1250, 								// 9
+// 	1760+7*1250, 								// 10
+// 	1760+8*1250, 								// 11
+// 	1760+9*1250, 								// 12
+// 	1760+10*1250, 							// 13
+// 	1760+11*1250, 							// 14
+// 	1760+12*1250, 							// 15
+	
+// };
+
 const uint16_t RUN_CYC[16] = 
 {
 	0, 													// 0
 	10, 												// 1
-	10+500, 										// 2
-	10+500+1250, 								// 3
-	1760+1*1250, 								// 4
-	1760+2*1250, 								// 5
-	1760+3*1250, 								// 6
-	1760+4*1250, 								// 7
-	1760+5*1250, 								// 8
-	1760+6*1250, 								// 9
-	1760+7*1250, 								// 10
-	1760+8*1250, 								// 11
-	1760+9*1250, 								// 12
-	1760+10*1250, 							// 13
-	1760+11*1250, 							// 14
-	1760+12*1250, 							// 15
+	10+490, 										// 2
+	10+490+750, 								// 3
+	1250+1*1250, 								// 4
+	1250+2*1250, 								// 5
+	1250+3*1250, 								// 6
+	1250+4*1250, 								// 7
+	1250+5*1250, 								// 8
+	1250+6*1250, 								// 9
+	1250+7*1250, 								// 10
+	1250+8*1250, 								// 11
+	1250+9*1250, 								// 12
+	1250+10*1250, 							// 13
+	1250+11*1250, 							// 14
+	1250+12*1250, 							// 15
 	
 };
 
@@ -368,9 +380,9 @@ float UnsettledVolume1 = 0; 						// 站1样品初始体积
 float UnsettledVolume2 = 0; 						// 站2样品初始体积
 float SampleMass1 = 0.0; 								// 站1样品质量
 float SampleMass2 = 0.0; 								// 站2样品质量
-const char * USP_EP_TList[3] = {"V10","V500","V1250"};
+const char * USP_EP_TList[9] = {"V10","V500","V1250","V2500","V3750","V5000","V6250","V7500","V8750"};
 const char * USP_EP_3List[3] = {"V200","V400","V200"};
-char VolumeStr1_T[16][10]; 							// 站1拍击体积字符串
+char VolumeStr1_T[16][10]; 					 		// 站1拍击体积字符串
 char VolumeStr2_T[16][10]; 							// 站2拍击体积字符串
 float VolumeTest1[16]; 									// 站1拍击体积数值
 float VolumeTest2[16]; 									// 站2拍击体积数值
@@ -577,2353 +589,6 @@ __asm void MSR_MSP(u32 addr)
 	BX r14
 }
 
-//osDelay(100);
-
-// 计次数/计时间测试报告打印 ---------------------------------------------------
-/*void druckergebnisNorm(void)
-{
-	char tbuf1[50];
-	char tbuf2[50];
-	char PrintBuf[100];
-	
-	char RError[] = "Speed Error";										//针对报告转速出错问题加的错误提示字符串	2021/12/13 星期一 11:56:58
-	//char type[25];
-	//u8 i;
-	
-	//RTC_GetTime(RTC_Format_BIN, &RTC_TimeStruct);
-	//RTC_GetDate(RTC_Format_BIN, &RTC_DateStruct);
-	
-	SendPrinter("                         Tapped Density Report Test Assist\r\n");
-	SendPrinter("      ----------------------------------------------------------------------\r\n");
-	SendPrinter("\r\n");
-	
-	strcpy(tbuf1,Reports_rsmp.RPT_DeviceSerialNb);
-	sprintf(PrintBuf, "      Device serial no.:     %6s", tbuf1);
-	SendPrinter(PrintBuf);
-	      SendPrinter("        Page:                        1/1\r\n");
-	
-	sprintf(PrintBuf, "      Main Firmware version: %6s", Reports_rsmp.RPT_MbVersion);
-	SendPrinter(PrintBuf);
-	sprintf(PrintBuf, "        Touch Firmware version:   %6s\r\n", Reports_rsmp.RPT_DbVersion);
-	SendPrinter(PrintBuf);
-	
-	//sprintf(PrintBuf, "      Device configuration:  %6d", (int)Reports_rsmp.RPT_DeviceType);
-	if(Reports_rsmp.RPT_DeviceType == 121)
-		strcpy(tbuf1,"USP 1, 1 Station");
-	else
-	if(Reports_rsmp.RPT_DeviceType == 122)
-		strcpy(tbuf1,"USP 2, 1 Station");
-	else
-	if(Reports_rsmp.RPT_DeviceType == 221)
-		strcpy(tbuf1,"USP 1, 2 Stations");
-	else
-	if(Reports_rsmp.RPT_DeviceType == 222)
-		strcpy(tbuf1,"USP 2, 2 Stations");
-	else
-	if(Reports_rsmp.RPT_DeviceType == 223)
-		strcpy(tbuf1,"USP 1&2, 2 Stations");
-	else
-		strcpy(tbuf1,"USP x, x Stations");
-	sprintf(PrintBuf, "      Configuration: %-20s", tbuf1);
-	SendPrinter(PrintBuf);
-	
-	//sprintf(PrintBuf, "        Print date:  20%02d-%02d-%02d %02d:%02d:%02d\r\n", RTC_DateStruct.RTC_Year,RTC_DateStruct.RTC_Month,RTC_DateStruct.RTC_Date,RTC_TimeStruct.RTC_Hours,RTC_TimeStruct.RTC_Minutes,RTC_TimeStruct.RTC_Seconds);
-	sprintf(PrintBuf, "  Print date:  %s %s\r\n", DisDateStr,DisTimeStr);
-	SendPrinter(PrintBuf);
-	SendPrinter("\r\n");
-	
-	switch(Reports_rsmp.RPT_DeviceType)
-	{
-		case 121: 													// 1个测试站，方法1，300转/分
-		case 122: 													// 1个测试站，方法2，250转/分
-		{
-			SendPrinter("      Product name station 1:\r\n");
-			SendPrinter("      ----------------------------------------------------------------------\r\n");
-			sprintf(PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S1PName);
-			SendPrinter(PrintBuf);
-			
-			memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-			strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-			sprintf(PrintBuf,"      Information: %-17s\r\n",tbuf1);
-			SendPrinter(PrintBuf);
-			
-			memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-			if(strlen(Reports_rsmp.RPT_S1PInfo)>17)
-				strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+17,30); 
-			else 
-				tbuf1[0] = '\0';
-			
-			sprintf(PrintBuf,"      %-30s\r\n",tbuf1);
-			SendPrinter(PrintBuf);
-			
-			memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-			if(strlen(Reports_rsmp.RPT_S1PInfo)>47)
-				strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+47,30);
-			else
-				tbuf1[0] = '\0';
-			
-			sprintf(PrintBuf,"      %-30s\r\n",tbuf1);
-			SendPrinter(PrintBuf);
-			
-			sprintf(PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S1PBatchNb);
-			SendPrinter(PrintBuf);
-			
-			sprintf(PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S1CylinderNb);
-			SendPrinter(PrintBuf);
-			
-			SendPrinter("\r\n");
-			SendPrinter("      Test Parameter                       Station 1\r\n");
-			SendPrinter("      ----------------------------------------------------------------------\r\n");
-			sprintf(PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S1Method);
-			SendPrinter(PrintBuf);
-			
-			if(Reports_rsmp.RPT_DeviceType == 121)
-				strcpy(PrintBuf,"      Speed:                               300 taps/min\r\n");
-			else
-				strcpy(PrintBuf,"      Speed:                               250 taps/min\r\n");
-			SendPrinter(PrintBuf);
-			
-			sprintf(PrintBuf,"      Cylinder Volume:                     %-15s\r\n",Reports_rsmp.RPT_S1CylinderSize);
-			SendPrinter(PrintBuf);
-			
-			if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-				sprintf(PrintBuf,"      Number of taps:                      %d\r\n",Reports_rsmp.RPT_S1SetTapsNb);
-			else
-			if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-			{
-				TimeOfHour = Reports_rsmp.RPT_S1SetRunTime/3600;
-				TimeOfMin = Reports_rsmp.RPT_S1SetRunTime%3600/60;
-				TimeOfSec = Reports_rsmp.RPT_S1SetRunTime%60;
-				sprintf(PrintBuf,"      Run Time:                            %02d:%02d:%02d\r\n",TimeOfHour,TimeOfMin,TimeOfSec);
-			}
-			SendPrinter(PrintBuf);
-			
-			SendPrinter("\r\n");
-			SendPrinter("      System Settings\r\n");
-			SendPrinter("      ----------------------------------------------------------------------\r\n");
-			sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-				Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-			SendPrinter(PrintBuf);
-			
-			SendPrinter("\r\n");
-			SendPrinter("      Test run data           Station 1\r\n");
-			SendPrinter("      ----------------------------------------------------------------------\r\n");
-			SendPrinter("      Sample Weight           ________________\r\n");
-			//SendPrinter("      V0                      ________________\r\n");
-			//SendPrinter("      V10                     ________________\r\n");
-			//SendPrinter("      V500                    ________________\r\n");
-			//SendPrinter("      V1250                   ________________\r\n");
-			SendPrinter("      Initial Density         ________________\r\n");
-			SendPrinter("      Tapped Density          ________________\r\n");
-			SendPrinter("      Hausner Ratio           ________________\r\n");
-			SendPrinter("      Compressibility Index   ________________\r\n");
-			
-			SendPrinter("\r\n");
-			SendPrinter("      Actual number of taps, time, and speed\r\n");
-			SendPrinter("      ----------------------------------------------------------------------\r\n");
-			sprintf(PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-				Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-			if(strlen(PrintBuf)>50)																																					//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-			 	sprintf(PrintBuf,"      Speed min-max:      %s\r\n",RError);																	//2021/12/13 星期一 11:56:48	Mark 2
-			SendPrinter(PrintBuf);
-			
-			if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-				sprintf(PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-			else
-			if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-				sprintf(PrintBuf,"      Run Time:           %02d:%02d:%02d (hh:mm:ss)\r\n",
-					Reports_rsmp.RPT_RealRunTime/3600,Reports_rsmp.RPT_RealRunTime%3600/60,Reports_rsmp.RPT_RealRunTime%60); 
-			SendPrinter(PrintBuf);
-			
-			SendPrinter("\r\n");
-			if(Reports_rsmp.RPT_TestStatus)
-				sprintf(PrintBuf,"      Status:             %s\r\n","Test completed.");
-			else
-				sprintf(PrintBuf,"      Status:             %s\r\n","Test abort.");
-			SendPrinter(PrintBuf);
-		}break;
-		case 221: 													// 2个测试站，方法1，300转/分
-		case 222: 													// 2个测试站，方法2，250转/分
-		{
-			SendPrinter("      Product name station 1:              Product name station 2:\r\n");
-			SendPrinter("      ----------------------------------------------------------------------\r\n");
-			sprintf(PrintBuf,"      Name:        %-17s       Name:        %-17s\r\n",Reports_rsmp.RPT_S1PName,Reports_rsmp.RPT_S2PName);
-			SendPrinter(PrintBuf);
-			
-			memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-			memset(tbuf2,'\0',sizeof(tbuf2));						//清空数组
-			strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-			strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo,17);
-			sprintf(PrintBuf,"      Information: %-17s       Information: %-17s\r\n",tbuf1,tbuf2);
-			SendPrinter(PrintBuf);
-			
-			memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-			memset(tbuf2,'\0',sizeof(tbuf2));						//清空数组
-			if(strlen(Reports_rsmp.RPT_S1PInfo)>17) strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+17,30); else tbuf1[0] = '\0';
-			if(strlen(Reports_rsmp.RPT_S2PInfo)>17) strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+17,30); else tbuf2[0] = '\0';
-			
-			sprintf(PrintBuf,"      %-30s       %-30s\r\n",tbuf1,tbuf2);
-			SendPrinter(PrintBuf);
-			
-			memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-			memset(tbuf2,'\0',sizeof(tbuf2));						//清空数组
-			if(strlen(Reports_rsmp.RPT_S1PInfo)>47) strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+47,30); else tbuf1[0] = '\0';
-			if(strlen(Reports_rsmp.RPT_S2PInfo)>47) strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+47,30); else tbuf2[0] = '\0';
-			
-			sprintf(PrintBuf,"      %-30s       %-30s\r\n",tbuf1,tbuf2);
-			SendPrinter(PrintBuf);
-			
-			sprintf(PrintBuf,"      Batch Number:    %15s     Batch Number:    %15s\r\n",Reports_rsmp.RPT_S1PBatchNb,Reports_rsmp.RPT_S2PBatchNb);
-			SendPrinter(PrintBuf);
-			
-			sprintf(PrintBuf,"      Cylinder Number: %15s     Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S1CylinderNb,Reports_rsmp.RPT_S2CylinderNb);
-			SendPrinter(PrintBuf);
-			
-			SendPrinter("\r\n");
-			SendPrinter("      Test Parameter                       Station 1          Station 2\r\n");
-			SendPrinter("      ----------------------------------------------------------------------\r\n");
-			sprintf(PrintBuf,"      USP method:                          USP %d              USP %d\r\n",(u16)Reports_rsmp.RPT_S1Method,(u16)Reports_rsmp.RPT_S2Method);
-			SendPrinter(PrintBuf);
-			
-			if(Reports_rsmp.RPT_DeviceType == 221)
-				strcpy(PrintBuf,"      Speed:                               300 taps/min       300 taps/min\r\n");
-			else
-				strcpy(PrintBuf,"      Speed:                               250 taps/min       250 taps/min\r\n");
-			SendPrinter(PrintBuf);
-			
-			sprintf(PrintBuf,"      Cylinder Volume:                     %-15s    %-15s\r\n",Reports_rsmp.RPT_S1CylinderSize,Reports_rsmp.RPT_S2CylinderSize);
-			SendPrinter(PrintBuf);
-			
-			if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-				sprintf(PrintBuf,"      Number of taps:                      %d                 %d\r\n",Reports_rsmp.RPT_S1SetTapsNb,Reports_rsmp.RPT_S2SetTapsNb);
-			else
-			if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-			{
-				TimeOfHour = Reports_rsmp.RPT_S1SetRunTime/3600;
-				TimeOfMin = Reports_rsmp.RPT_S1SetRunTime%3600/60;
-				TimeOfSec = Reports_rsmp.RPT_S1SetRunTime%60;
-				sprintf(PrintBuf,"      Run Time:                            %02d:%02d:%02d           %02d:%02d:%02d\r\n",TimeOfHour,TimeOfMin,TimeOfSec,TimeOfHour,TimeOfMin,TimeOfSec);
-			}
-			SendPrinter(PrintBuf);
-			
-			SendPrinter("\r\n");
-			SendPrinter("      System Settings\r\n");
-			SendPrinter("      ----------------------------------------------------------------------\r\n");
-			sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-				Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-			SendPrinter(PrintBuf);
-			
-			SendPrinter("\r\n");
-			SendPrinter("      Test run data           Station 1            Station 2\r\n");
-			SendPrinter("      ----------------------------------------------------------------------\r\n");
-			SendPrinter("      Sample Weight           ________________     ________________\r\n");
-			//SendPrinter("      V0                      ________________     ________________\r\n");
-			//SendPrinter("      V10                     ________________     ________________\r\n");
-			//SendPrinter("      V500                    ________________     ________________\r\n");
-			//SendPrinter("      V1250                   ________________     ________________\r\n");
-			SendPrinter("      Initial Density         ________________     ________________\r\n");
-			SendPrinter("      Tapped Density          ________________     ________________\r\n");
-			SendPrinter("      Hausner Ratio           ________________     ________________\r\n");
-			SendPrinter("      Compressibility Index   ________________     ________________\r\n");
-			
-			SendPrinter("\r\n");
-			SendPrinter("      Actual number of taps, time, and speed\r\n");
-			SendPrinter("      ----------------------------------------------------------------------\r\n");
-			sprintf(PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min     %5.1f-%5.1f taps/min\r\n",
-				Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed,Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-			if(strlen(PrintBuf)>80)																											//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-				sprintf(PrintBuf,"      Speed min-max:      %s\r\n",RError);									//2021/12/13 星期一 11:56:48
-				
-			SendPrinter(PrintBuf);
-			
-			if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-				sprintf(PrintBuf,"      Number of taps:     %4d                        %4d\r\n",Reports_rsmp.RPT_RealTapsNb,Reports_rsmp.RPT_RealTapsNb); 
-			else
-			if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-				sprintf(PrintBuf,"      Run Time:           %02d:%02d:%02d (hh:mm:ss)\r\n",
-					Reports_rsmp.RPT_RealRunTime/3600,Reports_rsmp.RPT_RealRunTime%3600/60,Reports_rsmp.RPT_RealRunTime%60); 
-			SendPrinter(PrintBuf);
-			
-			SendPrinter("\r\n");
-			if(Reports_rsmp.RPT_TestStatus)
-				sprintf(PrintBuf,"      Status:             %s\r\n","Test completed.");
-			else
-				sprintf(PrintBuf,"      Status:             %s\r\n","Test abort.");
-			SendPrinter(PrintBuf);
-			
-		}break;
-		case 223: 													// 1个测试站，方法可选
-		{
-			if(Reports_rsmp.RPT_S1Method == 1) 					// 测试站1方法1
-			{
-				SendPrinter("      Product name station 1:\r\n");
-				SendPrinter("      ----------------------------------------------------------------------\r\n");
-				sprintf(PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S1PName);
-				SendPrinter(PrintBuf);
-				
-				memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-				strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-				sprintf(PrintBuf,"      Information: %-17s\r\n",tbuf1);
-				SendPrinter(PrintBuf);
-				
-				memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-				if(strlen(Reports_rsmp.RPT_S1PInfo)>17) 
-					strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+17,30); 
-				else 
-					tbuf1[0] = '\0';
-				
-				sprintf(PrintBuf,"      %-30s\r\n",tbuf1);
-				SendPrinter(PrintBuf);
-				
-				memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-				if(strlen(Reports_rsmp.RPT_S1PInfo)>47)
-					strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+47,30);
-				else
-					tbuf1[0] = '\0';
-				
-				sprintf(PrintBuf,"      %-30s\r\n",tbuf1);
-				SendPrinter(PrintBuf);
-				
-				sprintf(PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S1PBatchNb);
-				SendPrinter(PrintBuf);
-				
-				sprintf(PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S1CylinderNb);
-				SendPrinter(PrintBuf);
-				
-				SendPrinter("\r\n");
-				SendPrinter("      Test Parameter                       Station 1\r\n");
-				SendPrinter("      ----------------------------------------------------------------------\r\n");
-				sprintf(PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S1Method);
-				SendPrinter(PrintBuf);
-				
-				strcpy(PrintBuf,"      Speed:                               300 taps/min\r\n");
-				SendPrinter(PrintBuf);
-				
-				sprintf(PrintBuf,"      Cylinder Volume:                     %-15s\r\n",Reports_rsmp.RPT_S1CylinderSize);
-				SendPrinter(PrintBuf);
-				
-				if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-					sprintf(PrintBuf,"      Number of taps:                      %d\r\n",Reports_rsmp.RPT_S1SetTapsNb);
-				else
-				if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-				{
-					TimeOfHour = Reports_rsmp.RPT_S1SetRunTime/3600;
-					TimeOfMin = Reports_rsmp.RPT_S1SetRunTime%3600/60;
-					TimeOfSec = Reports_rsmp.RPT_S1SetRunTime%60;
-					sprintf(PrintBuf,"      Run Time:                            %02d:%02d:%02d\r\n",TimeOfHour,TimeOfMin,TimeOfSec);
-				}
-				SendPrinter(PrintBuf);
-				
-				SendPrinter("\r\n");
-				SendPrinter("      System Settings\r\n");
-				SendPrinter("      ----------------------------------------------------------------------\r\n");
-				sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-					Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-				SendPrinter(PrintBuf);
-				
-				SendPrinter("\r\n");
-				SendPrinter("      Test run data           Station 1\r\n");
-				SendPrinter("      ----------------------------------------------------------------------\r\n");
-				SendPrinter("      Sample Weight           ________________\r\n");
-				//SendPrinter("      V0                      ________________\r\n");
-				//SendPrinter("      V10                     ________________\r\n");
-				//SendPrinter("      V500                    ________________\r\n");
-				//SendPrinter("      V1250                   ________________\r\n");
-				SendPrinter("      Initial Density         ________________\r\n");
-				SendPrinter("      Tapped Density          ________________\r\n");
-				SendPrinter("      Hausner Ratio           ________________\r\n");
-				SendPrinter("      Compressibility Index   ________________\r\n");
-				
-				SendPrinter("\r\n");
-				SendPrinter("      Actual number of taps, time, and speed\r\n");
-				SendPrinter("      ----------------------------------------------------------------------\r\n");
-				sprintf(PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-					Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-				if(strlen(PrintBuf)>50)																											//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-					sprintf(PrintBuf,"      Speed min-max:      %s\r\n",RError);									//2021/12/13 星期一 11:56:48
-				SendPrinter(PrintBuf);
-				
-				if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-					sprintf(PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-				else
-				if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-					sprintf(PrintBuf,"      Run Time:           %02d:%02d:%02d (hh:mm:ss)\r\n",
-						Reports_rsmp.RPT_RealRunTime/3600,Reports_rsmp.RPT_RealRunTime%3600/60,Reports_rsmp.RPT_RealRunTime%60); 
-				SendPrinter(PrintBuf);
-				
-				SendPrinter("\r\n");
-				if(Reports_rsmp.RPT_TestStatus)
-					sprintf(PrintBuf,"      Status:             %s\r\n","Test completed.");
-				else
-					sprintf(PrintBuf,"      Status:             %s\r\n","Test abort.");
-				SendPrinter(PrintBuf);
-			}
-			else
-			if(Reports_rsmp.RPT_S2Method == 2) 					// 测试站2方法2
-			{
-				SendPrinter("      Product name station 2:\r\n");
-				SendPrinter("      ----------------------------------------------------------------------\r\n");
-				sprintf(PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S2PName);
-				SendPrinter(PrintBuf);
-				
-				memset(tbuf2,'\0',sizeof(tbuf2));						//清空数组
-				strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo,17);
-				sprintf(PrintBuf,"      Information: %-17s\r\n",tbuf2);
-				SendPrinter(PrintBuf);
-				
-				memset(tbuf2,'\0',sizeof(tbuf2));						//清空数组
-				if(strlen(Reports_rsmp.RPT_S2PInfo)>17) 
-					strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+17,30); 
-				else 
-					tbuf2[0] = '\0';
-				
-				sprintf(PrintBuf,"      %-30s\r\n",tbuf2);
-				SendPrinter(PrintBuf);
-				
-				memset(tbuf2,'\0',sizeof(tbuf2));						//清空数组
-				if(strlen(Reports_rsmp.RPT_S2PInfo)>47)
-					strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+47,30);
-				else
-					tbuf2[0] = '\0';
-				
-				sprintf(PrintBuf,"      %-30s\r\n",tbuf2);
-				SendPrinter(PrintBuf);
-				
-				sprintf(PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S2PBatchNb);
-				SendPrinter(PrintBuf);
-				
-				sprintf(PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S2CylinderNb);
-				SendPrinter(PrintBuf);
-				
-				SendPrinter("\r\n");
-				SendPrinter("      Test Parameter                       Station 2\r\n");
-				SendPrinter("      ----------------------------------------------------------------------\r\n");
-				sprintf(PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S2Method);
-				SendPrinter(PrintBuf);
-				
-				strcpy(PrintBuf,"      Speed:                               250 taps/min\r\n");
-				SendPrinter(PrintBuf);
-				
-				sprintf(PrintBuf,"      Cylinder Volume:                     %-15s\r\n",Reports_rsmp.RPT_S2CylinderSize);
-				SendPrinter(PrintBuf);
-				
-				if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-					sprintf(PrintBuf,"      Number of taps:                      %d\r\n",Reports_rsmp.RPT_S2SetTapsNb);
-				else
-				if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-				{
-					TimeOfHour = Reports_rsmp.RPT_S2SetRunTime/3600;
-					TimeOfMin = Reports_rsmp.RPT_S2SetRunTime%3600/60;
-					TimeOfSec = Reports_rsmp.RPT_S2SetRunTime%60;
-					sprintf(PrintBuf,"      Run Time:                            %02d:%02d:%02d\r\n",TimeOfHour,TimeOfMin,TimeOfSec);
-				}
-				SendPrinter(PrintBuf);
-				
-				SendPrinter("\r\n");
-				SendPrinter("      System Settings\r\n");
-				SendPrinter("      ----------------------------------------------------------------------\r\n");
-				sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-					Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-				SendPrinter(PrintBuf);
-				
-				SendPrinter("\r\n");
-				SendPrinter("      Test run data           Station 2\r\n");
-				SendPrinter("      ----------------------------------------------------------------------\r\n");
-				SendPrinter("      Sample Weight           ________________\r\n");
-				//SendPrinter("      V0                      ________________\r\n");
-				//SendPrinter("      V10                     ________________\r\n");
-				//SendPrinter("      V500                    ________________\r\n");
-				//SendPrinter("      V1250                   ________________\r\n");
-				SendPrinter("      Initial Density         ________________\r\n");
-				SendPrinter("      Tapped Density          ________________\r\n");
-				SendPrinter("      Hausner Ratio           ________________\r\n");
-				SendPrinter("      Compressibility Index   ________________\r\n");
-				
-				SendPrinter("\r\n");
-				SendPrinter("      Actual number of taps, time, and speed\r\n");
-				SendPrinter("      ----------------------------------------------------------------------\r\n");
-				sprintf(PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-					Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-				if(strlen(PrintBuf)>50)																											//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-					sprintf(PrintBuf,"      Speed min-max:      %s\r\n",RError);									//2021/12/13 星期一 11:56:48
-				SendPrinter(PrintBuf);
-				
-				if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-					sprintf(PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-				else
-				if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-					sprintf(PrintBuf,"      Run Time:           %02d:%02d:%02d (hh:mm:ss)\r\n",
-						Reports_rsmp.RPT_RealRunTime/3600,Reports_rsmp.RPT_RealRunTime%3600/60,Reports_rsmp.RPT_RealRunTime%60); 
-				SendPrinter(PrintBuf);
-				
-				SendPrinter("\r\n");
-				if(Reports_rsmp.RPT_TestStatus)
-					sprintf(PrintBuf,"      Status:             %s\r\n","Test completed.");
-				else
-					sprintf(PrintBuf,"      Status:             %s\r\n","Test abort.");
-				SendPrinter(PrintBuf);
-			}
-		}break;
-		default:
-		break;
-	}
-	
-	// 打印测试日期 ------------------------------------------
-	if(DateFormat == 0) 									// Day,Month,Year
-		sprintf(PrintBuf,"      Test date:          %02d.%02d.20%02d %02d:%02d:%02d",
-			Reports_rsmp.RPT_Date.RTC_Date,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Year,
-			Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-	else
-	if(DateFormat == 1) 									// Year,Month,Day
-		sprintf(PrintBuf,"      Test date:          20%02d-%02d-%02d %02d:%02d:%02d",
-			Reports_rsmp.RPT_Date.RTC_Year,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date,
-			Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-	else
-	if(DateFormat == 2) 									// Month,Day,Year
-		sprintf(PrintBuf,"      Test date:          %02d/%02d/20%02d %02d:%02d:%02d",
-			Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date,Reports_rsmp.RPT_Date.RTC_Year,
-			Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-	
-	SendPrinter(PrintBuf);
-	
-	SendPrinter("\r\n");
-	SendPrinter("      Requirements fulfilled:      YES      No\r\n");
-	SendPrinter("\r\n");
-	SendPrinter("      Comments\r\n");
-	//SendPrinter("      ______________________________________________________________________\r\n");
-	SendPrinter("      ______________________________________________________________________\r\n");
-	SendPrinter("      ______________________________________________________________________\r\n");
-	SendPrinter("\r\n");
-	SendPrinter("\r\n");
-	SendPrinter("\r\n");
-	SendPrinter("      ______________________________________________________________________\r\n");
-	SendPrinter("      Operator                    Date                    Signature \r\n");
-	
-}*/
-
-/*char LanPrtNorm(void)
-{
-	//char Namebuf[50];
-	char tbuf1[50];
-	char tbuf2[50];
-	char PrintBuf[100];
-	//char Catalogue_1[15];
-	u8 PutStep = 0;
-	//char Y,M,D,h,m,s;
-	//char VincReState;
-	char OverTime = 0;
-	
-	struct tcp_pcb *tcppcb; 							// 定义一个TCP服务器控制块
-	struct ip_addr rmtipaddr; 						// 远端ip地址
-	u8 *tbuf;
- 	u8 res=0;		
-	u8 t=0; 
-	u8 connflag=0; 												// 连接标记
-	
-	char RError[] = "Speed Error";										//针对报告转速出错问题加的错误提示字符串	2021/12/13 星期一 11:56:58
-	
-	tbuf=mymalloc(SRAMIN,200);	//申请内存
-	if(tbuf==NULL)
-	{
-		OverTime = 1; 					// 内存申请失败
-		return OverTime;		//内存申请失败了,直接退出
-	}
-	
-	tcppcb=tcp_new();	//创建一个新的pcb
-	if(tcppcb)			//创建成功
-	{
-		//IP4_ADDR(&rmtipaddr,lwipdev.remoteip[0],lwipdev.remoteip[1],lwipdev.remoteip[2],lwipdev.remoteip[3]); 
-		//IP4_ADDR(&rmtipaddr,192,168,1,2); 
-		IP4_ADDR(&rmtipaddr,PrtIP[0],PrtIP[1],PrtIP[2],PrtIP[3]); 
-		//连接到目的地址的指定端口上,当连接成功后回调tcp_client_connected()函数
-		//tcp_connect(tcppcb,&rmtipaddr,TcpPort,tcp_client_connected);
-		tcp_connect(tcppcb,&rmtipaddr,PrtPort,tcp_client_connected);
- 	}
- 	else
- 	{
- 		//res=1;
- 		OverTime = 2; 					// pcb创建失败
- 		return OverTime;
- 	}
- 	
- 	TIMER_Start(TIMER_GENERAL, TO_20SEC);						// 启动延时定时器
- 	
- 	while(res==0)
-	{
-		if((connflag)&&(!(tcp_client_flag&1<<7)))
-		{
-			memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-			memset(tbuf2,'\0',sizeof(tbuf2));						//清空数组
-			memset(PrintBuf,'\0',sizeof(PrintBuf));			//清空数组
-			
-			if(PrintFormat == 0) 							// PCL
- 			{
-				switch(PutStep)
-				{
-					case 0: 											// 表头
-					{
-						strcpy( PrintBuf,"                         Tapped Density Report Test Assist\r\n");
-					}break;
-					case 1:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-						//PutStep++;
-					}break;
-					case 2:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 3: 											// 设备序列号
-					{
-						strcpy(tbuf1,Reports_rsmp.RPT_DeviceSerialNb);
-						sprintf( PrintBuf, "      Device serial no.:     %6s", tbuf1);
-					}break;
-					case 4: 											// 页码
-					{
-						strcpy( PrintBuf, "        Page:                        1/1\r\n");
-					}break;
-					case 5: 											// 主控板软件版本号
-					{
-						sprintf( PrintBuf, "      Main Firmware version: %6s", Reports_rsmp.RPT_MbVersion);
-					}break;
-					case 6: 											// 触摸板软件版本号
-					{
-						sprintf( PrintBuf, "        Touch Firmware version:   %6s\r\n", Reports_rsmp.RPT_DbVersion);
-					}break;
-					case 7: 											// 设备类型显示
-					{
-						if(Reports_rsmp.RPT_DeviceType == 121)
-							strcpy(tbuf1,"USP 1, 1 Station");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 122)
-							strcpy(tbuf1,"USP 2, 1 Station");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 221)
-							strcpy(tbuf1,"USP 1, 2 Stations");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 222)
-							strcpy(tbuf1,"USP 2, 2 Stations");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 223)
-							strcpy(tbuf1,"USP 1&2, 2 Stations");
-						else
-							strcpy(tbuf1,"USP x, x Stations");
-						sprintf( PrintBuf, "      Configuration: %-20s", tbuf1);
-					}break;
-					case 8: 											// 打印日期
-					{
-						sprintf( PrintBuf, "  Print date:  %s %s\r\n", DisDateStr,DisTimeStr);
-					}break;
-					case 9: 											// 设备类型选择
-					{
-						strcpy( PrintBuf, "\r\n");
-						
-						if((Reports_rsmp.RPT_DeviceType == 121)||
-							 (Reports_rsmp.RPT_DeviceType == 122))
-						{
-							PutStep = 10-1;
-						}
-						
-						if((Reports_rsmp.RPT_DeviceType == 221)||
-							 (Reports_rsmp.RPT_DeviceType == 222))
-						{
-							PutStep = 44-1;
-						}
-						
-						if(Reports_rsmp.RPT_DeviceType == 223)
-						{
-							if(Reports_rsmp.RPT_S1Method == 1) 					// 测试站1方法1
-								PutStep = 78-1;
-							
-							if(Reports_rsmp.RPT_S2Method == 2) 					// 测试站2方法2
-								PutStep = 112-1;
-						}
-					}break;
-					case 10: 											// 121/122
-					{
-						strcpy( PrintBuf, "      Product name station 1:\r\n");
-					}break;
-					case 11:
-					{
-						strcpy( PrintBuf, "      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 12: 											// 站1产品名称
-					{
-						sprintf( PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S1PName);
-					}break;
-					case 13: 											// 站1产品信息
-					{
-						strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-						sprintf( PrintBuf,"      Information: %-17s\r\n",tbuf1);
-					}break;
-					case 14:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>17) 
-							strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+17,30); 
-						else 
-							tbuf1[0] = '\0';
-						
-						sprintf( PrintBuf,"      %-30s\r\n",tbuf1);
-					}break;
-					case 15:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>47)
-							strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+47,30);
-						else
-							tbuf1[0] = '\0';
-						
-						sprintf( PrintBuf,"      %-30s\r\n",tbuf1);
-					}break;
-					case 16: 											// 站1产品批号
-					{
-						sprintf( PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S1PBatchNb);
-					}break;
-					case 17: 											// 站1量杯编号
-					{
-						sprintf( PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S1CylinderNb);
-					}break;
-					case 18:
-					{
-						strcpy( PrintBuf, "\r\n");
-					}break;
-					case 19:
-					{
-						strcpy( PrintBuf, "      Test Parameter                       Station 1\r\n");
-					}break;
-					case 20:
-					{
-						strcpy( PrintBuf, "      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 21: 											// 方法
-					{
-						sprintf( PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S1Method);
-					}break;
-					case 22: 											// 转速
-					{
-						if(Reports_rsmp.RPT_DeviceType == 121)
-							strcpy( PrintBuf,"      Speed:                               300 taps/min\r\n");
-						else
-							strcpy( PrintBuf,"      Speed:                               250 taps/min\r\n");
-					}break;
-					case 23: 											// 体积
-					{
-						sprintf( PrintBuf,"      Cylinder Volume:                     %-15s\r\n",Reports_rsmp.RPT_S1CylinderSize);
-					}break;
-					case 24: 											// 计次/计时
-					{
-						if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-							sprintf( PrintBuf,"      Number of taps:                      %d\r\n",Reports_rsmp.RPT_S1SetTapsNb);
-						else
-						if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-						{
-							TimeOfHour = Reports_rsmp.RPT_S1SetRunTime/3600;
-							TimeOfMin = Reports_rsmp.RPT_S1SetRunTime%3600/60;
-							TimeOfSec = Reports_rsmp.RPT_S1SetRunTime%60;
-							sprintf( PrintBuf,"      Run Time:                            %02d:%02d:%02d\r\n",TimeOfHour,TimeOfMin,TimeOfSec);
-						}
-					}break;
-					case 25:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 26:
-					{
-						strcpy( PrintBuf,"      System Settings\r\n");
-					}break;
-					case 27:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 28: 											// 时区，OQ状态
-					{
-						sprintf( PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-					}break;
-					case 29:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 30:
-					{
-						strcpy( PrintBuf,"      Test run data           Station 1\r\n");
-					}break;
-					case 31:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 32: 											// 样本重量
-					{
-						strcpy( PrintBuf,"      Sample Weight           ________________\r\n");
-					}break;
-					case 33: 											// 初始密度
-					{
-						strcpy( PrintBuf,"      Initial Density         ________________\r\n");
-					}break;
-					case 34: 											// 终止密度
-					{
-						strcpy( PrintBuf,"      Tapped Density          ________________\r\n");
-					}break;
-					case 35: 											// 比率
-					{
-						strcpy( PrintBuf,"      Hausner Ratio           ________________\r\n");
-					}break;
-					case 36: 											// 压缩比
-					{
-						strcpy( PrintBuf,"      Compressibility Index   ________________\r\n");
-					}break;
-					case 37:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 38:
-					{
-						strcpy( PrintBuf,"      Actual number of taps, time, and speed\r\n");
-					}break;
-					case 39:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 40: 											// 转速范围
-					{
-						sprintf( PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-							Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-						if(strlen( PrintBuf)>50)																						//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-			 				sprintf( PrintBuf,"      Speed min-max:      %s\r\n",RError);			//2021/12/13 星期一 11:56:48	Mark 2
-					}break;
-					case 41: 											// 计次/计时
-					{
-						//XmlChange(tbuf2,Reports_rsmp.RPT_S2PName);
-						sprintf( PrintBuf,"\t\t\t<productname>%-17s</productname>\r\n",tbuf2);
-						
-						if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-							sprintf( PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-						else
-						if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-							sprintf( PrintBuf,"      Run Time:           %02d:%02d:%02d (hh:mm:ss)\r\n",
-								Reports_rsmp.RPT_RealRunTime/3600,Reports_rsmp.RPT_RealRunTime%3600/60,Reports_rsmp.RPT_RealRunTime%60); 
-					}break;
-					case 42:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 43: 											// 121/122，测试结束状态
-					{
-						if(Reports_rsmp.RPT_TestStatus)
-							sprintf( PrintBuf,"      Status:             %s\r\n","Test completed.");
-						else
-							sprintf( PrintBuf,"      Status:             %s\r\n","Test abort.");
-						
-						PutStep = 146-1;
-					}break;
-					case 44: 											// 221/222
-					{
-						strcpy( PrintBuf,"      Product name station 1:              Product name station 2:\r\n");
-					}break;
-					case 45:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 46: 											// 站1站2产品名称
-					{
-						sprintf( PrintBuf,"      Name:        %-17s       Name:        %-17s\r\n",Reports_rsmp.RPT_S1PName,Reports_rsmp.RPT_S2PName);
-					}break;
-					case 47: 											// 站1站2产品信息
-					{
-						strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-						strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo,17);
-						sprintf( PrintBuf,"      Information: %-17s       Information: %-17s\r\n",tbuf1,tbuf2);
-					}break;
-					case 48:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>17) strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+17,30); else tbuf1[0] = '\0';
-						if(strlen(Reports_rsmp.RPT_S2PInfo)>17) strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+17,30); else tbuf2[0] = '\0';
-						
-						sprintf( PrintBuf,"      %-30s       %-30s\r\n",tbuf1,tbuf2);
-					}break;
-					case 49:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>47) strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+47,30); else tbuf1[0] = '\0';
-						if(strlen(Reports_rsmp.RPT_S2PInfo)>47) strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+47,30); else tbuf2[0] = '\0';
-						
-						sprintf( PrintBuf,"      %-30s       %-30s\r\n",tbuf1,tbuf2);
-					}break;
-					case 50: 											// 站1站2产品批号
-					{
-						sprintf( PrintBuf,"      Batch Number:    %15s     Batch Number:    %15s\r\n",Reports_rsmp.RPT_S1PBatchNb,Reports_rsmp.RPT_S2PBatchNb);
-					}break;
-					case 51: 											// 量杯编号
-					{
-						sprintf( PrintBuf,"      Cylinder Number: %15s     Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S1CylinderNb,Reports_rsmp.RPT_S2CylinderNb);
-					}break;
-					case 52:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 53:
-					{
-						strcpy( PrintBuf,"      Test Parameter                       Station 1          Station 2\r\n");
-					}break;
-					case 54:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 55: 											// 测试方法
-					{
-						sprintf( PrintBuf,"      USP method:                          USP %d              USP %d\r\n",(u16)Reports_rsmp.RPT_S1Method,(u16)Reports_rsmp.RPT_S2Method);
-					}break;
-					case 56: 											// 测试转速
-					{
-						if(Reports_rsmp.RPT_DeviceType == 221)
-							strcpy( PrintBuf,"      Speed:                               300 taps/min       300 taps/min\r\n");
-						else
-							strcpy( PrintBuf,"      Speed:                               250 taps/min       250 taps/min\r\n");
-					}break;
-					case 57: 											// 体积
-					{
-						sprintf( PrintBuf,"      Cylinder Volume:                     %-15s    %-15s\r\n",Reports_rsmp.RPT_S1CylinderSize,Reports_rsmp.RPT_S2CylinderSize);
-					}break;
-					case 58: 											// 计次/计时
-					{
-						if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-							sprintf( PrintBuf,"      Number of taps:                      %d                 %d\r\n",Reports_rsmp.RPT_S1SetTapsNb,Reports_rsmp.RPT_S2SetTapsNb);
-						else
-						if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-						{
-							TimeOfHour = Reports_rsmp.RPT_S1SetRunTime/3600;
-							TimeOfMin = Reports_rsmp.RPT_S1SetRunTime%3600/60;
-							TimeOfSec = Reports_rsmp.RPT_S1SetRunTime%60;
-							sprintf( PrintBuf,"      Run Time:                            %02d:%02d:%02d           %02d:%02d:%02d\r\n",TimeOfHour,TimeOfMin,TimeOfSec,TimeOfHour,TimeOfMin,TimeOfSec);
-						}
-					}break;
-					case 59:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 60:
-					{
-						strcpy( PrintBuf,"      System Settings\r\n");
-					}break;
-					case 61:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 62: 											// 时区，OQ状态
-					{
-						sprintf( PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-					}break;
-					case 63:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 64:
-					{
-						strcpy( PrintBuf,"      Test run data           Station 1            Station 2\r\n");
-					}break;
-					case 65:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 66: 											// 站1站2样本重量
-					{
-						strcpy( PrintBuf,"      Sample Weight           ________________     ________________\r\n");
-					}break;
-					case 67: 											// 站1站2初始密度
-					{
-						strcpy( PrintBuf,"      Initial Density         ________________     ________________\r\n");
-					}break;
-					case 68: 											// 站1站2终止密度
-					{
-						strcpy( PrintBuf,"      Tapped Density          ________________     ________________\r\n");
-					}break;
-					case 69: 											// 比率
-					{
-						strcpy( PrintBuf,"      Hausner Ratio           ________________     ________________\r\n");
-					}break;
-					case 70: 											// 压缩比
-					{
-						strcpy( PrintBuf,"      Compressibility Index   ________________     ________________\r\n");
-					}break;
-					case 71:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 72:
-					{
-						strcpy( PrintBuf,"      Actual number of taps, time, and speed\r\n");
-					}break;
-					case 73:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 74: 											// 实测转速最小最大值
-					{
-						sprintf( PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min     %5.1f-%5.1f taps/min\r\n",
-							Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed,Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-						if(strlen( PrintBuf)>80)																											//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-							sprintf( PrintBuf,"      Speed min-max:      %s\r\n",RError);									//2021/12/13 星期一 11:56:48
-					}break;
-					case 75: 											// 计次/计时
-					{
-						if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-							sprintf( PrintBuf,"      Number of taps:     %4d                        %4d\r\n",Reports_rsmp.RPT_RealTapsNb,Reports_rsmp.RPT_RealTapsNb); 
-						else
-						if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-							sprintf( PrintBuf,"      Run Time:           %02d:%02d:%02d (hh:mm:ss)\r\n",
-								Reports_rsmp.RPT_RealRunTime/3600,Reports_rsmp.RPT_RealRunTime%3600/60,Reports_rsmp.RPT_RealRunTime%60); 
-					}break;
-					case 76:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 77: 											// 221/222，测试结束状态
-					{
-						if(Reports_rsmp.RPT_TestStatus)
-							sprintf( PrintBuf,"      Status:             %s\r\n","Test completed.");
-						else
-							sprintf( PrintBuf,"      Status:             %s\r\n","Test abort.");
-						
-						PutStep = 146-1;
-					}break;
-					case 78: 											// 223, 测试站1，方法1
-					{
-						strcpy( PrintBuf,"      Product name station 1:\r\n");
-					}break;
-					case 79:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 80:
-					{
-						sprintf( PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S1PName);
-					}break;
-					case 81:
-					{
-						strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-						sprintf( PrintBuf,"      Information: %-17s\r\n",tbuf1);
-					}break;
-					case 82:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>17) 
-							strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+17,30); 
-						else 
-							tbuf1[0] = '\0';
-						
-						sprintf( PrintBuf,"      %-30s\r\n",tbuf1);
-					}break;
-					case 83:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>47)
-							strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+47,30);
-						else
-							tbuf1[0] = '\0';
-						
-						sprintf( PrintBuf,"      %-30s\r\n",tbuf1);
-					}break;
-					case 84:
-					{
-						sprintf( PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S1PBatchNb);
-					}break;
-					case 85:
-					{
-						sprintf( PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S1CylinderNb);
-					}break;
-					case 86:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 87:
-					{
-						strcpy( PrintBuf,"      Test Parameter                       Station 1\r\n");
-					}break;
-					case 88:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 89:
-					{
-						sprintf( PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S1Method);
-					}break;
-					case 90:
-					{
-						strcpy( PrintBuf,"      Speed:                               300 taps/min\r\n");
-					}break;
-					case 91:
-					{
-						sprintf( PrintBuf,"      Cylinder Volume:                     %-15s\r\n",Reports_rsmp.RPT_S1CylinderSize);
-					}break;
-					case 92:
-					{
-						if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-							sprintf( PrintBuf,"      Number of taps:                      %d\r\n",Reports_rsmp.RPT_S1SetTapsNb);
-						else
-						if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-						{
-							TimeOfHour = Reports_rsmp.RPT_S1SetRunTime/3600;
-							TimeOfMin = Reports_rsmp.RPT_S1SetRunTime%3600/60;
-							TimeOfSec = Reports_rsmp.RPT_S1SetRunTime%60;
-							sprintf( PrintBuf,"      Run Time:                            %02d:%02d:%02d\r\n",TimeOfHour,TimeOfMin,TimeOfSec);
-						}
-					}break;
-					case 93:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 94:
-					{
-						strcpy( PrintBuf,"      System Settings\r\n");
-					}break;
-					case 95:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 96:
-					{
-						sprintf( PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-					}break;
-					case 97:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 98:
-					{
-						strcpy( PrintBuf,"      Test run data           Station 1\r\n");
-					}break;
-					case 99:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 100:
-					{
-						strcpy( PrintBuf,"      Sample Weight           ________________\r\n");
-						//strcpy( PrintBuf,"      V0                      ________________\r\n");
-						//strcpy( PrintBuf,"      V10                     ________________\r\n");
-						//strcpy( PrintBuf,"      V500                    ________________\r\n");
-						//strcpy( PrintBuf,"      V1250                   ________________\r\n");
-					}break;
-					case 101:
-					{
-						strcpy( PrintBuf,"      Initial Density         ________________\r\n");
-					}break;
-					case 102:
-					{
-						strcpy( PrintBuf,"      Tapped Density          ________________\r\n");
-					}break;
-					case 103:
-					{
-						strcpy( PrintBuf,"      Hausner Ratio           ________________\r\n");
-					}break;
-					case 104:
-					{
-						strcpy( PrintBuf,"      Compressibility Index   ________________\r\n");
-					}break;
-					case 105:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 106:
-					{
-						strcpy( PrintBuf,"      Actual number of taps, time, and speed\r\n");
-					}break;
-					case 107:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 108:
-					{
-						sprintf( PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-							Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-						if(strlen( PrintBuf)>50)																											//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-							sprintf( PrintBuf,"      Speed min-max:      %s\r\n",RError);									//2021/12/13 星期一 11:56:48
-					}break;
-					case 109:
-					{
-						if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-							sprintf( PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-						else
-						if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-							sprintf( PrintBuf,"      Run Time:           %02d:%02d:%02d (hh:mm:ss)\r\n",
-								Reports_rsmp.RPT_RealRunTime/3600,Reports_rsmp.RPT_RealRunTime%3600/60,Reports_rsmp.RPT_RealRunTime%60); 
-					}break;
-					case 110:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 111:
-					{
-						if(Reports_rsmp.RPT_TestStatus)
-							sprintf( PrintBuf,"      Status:             %s\r\n","Test completed.");
-						else
-							sprintf( PrintBuf,"      Status:             %s\r\n","Test abort.");
-						
-						PutStep = 146-1;
-					}break;
-					case 112: 										// 223, 测试站2，方法2
-					{
-						strcpy( PrintBuf,"      Product name station 2:\r\n");
-					}break;
-					case 113:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 114:
-					{
-						sprintf( PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S2PName);
-					}break;
-					case 115:
-					{
-						strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo,17);
-						sprintf( PrintBuf,"      Information: %-17s\r\n",tbuf2);
-					}break;
-					case 116:
-					{
-						if(strlen(Reports_rsmp.RPT_S2PInfo)>17) 
-							strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+17,30); 
-						else 
-							tbuf2[0] = '\0';
-						
-						sprintf( PrintBuf,"      %-30s\r\n",tbuf2);
-					}break;
-					case 117:
-					{
-						if(strlen(Reports_rsmp.RPT_S2PInfo)>47)
-							strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+47,30);
-						else
-							tbuf2[0] = '\0';
-						
-						sprintf( PrintBuf,"      %-30s\r\n",tbuf2);
-					}break;
-					case 118:
-					{
-						sprintf(PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S2PBatchNb);
-					}break;
-					case 119:
-					{
-						sprintf(PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S2CylinderNb);
-					}break;
-					case 120:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 121:
-					{
-						strcpy( PrintBuf,"      Test Parameter                       Station 2\r\n");
-					}break;
-					case 122:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 123:
-					{
-						sprintf( PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S2Method);
-					}break;
-					case 124:
-					{
-						strcpy( PrintBuf,"      Speed:                               250 taps/min\r\n");
-					}break;
-					case 125:
-					{
-						sprintf( PrintBuf,"      Cylinder Volume:                     %-15s\r\n",Reports_rsmp.RPT_S2CylinderSize);
-					}break;
-					case 126:
-					{
-						if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-							sprintf( PrintBuf,"      Number of taps:                      %d\r\n",Reports_rsmp.RPT_S2SetTapsNb);
-						else
-						if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-						{
-							TimeOfHour = Reports_rsmp.RPT_S2SetRunTime/3600;
-							TimeOfMin = Reports_rsmp.RPT_S2SetRunTime%3600/60;
-							TimeOfSec = Reports_rsmp.RPT_S2SetRunTime%60;
-							sprintf( PrintBuf,"      Run Time:                            %02d:%02d:%02d\r\n",TimeOfHour,TimeOfMin,TimeOfSec);
-						}
-					}break;
-					case 127:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 128:
-					{
-						strcpy( PrintBuf,"      System Settings\r\n");
-					}break;
-					case 129:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 130:
-					{
-						sprintf( PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-					}break;
-					case 131:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 132:
-					{
-						strcpy( PrintBuf,"      Test run data           Station 2\r\n");
-					}break;
-					case 133:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 134:
-					{
-						strcpy( PrintBuf,"      Sample Weight           ________________\r\n");
-						//strcpy( PrintBuf,"      V0                      ________________\r\n");
-						//strcpy( PrintBuf,"      V10                     ________________\r\n");
-						//strcpy( PrintBuf,"      V500                    ________________\r\n");
-						//strcpy( PrintBuf,"      V1250                   ________________\r\n");
-					}break;
-					case 135:
-					{
-						strcpy( PrintBuf,"      Initial Density         ________________\r\n");
-					}break;
-					case 136:
-					{
-						strcpy( PrintBuf,"      Tapped Density          ________________\r\n");
-					}break;
-					case 137:
-					{
-						strcpy( PrintBuf,"      Hausner Ratio           ________________\r\n");
-					}break;
-					case 138:
-					{
-						strcpy( PrintBuf,"      Compressibility Index   ________________\r\n");
-					}break;
-					case 139:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 140:
-					{
-						strcpy( PrintBuf,"      Actual number of taps, time, and speed\r\n");
-					}break;
-					case 141:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 142:
-					{
-						sprintf( PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-							Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-						if(strlen( PrintBuf)>50)																											//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-							sprintf( PrintBuf,"      Speed min-max:      %s\r\n",RError);									//2021/12/13 星期一 11:56:48
-					}break;
-					case 143:
-					{
-						if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-							sprintf( PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-						else
-						if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-							sprintf( PrintBuf,"      Run Time:           %02d:%02d:%02d (hh:mm:ss)\r\n",
-								Reports_rsmp.RPT_RealRunTime/3600,Reports_rsmp.RPT_RealRunTime%3600/60,Reports_rsmp.RPT_RealRunTime%60); 
-					}break;
-					case 144:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 145:
-					{
-						if(Reports_rsmp.RPT_TestStatus)
-							sprintf( PrintBuf,"      Status:             %s\r\n","Test completed.");
-						else
-							sprintf( PrintBuf,"      Status:             %s\r\n","Test abort.");
-					}break;
-					case 146: 										// 打印测试日期，表脚公共部分
-					{
-						if(DateFormat == 0) 									// Day,Month,Year
-							sprintf( PrintBuf,"      Test date:          %02d.%02d.20%02d %02d:%02d:%02d",
-								Reports_rsmp.RPT_Date.RTC_Date,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Year,
-								Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-						else
-						if(DateFormat == 1) 									// Year,Month,Day
-							sprintf( PrintBuf,"      Test date:          20%02d-%02d-%02d %02d:%02d:%02d",
-								Reports_rsmp.RPT_Date.RTC_Year,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date,
-								Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-						else
-						if(DateFormat == 2) 									// Month,Day,Year
-							sprintf( PrintBuf,"      Test date:          %02d/%02d/20%02d %02d:%02d:%02d",
-								Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date,Reports_rsmp.RPT_Date.RTC_Year,
-								Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-					}break;
-					case 147:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 148:
-					{
-						strcpy( PrintBuf,"      Requirements fulfilled:      YES      No\r\n");
-					}break;
-					case 149:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 150:
-					{
-						strcpy( PrintBuf,"      Comments\r\n");
-						//strcpy( PrintBuf,"      ______________________________________________________________________\r\n");
-					}break;
-					case 151:
-					{
-						strcpy( PrintBuf,"      ______________________________________________________________________\r\n");
-					}break;
-					case 152:
-					{
-						strcpy( PrintBuf,"      ______________________________________________________________________\r\n");
-						//PutStep++;
-						//PutStep++;
-					}break;
-					case 153:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 154:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 155:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 156:
-					{
-						strcpy( PrintBuf,"      ______________________________________________________________________\r\n");
-					}break;
-					case 157:
-					{
-						strcpy( PrintBuf,"      Operator                    Date                    Signature \r\n");
-					}break;
-					default:
-					{
-						PutStep = 0xff;
-					}break;
-				}
-			}
-			else 															// ASC II
-			{
-				switch(PutStep)
-				{
-					case 0: 											// 表头
-					{
-						strcpy( PrintBuf,"                         Tapped Density Report Test Assist\r\n");
-					}break;
-					case 1:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-						//PutStep++;
-					}break;
-					case 2:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 3: 											// 设备序列号
-					{
-						strcpy(tbuf1,Reports_rsmp.RPT_DeviceSerialNb);
-						sprintf( PrintBuf, "      Device serial no.:     %6s", tbuf1);
-					}break;
-					case 4: 											// 页码
-					{
-						strcpy( PrintBuf, "        Page:                        1/1\r\n");
-					}break;
-					case 5: 											// 主控板软件版本号
-					{
-						sprintf( PrintBuf, "      Main Firmware version: %6s", Reports_rsmp.RPT_MbVersion);
-					}break;
-					case 6: 											// 触摸板软件版本号
-					{
-						sprintf( PrintBuf, "        Touch Firmware version:   %6s\r\n", Reports_rsmp.RPT_DbVersion);
-					}break;
-					case 7: 											// 设备类型显示
-					{
-						if(Reports_rsmp.RPT_DeviceType == 121)
-							strcpy(tbuf1,"USP 1, 1 Station");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 122)
-							strcpy(tbuf1,"USP 2, 1 Station");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 221)
-							strcpy(tbuf1,"USP 1, 2 Stations");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 222)
-							strcpy(tbuf1,"USP 2, 2 Stations");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 223)
-							strcpy(tbuf1,"USP 1&2, 2 Stations");
-						else
-							strcpy(tbuf1,"USP x, x Stations");
-						sprintf( PrintBuf, "      Configuration: %-20s", tbuf1);
-					}break;
-					case 8: 											// 打印日期
-					{
-						sprintf( PrintBuf, "  Print date:  %s %s\r\n", DisDateStr,DisTimeStr);
-					}break;
-					case 9: 											// 设备类型选择
-					{
-						strcpy( PrintBuf, "\r\n");
-						
-						if((Reports_rsmp.RPT_DeviceType == 121)||
-							 (Reports_rsmp.RPT_DeviceType == 122))
-						{
-							PutStep = 10-1;
-						}
-						
-						if((Reports_rsmp.RPT_DeviceType == 221)||
-							 (Reports_rsmp.RPT_DeviceType == 222))
-						{
-							PutStep = 44-1;
-						}
-						
-						if(Reports_rsmp.RPT_DeviceType == 223)
-						{
-							if(Reports_rsmp.RPT_S1Method == 1) 					// 测试站1方法1
-								PutStep = 78-1;
-							
-							if(Reports_rsmp.RPT_S2Method == 2) 					// 测试站2方法2
-								PutStep = 112-1;
-						}
-					}break;
-					case 10: 											// 121/122
-					{
-						strcpy( PrintBuf, "      Product name station 1:\r\n");
-					}break;
-					case 11:
-					{
-						strcpy( PrintBuf, "      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 12: 											// 站1产品名称
-					{
-						sprintf( PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S1PName);
-					}break;
-					case 13: 											// 站1产品信息
-					{
-						strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-						sprintf( PrintBuf,"      Information: %-17s\r\n",tbuf1);
-					}break;
-					case 14:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>17) 
-							strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+17,30); 
-						else 
-							tbuf1[0] = '\0';
-						
-						sprintf( PrintBuf,"      %-30s\r\n",tbuf1);
-					}break;
-					case 15:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>47)
-							strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+47,30);
-						else
-							tbuf1[0] = '\0';
-						
-						sprintf( PrintBuf,"      %-30s\r\n",tbuf1);
-					}break;
-					case 16: 											// 站1产品批号
-					{
-						sprintf( PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S1PBatchNb);
-					}break;
-					case 17: 											// 站1量杯编号
-					{
-						sprintf( PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S1CylinderNb);
-					}break;
-					case 18:
-					{
-						strcpy( PrintBuf, "\r\n");
-					}break;
-					case 19:
-					{
-						strcpy( PrintBuf, "      Test Parameter                       Station 1\r\n");
-					}break;
-					case 20:
-					{
-						strcpy( PrintBuf, "      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 21: 											// 方法
-					{
-						sprintf( PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S1Method);
-					}break;
-					case 22: 											// 转速
-					{
-						if(Reports_rsmp.RPT_DeviceType == 121)
-							strcpy( PrintBuf,"      Speed:                               300 taps/min\r\n");
-						else
-							strcpy( PrintBuf,"      Speed:                               250 taps/min\r\n");
-					}break;
-					case 23: 											// 体积
-					{
-						sprintf( PrintBuf,"      Cylinder Volume:                     %-15s\r\n",Reports_rsmp.RPT_S1CylinderSize);
-					}break;
-					case 24: 											// 计次/计时
-					{
-						if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-							sprintf( PrintBuf,"      Number of taps:                      %d\r\n",Reports_rsmp.RPT_S1SetTapsNb);
-						else
-						if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-						{
-							TimeOfHour = Reports_rsmp.RPT_S1SetRunTime/3600;
-							TimeOfMin = Reports_rsmp.RPT_S1SetRunTime%3600/60;
-							TimeOfSec = Reports_rsmp.RPT_S1SetRunTime%60;
-							sprintf( PrintBuf,"      Run Time:                            %02d:%02d:%02d\r\n",TimeOfHour,TimeOfMin,TimeOfSec);
-						}
-					}break;
-					case 25:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 26:
-					{
-						strcpy( PrintBuf,"      System Settings\r\n");
-					}break;
-					case 27:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 28: 											// 时区，OQ状态
-					{
-						sprintf( PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-					}break;
-					case 29:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 30:
-					{
-						strcpy( PrintBuf,"      Test run data           Station 1\r\n");
-					}break;
-					case 31:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 32: 											// 样本重量
-					{
-						strcpy( PrintBuf,"      Sample Weight           ________________\r\n");
-					}break;
-					case 33: 											// 初始密度
-					{
-						strcpy( PrintBuf,"      Initial Density         ________________\r\n");
-					}break;
-					case 34: 											// 终止密度
-					{
-						strcpy( PrintBuf,"      Tapped Density          ________________\r\n");
-					}break;
-					case 35: 											// 比率
-					{
-						strcpy( PrintBuf,"      Hausner Ratio           ________________\r\n");
-					}break;
-					case 36: 											// 压缩比
-					{
-						strcpy( PrintBuf,"      Compressibility Index   ________________\r\n");
-					}break;
-					case 37:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 38:
-					{
-						strcpy( PrintBuf,"      Actual number of taps, time, and speed\r\n");
-					}break;
-					case 39:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 40: 											// 转速范围
-					{
-						sprintf( PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-							Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-						if(strlen( PrintBuf)>50)																						//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-			 				sprintf( PrintBuf,"      Speed min-max:      %s\r\n",RError);			//2021/12/13 星期一 11:56:48	Mark 2
-					}break;
-					case 41: 											// 计次/计时
-					{
-						//XmlChange(tbuf2,Reports_rsmp.RPT_S2PName);
-						sprintf( PrintBuf,"\t\t\t<productname>%-17s</productname>\r\n",tbuf2);
-						
-						if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-							sprintf( PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-						else
-						if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-							sprintf( PrintBuf,"      Run Time:           %02d:%02d:%02d (hh:mm:ss)\r\n",
-								Reports_rsmp.RPT_RealRunTime/3600,Reports_rsmp.RPT_RealRunTime%3600/60,Reports_rsmp.RPT_RealRunTime%60); 
-					}break;
-					case 42:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 43: 											// 121/122，测试结束状态
-					{
-						if(Reports_rsmp.RPT_TestStatus)
-							sprintf( PrintBuf,"      Status:             %s\r\n","Test completed.");
-						else
-							sprintf( PrintBuf,"      Status:             %s\r\n","Test abort.");
-						
-						PutStep = 146-1;
-					}break;
-					case 44: 											// 221/222
-					{
-						strcpy( PrintBuf,"      Product name station 1:              Product name station 2:\r\n");
-					}break;
-					case 45:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 46: 											// 站1站2产品名称
-					{
-						sprintf( PrintBuf,"      Name:        %-17s       Name:        %-17s\r\n",Reports_rsmp.RPT_S1PName,Reports_rsmp.RPT_S2PName);
-					}break;
-					case 47: 											// 站1站2产品信息
-					{
-						strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-						strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo,17);
-						sprintf( PrintBuf,"      Information: %-17s       Information: %-17s\r\n",tbuf1,tbuf2);
-					}break;
-					case 48:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>17) strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+17,30); else tbuf1[0] = '\0';
-						if(strlen(Reports_rsmp.RPT_S2PInfo)>17) strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+17,30); else tbuf2[0] = '\0';
-						
-						sprintf( PrintBuf,"      %-30s       %-30s\r\n",tbuf1,tbuf2);
-					}break;
-					case 49:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>47) strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+47,30); else tbuf1[0] = '\0';
-						if(strlen(Reports_rsmp.RPT_S2PInfo)>47) strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+47,30); else tbuf2[0] = '\0';
-						
-						sprintf( PrintBuf,"      %-30s       %-30s\r\n",tbuf1,tbuf2);
-					}break;
-					case 50: 											// 站1站2产品批号
-					{
-						sprintf( PrintBuf,"      Batch Number:    %15s     Batch Number:    %15s\r\n",Reports_rsmp.RPT_S1PBatchNb,Reports_rsmp.RPT_S2PBatchNb);
-					}break;
-					case 51: 											// 量杯编号
-					{
-						sprintf( PrintBuf,"      Cylinder Number: %15s     Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S1CylinderNb,Reports_rsmp.RPT_S2CylinderNb);
-					}break;
-					case 52:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 53:
-					{
-						strcpy( PrintBuf,"      Test Parameter                       Station 1          Station 2\r\n");
-					}break;
-					case 54:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 55: 											// 测试方法
-					{
-						sprintf( PrintBuf,"      USP method:                          USP %d              USP %d\r\n",(u16)Reports_rsmp.RPT_S1Method,(u16)Reports_rsmp.RPT_S2Method);
-					}break;
-					case 56: 											// 测试转速
-					{
-						if(Reports_rsmp.RPT_DeviceType == 221)
-							strcpy( PrintBuf,"      Speed:                               300 taps/min       300 taps/min\r\n");
-						else
-							strcpy( PrintBuf,"      Speed:                               250 taps/min       250 taps/min\r\n");
-					}break;
-					case 57: 											// 体积
-					{
-						sprintf( PrintBuf,"      Cylinder Volume:                     %-15s    %-15s\r\n",Reports_rsmp.RPT_S1CylinderSize,Reports_rsmp.RPT_S2CylinderSize);
-					}break;
-					case 58: 											// 计次/计时
-					{
-						if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-							sprintf( PrintBuf,"      Number of taps:                      %d                 %d\r\n",Reports_rsmp.RPT_S1SetTapsNb,Reports_rsmp.RPT_S2SetTapsNb);
-						else
-						if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-						{
-							TimeOfHour = Reports_rsmp.RPT_S1SetRunTime/3600;
-							TimeOfMin = Reports_rsmp.RPT_S1SetRunTime%3600/60;
-							TimeOfSec = Reports_rsmp.RPT_S1SetRunTime%60;
-							sprintf( PrintBuf,"      Run Time:                            %02d:%02d:%02d           %02d:%02d:%02d\r\n",TimeOfHour,TimeOfMin,TimeOfSec,TimeOfHour,TimeOfMin,TimeOfSec);
-						}
-					}break;
-					case 59:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 60:
-					{
-						strcpy( PrintBuf,"      System Settings\r\n");
-					}break;
-					case 61:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 62: 											// 时区，OQ状态
-					{
-						sprintf( PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-					}break;
-					case 63:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 64:
-					{
-						strcpy( PrintBuf,"      Test run data           Station 1            Station 2\r\n");
-					}break;
-					case 65:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 66: 											// 站1站2样本重量
-					{
-						strcpy( PrintBuf,"      Sample Weight           ________________     ________________\r\n");
-					}break;
-					case 67: 											// 站1站2初始密度
-					{
-						strcpy( PrintBuf,"      Initial Density         ________________     ________________\r\n");
-					}break;
-					case 68: 											// 站1站2终止密度
-					{
-						strcpy( PrintBuf,"      Tapped Density          ________________     ________________\r\n");
-					}break;
-					case 69: 											// 比率
-					{
-						strcpy( PrintBuf,"      Hausner Ratio           ________________     ________________\r\n");
-					}break;
-					case 70: 											// 压缩比
-					{
-						strcpy( PrintBuf,"      Compressibility Index   ________________     ________________\r\n");
-					}break;
-					case 71:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 72:
-					{
-						strcpy( PrintBuf,"      Actual number of taps, time, and speed\r\n");
-					}break;
-					case 73:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 74: 											// 实测转速最小最大值
-					{
-						sprintf( PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min     %5.1f-%5.1f taps/min\r\n",
-							Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed,Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-						if(strlen( PrintBuf)>80)																											//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-							sprintf( PrintBuf,"      Speed min-max:      %s\r\n",RError);									//2021/12/13 星期一 11:56:48
-					}break;
-					case 75: 											// 计次/计时
-					{
-						if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-							sprintf( PrintBuf,"      Number of taps:     %4d                        %4d\r\n",Reports_rsmp.RPT_RealTapsNb,Reports_rsmp.RPT_RealTapsNb); 
-						else
-						if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-							sprintf( PrintBuf,"      Run Time:           %02d:%02d:%02d (hh:mm:ss)\r\n",
-								Reports_rsmp.RPT_RealRunTime/3600,Reports_rsmp.RPT_RealRunTime%3600/60,Reports_rsmp.RPT_RealRunTime%60); 
-					}break;
-					case 76:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 77: 											// 221/222，测试结束状态
-					{
-						if(Reports_rsmp.RPT_TestStatus)
-							sprintf( PrintBuf,"      Status:             %s\r\n","Test completed.");
-						else
-							sprintf( PrintBuf,"      Status:             %s\r\n","Test abort.");
-						
-						PutStep = 146-1;
-					}break;
-					case 78: 											// 223, 测试站1，方法1
-					{
-						strcpy( PrintBuf,"      Product name station 1:\r\n");
-					}break;
-					case 79:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 80:
-					{
-						sprintf( PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S1PName);
-					}break;
-					case 81:
-					{
-						strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-						sprintf( PrintBuf,"      Information: %-17s\r\n",tbuf1);
-					}break;
-					case 82:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>17) 
-							strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+17,30); 
-						else 
-							tbuf1[0] = '\0';
-						
-						sprintf( PrintBuf,"      %-30s\r\n",tbuf1);
-					}break;
-					case 83:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>47)
-							strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+47,30);
-						else
-							tbuf1[0] = '\0';
-						
-						sprintf( PrintBuf,"      %-30s\r\n",tbuf1);
-					}break;
-					case 84:
-					{
-						sprintf( PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S1PBatchNb);
-					}break;
-					case 85:
-					{
-						sprintf( PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S1CylinderNb);
-					}break;
-					case 86:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 87:
-					{
-						strcpy( PrintBuf,"      Test Parameter                       Station 1\r\n");
-					}break;
-					case 88:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 89:
-					{
-						sprintf( PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S1Method);
-					}break;
-					case 90:
-					{
-						strcpy( PrintBuf,"      Speed:                               300 taps/min\r\n");
-					}break;
-					case 91:
-					{
-						sprintf( PrintBuf,"      Cylinder Volume:                     %-15s\r\n",Reports_rsmp.RPT_S1CylinderSize);
-					}break;
-					case 92:
-					{
-						if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-							sprintf( PrintBuf,"      Number of taps:                      %d\r\n",Reports_rsmp.RPT_S1SetTapsNb);
-						else
-						if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-						{
-							TimeOfHour = Reports_rsmp.RPT_S1SetRunTime/3600;
-							TimeOfMin = Reports_rsmp.RPT_S1SetRunTime%3600/60;
-							TimeOfSec = Reports_rsmp.RPT_S1SetRunTime%60;
-							sprintf( PrintBuf,"      Run Time:                            %02d:%02d:%02d\r\n",TimeOfHour,TimeOfMin,TimeOfSec);
-						}
-					}break;
-					case 93:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 94:
-					{
-						strcpy( PrintBuf,"      System Settings\r\n");
-					}break;
-					case 95:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 96:
-					{
-						sprintf( PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-					}break;
-					case 97:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 98:
-					{
-						strcpy( PrintBuf,"      Test run data           Station 1\r\n");
-					}break;
-					case 99:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 100:
-					{
-						strcpy( PrintBuf,"      Sample Weight           ________________\r\n");
-						//strcpy( PrintBuf,"      V0                      ________________\r\n");
-						//strcpy( PrintBuf,"      V10                     ________________\r\n");
-						//strcpy( PrintBuf,"      V500                    ________________\r\n");
-						//strcpy( PrintBuf,"      V1250                   ________________\r\n");
-					}break;
-					case 101:
-					{
-						strcpy( PrintBuf,"      Initial Density         ________________\r\n");
-					}break;
-					case 102:
-					{
-						strcpy( PrintBuf,"      Tapped Density          ________________\r\n");
-					}break;
-					case 103:
-					{
-						strcpy( PrintBuf,"      Hausner Ratio           ________________\r\n");
-					}break;
-					case 104:
-					{
-						strcpy( PrintBuf,"      Compressibility Index   ________________\r\n");
-					}break;
-					case 105:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 106:
-					{
-						strcpy( PrintBuf,"      Actual number of taps, time, and speed\r\n");
-					}break;
-					case 107:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 108:
-					{
-						sprintf( PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-							Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-						if(strlen( PrintBuf)>50)																											//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-							sprintf( PrintBuf,"      Speed min-max:      %s\r\n",RError);									//2021/12/13 星期一 11:56:48
-					}break;
-					case 109:
-					{
-						if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-							sprintf( PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-						else
-						if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-							sprintf( PrintBuf,"      Run Time:           %02d:%02d:%02d (hh:mm:ss)\r\n",
-								Reports_rsmp.RPT_RealRunTime/3600,Reports_rsmp.RPT_RealRunTime%3600/60,Reports_rsmp.RPT_RealRunTime%60); 
-					}break;
-					case 110:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 111:
-					{
-						if(Reports_rsmp.RPT_TestStatus)
-							sprintf( PrintBuf,"      Status:             %s\r\n","Test completed.");
-						else
-							sprintf( PrintBuf,"      Status:             %s\r\n","Test abort.");
-						
-						PutStep = 146-1;
-					}break;
-					case 112: 										// 223, 测试站2，方法2
-					{
-						strcpy( PrintBuf,"      Product name station 2:\r\n");
-					}break;
-					case 113:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 114:
-					{
-						sprintf( PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S2PName);
-					}break;
-					case 115:
-					{
-						strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo,17);
-						sprintf( PrintBuf,"      Information: %-17s\r\n",tbuf2);
-					}break;
-					case 116:
-					{
-						if(strlen(Reports_rsmp.RPT_S2PInfo)>17) 
-							strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+17,30); 
-						else 
-							tbuf2[0] = '\0';
-						
-						sprintf( PrintBuf,"      %-30s\r\n",tbuf2);
-					}break;
-					case 117:
-					{
-						if(strlen(Reports_rsmp.RPT_S2PInfo)>47)
-							strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+47,30);
-						else
-							tbuf2[0] = '\0';
-						
-						sprintf( PrintBuf,"      %-30s\r\n",tbuf2);
-					}break;
-					case 118:
-					{
-						sprintf(PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S2PBatchNb);
-					}break;
-					case 119:
-					{
-						sprintf(PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S2CylinderNb);
-					}break;
-					case 120:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 121:
-					{
-						strcpy( PrintBuf,"      Test Parameter                       Station 2\r\n");
-					}break;
-					case 122:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 123:
-					{
-						sprintf( PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S2Method);
-					}break;
-					case 124:
-					{
-						strcpy( PrintBuf,"      Speed:                               250 taps/min\r\n");
-					}break;
-					case 125:
-					{
-						sprintf( PrintBuf,"      Cylinder Volume:                     %-15s\r\n",Reports_rsmp.RPT_S2CylinderSize);
-					}break;
-					case 126:
-					{
-						if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-							sprintf( PrintBuf,"      Number of taps:                      %d\r\n",Reports_rsmp.RPT_S2SetTapsNb);
-						else
-						if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-						{
-							TimeOfHour = Reports_rsmp.RPT_S2SetRunTime/3600;
-							TimeOfMin = Reports_rsmp.RPT_S2SetRunTime%3600/60;
-							TimeOfSec = Reports_rsmp.RPT_S2SetRunTime%60;
-							sprintf( PrintBuf,"      Run Time:                            %02d:%02d:%02d\r\n",TimeOfHour,TimeOfMin,TimeOfSec);
-						}
-					}break;
-					case 127:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 128:
-					{
-						strcpy( PrintBuf,"      System Settings\r\n");
-					}break;
-					case 129:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 130:
-					{
-						sprintf( PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-					}break;
-					case 131:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 132:
-					{
-						strcpy( PrintBuf,"      Test run data           Station 2\r\n");
-					}break;
-					case 133:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 134:
-					{
-						strcpy( PrintBuf,"      Sample Weight           ________________\r\n");
-						//strcpy( PrintBuf,"      V0                      ________________\r\n");
-						//strcpy( PrintBuf,"      V10                     ________________\r\n");
-						//strcpy( PrintBuf,"      V500                    ________________\r\n");
-						//strcpy( PrintBuf,"      V1250                   ________________\r\n");
-					}break;
-					case 135:
-					{
-						strcpy( PrintBuf,"      Initial Density         ________________\r\n");
-					}break;
-					case 136:
-					{
-						strcpy( PrintBuf,"      Tapped Density          ________________\r\n");
-					}break;
-					case 137:
-					{
-						strcpy( PrintBuf,"      Hausner Ratio           ________________\r\n");
-					}break;
-					case 138:
-					{
-						strcpy( PrintBuf,"      Compressibility Index   ________________\r\n");
-					}break;
-					case 139:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 140:
-					{
-						strcpy( PrintBuf,"      Actual number of taps, time, and speed\r\n");
-					}break;
-					case 141:
-					{
-						strcpy( PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 142:
-					{
-						sprintf( PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-							Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-						if(strlen( PrintBuf)>50)																											//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-							sprintf( PrintBuf,"      Speed min-max:      %s\r\n",RError);									//2021/12/13 星期一 11:56:48
-					}break;
-					case 143:
-					{
-						if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-							sprintf( PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-						else
-						if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-							sprintf( PrintBuf,"      Run Time:           %02d:%02d:%02d (hh:mm:ss)\r\n",
-								Reports_rsmp.RPT_RealRunTime/3600,Reports_rsmp.RPT_RealRunTime%3600/60,Reports_rsmp.RPT_RealRunTime%60); 
-					}break;
-					case 144:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 145:
-					{
-						if(Reports_rsmp.RPT_TestStatus)
-							sprintf( PrintBuf,"      Status:             %s\r\n","Test completed.");
-						else
-							sprintf( PrintBuf,"      Status:             %s\r\n","Test abort.");
-					}break;
-					case 146: 										// 打印测试日期，表脚公共部分
-					{
-						if(DateFormat == 0) 									// Day,Month,Year
-							sprintf( PrintBuf,"      Test date:          %02d.%02d.20%02d %02d:%02d:%02d",
-								Reports_rsmp.RPT_Date.RTC_Date,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Year,
-								Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-						else
-						if(DateFormat == 1) 									// Year,Month,Day
-							sprintf( PrintBuf,"      Test date:          20%02d-%02d-%02d %02d:%02d:%02d",
-								Reports_rsmp.RPT_Date.RTC_Year,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date,
-								Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-						else
-						if(DateFormat == 2) 									// Month,Day,Year
-							sprintf( PrintBuf,"      Test date:          %02d/%02d/20%02d %02d:%02d:%02d",
-								Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date,Reports_rsmp.RPT_Date.RTC_Year,
-								Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-					}break;
-					case 147:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 148:
-					{
-						strcpy( PrintBuf,"      Requirements fulfilled:      YES      No\r\n");
-					}break;
-					case 149:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 150:
-					{
-						strcpy( PrintBuf,"      Comments\r\n");
-						//strcpy( PrintBuf,"      ______________________________________________________________________\r\n");
-					}break;
-					case 151:
-					{
-						strcpy( PrintBuf,"      ______________________________________________________________________\r\n");
-					}break;
-					case 152:
-					{
-						strcpy( PrintBuf,"      ______________________________________________________________________\r\n");
-						//PutStep++;
-						//PutStep++;
-					}break;
-					case 153:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 154:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 155:
-					{
-						strcpy( PrintBuf,"\r\n");
-					}break;
-					case 156:
-					{
-						strcpy( PrintBuf,"      ______________________________________________________________________\r\n");
-					}break;
-					case 157:
-					{
-						strcpy( PrintBuf,"      Operator                    Date                    Signature \r\n");
-					}break;
-					default:
-					{
-						PutStep = 0xff;
-					}break;
-				}
-			}
-			
-			if(PutStep < 0xff)
-			{
-				tcp_client_sendbuf = (u8 *) PrintBuf;
-				//while(tcp_client_flag&(1<<7));
-				
-				tcp_client_flag|=1<<7;//标记要发送数据
-				//res = 1;
-				//delay_ms(2000);
-				PutStep++;
-			}
-		}
-		
-		if(PutStep == 0xff)
-		{
-			if(!(tcp_client_flag&1<<7))
-			{
-				delay_ms(2000);
-				break;
-			}
-		}
-		
-		if(tcp_client_flag&1<<5)//是否连接上?
-		{
-			if(connflag==0)
-			{ 
-				//LCD_ShowString(30,190,lcddev.width-30,lcddev.height-190,16,"STATUS:Connected   ");//提示消息		
-				//POINT_COLOR=RED;
-				//LCD_ShowString(30,210,lcddev.width-30,lcddev.height-190,16,"Receive Data:");//提示消息		
-				//POINT_COLOR=BLUE;//蓝色字体
-				RS232_SendString("STATUS:Connected\r\n");
-				RS232_SendString("Receive Data: \r\n");
-				connflag=1;//标记连接了
-			} 
-		}
-		else 
-		if(connflag)
-		{
- 			//LCD_ShowString(30,190,190,16,16,"STATUS:Disconnected");
-			//LCD_Fill(30,210,lcddev.width-1,lcddev.height-1,WHITE);//清屏
-			RS232_SendString("STATUS:Disconnected\r\n");
-			connflag=0;	//标记连接断开了
-		} 
-		
-		lwip_periodic_handle();
-		delay_ms(2);
-		
-		t++;
-		if(t==200)
-		{
-			if(connflag==0&&(tcp_client_flag&1<<5)==0)//未连接上,则尝试重连
-			{ 
-				tcp_client_connection_close(tcppcb,0);//关闭连接
-				tcppcb=tcp_new();	//创建一个新的pcb
-				if(tcppcb)			//创建成功
-				{
-					//连接到目的地址的指定端口上,当连接成功后回调tcp_client_connected()函数
-					//tcp_connect(tcppcb,&rmtipaddr,TcpPort,tcp_client_connected);
-					tcp_connect(tcppcb,&rmtipaddr,PrtPort,tcp_client_connected);
-				}
-			}
-			t=0;
-			LED0=!LED0;
-		}
-		
-		if(TIMER_TimeOut(TIMER_GENERAL)) 						// 判断是否超时
-		{
-			OverTime = 3; 														// 服务器端无响应
-			break;
-		}
-	}
-	
-	//osDelay(100);
-	tcp_client_connection_close(tcppcb,0);				//关闭TCP Client连接
-	myfree(SRAMIN,tbuf);
-	
-	return OverTime;
-}*/
 
 char UsbLanPrtNorm(void)
 {
@@ -3166,8 +831,7 @@ char UsbLanPrtNorm(void)
 					}break;
 					case 28: 											// 时区，OQ状态
 					{
-						sprintf( PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
+						sprintf( PrintBuf,"      Qualification status: %9s\r\n",Reports_rsmp.RPT_OQ);
 					}break;
 					case 29:
 					{
@@ -3339,8 +1003,7 @@ char UsbLanPrtNorm(void)
 					}break;
 					case 62: 											// 时区，OQ状态
 					{
-						sprintf( PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
+						sprintf( PrintBuf,"      Qualification status: %9s\r\n",Reports_rsmp.RPT_OQ);
 					}break;
 					case 63:
 					{
@@ -3509,8 +1172,7 @@ char UsbLanPrtNorm(void)
 					}break;
 					case 96:
 					{
-						sprintf( PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
+						sprintf( PrintBuf,"      Qualification status: %9s\r\n",Reports_rsmp.RPT_OQ);
 					}break;
 					case 97:
 					{
@@ -3683,8 +1345,7 @@ char UsbLanPrtNorm(void)
 					}break;
 					case 130:
 					{
-						sprintf( PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
+						sprintf( PrintBuf,"      Qualification status: %9s\r\n",Reports_rsmp.RPT_OQ);
 					}break;
 					case 131:
 					{
@@ -4011,8 +1672,7 @@ char UsbLanPrtNorm(void)
 					}break;
 					case 28: 											// 时区，OQ状态
 					{
-						sprintf( PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
+						sprintf( PrintBuf,"      Qualification status: %9s\r\n",Reports_rsmp.RPT_OQ);
 					}break;
 					case 29:
 					{
@@ -4184,8 +1844,7 @@ char UsbLanPrtNorm(void)
 					}break;
 					case 62: 											// 时区，OQ状态
 					{
-						sprintf( PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
+						sprintf( PrintBuf,"      Qualification status: %9s\r\n",Reports_rsmp.RPT_OQ);
 					}break;
 					case 63:
 					{
@@ -4354,8 +2013,7 @@ char UsbLanPrtNorm(void)
 					}break;
 					case 96:
 					{
-						sprintf( PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
+						sprintf( PrintBuf,"      Qualification status: %9s\r\n",Reports_rsmp.RPT_OQ);
 					}break;
 					case 97:
 					{
@@ -4528,8 +2186,7 @@ char UsbLanPrtNorm(void)
 					}break;
 					case 130:
 					{
-						sprintf( PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
+						sprintf( PrintBuf,"      Qualification status: %9s\r\n",Reports_rsmp.RPT_OQ);
 					}break;
 					case 131:
 					{
@@ -4784,3552 +2441,8 @@ char UsbLanPrtNorm(void)
 	return OverTime;
 }
 
-// 压缩率测试报告打印 ----------------------------------------------------------
-/*void druckergebnisUsp(void)
-{
-	char tbuf1[50];
-	char tbuf2[50];
-	char PrintBuf[100];
-	char RError[] = "Speed Error";							//针对报告转速出错问题加的错误提示字符串			2021/12/13 星期一 11:56:58
-	char VError[] = "Error";										//针对报告体积质量出错问题加的错误提示字符串	2021/12/13 星期一 11:56:58
-	//char type[25];
-	u8 i;
-	float bDat;
-	float fDat;
-	
-	//RTC_GetTime(RTC_Format_BIN, &RTC_TimeStruct);
-	//RTC_GetDate(RTC_Format_BIN, &RTC_DateStruct);
-	
-	SendPrinter("                         Tapped Density Report Test Assist\r\n");
-	SendPrinter("      ----------------------------------------------------------------------\r\n");
-	SendPrinter("\r\n");
-	
-	strcpy(tbuf1,Reports_rsmp.RPT_DeviceSerialNb);
-	sprintf(PrintBuf, "      Device serial no.:     %6s", tbuf1);
-	SendPrinter(PrintBuf);
-	      SendPrinter("        Page:                        1/1\r\n");
-	
-	//osDelay(100);
-	sprintf(PrintBuf, "      Main Firmware version: %6s", Reports_rsmp.RPT_MbVersion);
-	SendPrinter(PrintBuf);
-	sprintf(PrintBuf, "        Touch Firmware version:   %6s\r\n", Reports_rsmp.RPT_DbVersion);
-	SendPrinter(PrintBuf);
-	
-	//sprintf(PrintBuf, "      Device configuration:  %6d", (int)Reports_rsmp.RPT_DeviceType);
-	if(Reports_rsmp.RPT_DeviceType == 121)
-		strcpy(tbuf1,"USP 1, 1 Station");
-	else
-	if(Reports_rsmp.RPT_DeviceType == 122)
-		strcpy(tbuf1,"USP 2, 1 Station");
-	else
-	if(Reports_rsmp.RPT_DeviceType == 221)
-		strcpy(tbuf1,"USP 1, 2 Stations");
-	else
-	if(Reports_rsmp.RPT_DeviceType == 222)
-		strcpy(tbuf1,"USP 2, 2 Stations");
-	else
-	if(Reports_rsmp.RPT_DeviceType == 223)
-		strcpy(tbuf1,"USP 1&2, 2 Stations");
-	else
-		strcpy(tbuf1,"USP x, x Stations");
-	sprintf(PrintBuf, "      Configuration: %-20s", tbuf1);
-	SendPrinter(PrintBuf);
-	
-	//sprintf(PrintBuf, "        Print date:  20%02d-%02d-%02d %02d:%02d:%02d\r\n", RTC_DateStruct.RTC_Year,RTC_DateStruct.RTC_Month,RTC_DateStruct.RTC_Date,RTC_TimeStruct.RTC_Hours,RTC_TimeStruct.RTC_Minutes,RTC_TimeStruct.RTC_Seconds);
-	sprintf(PrintBuf, "  Print date:  %s %s\r\n", DisDateStr,DisTimeStr);
-	SendPrinter(PrintBuf);
-	SendPrinter("\r\n");
-	
-	switch(Reports_rsmp.RPT_DeviceType)
-	{
-		case 121: 													// 1个测试站，方法1，300转/分
-		case 122: 													// 1个测试站，方法2，250转/分
-		{
-			SendPrinter("      Product name station 1:\r\n");
-			SendPrinter("      ----------------------------------------------------------------------\r\n");
-			sprintf(PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S1PName);
-			SendPrinter(PrintBuf);
-			
-			memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-			strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-			sprintf(PrintBuf,"      Information: %-17s\r\n",tbuf1);
-			SendPrinter(PrintBuf);
-			
-			memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-			if(strlen(Reports_rsmp.RPT_S1PInfo)>17) 
-				strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+17,30); 
-			else 
-				tbuf1[0] = '\0';
-			
-			sprintf(PrintBuf,"      %-30s\r\n",tbuf1);
-			SendPrinter(PrintBuf);
-			
-			memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-			if(strlen(Reports_rsmp.RPT_S1PInfo)>47)
-				strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+47,30);
-			else
-				tbuf1[0] = '\0';
-			
-			sprintf(PrintBuf,"      %-30s\r\n",tbuf1);
-			SendPrinter(PrintBuf);
-			
-			sprintf(PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S1PBatchNb);
-			SendPrinter(PrintBuf);
-			
-			sprintf(PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S1CylinderNb);
-			SendPrinter(PrintBuf);
-			
-			SendPrinter("\r\n");
-			SendPrinter("      Test Parameter                       Station 1\r\n");
-			SendPrinter("      ----------------------------------------------------------------------\r\n");
-			sprintf(PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S1Method);
-			SendPrinter(PrintBuf);
-			
-			if(Reports_rsmp.RPT_DeviceType == 121)
-				strcpy(PrintBuf,"      Speed:                               300 taps/min\r\n");
-			else
-				strcpy(PrintBuf,"      Speed:                               250 taps/min\r\n");
-			SendPrinter(PrintBuf);
-			
-			sprintf(PrintBuf,"      Cylinder Size:                       %-15s\r\n",Reports_rsmp.RPT_S1CylinderSize);
-			SendPrinter(PrintBuf);
-			
-			sprintf(PrintBuf,"      Calculation of Compressibility Index: V%d\r\n",Reports_rsmp.RPT_V0_V10);
-			SendPrinter(PrintBuf);
-			
-			fDat = Reports_rsmp.RPT_S1InitialVolume;
-			fDat /= 10;	
-			sprintf(PrintBuf,"      Initial Volume:                      %5.1f ml\r\n",fDat);
-			SendPrinter(PrintBuf);
-			
-			sprintf(PrintBuf,"      Sample Mass:                         %5.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100);
-			SendPrinter(PrintBuf);
-			
-			SendPrinter("\r\n");
-			SendPrinter("      System Settings\r\n");
-			SendPrinter("      ----------------------------------------------------------------------\r\n");
-			sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-				Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-			SendPrinter(PrintBuf);
-			
-			SendPrinter("\r\n");
-			SendPrinter("      Test run data           Station 1\r\n");
-			SendPrinter("      ----------------------------------------------------------------------\r\n");
-			sprintf(PrintBuf,"      Sample Weight           %5.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100); 
-			if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				sprintf(PrintBuf,"      Sample Weight           %s\r\n",VError); 			//Mark 3																	
-			SendPrinter(PrintBuf);
-
-			fDat = Reports_rsmp.RPT_S1InitialVolume;					//Mark 1  关于体积报告出错修改 2021/11/30 星期二 16:41:13
-			fDat /= 10;	
-			sprintf(PrintBuf,"      V0                      %5.1f ml\r\n",fDat); 
-			if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				sprintf(PrintBuf,"      V0                      %s\r\n",VError); 	
-			SendPrinter(PrintBuf);
-			
-			fDat = Reports_rsmp.RPT_S1V10;
-			fDat /= 10;	
-			sprintf(PrintBuf,"      V10                     %5.1f ml\r\n",fDat); 
-			if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				sprintf(PrintBuf,"      V10                     %s\r\n",VError);  	
-			SendPrinter(PrintBuf);
-			
-			fDat = Reports_rsmp.RPT_S1V500;
-			fDat /= 10;
-			sprintf(PrintBuf,"      V500                    %5.1f ml\r\n",fDat); 
-			if(strlen(PrintBuf)>43)											//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				sprintf(PrintBuf,"      V500                    %s\r\n",VError); 
-			SendPrinter(PrintBuf);	
-			
-			fDat = Reports_rsmp.RPT_S1V1250;
-			fDat /= 10;
-			if(Reports_rsmp.RPT_TESTENDS1 == 3)
-			{
-				sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-				if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-					sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
-			}
-			else
-			{
-				sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-				if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-					sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
-			}
-			SendPrinter(PrintBuf);
-			
-			for(i=4;i<10;i++)
-			{
-				if(i < Reports_rsmp.RPT_TESTENDS1+1)
-				{
-					fDat = Reports_rsmp.RPT_S1Delay[i-4];
-					fDat /= 10;
-					if(i != Reports_rsmp.RPT_TESTENDS1)
-					{
-						sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
-					}
-					else
-					{	
-						sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-						if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
-					}
-					SendPrinter(PrintBuf);
-				}
-				else
-					break;
-			}
-
-			sprintf(PrintBuf,"      Initial Density         %5.2f g/ml\r\n",Reports_rsmp.RPT_S1InitialDensity);
-			if(strlen(PrintBuf)>44)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				sprintf(PrintBuf,"      Initial Density         %s\r\n",VError);	
-			SendPrinter(PrintBuf);
-
-			sprintf(PrintBuf,"      Tapped Density          %5.2f g/ml\r\n",Reports_rsmp.RPT_S1TappedDensity);
-			if(strlen(PrintBuf)>44)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				sprintf(PrintBuf,"      Tapped Density          %s\r\n",VError); 
-			SendPrinter(PrintBuf);
-			
-			sprintf(PrintBuf,"      Hausner Ratio           %5.2f\r\n",Reports_rsmp.RPT_S1HausnerRatio); 
-			if(strlen(PrintBuf)>40)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				sprintf(PrintBuf,"      Hausner Ratio           %s\r\n",VError);
-			SendPrinter(PrintBuf);
-			
-			sprintf(PrintBuf,"      Compressibility Index   %5.1f %%\r\n",Reports_rsmp.RPT_S1Compressibility);
-			if(strlen(PrintBuf)>42)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				sprintf(PrintBuf,"      Compressibility Index   %s\r\n",VError);
-			SendPrinter(PrintBuf);
-			
-			SendPrinter("\r\n");
-			SendPrinter("      Actual number of taps, time, and speed\r\n");
-			SendPrinter("      ----------------------------------------------------------------------\r\n");
-			sprintf(PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-				Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-			if(strlen(PrintBuf)>50)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				sprintf(PrintBuf,"      Speed min-max:      %s\r\n",RError);																	//2021/12/13 星期一 11:56:48
-			SendPrinter(PrintBuf);
-			
-			sprintf(PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-			SendPrinter(PrintBuf);
-			
-			SendPrinter("\r\n");
-			if(Reports_rsmp.RPT_TestStatus)
-				sprintf(PrintBuf,"      Status:             %s\r\n","Test completed.");
-			else
-				sprintf(PrintBuf,"      Status:             %s\r\n","Test abort.");
-			SendPrinter(PrintBuf);
-		}break;
-		case 221: 													// 2个测试站，方法1，300转/分
-		case 222: 													// 2个测试站，方法2，250转/分
-		{
-			SendPrinter("      Product name station 1:              Product name station 2:\r\n");
-			SendPrinter("      ----------------------------------------------------------------------\r\n");
-			sprintf(PrintBuf,"      Name:        %-17s       Name:        %-17s\r\n",Reports_rsmp.RPT_S1PName,Reports_rsmp.RPT_S2PName);
-			SendPrinter(PrintBuf);
-			
-			memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-			memset(tbuf2,'\0',sizeof(tbuf2));						//清空数组
-			strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-			strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo,17);
-			sprintf(PrintBuf,"      Information: %-17s       Information: %-17s\r\n",tbuf1,tbuf2);
-			SendPrinter(PrintBuf);
-			
-			memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-			memset(tbuf2,'\0',sizeof(tbuf2));						//清空数组
-			if(strlen(Reports_rsmp.RPT_S1PInfo)>17) strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+17,30); else tbuf1[0] = '\0';
-			if(strlen(Reports_rsmp.RPT_S2PInfo)>17) strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+17,30); else tbuf2[0] = '\0';
-			
-			sprintf(PrintBuf,"      %-30s       %-30s\r\n",tbuf1,tbuf2);
-			SendPrinter(PrintBuf);
-			
-			memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-			memset(tbuf2,'\0',sizeof(tbuf2));						//清空数组
-			if(strlen(Reports_rsmp.RPT_S1PInfo)>47) strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+47,30); else tbuf1[0] = '\0';
-			if(strlen(Reports_rsmp.RPT_S2PInfo)>47) strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+47,30); else tbuf2[0] = '\0';
-			
-			sprintf(PrintBuf,"      %-30s       %-30s\r\n",tbuf1,tbuf2);
-			SendPrinter(PrintBuf);
-			
-			sprintf(PrintBuf,"      Batch Number:    %15s     Batch Number:    %15s\r\n",Reports_rsmp.RPT_S1PBatchNb,Reports_rsmp.RPT_S2PBatchNb);
-			SendPrinter(PrintBuf);
-			
-			sprintf(PrintBuf,"      Cylinder Number: %15s     Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S1CylinderNb,Reports_rsmp.RPT_S2CylinderNb);
-			SendPrinter(PrintBuf);
-			
-			SendPrinter("\r\n");
-			SendPrinter("      Test Parameter                       Station 1          Station 2\r\n");
-			SendPrinter("      ----------------------------------------------------------------------\r\n");
-			sprintf(PrintBuf,"      USP method:                          USP %d              USP %d\r\n",(u16)Reports_rsmp.RPT_S1Method,(u16)Reports_rsmp.RPT_S2Method);
-			SendPrinter(PrintBuf);
-			
-			if(Reports_rsmp.RPT_DeviceType == 221)
-				strcpy(PrintBuf,"      Speed:                               300 taps/min       300 taps/min\r\n");
-			else
-				strcpy(PrintBuf,"      Speed:                               250 taps/min       250 taps/min\r\n");
-			SendPrinter(PrintBuf);
-			
-			sprintf(PrintBuf,"      Cylinder Size:                       %-15s    %-15s\r\n",Reports_rsmp.RPT_S1CylinderSize,Reports_rsmp.RPT_S2CylinderSize);
-			SendPrinter(PrintBuf);
-			
-			sprintf(PrintBuf,"      Calculation of Compressibility Index: V%d                  V%d\r\n",Reports_rsmp.RPT_V0_V10,Reports_rsmp.RPT_V0_V10);
-			SendPrinter(PrintBuf);
-			
-			fDat = Reports_rsmp.RPT_S1InitialVolume;
-			fDat /= 10;
-			bDat = Reports_rsmp.RPT_S2InitialVolume;
-			bDat /= 10;
-			//sprintf(PrintBuf,"      Initial Volume:                      %5.1f ml               %5.1f ml\r\n",fDat,bDat);
-			sprintf(PrintBuf,"      Initial Volume:                      %5.1f ml           %5.1f ml\r\n",fDat,bDat);
-			SendPrinter(PrintBuf);
-			
-			//sprintf(PrintBuf,"      Sample Mass:                         %5.1f g             %5.1f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/10,(float)Reports_rsmp.RPT_S1SampleMass/10);
-//			sprintf(PrintBuf,"      Sample Mass:                         %5.1f g            %5.1f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/10,(float)Reports_rsmp.RPT_S1SampleMass/10);
-			sprintf(PrintBuf,"      Sample Mass:                         %5.2f g            %5.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100,(float)Reports_rsmp.RPT_S2SampleMass/100);	//2021/12/20 星期一 16:46:59
-			SendPrinter(PrintBuf);
-			
-			SendPrinter("\r\n");
-			SendPrinter("      System Settings\r\n");
-			SendPrinter("      ----------------------------------------------------------------------\r\n");
-			sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-				Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-			SendPrinter(PrintBuf);
-			
-			SendPrinter("\r\n");
-			SendPrinter("      Test run data           Station 1            Station 2\r\n");
-			SendPrinter("      ----------------------------------------------------------------------\r\n");
-			sprintf(PrintBuf,"      Sample Weight           %5.2f g               %5.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100,(float)Reports_rsmp.RPT_S2SampleMass/100); 
-			if(strlen(PrintBuf)>63)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				sprintf(PrintBuf,"      Sample Weight           %s\r\n",VError); 
-			SendPrinter(PrintBuf);
-
-			fDat = Reports_rsmp.RPT_S1InitialVolume;
-			fDat /= 10;
-			bDat = Reports_rsmp.RPT_S2InitialVolume;
-			bDat /= 10;
-			sprintf(PrintBuf,"      V0                      %5.1f ml                %5.1f ml\r\n",fDat,bDat); 
-			if(strlen(PrintBuf)>66)											//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				sprintf(PrintBuf,"      V0                      %s\r\n",VError); 	
-			SendPrinter(PrintBuf);
-			
-			fDat = Reports_rsmp.RPT_S1V10;
-			fDat /= 10;
-			bDat = Reports_rsmp.RPT_S2V10;
-			bDat /= 10;
-			sprintf(PrintBuf,"      V10                     %5.1f ml                %5.1f ml\r\n",fDat,bDat); 
-			if(strlen(PrintBuf)>66)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				sprintf(PrintBuf,"      V10                     %s\r\n",VError);  
-			SendPrinter(PrintBuf);
-			
-			fDat = Reports_rsmp.RPT_S1V500;
-			fDat /= 10;
-			bDat = Reports_rsmp.RPT_S2V500;
-			bDat /= 10;
-			sprintf(PrintBuf,"      V500                    %5.1f ml                %5.1f ml\r\n",fDat,bDat); 
-			if(strlen(PrintBuf)>66)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				sprintf(PrintBuf,"      V500                    %s\r\n",VError); 
-			SendPrinter(PrintBuf);
-			
-			fDat = Reports_rsmp.RPT_S1V1250;
-			fDat /= 10;
-			bDat = Reports_rsmp.RPT_S2V1250;
-			bDat /= 10;
-			
-			if((Reports_rsmp.RPT_TESTENDS1 != 3)&&(Reports_rsmp.RPT_TESTENDS2 != 3))
-			{
-				sprintf(PrintBuf,"      V1250                   %5.1f ml                %5.1f ml\r\n",fDat,bDat);
-				if(strlen(PrintBuf)>66)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-					sprintf(PrintBuf,"      V1250                   %s\r\n",VError);		
-			}
-			else
-			{
-				if((Reports_rsmp.RPT_TESTENDS1 == 3)&&(Reports_rsmp.RPT_TESTENDS2 == 3))
-				{
-
-					sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)         %5.1f ml(Final)\r\n",fDat,bDat);
-					if(strlen(PrintBuf)>73)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-						sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
-				}
-				else
-				{
-					if(Reports_rsmp.RPT_TESTENDS1 == 3)
-					{
-						sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)         %5.1f ml\r\n",fDat,bDat);
-						if(strlen(PrintBuf)>66)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
-					}
-					else
-					{
-						sprintf(PrintBuf,"      V1250                   %5.1f ml                %5.1f ml(Final)\r\n",fDat,bDat);
-						if(strlen(PrintBuf)>73)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      V1250                   %s\r\n",VError);
-					}
-				}
-			}
-			SendPrinter(PrintBuf);
-			
-			for(i=4;i<10;i++)
-			{
-				if((Reports_rsmp.RPT_S1SampleMass != 0)&&
-					 (Reports_rsmp.RPT_S1InitialVolume != 0))
-				{
-					if(i <= Reports_rsmp.RPT_TESTENDS1)
-					{
-						fDat = Reports_rsmp.RPT_S1Delay[i-4];
-						fDat /= 10;
-						if(i != Reports_rsmp.RPT_TESTENDS1)
-							sprintf(tbuf1,"%5.1f ml       ",fDat);
-						else
-							sprintf(tbuf1,"%5.1f ml(Final)",fDat);
-						if(strlen(tbuf1)>25)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(tbuf1,"%s",VError);	
-					}
-					else
-					{
-						strcpy(tbuf1,"\0");
-					}
-				}
-				else
-				{
-					if(i == 4)
-						strcpy(tbuf1,"NA");
-					else
-						strcpy(tbuf1,"\0");
-				}
-				
-				if((Reports_rsmp.RPT_S2SampleMass != 0)&&
-					 (Reports_rsmp.RPT_S2InitialVolume != 0))
-				{
-					if(i <= Reports_rsmp.RPT_TESTENDS2)
-					{
-						bDat = Reports_rsmp.RPT_S2Delay[i-4];
-						bDat /= 10;
-						if(i != Reports_rsmp.RPT_TESTENDS2)
-							sprintf(tbuf2,"%5.1f ml       ",bDat);
-						else
-							sprintf(tbuf2,"%5.1f ml(Final)",bDat);
-						if(strlen(tbuf2)>25)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(tbuf2,"%s",VError);	
-					}
-					else
-					{
-						strcpy(tbuf2,"\0");
-					}
-				}
-				else
-				{
-					if(i == 4)
-						strcpy(tbuf2,"NA");
-					else
-						strcpy(tbuf2,"\0");
-				}
-				sprintf(PrintBuf,"      V1250                   %13s         %13s\r\n",tbuf1,tbuf2);
-				SendPrinter(PrintBuf);
-				
-				if((i >= Reports_rsmp.RPT_TESTENDS1)&&
-					 (i >= Reports_rsmp.RPT_TESTENDS2))
-				{
-					break;
-				}
-			}
-			
-			sprintf(PrintBuf,"      Initial Density         %5.2f g/ml            %5.2f g/ml\r\n",Reports_rsmp.RPT_S1InitialDensity,Reports_rsmp.RPT_S2InitialDensity); 
-			if(strlen(PrintBuf)>66)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				sprintf(PrintBuf,"      Initial Density         %s\r\n",VError); 	
-			SendPrinter(PrintBuf);
-			
-			sprintf(PrintBuf,"      Tapped Density          %5.2f g/ml            %5.2f g/ml\r\n",Reports_rsmp.RPT_S1TappedDensity,Reports_rsmp.RPT_S2TappedDensity); 
-			if(strlen(PrintBuf)>66)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				sprintf(PrintBuf,"      Tapped Density          %s\r\n",VError); 
-			SendPrinter(PrintBuf);
-			
-			sprintf(PrintBuf,"      Hausner Ratio           %5.2f                 %5.2f\r\n",Reports_rsmp.RPT_S1HausnerRatio,Reports_rsmp.RPT_S2HausnerRatio); 
-			if(strlen(PrintBuf)>61)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				sprintf(PrintBuf,"      Hausner Ratio           %s\r\n",VError); 
-			SendPrinter(PrintBuf);
-			
-			sprintf(PrintBuf,"      Compressibility Index   %5.1f %%              %5.1f %%\r\n",Reports_rsmp.RPT_S1Compressibility,Reports_rsmp.RPT_S2Compressibility); 
-			if(strlen(PrintBuf)>61)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				sprintf(PrintBuf,"      Compressibility Index   %s\r\n",VError); 
-			SendPrinter(PrintBuf);
-			
-			SendPrinter("\r\n");
-			SendPrinter("      Actual number of taps, time, and speed\r\n");
-			SendPrinter("      ----------------------------------------------------------------------\r\n");
-			sprintf(PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min     %5.1f-%5.1f taps/min\r\n",
-				Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed,Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-			if(strlen(PrintBuf)>75)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				sprintf(PrintBuf,"      Speed min-max:      %s\r\n",RError);																	//2021/12/13 星期一 11:56:48
-			SendPrinter(PrintBuf);
-			
-			//sprintf(PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb);
-			if(Exitflag!=0)					//测试时退出
-			{
-				if(Exitflag==1)
-					sprintf(PrintBuf,"      Number of taps:     %4d                    	0\r\n",Reports_rsmp.RPT_RealTapsNb);
-				else if(Exitflag==2)
-					sprintf(PrintBuf,"      Number of taps:        0                       %4d\r\n",Reports_rsmp.RPT_RealTapsNb);
-				else if(Exitflag==3)
-					sprintf(PrintBuf,"      Number of taps:     %4d                     %4d\r\n",Reports_rsmp.RPT_RealTapsNb,Reports_rsmp.RPT_RealTapsNb);
-				Exitflag = 0;
-			}
-			else				//正常测试完成
-			{
-				sprintf(PrintBuf,"      Number of taps:     %4d                     %4d\r\n",
-				RUN_CYC[Reports_rsmp.RPT_TESTENDS1],RUN_CYC[Reports_rsmp.RPT_TESTENDS2]); 
-			}
-			SendPrinter(PrintBuf);
-			
-			SendPrinter("\r\n");
-			if(Reports_rsmp.RPT_TestStatus)
-				sprintf(PrintBuf,"      Status:             %s\r\n","Test completed.");
-			else
-				sprintf(PrintBuf,"      Status:             %s\r\n","Test abort.");
-			SendPrinter(PrintBuf);
-			
-		}break;
-		case 223: 													// 1个测试站，方法可选
-		{
-			if(Reports_rsmp.RPT_S1Method == 1) 					// 测试站1方法1
-			{
-				SendPrinter("      Product name station 1:\r\n");
-				SendPrinter("      ----------------------------------------------------------------------\r\n");
-				sprintf(PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S1PName);
-				SendPrinter(PrintBuf);
-				
-				memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-				strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-				sprintf(PrintBuf,"      Information: %-17s\r\n",tbuf1);
-				SendPrinter(PrintBuf);
-				
-				memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-				if(strlen(Reports_rsmp.RPT_S1PInfo)>17) 
-					strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+17,30); 
-				else 
-					tbuf1[0] = '\0';
-				
-				sprintf(PrintBuf,"      %-30s\r\n",tbuf1);
-				SendPrinter(PrintBuf);
-				
-				memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-				if(strlen(Reports_rsmp.RPT_S1PInfo)>47)
-					strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+47,30);
-				else
-					tbuf1[0] = '\0';
-				
-				sprintf(PrintBuf,"      %-30s\r\n",tbuf1);
-				SendPrinter(PrintBuf);
-				
-				sprintf(PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S1PBatchNb);
-				SendPrinter(PrintBuf);
-				
-				sprintf(PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S1CylinderNb);
-				SendPrinter(PrintBuf);
-				
-				SendPrinter("\r\n");
-				SendPrinter("      Test Parameter                       Station 1\r\n");
-				SendPrinter("      ----------------------------------------------------------------------\r\n");
-				sprintf(PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S1Method);
-				SendPrinter(PrintBuf);
-				
-				strcpy(PrintBuf,"      Speed:                               300 taps/min\r\n");
-				SendPrinter(PrintBuf);
-				
-				sprintf(PrintBuf,"      Cylinder Size:                       %-15s\r\n",Reports_rsmp.RPT_S1CylinderSize);
-				SendPrinter(PrintBuf);
-				
-				sprintf(PrintBuf,"      Calculation of Compressibility Index: V%d\r\n",Reports_rsmp.RPT_V0_V10);
-				SendPrinter(PrintBuf);
-				
-				fDat = Reports_rsmp.RPT_S1InitialVolume;
-				fDat /= 10;		
-				sprintf(PrintBuf,"      Initial Volume:                      %5.1f ml\r\n",fDat);
-				SendPrinter(PrintBuf);
-				
-				sprintf(PrintBuf,"      Sample Mass:                         %5.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100);
-				SendPrinter(PrintBuf);
-				
-				SendPrinter("\r\n");
-				SendPrinter("      System Settings\r\n");
-				SendPrinter("      ----------------------------------------------------------------------\r\n");
-				sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-					Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-				SendPrinter(PrintBuf);
-				
-				SendPrinter("\r\n");
-				SendPrinter("      Test run data           Station 1\r\n");
-				SendPrinter("      ----------------------------------------------------------------------\r\n");
-				sprintf(PrintBuf,"      Sample Weight           %5.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100); 
-				if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-					sprintf(PrintBuf,"      Sample Weight           %s\r\n",VError); 
-				SendPrinter(PrintBuf);
-
-				fDat = Reports_rsmp.RPT_S1InitialVolume;
-				fDat /= 10;						
-				sprintf(PrintBuf,"      V0                      %5.1f ml\r\n",fDat);	//2021/11/30 星期二 14:37:43
-				if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-					sprintf(PrintBuf,"      V0                      %s\r\n",VError); 	
-				SendPrinter(PrintBuf);	
-				
-				fDat = Reports_rsmp.RPT_S1V10;
-				fDat /= 10;
-				sprintf(PrintBuf,"      V10                     %5.1f ml\r\n",fDat); 
-				if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-					sprintf(PrintBuf,"      V10                     %s\r\n",VError);  	
-				SendPrinter(PrintBuf);							//
-				
-				fDat = Reports_rsmp.RPT_S1V500;
-				fDat /= 10;
-				sprintf(PrintBuf,"      V500                    %5.1f ml\r\n",fDat);
-				if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-					sprintf(PrintBuf,"      V500                    %s\r\n",VError);  
-				SendPrinter(PrintBuf);							//
-
-				fDat = Reports_rsmp.RPT_S1V1250;
-				fDat /= 10;
-				if(Reports_rsmp.RPT_TESTENDS1 == 3)
-				{
-					sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-					if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-						sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
-				}
-				else
-				{
-					sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-					if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-						sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
-				}	
-				SendPrinter(PrintBuf);
-				
-				
-				for(i=4;i<10;i++)
-				{
-					if(i < Reports_rsmp.RPT_TESTENDS1+1)
-					{
-						fDat = Reports_rsmp.RPT_S1Delay[i-4];
-						fDat /= 10;
-						if(i != Reports_rsmp.RPT_TESTENDS1)
-						{	
-							sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
-						}
-						else
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
-						}
-						SendPrinter(PrintBuf);
-					}
-					else
-						break;
-				}
-
-				sprintf(PrintBuf,"      Initial Density         %5.2f g/ml\r\n",Reports_rsmp.RPT_S1InitialDensity); 
-				if(strlen(PrintBuf)>43)														//针对打印报告出错问题,无法判断结束位,清空数组后求他长度
-					sprintf(PrintBuf,"      Initial Density         %s\r\n",VError);	
-				SendPrinter(PrintBuf);
-				
-				memset(PrintBuf,'\0',sizeof(PrintBuf));						//清空数组
-				sprintf(PrintBuf,"      Tapped Density          %5.2f g/ml\r\n",Reports_rsmp.RPT_S1TappedDensity);
-				if(strlen(PrintBuf)>43)														//针对打印报告出错问题,无法判断结束位,清空数组后求他长度
-					sprintf(PrintBuf,"      Tapped Density          %s\r\n",VError); 
-				SendPrinter(PrintBuf);
-				
-				sprintf(PrintBuf,"      Hausner Ratio           %5.2f\r\n",Reports_rsmp.RPT_S1HausnerRatio);
-				if(strlen(PrintBuf)>40)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-					sprintf(PrintBuf,"      Hausner Ratio           %s\r\n",VError);
-				SendPrinter(PrintBuf);
-				
-				sprintf(PrintBuf,"      Compressibility Index   %5.1f %%\r\n",Reports_rsmp.RPT_S1Compressibility); 
-				if(strlen(PrintBuf)>40)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-					sprintf(PrintBuf,"      Compressibility Index   %s\r\n",VError);
-				SendPrinter(PrintBuf);
-				
-				SendPrinter("\r\n");
-				SendPrinter("      Actual number of taps, time, and speed\r\n");
-				SendPrinter("      ----------------------------------------------------------------------\r\n");
-				sprintf(PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-					Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-				if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-					sprintf(PrintBuf,"      Speed min-max:      %s\r\n",RError);																	//2021/12/13 星期一 11:56:48
-				SendPrinter(PrintBuf);
-				
-				sprintf(PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-				SendPrinter(PrintBuf);
-				
-				SendPrinter("\r\n");
-				if(Reports_rsmp.RPT_TestStatus)
-					sprintf(PrintBuf,"      Status:             %s\r\n","Test completed.");
-				else
-					sprintf(PrintBuf,"      Status:             %s\r\n","Test abort.");
-				SendPrinter(PrintBuf);
-			}
-			else
-			if(Reports_rsmp.RPT_S2Method == 2) 					// 测试站2方法2
-			{
-				SendPrinter("      Product name station 2:\r\n");
-				SendPrinter("      ----------------------------------------------------------------------\r\n");
-				sprintf(PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S2PName);
-				SendPrinter(PrintBuf);
-				
-				memset(tbuf2,'\0',sizeof(tbuf2));						//清空数组
-				strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo,17);
-				sprintf(PrintBuf,"      Information: %-17s\r\n",tbuf2);
-				SendPrinter(PrintBuf);
-				
-				memset(tbuf2,'\0',sizeof(tbuf2));						//清空数组
-				if(strlen(Reports_rsmp.RPT_S2PInfo)>17) 
-					strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+17,30); 
-				else 
-					tbuf2[0] = '\0';
-				
-				sprintf(PrintBuf,"      %-30s\r\n",tbuf2);
-				SendPrinter(PrintBuf);
-				
-				memset(tbuf2,'\0',sizeof(tbuf2));						//清空数组
-				if(strlen(Reports_rsmp.RPT_S2PInfo)>47)
-					strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+47,30);
-				else
-					tbuf2[0] = '\0';
-				
-				sprintf(PrintBuf,"      %-30s\r\n",tbuf2);
-				SendPrinter(PrintBuf);
-				
-				sprintf(PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S2PBatchNb);
-				SendPrinter(PrintBuf);
-				
-				sprintf(PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S2CylinderNb);
-				SendPrinter(PrintBuf);
-				
-				SendPrinter("\r\n");
-				SendPrinter("      Test Parameter                       Station 2\r\n");
-				SendPrinter("      ----------------------------------------------------------------------\r\n");
-				sprintf(PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S2Method);
-				SendPrinter(PrintBuf);
-				
-				strcpy(PrintBuf,"      Speed:                               250 taps/min\r\n");
-				SendPrinter(PrintBuf);
-				
-				sprintf(PrintBuf,"      Cylinder Size:                       %-15s\r\n",Reports_rsmp.RPT_S2CylinderSize);
-				SendPrinter(PrintBuf);
-				
-				sprintf(PrintBuf,"      Calculation of Compressibility Index: V%d\r\n",Reports_rsmp.RPT_V0_V10);
-				SendPrinter(PrintBuf);
-				
-				fDat = Reports_rsmp.RPT_S2InitialVolume;
-				fDat /= 10;	
-				sprintf(PrintBuf,"      Initial Volume:                      %5.1f ml\r\n",fDat);
-				SendPrinter(PrintBuf);
-				
-				sprintf(PrintBuf,"      Sample Mass:                         %5.2f g\r\n",(float)Reports_rsmp.RPT_S2SampleMass/100);
-				SendPrinter(PrintBuf);
-				
-				SendPrinter("\r\n");
-				SendPrinter("      System Settings\r\n");
-				SendPrinter("      ----------------------------------------------------------------------\r\n");
-				sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-					Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-				SendPrinter(PrintBuf);
-				
-				SendPrinter("\r\n");
-				SendPrinter("      Test run data           Station 2\r\n");
-				SendPrinter("      ----------------------------------------------------------------------\r\n");
-				sprintf(PrintBuf,"      Sample Weight           %5.2f g\r\n",(float)Reports_rsmp.RPT_S2SampleMass/100); 
-				if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-					sprintf(PrintBuf,"      Sample Weight           %s\r\n",VError); 
-				SendPrinter(PrintBuf);
-
-				fDat = Reports_rsmp.RPT_S2InitialVolume;
-				fDat /= 10;						
-				sprintf(PrintBuf,"      V0                      %5.1f ml\r\n",fDat); 
-				if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-					sprintf(PrintBuf,"      V0                      %s\r\n",VError); 	
-				SendPrinter(PrintBuf);														//2021/11/30 星期二 14:37:43
-				
-				fDat = Reports_rsmp.RPT_S2V10;
-				fDat /= 10;
-				sprintf(PrintBuf,"      V10                     %5.1f ml\r\n",fDat);
-				if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-					sprintf(PrintBuf,"      V10                     %s\r\n",VError);  
-				SendPrinter(PrintBuf);							//
-				
-				fDat = Reports_rsmp.RPT_S2V500;
-				fDat /= 10;
-				sprintf(PrintBuf,"      V500                    %5.1f ml\r\n",fDat); 
-				if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-					sprintf(PrintBuf,"      V500                    %s\r\n",VError);
-				SendPrinter(PrintBuf);							//
-
-				fDat = Reports_rsmp.RPT_S2V1250;
-				fDat /= 10;
-				if(Reports_rsmp.RPT_TESTENDS2 == 3)
-				{	
-					sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-					if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-						sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
-				}
-				else
-				{
-					sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-					if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-						sprintf(PrintBuf,"      V1250                   %s\r\n",VError);
-				}
-				SendPrinter(PrintBuf);
-				
-				for(i=4;i<10;i++)
-				{
-					if(i < Reports_rsmp.RPT_TESTENDS2+1)
-					{
-						fDat = Reports_rsmp.RPT_S2Delay[i-4];
-						fDat /= 10;
-						if(i != Reports_rsmp.RPT_TESTENDS2)
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
-						}
-						else
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-								sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
-						}
-						SendPrinter(PrintBuf);
-					}
-					else
-						break;
-				}
-				memset(PrintBuf,'\0',sizeof(PrintBuf));						//清空数组
-				sprintf(PrintBuf,"      Initial Density         %5.2f g/ml\r\n",Reports_rsmp.RPT_S2InitialDensity); 
-				if(strlen(PrintBuf)>43)				//针对打印报告出错问题,正常报告结束位是0X0D,0X0A
-					sprintf(PrintBuf,"      Initial Density         %s\r\n",VError);
-				SendPrinter(PrintBuf);
-				
-				memset(PrintBuf,'\0',sizeof(PrintBuf));						//清空数组
-				sprintf(PrintBuf,"      Tapped Density          %5.2f g/ml\r\n",Reports_rsmp.RPT_S2TappedDensity); 
-				if(strlen(PrintBuf)>43)				//针对打印报告出错问题,正常报告结束位是0X0D,0X0A
-					sprintf(PrintBuf,"      Tapped Density          %s\r\n",VError); 
-				SendPrinter(PrintBuf);
-				
-				sprintf(PrintBuf,"      Hausner Ratio           %5.2f\r\n",Reports_rsmp.RPT_S2HausnerRatio); 
-				if(strlen(PrintBuf)>40)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-					sprintf(PrintBuf,"      Hausner Ratio           %s\r\n",VError);
-				SendPrinter(PrintBuf);
-				
-				sprintf(PrintBuf,"      Compressibility Index   %5.1f %%\r\n",Reports_rsmp.RPT_S2Compressibility); 
-				if(strlen(PrintBuf)>42)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-					sprintf(PrintBuf,"      Compressibility Index   %s\r\n",VError);
-				SendPrinter(PrintBuf);
-				
-				SendPrinter("\r\n");
-				SendPrinter("      Actual number of taps, time, and speed\r\n");
-				SendPrinter("      ----------------------------------------------------------------------\r\n");
-				sprintf(PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-					Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-				if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-					sprintf(PrintBuf,"      Speed min-max:      %s\r\n",RError);																	//2021/12/13 星期一 11:56:48
-				SendPrinter(PrintBuf);
-				
-				sprintf(PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-				SendPrinter(PrintBuf);
-				
-				SendPrinter("\r\n");
-				if(Reports_rsmp.RPT_TestStatus)
-					sprintf(PrintBuf,"      Status:             %s\r\n","Test completed.");
-				else
-					sprintf(PrintBuf,"      Status:             %s\r\n","Test abort.");
-				SendPrinter(PrintBuf);
-			}
-		}break;
-		default:
-		break;
-	}
-	
-	// 打印测试时间 ------------------------------------------
-	if(DateFormat == 0) 									// Day,Month,Year
-		sprintf(PrintBuf,"      Test date:          %02d.%02d.20%02d %02d:%02d:%02d",
-			Reports_rsmp.RPT_Date.RTC_Date,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Year,
-			Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-	else
-	if(DateFormat == 1) 									// Year,Month,Day
-		sprintf(PrintBuf,"      Test date:          20%02d-%02d-%02d %02d:%02d:%02d",
-			Reports_rsmp.RPT_Date.RTC_Year,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date,
-			Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-	else
-	if(DateFormat == 2) 									// Month,Day,Year
-		sprintf(PrintBuf,"      Test date:          %02d/%02d/20%02d %02d:%02d:%02d",
-			Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date,Reports_rsmp.RPT_Date.RTC_Year,
-			Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-	
-	SendPrinter(PrintBuf);
-	
-	SendPrinter("\r\n");
-	SendPrinter("      Requirements fulfilled:      YES      No\r\n");
-	SendPrinter("\r\n");
-	SendPrinter("      Comments\r\n");
-	//SendPrinter("      ______________________________________________________________________\r\n");
-	SendPrinter("      ______________________________________________________________________\r\n");
-	SendPrinter("      ______________________________________________________________________\r\n");
-	SendPrinter("\r\n");
-	SendPrinter("\r\n");
-	SendPrinter("\r\n");
-	SendPrinter("      ______________________________________________________________________\r\n");
-	SendPrinter("      Operator                    Date                    Signature \r\n");
-}*/
-
 const char prinit[22]=
 {0x1B,0x09,0x1B,0x09,0x1B,0x23,0xBB,0x1B,0x21,0x00,0x1C,0x2E,0x1B,0xFD,0x83,0x1B,0x63,0x00,0x1B,0x15,0x1B,0x15};
-
-/*char LanPrtUsp(void)
-{
-	//char Namebuf[50];
-	char tbuf1[50];
-	char tbuf2[50];
-	char PrintBuf[100];
-	//char Catalogue_1[15];
-	
-	u8 PutStep = 0;
-	//char Y,M,D,h,m,s;
-	//char VincReState;
-	char OverTime = 0;
-	//char TestEndNb;
-	
-	struct tcp_pcb *tcppcb; 							// 定义一个TCP服务器控制块
-	struct ip_addr rmtipaddr; 						// 远端ip地址
-	u8 *tbuf;
- 	//u8 res=0;		
-	u8 t=0; 
-	u8 connflag=0; 												// 连接标记
-	
-	u8 i;
-	float bDat;
-	float fDat;
-	
-	char RError[] = "Speed Error";			// 针对报告转速出错问题加的错误提示字符串			2021/12/13 星期一 11:56:58
-	char VError[] = "Error";						// 针对报告体积质量出错问题加的错误提示字符串	2021/12/13 星期一 11:56:58
-	
-	tbuf=mymalloc(SRAMIN,200);						// 申请内存
-	if(tbuf==NULL)
-	{
-		OverTime = 1; 										// 内存申请失败
-		return OverTime; 									// 内存申请失败了,直接退出
-	}
-	
-	tcppcb=tcp_new(); 										// 创建一个新的pcb
-	if(tcppcb) 														// 创建成功
-	{
-		//IP4_ADDR(&rmtipaddr,lwipdev.remoteip[0],lwipdev.remoteip[1],lwipdev.remoteip[2],lwipdev.remoteip[3]); 
-		//IP4_ADDR(&rmtipaddr,192,168,1,2); 
-		IP4_ADDR(&rmtipaddr,PrtIP[0],PrtIP[1],PrtIP[2],PrtIP[3]); 
-		//连接到目的地址的指定端口上,当连接成功后回调tcp_client_connected()函数
-		//tcp_connect(tcppcb,&rmtipaddr,TcpPort,tcp_client_connected);
-		tcp_connect(tcppcb,&rmtipaddr,PrtPort,tcp_client_connected);
- 	}
- 	else
- 	{
- 		OverTime = 2; 										// pcb创建失败
- 		return OverTime;
- 	}
- 	
- 	TIMER_Start(TIMER_GENERAL, TO_20SEC);	// 启动延时定时器
-	
-	while(1)
-	{
-		if((connflag)&&(!(tcp_client_flag&1<<7)))
-		{
-			memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-			memset(tbuf2,'\0',sizeof(tbuf2));						//清空数组
-			memset(PrintBuf,'\0',sizeof(PrintBuf));						//清空数组
-			
-			if(PrintFormat == 0) 							// PCL
-			{
-				switch(PutStep)
-				{
-					case 0: 											// 表头
-					{
-						strcpy(PrintBuf,"                         Tapped Density Report Test Assist\r\n");
-						//strncpy(PrintBuf,prinit,22);
-						//i = 0;
-					}break;
-					case 1:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-//						if(i == 0)
-//						{
-//							strcpy(PrintBuf,"\033E\033&l26A");
-//							PutStep--;
-//						}
-//						else if (i == 1)
-//						{
-//							strcpy(PrintBuf,"\033(10U");
-//							PutStep--;
-//						}
-//						else if (i == 2)
-//						{
-//							strcpy(PrintBuf,"\033&a5L\033&k10.35H");
-//						}
-//						
-//						i++;
-						PutStep++;
-					}break;
-					case 2:
-					{
-						strcpy(PrintBuf,"\r\n");
-						//strcpy(PrintBuf,"       \xda\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xbf\n\r");
-					}break;
-					case 3: 											// 设备序列号
-					{
-						strcpy(tbuf1,Reports_rsmp.RPT_DeviceSerialNb);
-						sprintf(PrintBuf, "      Device serial no.:     %6s", tbuf1);
-					}break;
-					case 4: 											// 打印页码
-					{
-						strcpy(PrintBuf,"        Page:                        1/1\r\n");
-					}break;
-					case 5: 											// 主控板版本号
-					{
-						//osDelay(100);
-						sprintf(PrintBuf, "      Main Firmware version: %6s", Reports_rsmp.RPT_MbVersion);
-					}break;
-					case 6: 											// 触摸板版本号
-					{
-						sprintf(PrintBuf, "        Touch Firmware version:   %6s\r\n", Reports_rsmp.RPT_DbVersion);
-					}break;
-					case 7: 											// 机型显示，工作站数量及方法
-					{
-						//sprintf(PrintBuf, "      Device configuration:  %6d", (int)Reports_rsmp.RPT_DeviceType);
-						if(Reports_rsmp.RPT_DeviceType == 121)
-							strcpy(tbuf1,"USP 1, 1 Station");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 122)
-							strcpy(tbuf1,"USP 2, 1 Station");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 221)
-							strcpy(tbuf1,"USP 1, 2 Stations");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 222)
-							strcpy(tbuf1,"USP 2, 2 Stations");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 223)
-							strcpy(tbuf1,"USP 1&2, 2 Stations");
-						else
-							strcpy(tbuf1,"USP x, x Stations");
-						sprintf(PrintBuf, "      Configuration: %-20s", tbuf1);
-					}break;
-					case 8: 											// 日期，时间
-					{
-						//sprintf(PrintBuf, "        Print date:  20%02d-%02d-%02d %02d:%02d:%02d\r\n", RTC_DateStruct.RTC_Year,RTC_DateStruct.RTC_Month,RTC_DateStruct.RTC_Date,RTC_TimeStruct.RTC_Hours,RTC_TimeStruct.RTC_Minutes,RTC_TimeStruct.RTC_Seconds);
-						sprintf(PrintBuf, "  Print date:  %s %s\r\n", DisDateStr,DisTimeStr);
-					}break;
-					case 9: 											// 设备类型选择
-					{
-						strcpy(PrintBuf,"\r\n");
-						
-						switch(Reports_rsmp.RPT_DeviceType)
-						{
-							case 121: 								// 1个测试站，方法1，300转/分
-							case 122: 								// 1个测试站，方法2，250转/分
-							{
-								PutStep = 10-1;
-							}break;
-							case 221: 								// 2个测试站，方法1，300转/分
-							case 222: 								// 2个测试站，方法2，250转/分
-							{
-								PutStep = 53-1;
-							}break;
-							case 223: 								// 1个测试站，方法可选
-							{
-								if(Reports_rsmp.RPT_S1Method == 1) 					// 测试站1方法1
-								{
-									PutStep = 94-1;
-								}
-								else
-								if(Reports_rsmp.RPT_S2Method == 2) 					// 测试站2方法2
-								{
-									PutStep = 135-1;
-								}
-								else 
-								{
-									;
-								}
-							}break;
-							default:
-							{
-								;
-							}break;
-						}
-					}break;
-					case 10: 											// 121/122 -----------------------------
-					{
-						strcpy(PrintBuf,"      Product name station 1:\r\n");
-					}break;
-					case 11:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 12: 											// 产品名称
-					{
-						sprintf(PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S1PName);
-					}break;
-					case 13: 											// 产品信息
-					{
-						strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-						sprintf(PrintBuf,"      Information: %-17s\r\n",tbuf1);
-					}break;
-					case 14:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>17) 
-							strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+17,30); 
-						else 
-							tbuf1[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s\r\n",tbuf1);
-					}break;
-					case 15:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>47)
-							strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+47,30);
-						else
-							tbuf1[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s\r\n",tbuf1);
-					}break;
-					case 16: 											// 产品批号
-					{
-						sprintf(PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S1PBatchNb);
-					}break;
-					case 17: 											// 量杯编号
-					{
-						sprintf(PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S1CylinderNb);
-					}break;
-					case 18:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 19:
-					{
-						strcpy(PrintBuf,"      Test Parameter                       Station 1\r\n");
-					}break;
-					case 20:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 21:
-					{
-						sprintf(PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S1Method);
-					}break;
-					case 22: 											// 设定转速
-					{
-						if(Reports_rsmp.RPT_DeviceType == 121)
-							strcpy(PrintBuf,"      Speed:                               300 taps/min\r\n");
-						else
-							strcpy(PrintBuf,"      Speed:                               250 taps/min\r\n");
-					}break;
-					case 23: 											// 量杯规格
-					{
-						sprintf(PrintBuf,"      Cylinder Size:                       %-15s\r\n",Reports_rsmp.RPT_S1CylinderSize);
-					}break;
-					case 24: 											// 计量基准，V0,V10
-					{
-						sprintf(PrintBuf,"      Calculation of Compressibility Index: V%d\r\n",Reports_rsmp.RPT_V0_V10);
-					}break;
-					case 25: 											// 初始体积
-					{
-						fDat = Reports_rsmp.RPT_S1InitialVolume;
-						fDat /= 10;	
-						sprintf(PrintBuf,"      Initial Volume:                      %5.1f ml\r\n",fDat);
-					}break;
-					case 26: 											// 样板重量
-					{
-						sprintf(PrintBuf,"      Sample Mass:                         %5.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100);
-					}break;
-					case 27:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 30:
-					{
-						strcpy(PrintBuf,"      System Settings\r\n");
-					}break;
-					case 31:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 32: 											// 时区，OQ
-					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-					}break;
-					case 33:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 34:
-					{
-						strcpy(PrintBuf,"      Test run data           Station 1\r\n");
-					}break;
-					case 35:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 36: 											// 样本重量
-					{
-						sprintf(PrintBuf,"      Sample Weight           %5.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100); 
-						if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Sample Weight           %s\r\n",VError); 			//Mark 3																	
-					}break;
-					case 37: 											// V0体积
-					{
-						fDat = Reports_rsmp.RPT_S1InitialVolume;					//Mark 1  关于体积报告出错修改 2021/11/30 星期二 16:41:13
-						fDat /= 10;	
-						sprintf(PrintBuf,"      V0                      %5.1f ml\r\n",fDat); 
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      V0                      %s\r\n",VError); 	
-					}break;
-					case 38: 											// V10体积
-					{
-						fDat = Reports_rsmp.RPT_S1V10;
-						fDat /= 10;	
-						sprintf(PrintBuf,"      V10                     %5.1f ml\r\n",fDat); 
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      V10                     %s\r\n",VError);  	
-					}break;
-					case 39: 											// V500体积
-					{
-						fDat = Reports_rsmp.RPT_S1V500;
-						fDat /= 10;
-						sprintf(PrintBuf,"      V500                    %5.1f ml\r\n",fDat); 
-						if(strlen(PrintBuf)>43)											//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      V500                    %s\r\n",VError); 
-					}break;
-					case 40: 											// V1250体积
-					{
-						fDat = Reports_rsmp.RPT_S1V1250;
-						fDat /= 10;
-						if(Reports_rsmp.RPT_TESTENDS1 == 3)
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
-						}
-						else
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
-						}
-						
-						i = 4;
-						if(i >= Reports_rsmp.RPT_TESTENDS1+1)
-							PutStep++;
-					}break;
-					case 41: 											// 
-					{
-						fDat = Reports_rsmp.RPT_S1Delay[i-4];
-						fDat /= 10;
-						if(i != Reports_rsmp.RPT_TESTENDS1)
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
-						}
-						else
-						{	
-							sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
-						}
-						
-						i++;
-						if((i < Reports_rsmp.RPT_TESTENDS1+1)&&
-							 (i < 10))
-						{
-							PutStep--;
-						}
-					}break;
-					case 42: 											// 初始密度
-					{
-						sprintf(PrintBuf,"      Initial Density         %5.2f g/ml\r\n",Reports_rsmp.RPT_S1InitialDensity);
-						if(strlen(PrintBuf)>44)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Initial Density         %s\r\n",VError);	
-					}break;
-					case 43: 											// 终止密度
-					{
-						sprintf(PrintBuf,"      Tapped Density          %5.2f g/ml\r\n",Reports_rsmp.RPT_S1TappedDensity);
-						if(strlen(PrintBuf)>44)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Tapped Density          %s\r\n",VError); 
-					}break;
-					case 44: 											// 压缩比
-					{
-						sprintf(PrintBuf,"      Hausner Ratio           %5.2f\r\n",Reports_rsmp.RPT_S1HausnerRatio); 
-						if(strlen(PrintBuf)>40)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Hausner Ratio           %s\r\n",VError);
-					}break;
-					case 45: 											// 比率
-					{
-						sprintf(PrintBuf,"      Compressibility Index   %5.1f %%\r\n",Reports_rsmp.RPT_S1Compressibility);
-						if(strlen(PrintBuf)>42)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Compressibility Index   %s\r\n",VError);
-					}break;
-					case 46:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 47:
-					{
-						strcpy(PrintBuf,"      Actual number of taps, time, and speed\r\n");
-					}break;
-					case 48:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 49: 											// 实际转速范围
-					{
-						sprintf(PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-							Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-						if(strlen(PrintBuf)>50)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Speed min-max:      %s\r\n",RError);																	//2021/12/13 星期一 11:56:48
-					}break;
-					case 50: 											// 拍击次数
-					{
-						sprintf(PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-					}break;
-					case 51:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 52: 											// 测试结束状态
-					{
-						if(Reports_rsmp.RPT_TestStatus)
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test completed.");
-						else
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test abort.");
-						
-						PutStep = 176-1;
-					}break;
-					case 53: 											// 221/222 -----------------------------
-					{
-						strcpy(PrintBuf,"      Product name station 1:              Product name station 2:\r\n");
-					}break;
-					case 54:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 55: 											// 产品名称
-					{
-						sprintf(PrintBuf,"      Name:        %-17s       Name:        %-17s\r\n",Reports_rsmp.RPT_S1PName,Reports_rsmp.RPT_S2PName);
-					}break;
-					case 56: 											// 产品信息
-					{
-						strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-						strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo,17);
-						
-						sprintf(PrintBuf,"      Information: %-17s       Information: %-17s\r\n",tbuf1,tbuf2);
-					}break;
-					case 57:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>17) strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+17,30); else tbuf1[0] = '\0';
-						if(strlen(Reports_rsmp.RPT_S2PInfo)>17) strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+17,30); else tbuf2[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s       %-30s\r\n",tbuf1,tbuf2);
-					}break;
-					case 58:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>47) strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+47,30); else tbuf1[0] = '\0';
-						if(strlen(Reports_rsmp.RPT_S2PInfo)>47) strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+47,30); else tbuf2[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s       %-30s\r\n",tbuf1,tbuf2);
-					}break;
-					case 59: 											// 产品批号
-					{
-						sprintf(PrintBuf,"      Batch Number:    %15s     Batch Number:    %15s\r\n",Reports_rsmp.RPT_S1PBatchNb,Reports_rsmp.RPT_S2PBatchNb);
-					}break;
-					case 60: 											// 量杯编号
-					{
-						sprintf(PrintBuf,"      Cylinder Number: %15s     Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S1CylinderNb,Reports_rsmp.RPT_S2CylinderNb);
-					}break;
-					case 61:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 62:
-					{
-						strcpy(PrintBuf,"      Test Parameter                       Station 1          Station 2\r\n");
-					}break;
-					case 63:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 64: 											// 测试方法
-					{
-						sprintf(PrintBuf,"      USP method:                          USP %d              USP %d\r\n",(u16)Reports_rsmp.RPT_S1Method,(u16)Reports_rsmp.RPT_S2Method);
-					}break;
-					case 65: 											// 测试转速
-					{
-						if(Reports_rsmp.RPT_DeviceType == 221)
-							strcpy(PrintBuf,"      Speed:                               300 taps/min       300 taps/min\r\n");
-						else
-							strcpy(PrintBuf,"      Speed:                               250 taps/min       250 taps/min\r\n");
-					}break;
-					case 66: 											// 量杯规格
-					{
-						sprintf(PrintBuf,"      Cylinder Size:                       %-15s    %-15s\r\n",Reports_rsmp.RPT_S1CylinderSize,Reports_rsmp.RPT_S2CylinderSize);
-					}break;
-					case 67: 											// 计算基准，V0，V10
-					{
-						sprintf(PrintBuf,"      Calculation of Compressibility Index: V%d                  V%d\r\n",Reports_rsmp.RPT_V0_V10,Reports_rsmp.RPT_V0_V10);
-					}break;
-					case 68: 											// 初始体积
-					{
-						fDat = Reports_rsmp.RPT_S1InitialVolume;
-						fDat /= 10;
-						bDat = Reports_rsmp.RPT_S2InitialVolume;
-						bDat /= 10;
-						//sprintf(PrintBuf,"      Initial Volume:                      %5.1f ml               %5.1f ml\r\n",fDat,bDat);
-						sprintf(PrintBuf,"      Initial Volume:                      %5.1f ml           %5.1f ml\r\n",fDat,bDat);
-					}break;
-					case 69: 											// 初始重量
-					{
-						sprintf(PrintBuf,"      Sample Mass:                         %5.2f g            %5.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100,(float)Reports_rsmp.RPT_S2SampleMass/100);	//2021/12/20 星期一 16:46:59
-					}break;
-					case 70:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 71:
-					{
-						strcpy(PrintBuf,"      System Settings\r\n");
-					}break;
-					case 72:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 73: 											// 时区，OQ
-					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-					}break;
-					case 74:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 75:
-					{
-						strcpy(PrintBuf,"      Test run data           Station 1            Station 2\r\n");
-					}break;
-					case 76:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 77: 											// 初始重量
-					{
-						sprintf(PrintBuf,"      Sample Weight           %5.2f g               %5.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100,(float)Reports_rsmp.RPT_S2SampleMass/100); 
-						if(strlen(PrintBuf)>63)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Sample Weight           %s\r\n",VError); 
-					}break;
-					case 78: 											// V0体积
-					{
-						fDat = Reports_rsmp.RPT_S1InitialVolume;
-						fDat /= 10;
-						bDat = Reports_rsmp.RPT_S2InitialVolume;
-						bDat /= 10;
-						sprintf(PrintBuf,"      V0                      %5.1f ml                %5.1f ml\r\n",fDat,bDat); 
-						if(strlen(PrintBuf)>66)											//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      V0                      %s\r\n",VError); 	
-					}break;
-					case 79: 											// V10
-					{
-						fDat = Reports_rsmp.RPT_S1V10;
-						fDat /= 10;
-						bDat = Reports_rsmp.RPT_S2V10;
-						bDat /= 10;
-						sprintf(PrintBuf,"      V10                     %5.1f ml                %5.1f ml\r\n",fDat,bDat); 
-						if(strlen(PrintBuf)>66)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      V10                     %s\r\n",VError);  
-					}break;
-					case 80: 											// V500
-					{
-						fDat = Reports_rsmp.RPT_S1V500;
-						fDat /= 10;
-						bDat = Reports_rsmp.RPT_S2V500;
-						bDat /= 10;
-						sprintf(PrintBuf,"      V500                    %5.1f ml                %5.1f ml\r\n",fDat,bDat); 
-						if(strlen(PrintBuf)>66)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      V500                    %s\r\n",VError); 
-					}break;
-					case 81: 											// V1250
-					{
-						fDat = Reports_rsmp.RPT_S1V1250;
-						fDat /= 10;
-						bDat = Reports_rsmp.RPT_S2V1250;
-						bDat /= 10;
-						
-						if((Reports_rsmp.RPT_TESTENDS1 != 3)&&(Reports_rsmp.RPT_TESTENDS2 != 3))
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml                %5.1f ml\r\n",fDat,bDat);
-							if(strlen(PrintBuf)>66)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);		
-						}
-						else
-						{
-							if((Reports_rsmp.RPT_TESTENDS1 == 3)&&(Reports_rsmp.RPT_TESTENDS2 == 3))
-							{
-
-								sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)         %5.1f ml(Final)\r\n",fDat,bDat);
-								if(strlen(PrintBuf)>73)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-									sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
-							}
-							else
-							{
-								if(Reports_rsmp.RPT_TESTENDS1 == 3)
-								{
-									sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)         %5.1f ml\r\n",fDat,bDat);
-									if(strlen(PrintBuf)>66)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-										sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
-								}
-								else
-								{
-									sprintf(PrintBuf,"      V1250                   %5.1f ml                %5.1f ml(Final)\r\n",fDat,bDat);
-									if(strlen(PrintBuf)>73)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-										sprintf(PrintBuf,"      V1250                   %s\r\n",VError);
-								}
-							}
-						}
-						
-						i = 4;
-						if((i >= Reports_rsmp.RPT_TESTENDS1+1)&&
-							 (i >= Reports_rsmp.RPT_TESTENDS2+1))
-						{
-							PutStep++;
-						}
-					}break;
-					case 82:
-					{
-						if((Reports_rsmp.RPT_S1SampleMass != 0)&&
-							 (Reports_rsmp.RPT_S1InitialVolume != 0))
-						{
-							if(i <= Reports_rsmp.RPT_TESTENDS1)
-							{
-								fDat = Reports_rsmp.RPT_S1Delay[i-4];
-								fDat /= 10;
-								if(i != Reports_rsmp.RPT_TESTENDS1)
-									sprintf(tbuf1,"%5.1f ml       ",fDat);
-								else
-									sprintf(tbuf1,"%5.1f ml(Final)",fDat);
-								if(strlen(tbuf1)>25)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-									sprintf(tbuf1,"%s",VError);	
-							}
-							else
-							{
-								strcpy(tbuf1,"\0");
-							}
-						}
-						else
-						{
-							if(i == 4)
-								strcpy(tbuf1,"NA");
-							else
-								strcpy(tbuf1,"\0");
-						}
-						
-						if((Reports_rsmp.RPT_S2SampleMass != 0)&&
-							 (Reports_rsmp.RPT_S2InitialVolume != 0))
-						{
-							if(i <= Reports_rsmp.RPT_TESTENDS2)
-							{
-								bDat = Reports_rsmp.RPT_S2Delay[i-4];
-								bDat /= 10;
-								if(i != Reports_rsmp.RPT_TESTENDS2)
-									sprintf(tbuf2,"%5.1f ml       ",bDat);
-								else
-									sprintf(tbuf2,"%5.1f ml(Final)",bDat);
-								if(strlen(tbuf2)>25)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-									sprintf(tbuf2,"%s",VError);	
-							}
-							else
-							{
-								strcpy(tbuf2,"\0");
-							}
-						}
-						else
-						{
-							if(i == 4)
-								strcpy(tbuf2,"NA");
-							else
-								strcpy(tbuf2,"\0");
-						}
-						
-						sprintf(PrintBuf,"      V1250                   %13s         %13s\r\n",tbuf1,tbuf2);
-						
-						i++;
-						if((i < Reports_rsmp.RPT_TESTENDS1+1)||
-							 (i < Reports_rsmp.RPT_TESTENDS2+1))
-						{
-							if(i < 10)
-								PutStep--;
-						}
-					}break;
-					case 83: 											// 初始密度
-					{
-						sprintf(PrintBuf,"      Initial Density         %5.2f g/ml            %5.2f g/ml\r\n",Reports_rsmp.RPT_S1InitialDensity,Reports_rsmp.RPT_S2InitialDensity); 
-						if(strlen(PrintBuf)>66)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Initial Density         %s\r\n",VError); 	
-					}break;
-					case 84: 											// 终止密度
-					{
-						sprintf(PrintBuf,"      Tapped Density          %5.2f g/ml            %5.2f g/ml\r\n",Reports_rsmp.RPT_S1TappedDensity,Reports_rsmp.RPT_S2TappedDensity); 
-						if(strlen(PrintBuf)>66)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Tapped Density          %s\r\n",VError); 
-					}break;
-					case 85: 											// 压缩比
-					{
-						sprintf(PrintBuf,"      Hausner Ratio           %5.2f                 %5.2f\r\n",Reports_rsmp.RPT_S1HausnerRatio,Reports_rsmp.RPT_S2HausnerRatio); 
-						if(strlen(PrintBuf)>61)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Hausner Ratio           %s\r\n",VError); 
-					}break;
-					case 86: 											// 比率
-					{
-						sprintf(PrintBuf,"      Compressibility Index   %5.1f %%              %5.1f %%\r\n",Reports_rsmp.RPT_S1Compressibility,Reports_rsmp.RPT_S2Compressibility); 
-						if(strlen(PrintBuf)>61)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Compressibility Index   %s\r\n",VError); 
-					}break;
-					case 87:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 88:
-					{
-						strcpy(PrintBuf,"      Actual number of taps, time, and speed\r\n");
-					}break;
-					case 89:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 90: 											// 实际转速范围
-					{
-						sprintf(PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min     %5.1f-%5.1f taps/min\r\n",
-							Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed,Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-						if(strlen(PrintBuf)>75)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Speed min-max:      %s\r\n",RError);																	//2021/12/13 星期一 11:56:48
-					}break;
-					case 91: 											// 实际拍击次数
-					{
-						//sprintf(PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb);
-						if(Exitflag!=0)					//测试时退出
-						{
-							if(Exitflag==1)
-								sprintf(PrintBuf,"      Number of taps:     %4d                    	0\r\n",Reports_rsmp.RPT_RealTapsNb);
-							else if(Exitflag==2)
-								sprintf(PrintBuf,"      Number of taps:        0                       %4d\r\n",Reports_rsmp.RPT_RealTapsNb);
-							else if(Exitflag==3)
-								sprintf(PrintBuf,"      Number of taps:     %4d                     %4d\r\n",Reports_rsmp.RPT_RealTapsNb,Reports_rsmp.RPT_RealTapsNb);
-							Exitflag = 0;
-						}
-						else				//正常测试完成
-						{
-							sprintf(PrintBuf,"      Number of taps:     %4d                     %4d\r\n",
-							RUN_CYC[Reports_rsmp.RPT_TESTENDS1],RUN_CYC[Reports_rsmp.RPT_TESTENDS2]); 
-						}
-					}break;
-					case 92:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 93: 											// 测试结束状态
-					{
-						if(Reports_rsmp.RPT_TestStatus)
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test completed.");
-						else
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test abort.");
-						
-						PutStep = 176-1;
-					}break;
-					case 94: 											// 223 测试站1方法1 --------------------
-					{
-						strcpy(PrintBuf,"      Product name station 1:\r\n");
-					}break;
-					case 95:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 96: 											// 产品名称
-					{
-						sprintf(PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S1PName);
-					}break;
-					case 97: 											// 产品信息
-					{
-						strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-						sprintf(PrintBuf,"      Information: %-17s\r\n",tbuf1);
-					}break;
-					case 98:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>17) 
-							strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+17,30); 
-						else 
-							tbuf1[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s\r\n",tbuf1);
-					}break;
-					case 99:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>47)
-							strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+47,30);
-						else
-							tbuf1[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s\r\n",tbuf1);
-					}break;
-					case 100: 										// 产品批号
-					{
-						sprintf(PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S1PBatchNb);
-					}break;
-					case 101: 										// 量杯编号
-					{
-						sprintf(PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S1CylinderNb);
-					}break;
-					case 102:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 103:
-					{
-						strcpy(PrintBuf,"      Test Parameter                       Station 1\r\n");
-					}break;
-					case 104:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 105: 										// 测试方法
-					{
-						sprintf(PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S1Method);
-					}break;
-					case 106: 										// 测试转速
-					{
-						strcpy(PrintBuf,"      Speed:                               300 taps/min\r\n");
-					}break;
-					case 107: 										// 量杯规格
-					{
-						sprintf(PrintBuf,"      Cylinder Size:                       %-15s\r\n",Reports_rsmp.RPT_S1CylinderSize);
-					}break;
-					case 108: 										// 计算基准，V0/V10
-					{
-						sprintf(PrintBuf,"      Calculation of Compressibility Index: V%d\r\n",Reports_rsmp.RPT_V0_V10);
-					}break;
-					case 109: 										// 初始体积
-					{
-						fDat = Reports_rsmp.RPT_S1InitialVolume;
-						fDat /= 10;		
-						sprintf(PrintBuf,"      Initial Volume:                      %5.1f ml\r\n",fDat);
-					}break;
-					case 110: 										// 样品重量
-					{
-						sprintf(PrintBuf,"      Sample Mass:                         %5.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100);
-					}break;
-					case 111:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 112:
-					{
-						strcpy(PrintBuf,"      System Settings\r\n");
-					}break;
-					case 113:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 114: 										// 时区，OQ
-					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-					}break;
-					case 115:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 116:
-					{
-						strcpy(PrintBuf,"      Test run data           Station 1\r\n");
-					}break;
-					case 117:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 118: 										// 样品重量
-					{
-						sprintf(PrintBuf,"      Sample Weight           %5.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100); 
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-							sprintf(PrintBuf,"      Sample Weight           %s\r\n",VError); 
-					}break;
-					case 119: 										// V0体积
-					{
-						fDat = Reports_rsmp.RPT_S1InitialVolume;
-						fDat /= 10;						
-						sprintf(PrintBuf,"      V0                      %5.1f ml\r\n",fDat);	//2021/11/30 星期二 14:37:43
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-							sprintf(PrintBuf,"      V0                      %s\r\n",VError); 	
-					}break;
-					case 120: 										// V10
-					{
-						fDat = Reports_rsmp.RPT_S1V10;
-						fDat /= 10;
-						sprintf(PrintBuf,"      V10                     %5.1f ml\r\n",fDat); 
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-							sprintf(PrintBuf,"      V10                     %s\r\n",VError);  	
-					}break;
-					case 121: 										// V500
-					{
-						fDat = Reports_rsmp.RPT_S1V500;
-						fDat /= 10;
-						sprintf(PrintBuf,"      V500                    %5.1f ml\r\n",fDat);
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      V500                    %s\r\n",VError);  
-					}break;
-					case 122: 										// V1250
-					{
-						fDat = Reports_rsmp.RPT_S1V1250;
-						fDat /= 10;
-						if(Reports_rsmp.RPT_TESTENDS1 == 3)
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-								sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
-						}
-						else
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
-						}
-						
-						i = 4;
-						if(i >= Reports_rsmp.RPT_TESTENDS1+1)
-							PutStep++;
-					}break;
-					case 123:
-					{
-						fDat = Reports_rsmp.RPT_S1Delay[i-4];
-						fDat /= 10;
-						if(i != Reports_rsmp.RPT_TESTENDS1)
-						{	
-							sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
-						}
-						else
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
-						}
-						
-						i++;
-						if((i < Reports_rsmp.RPT_TESTENDS1+1)&&
-							 (i < 10))
-						{
-							PutStep--;
-						}
-					}break;
-					case 124: 										// 初始密度
-					{
-						sprintf(PrintBuf,"      Initial Density         %5.2f g/ml\r\n",Reports_rsmp.RPT_S1InitialDensity); 
-						if(strlen(PrintBuf)>43)														//针对打印报告出错问题,无法判断结束位,清空数组后求他长度
-							sprintf(PrintBuf,"      Initial Density         %s\r\n",VError);	
-					}break;
-					case 125: 										// 终止密度
-					{
-						memset(PrintBuf,'\0',sizeof(PrintBuf));						//清空数组
-						sprintf(PrintBuf,"      Tapped Density          %5.2f g/ml\r\n",Reports_rsmp.RPT_S1TappedDensity);
-						if(strlen(PrintBuf)>43)														//针对打印报告出错问题,无法判断结束位,清空数组后求他长度
-							sprintf(PrintBuf,"      Tapped Density          %s\r\n",VError); 
-					}break;
-					case 126: 										// 压缩比
-					{
-						sprintf(PrintBuf,"      Hausner Ratio           %5.2f\r\n",Reports_rsmp.RPT_S1HausnerRatio);
-						if(strlen(PrintBuf)>40)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-							sprintf(PrintBuf,"      Hausner Ratio           %s\r\n",VError);
-					}break;
-					case 127: 										// 比率
-					{
-						sprintf(PrintBuf,"      Compressibility Index   %5.1f %%\r\n",Reports_rsmp.RPT_S1Compressibility); 
-						if(strlen(PrintBuf)>40)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-							sprintf(PrintBuf,"      Compressibility Index   %s\r\n",VError);
-					}break;
-					case 128:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 129:
-					{
-						strcpy(PrintBuf,"      Actual number of taps, time, and speed\r\n");
-					}break;
-					case 130:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 131: 										// 实际转速范围
-					{
-						sprintf(PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-							Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-						if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Speed min-max:      %s\r\n",RError);																	//2021/12/13 星期一 11:56:48
-					}break;
-					case 132: 										// 实际拍击次数
-					{
-						sprintf(PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-					}break;
-					case 133:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 134: 										// 测试结束状态
-					{
-						if(Reports_rsmp.RPT_TestStatus)
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test completed.");
-						else
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test abort.");
-						
-						PutStep = 176-1;
-					}break;
-					case 135: 										// 223 测试站2方法2 --------------------
-					{
-						strcpy(PrintBuf,"      Product name station 2:\r\n");
-					}break;
-					case 136:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 137: 										// 产品名称
-					{
-						sprintf(PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S2PName);
-					}break;
-					case 138: 										// 产品信息
-					{
-						strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo,17);
-						sprintf(PrintBuf,"      Information: %-17s\r\n",tbuf2);
-					}break;
-					case 139:
-					{
-						if(strlen(Reports_rsmp.RPT_S2PInfo)>17) 
-							strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+17,30); 
-						else 
-							tbuf2[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s\r\n",tbuf2);
-					}break;
-					case 140:
-					{
-						if(strlen(Reports_rsmp.RPT_S2PInfo)>47)
-							strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+47,30);
-						else
-							tbuf2[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s\r\n",tbuf2);
-					}break;
-					case 141: 										// 产品批号
-					{
-						sprintf(PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S2PBatchNb);
-					}break;
-					case 142: 										// 量杯编号
-					{
-						sprintf(PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S2CylinderNb);
-					}break;
-					case 143:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 144:
-					{
-						strcpy(PrintBuf,"      Test Parameter                       Station 2\r\n");
-					}break;
-					case 145:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 146: 										// 测试方法
-					{
-						sprintf(PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S2Method);
-					}break;
-					case 147: 										// 测试速度
-					{
-						strcpy(PrintBuf,"      Speed:                               250 taps/min\r\n");
-					}break;
-					case 148: 										// 量杯规格
-					{
-						sprintf(PrintBuf,"      Cylinder Size:                       %-15s\r\n",Reports_rsmp.RPT_S2CylinderSize);
-					}break;
-					case 149: 										// 计算基准，V0/V10
-					{
-						sprintf(PrintBuf,"      Calculation of Compressibility Index: V%d\r\n",Reports_rsmp.RPT_V0_V10);
-					}break;
-					case 150: 										// 初始体积
-					{
-						fDat = Reports_rsmp.RPT_S2InitialVolume;
-						fDat /= 10;	
-						sprintf(PrintBuf,"      Initial Volume:                      %5.1f ml\r\n",fDat);
-					}break;
-					case 151: 										// 样品质量
-					{
-						sprintf(PrintBuf,"      Sample Mass:                         %5.2f g\r\n",(float)Reports_rsmp.RPT_S2SampleMass/100);
-					}break;
-					case 152:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 153:
-					{
-						strcpy(PrintBuf,"      System Settings\r\n");
-					}break;
-					case 154:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 155: 										// 时区，OQ
-					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-					}break;
-					case 156:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 157:
-					{
-						strcpy(PrintBuf,"      Test run data           Station 2\r\n");
-					}break;
-					case 158:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 159: 										// 样品重量
-					{
-						sprintf(PrintBuf,"      Sample Weight           %5.2f g\r\n",(float)Reports_rsmp.RPT_S2SampleMass/100); 
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-							sprintf(PrintBuf,"      Sample Weight           %s\r\n",VError); 
-					}break;
-					case 160: 										// V0体积
-					{
-						fDat = Reports_rsmp.RPT_S2InitialVolume;
-						fDat /= 10;						
-						sprintf(PrintBuf,"      V0                      %5.1f ml\r\n",fDat); 
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      V0                      %s\r\n",VError); 	
-					}break;
-					case 161: 										// V10
-					{
-						fDat = Reports_rsmp.RPT_S2V10;
-						fDat /= 10;
-						sprintf(PrintBuf,"      V10                     %5.1f ml\r\n",fDat);
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-							sprintf(PrintBuf,"      V10                     %s\r\n",VError);  
-					}break;
-					case 162: 										// V500
-					{
-						fDat = Reports_rsmp.RPT_S2V500;
-						fDat /= 10;
-						sprintf(PrintBuf,"      V500                    %5.1f ml\r\n",fDat); 
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      V500                    %s\r\n",VError);
-					}break;
-					case 163: 										// V1250
-					{
-						fDat = Reports_rsmp.RPT_S2V1250;
-						fDat /= 10;
-						if(Reports_rsmp.RPT_TESTENDS2 == 3)
-						{	
-							sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-								sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
-						}
-						else
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);
-						}
-						
-						i = 4;
-						if(i >= Reports_rsmp.RPT_TESTENDS2+1)
-							PutStep++;
-					}break;
-					case 164:
-					{
-						fDat = Reports_rsmp.RPT_S2Delay[i-4];
-						fDat /= 10;
-						if(i != Reports_rsmp.RPT_TESTENDS2)
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
-						}
-						else
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-								sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
-						}
-						
-						i++;
-						if((i < Reports_rsmp.RPT_TESTENDS2+1)&&
-							 (i < 10))
-						{
-							PutStep--;
-						}
-					}break;
-					case 165: 										// 初始密度
-					{
-						memset(PrintBuf,'\0',sizeof(PrintBuf));						//清空数组
-						sprintf(PrintBuf,"      Initial Density         %5.2f g/ml\r\n",Reports_rsmp.RPT_S2InitialDensity); 
-						if(strlen(PrintBuf)>43)				//针对打印报告出错问题,正常报告结束位是0X0D,0X0A
-							sprintf(PrintBuf,"      Initial Density         %s\r\n",VError);
-					}break;
-					case 166: 										// 终止密度
-					{
-						memset(PrintBuf,'\0',sizeof(PrintBuf));						//清空数组
-						sprintf(PrintBuf,"      Tapped Density          %5.2f g/ml\r\n",Reports_rsmp.RPT_S2TappedDensity); 
-						if(strlen(PrintBuf)>43)				//针对打印报告出错问题,正常报告结束位是0X0D,0X0A
-							sprintf(PrintBuf,"      Tapped Density          %s\r\n",VError); 
-					}break;
-					case 167: 										// 压缩比
-					{
-						sprintf(PrintBuf,"      Hausner Ratio           %5.2f\r\n",Reports_rsmp.RPT_S2HausnerRatio); 
-						if(strlen(PrintBuf)>40)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Hausner Ratio           %s\r\n",VError);
-					}break;
-					case 168: 										// 比率
-					{
-						sprintf(PrintBuf,"      Compressibility Index   %5.1f %%\r\n",Reports_rsmp.RPT_S2Compressibility); 
-						if(strlen(PrintBuf)>42)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Compressibility Index   %s\r\n",VError);
-					}break;
-					case 169:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 170:
-					{
-						strcpy(PrintBuf,"      Actual number of taps, time, and speed\r\n");
-					}break;
-					case 171:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 172: 										// 实际转速范围
-					{
-						sprintf(PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-							Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-						if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Speed min-max:      %s\r\n",RError);																	//2021/12/13 星期一 11:56:48
-					}break;
-					case 173: 										// 实际拍击次数
-					{
-						sprintf(PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-					}break;
-					case 174:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 175: 										// 测试结束状态
-					{
-						if(Reports_rsmp.RPT_TestStatus)
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test completed.");
-						else
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test abort.");
-					}break;
-					case 176: 										// 表脚，公共部分 ----------------------
-					{
-						// 打印测试时间 ------------------------------------------
-						if(DateFormat == 0) 									// Day,Month,Year
-							sprintf(PrintBuf,"      Test date:          %02d.%02d.20%02d %02d:%02d:%02d",
-								Reports_rsmp.RPT_Date.RTC_Date,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Year,
-								Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-						else
-						if(DateFormat == 1) 									// Year,Month,Day
-							sprintf(PrintBuf,"      Test date:          20%02d-%02d-%02d %02d:%02d:%02d",
-								Reports_rsmp.RPT_Date.RTC_Year,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date,
-								Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-						else
-						if(DateFormat == 2) 									// Month,Day,Year
-							sprintf(PrintBuf,"      Test date:          %02d/%02d/20%02d %02d:%02d:%02d",
-								Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date,Reports_rsmp.RPT_Date.RTC_Year,
-								Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-					}break;
-					case 177:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 178: 										// Yes or No
-					{
-						strcpy(PrintBuf,"      Requirements fulfilled:      YES      No\r\n");
-					}break;
-					case 179:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 180: 										// 注释
-					{
-						strcpy(PrintBuf,"      Comments\r\n");
-					}break;
-					case 181:
-					{
-						//strcpy(PrintBuf,"      ______________________________________________________________________\r\n");
-						strcpy(PrintBuf,"      ______________________________________________________________________\r\n");
-					}break;
-					case 182:
-					{
-						strcpy(PrintBuf,"      ______________________________________________________________________\r\n");
-						PutStep++;
-						PutStep++;
-					}break;
-					case 183:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 184:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 185:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 186: 										// 日期，签名
-					{
-						strcpy(PrintBuf,"      ______________________________________________________________________\r\n");
-					}break;
-					case 187:
-					{
-						strcpy(PrintBuf,"      Operator                    Date                    Signature \r\n");
-					}break;
-					default:
-					{
-						PutStep = 0xff;
-					}break;
-				}
-			}
-			else 															// ASC II
-			{
-				switch(PutStep)
-				{
-					case 0: 											// 表头
-					{
-						strcpy(PrintBuf,"                         Tapped Density Report Test Assist\r\n");
-					}break;
-					case 1:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-						PutStep++;
-					}break;
-					case 2:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 3: 											// 设备序列号
-					{
-						strcpy(tbuf1,Reports_rsmp.RPT_DeviceSerialNb);
-						sprintf(PrintBuf, "      Device serial no.:     %6s", tbuf1);
-					}break;
-					case 4: 											// 打印页码
-					{
-						strcpy(PrintBuf,"        Page:                        1/1\r\n");
-					}break;
-					case 5: 											// 主控板版本号
-					{
-						//osDelay(100);
-						sprintf(PrintBuf, "      Main Firmware version: %6s", Reports_rsmp.RPT_MbVersion);
-					}break;
-					case 6: 											// 触摸板版本号
-					{
-						sprintf(PrintBuf, "        Touch Firmware version:   %6s\r\n", Reports_rsmp.RPT_DbVersion);
-					}break;
-					case 7: 											// 机型显示，工作站数量及方法
-					{
-						//sprintf(PrintBuf, "      Device configuration:  %6d", (int)Reports_rsmp.RPT_DeviceType);
-						if(Reports_rsmp.RPT_DeviceType == 121)
-							strcpy(tbuf1,"USP 1, 1 Station");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 122)
-							strcpy(tbuf1,"USP 2, 1 Station");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 221)
-							strcpy(tbuf1,"USP 1, 2 Stations");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 222)
-							strcpy(tbuf1,"USP 2, 2 Stations");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 223)
-							strcpy(tbuf1,"USP 1&2, 2 Stations");
-						else
-							strcpy(tbuf1,"USP x, x Stations");
-						sprintf(PrintBuf, "      Configuration: %-20s", tbuf1);
-					}break;
-					case 8: 											// 日期，时间
-					{
-						//sprintf(PrintBuf, "        Print date:  20%02d-%02d-%02d %02d:%02d:%02d\r\n", RTC_DateStruct.RTC_Year,RTC_DateStruct.RTC_Month,RTC_DateStruct.RTC_Date,RTC_TimeStruct.RTC_Hours,RTC_TimeStruct.RTC_Minutes,RTC_TimeStruct.RTC_Seconds);
-						sprintf(PrintBuf, "  Print date:  %s %s\r\n", DisDateStr,DisTimeStr);
-					}break;
-					case 9: 											// 设备类型选择
-					{
-						strcpy(PrintBuf,"\r\n");
-						
-						switch(Reports_rsmp.RPT_DeviceType)
-						{
-							case 121: 								// 1个测试站，方法1，300转/分
-							case 122: 								// 1个测试站，方法2，250转/分
-							{
-								PutStep = 10-1;
-							}break;
-							case 221: 								// 2个测试站，方法1，300转/分
-							case 222: 								// 2个测试站，方法2，250转/分
-							{
-								PutStep = 53-1;
-							}break;
-							case 223: 								// 1个测试站，方法可选
-							{
-								if(Reports_rsmp.RPT_S1Method == 1) 					// 测试站1方法1
-								{
-									PutStep = 94-1;
-								}
-								else
-								if(Reports_rsmp.RPT_S2Method == 2) 					// 测试站2方法2
-								{
-									PutStep = 135-1;
-								}
-								else 
-								{
-									;
-								}
-							}break;
-							default:
-							{
-								;
-							}break;
-						}
-					}break;
-					case 10: 											// 121/122 -----------------------------
-					{
-						strcpy(PrintBuf,"      Product name station 1:\r\n");
-					}break;
-					case 11:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 12: 											// 产品名称
-					{
-						sprintf(PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S1PName);
-					}break;
-					case 13: 											// 产品信息
-					{
-						strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-						sprintf(PrintBuf,"      Information: %-17s\r\n",tbuf1);
-					}break;
-					case 14:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>17) 
-							strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+17,30); 
-						else 
-							tbuf1[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s\r\n",tbuf1);
-					}break;
-					case 15:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>47)
-							strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+47,30);
-						else
-							tbuf1[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s\r\n",tbuf1);
-					}break;
-					case 16: 											// 产品批号
-					{
-						sprintf(PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S1PBatchNb);
-					}break;
-					case 17: 											// 量杯编号
-					{
-						sprintf(PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S1CylinderNb);
-					}break;
-					case 18:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 19:
-					{
-						strcpy(PrintBuf,"      Test Parameter                       Station 1\r\n");
-					}break;
-					case 20:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 21:
-					{
-						sprintf(PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S1Method);
-					}break;
-					case 22: 											// 设定转速
-					{
-						if(Reports_rsmp.RPT_DeviceType == 121)
-							strcpy(PrintBuf,"      Speed:                               300 taps/min\r\n");
-						else
-							strcpy(PrintBuf,"      Speed:                               250 taps/min\r\n");
-					}break;
-					case 23: 											// 量杯规格
-					{
-						sprintf(PrintBuf,"      Cylinder Size:                       %-15s\r\n",Reports_rsmp.RPT_S1CylinderSize);
-					}break;
-					case 24: 											// 计量基准，V0,V10
-					{
-						sprintf(PrintBuf,"      Calculation of Compressibility Index: V%d\r\n",Reports_rsmp.RPT_V0_V10);
-					}break;
-					case 25: 											// 初始体积
-					{
-						fDat = Reports_rsmp.RPT_S1InitialVolume;
-						fDat /= 10;	
-						sprintf(PrintBuf,"      Initial Volume:                      %5.1f ml\r\n",fDat);
-					}break;
-					case 26: 											// 样板重量
-					{
-						sprintf(PrintBuf,"      Sample Mass:                         %5.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100);
-					}break;
-					case 27:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 30:
-					{
-						strcpy(PrintBuf,"      System Settings\r\n");
-					}break;
-					case 31:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 32: 											// 时区，OQ
-					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-					}break;
-					case 33:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 34:
-					{
-						strcpy(PrintBuf,"      Test run data           Station 1\r\n");
-					}break;
-					case 35:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 36: 											// 样本重量
-					{
-						sprintf(PrintBuf,"      Sample Weight           %5.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100); 
-						if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Sample Weight           %s\r\n",VError); 			//Mark 3																	
-					}break;
-					case 37: 											// V0体积
-					{
-						fDat = Reports_rsmp.RPT_S1InitialVolume;					//Mark 1  关于体积报告出错修改 2021/11/30 星期二 16:41:13
-						fDat /= 10;	
-						sprintf(PrintBuf,"      V0                      %5.1f ml\r\n",fDat); 
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      V0                      %s\r\n",VError); 	
-					}break;
-					case 38: 											// V10体积
-					{
-						fDat = Reports_rsmp.RPT_S1V10;
-						fDat /= 10;	
-						sprintf(PrintBuf,"      V10                     %5.1f ml\r\n",fDat); 
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      V10                     %s\r\n",VError);  	
-					}break;
-					case 39: 											// V500体积
-					{
-						fDat = Reports_rsmp.RPT_S1V500;
-						fDat /= 10;
-						sprintf(PrintBuf,"      V500                    %5.1f ml\r\n",fDat); 
-						if(strlen(PrintBuf)>43)											//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      V500                    %s\r\n",VError); 
-					}break;
-					case 40: 											// V1250体积
-					{
-						fDat = Reports_rsmp.RPT_S1V1250;
-						fDat /= 10;
-						if(Reports_rsmp.RPT_TESTENDS1 == 3)
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
-						}
-						else
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
-						}
-						
-						i = 4;
-						if(i >= Reports_rsmp.RPT_TESTENDS1+1)
-							PutStep++;
-					}break;
-					case 41: 											// 
-					{
-						fDat = Reports_rsmp.RPT_S1Delay[i-4];
-						fDat /= 10;
-						if(i != Reports_rsmp.RPT_TESTENDS1)
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
-						}
-						else
-						{	
-							sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
-						}
-						
-						i++;
-						if((i < Reports_rsmp.RPT_TESTENDS1+1)&&
-							 (i < 10))
-						{
-							PutStep--;
-						}
-					}break;
-					case 42: 											// 初始密度
-					{
-						sprintf(PrintBuf,"      Initial Density         %5.2f g/ml\r\n",Reports_rsmp.RPT_S1InitialDensity);
-						if(strlen(PrintBuf)>44)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Initial Density         %s\r\n",VError);	
-					}break;
-					case 43: 											// 终止密度
-					{
-						sprintf(PrintBuf,"      Tapped Density          %5.2f g/ml\r\n",Reports_rsmp.RPT_S1TappedDensity);
-						if(strlen(PrintBuf)>44)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Tapped Density          %s\r\n",VError); 
-					}break;
-					case 44: 											// 压缩比
-					{
-						sprintf(PrintBuf,"      Hausner Ratio           %5.2f\r\n",Reports_rsmp.RPT_S1HausnerRatio); 
-						if(strlen(PrintBuf)>40)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Hausner Ratio           %s\r\n",VError);
-					}break;
-					case 45: 											// 比率
-					{
-						sprintf(PrintBuf,"      Compressibility Index   %5.1f %%\r\n",Reports_rsmp.RPT_S1Compressibility);
-						if(strlen(PrintBuf)>42)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Compressibility Index   %s\r\n",VError);
-					}break;
-					case 46:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 47:
-					{
-						strcpy(PrintBuf,"      Actual number of taps, time, and speed\r\n");
-					}break;
-					case 48:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 49: 											// 实际转速范围
-					{
-						sprintf(PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-							Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-						if(strlen(PrintBuf)>50)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Speed min-max:      %s\r\n",RError);																	//2021/12/13 星期一 11:56:48
-					}break;
-					case 50: 											// 拍击次数
-					{
-						sprintf(PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-					}break;
-					case 51:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 52: 											// 测试结束状态
-					{
-						if(Reports_rsmp.RPT_TestStatus)
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test completed.");
-						else
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test abort.");
-						
-						PutStep = 176-1;
-					}break;
-					case 53: 											// 221/222 -----------------------------
-					{
-						strcpy(PrintBuf,"      Product name station 1:              Product name station 2:\r\n");
-					}break;
-					case 54:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 55: 											// 产品名称
-					{
-						sprintf(PrintBuf,"      Name:        %-17s       Name:        %-17s\r\n",Reports_rsmp.RPT_S1PName,Reports_rsmp.RPT_S2PName);
-					}break;
-					case 56: 											// 产品信息
-					{
-						strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-						strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo,17);
-						
-						sprintf(PrintBuf,"      Information: %-17s       Information: %-17s\r\n",tbuf1,tbuf2);
-					}break;
-					case 57:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>17) strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+17,30); else tbuf1[0] = '\0';
-						if(strlen(Reports_rsmp.RPT_S2PInfo)>17) strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+17,30); else tbuf2[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s       %-30s\r\n",tbuf1,tbuf2);
-					}break;
-					case 58:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>47) strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+47,30); else tbuf1[0] = '\0';
-						if(strlen(Reports_rsmp.RPT_S2PInfo)>47) strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+47,30); else tbuf2[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s       %-30s\r\n",tbuf1,tbuf2);
-					}break;
-					case 59: 											// 产品批号
-					{
-						sprintf(PrintBuf,"      Batch Number:    %15s     Batch Number:    %15s\r\n",Reports_rsmp.RPT_S1PBatchNb,Reports_rsmp.RPT_S2PBatchNb);
-					}break;
-					case 60: 											// 量杯编号
-					{
-						sprintf(PrintBuf,"      Cylinder Number: %15s     Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S1CylinderNb,Reports_rsmp.RPT_S2CylinderNb);
-					}break;
-					case 61:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 62:
-					{
-						strcpy(PrintBuf,"      Test Parameter                       Station 1          Station 2\r\n");
-					}break;
-					case 63:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 64: 											// 测试方法
-					{
-						sprintf(PrintBuf,"      USP method:                          USP %d              USP %d\r\n",(u16)Reports_rsmp.RPT_S1Method,(u16)Reports_rsmp.RPT_S2Method);
-					}break;
-					case 65: 											// 测试转速
-					{
-						if(Reports_rsmp.RPT_DeviceType == 221)
-							strcpy(PrintBuf,"      Speed:                               300 taps/min       300 taps/min\r\n");
-						else
-							strcpy(PrintBuf,"      Speed:                               250 taps/min       250 taps/min\r\n");
-					}break;
-					case 66: 											// 量杯规格
-					{
-						sprintf(PrintBuf,"      Cylinder Size:                       %-15s    %-15s\r\n",Reports_rsmp.RPT_S1CylinderSize,Reports_rsmp.RPT_S2CylinderSize);
-					}break;
-					case 67: 											// 计算基准，V0，V10
-					{
-						sprintf(PrintBuf,"      Calculation of Compressibility Index: V%d                  V%d\r\n",Reports_rsmp.RPT_V0_V10,Reports_rsmp.RPT_V0_V10);
-					}break;
-					case 68: 											// 初始体积
-					{
-						fDat = Reports_rsmp.RPT_S1InitialVolume;
-						fDat /= 10;
-						bDat = Reports_rsmp.RPT_S2InitialVolume;
-						bDat /= 10;
-						//sprintf(PrintBuf,"      Initial Volume:                      %5.1f ml               %5.1f ml\r\n",fDat,bDat);
-						sprintf(PrintBuf,"      Initial Volume:                      %5.1f ml           %5.1f ml\r\n",fDat,bDat);
-					}break;
-					case 69: 											// 初始重量
-					{
-						sprintf(PrintBuf,"      Sample Mass:                         %5.2f g            %5.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100,(float)Reports_rsmp.RPT_S2SampleMass/100);	//2021/12/20 星期一 16:46:59
-					}break;
-					case 70:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 71:
-					{
-						strcpy(PrintBuf,"      System Settings\r\n");
-					}break;
-					case 72:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 73: 											// 时区，OQ
-					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-					}break;
-					case 74:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 75:
-					{
-						strcpy(PrintBuf,"      Test run data           Station 1            Station 2\r\n");
-					}break;
-					case 76:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 77: 											// 初始重量
-					{
-						sprintf(PrintBuf,"      Sample Weight           %5.2f g               %5.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100,(float)Reports_rsmp.RPT_S2SampleMass/100); 
-						if(strlen(PrintBuf)>63)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Sample Weight           %s\r\n",VError); 
-					}break;
-					case 78: 											// V0体积
-					{
-						fDat = Reports_rsmp.RPT_S1InitialVolume;
-						fDat /= 10;
-						bDat = Reports_rsmp.RPT_S2InitialVolume;
-						bDat /= 10;
-						sprintf(PrintBuf,"      V0                      %5.1f ml                %5.1f ml\r\n",fDat,bDat); 
-						if(strlen(PrintBuf)>66)											//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      V0                      %s\r\n",VError); 	
-					}break;
-					case 79: 											// V10
-					{
-						fDat = Reports_rsmp.RPT_S1V10;
-						fDat /= 10;
-						bDat = Reports_rsmp.RPT_S2V10;
-						bDat /= 10;
-						sprintf(PrintBuf,"      V10                     %5.1f ml                %5.1f ml\r\n",fDat,bDat); 
-						if(strlen(PrintBuf)>66)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      V10                     %s\r\n",VError);  
-					}break;
-					case 80: 											// V500
-					{
-						fDat = Reports_rsmp.RPT_S1V500;
-						fDat /= 10;
-						bDat = Reports_rsmp.RPT_S2V500;
-						bDat /= 10;
-						sprintf(PrintBuf,"      V500                    %5.1f ml                %5.1f ml\r\n",fDat,bDat); 
-						if(strlen(PrintBuf)>66)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      V500                    %s\r\n",VError); 
-					}break;
-					case 81: 											// V1250
-					{
-						fDat = Reports_rsmp.RPT_S1V1250;
-						fDat /= 10;
-						bDat = Reports_rsmp.RPT_S2V1250;
-						bDat /= 10;
-						
-						if((Reports_rsmp.RPT_TESTENDS1 != 3)&&(Reports_rsmp.RPT_TESTENDS2 != 3))
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml                %5.1f ml\r\n",fDat,bDat);
-							if(strlen(PrintBuf)>66)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);		
-						}
-						else
-						{
-							if((Reports_rsmp.RPT_TESTENDS1 == 3)&&(Reports_rsmp.RPT_TESTENDS2 == 3))
-							{
-
-								sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)         %5.1f ml(Final)\r\n",fDat,bDat);
-								if(strlen(PrintBuf)>73)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-									sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
-							}
-							else
-							{
-								if(Reports_rsmp.RPT_TESTENDS1 == 3)
-								{
-									sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)         %5.1f ml\r\n",fDat,bDat);
-									if(strlen(PrintBuf)>66)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-										sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
-								}
-								else
-								{
-									sprintf(PrintBuf,"      V1250                   %5.1f ml                %5.1f ml(Final)\r\n",fDat,bDat);
-									if(strlen(PrintBuf)>73)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-										sprintf(PrintBuf,"      V1250                   %s\r\n",VError);
-								}
-							}
-						}
-						
-						i = 4;
-						if((i >= Reports_rsmp.RPT_TESTENDS1+1)&&
-							 (i >= Reports_rsmp.RPT_TESTENDS2+1))
-						{
-							PutStep++;
-						}
-					}break;
-					case 82:
-					{
-						if((Reports_rsmp.RPT_S1SampleMass != 0)&&
-							 (Reports_rsmp.RPT_S1InitialVolume != 0))
-						{
-							if(i <= Reports_rsmp.RPT_TESTENDS1)
-							{
-								fDat = Reports_rsmp.RPT_S1Delay[i-4];
-								fDat /= 10;
-								if(i != Reports_rsmp.RPT_TESTENDS1)
-									sprintf(tbuf1,"%5.1f ml       ",fDat);
-								else
-									sprintf(tbuf1,"%5.1f ml(Final)",fDat);
-								if(strlen(tbuf1)>25)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-									sprintf(tbuf1,"%s",VError);	
-							}
-							else
-							{
-								strcpy(tbuf1,"\0");
-							}
-						}
-						else
-						{
-							if(i == 4)
-								strcpy(tbuf1,"NA");
-							else
-								strcpy(tbuf1,"\0");
-						}
-						
-						if((Reports_rsmp.RPT_S2SampleMass != 0)&&
-							 (Reports_rsmp.RPT_S2InitialVolume != 0))
-						{
-							if(i <= Reports_rsmp.RPT_TESTENDS2)
-							{
-								bDat = Reports_rsmp.RPT_S2Delay[i-4];
-								bDat /= 10;
-								if(i != Reports_rsmp.RPT_TESTENDS2)
-									sprintf(tbuf2,"%5.1f ml       ",bDat);
-								else
-									sprintf(tbuf2,"%5.1f ml(Final)",bDat);
-								if(strlen(tbuf2)>25)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-									sprintf(tbuf2,"%s",VError);	
-							}
-							else
-							{
-								strcpy(tbuf2,"\0");
-							}
-						}
-						else
-						{
-							if(i == 4)
-								strcpy(tbuf2,"NA");
-							else
-								strcpy(tbuf2,"\0");
-						}
-						
-						sprintf(PrintBuf,"      V1250                   %13s         %13s\r\n",tbuf1,tbuf2);
-						
-						i++;
-						if((i < Reports_rsmp.RPT_TESTENDS1+1)||
-							 (i < Reports_rsmp.RPT_TESTENDS2+1))
-						{
-							if(i < 10)
-								PutStep--;
-						}
-					}break;
-					case 83: 											// 初始密度
-					{
-						sprintf(PrintBuf,"      Initial Density         %5.2f g/ml            %5.2f g/ml\r\n",Reports_rsmp.RPT_S1InitialDensity,Reports_rsmp.RPT_S2InitialDensity); 
-						if(strlen(PrintBuf)>66)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Initial Density         %s\r\n",VError); 	
-					}break;
-					case 84: 											// 终止密度
-					{
-						sprintf(PrintBuf,"      Tapped Density          %5.2f g/ml            %5.2f g/ml\r\n",Reports_rsmp.RPT_S1TappedDensity,Reports_rsmp.RPT_S2TappedDensity); 
-						if(strlen(PrintBuf)>66)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Tapped Density          %s\r\n",VError); 
-					}break;
-					case 85: 											// 压缩比
-					{
-						sprintf(PrintBuf,"      Hausner Ratio           %5.2f                 %5.2f\r\n",Reports_rsmp.RPT_S1HausnerRatio,Reports_rsmp.RPT_S2HausnerRatio); 
-						if(strlen(PrintBuf)>61)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Hausner Ratio           %s\r\n",VError); 
-					}break;
-					case 86: 											// 比率
-					{
-						sprintf(PrintBuf,"      Compressibility Index   %5.1f %%              %5.1f %%\r\n",Reports_rsmp.RPT_S1Compressibility,Reports_rsmp.RPT_S2Compressibility); 
-						if(strlen(PrintBuf)>61)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Compressibility Index   %s\r\n",VError); 
-					}break;
-					case 87:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 88:
-					{
-						strcpy(PrintBuf,"      Actual number of taps, time, and speed\r\n");
-					}break;
-					case 89:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 90: 											// 实际转速范围
-					{
-						sprintf(PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min     %5.1f-%5.1f taps/min\r\n",
-							Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed,Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-						if(strlen(PrintBuf)>75)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Speed min-max:      %s\r\n",RError);																	//2021/12/13 星期一 11:56:48
-					}break;
-					case 91: 											// 实际拍击次数
-					{
-						//sprintf(PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb);
-						if(Exitflag!=0)					//测试时退出
-						{
-							if(Exitflag==1)
-								sprintf(PrintBuf,"      Number of taps:     %4d                    	0\r\n",Reports_rsmp.RPT_RealTapsNb);
-							else if(Exitflag==2)
-								sprintf(PrintBuf,"      Number of taps:        0                       %4d\r\n",Reports_rsmp.RPT_RealTapsNb);
-							else if(Exitflag==3)
-								sprintf(PrintBuf,"      Number of taps:     %4d                     %4d\r\n",Reports_rsmp.RPT_RealTapsNb,Reports_rsmp.RPT_RealTapsNb);
-							Exitflag = 0;
-						}
-						else				//正常测试完成
-						{
-							sprintf(PrintBuf,"      Number of taps:     %4d                     %4d\r\n",
-							RUN_CYC[Reports_rsmp.RPT_TESTENDS1],RUN_CYC[Reports_rsmp.RPT_TESTENDS2]); 
-						}
-					}break;
-					case 92:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 93: 											// 测试结束状态
-					{
-						if(Reports_rsmp.RPT_TestStatus)
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test completed.");
-						else
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test abort.");
-						
-						PutStep = 176-1;
-					}break;
-					case 94: 											// 223 测试站1方法1 --------------------
-					{
-						strcpy(PrintBuf,"      Product name station 1:\r\n");
-					}break;
-					case 95:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 96: 											// 产品名称
-					{
-						sprintf(PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S1PName);
-					}break;
-					case 97: 											// 产品信息
-					{
-						strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-						sprintf(PrintBuf,"      Information: %-17s\r\n",tbuf1);
-					}break;
-					case 98:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>17) 
-							strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+17,30); 
-						else 
-							tbuf1[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s\r\n",tbuf1);
-					}break;
-					case 99:
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>47)
-							strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+47,30);
-						else
-							tbuf1[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s\r\n",tbuf1);
-					}break;
-					case 100: 										// 产品批号
-					{
-						sprintf(PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S1PBatchNb);
-					}break;
-					case 101: 										// 量杯编号
-					{
-						sprintf(PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S1CylinderNb);
-					}break;
-					case 102:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 103:
-					{
-						strcpy(PrintBuf,"      Test Parameter                       Station 1\r\n");
-					}break;
-					case 104:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 105: 										// 测试方法
-					{
-						sprintf(PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S1Method);
-					}break;
-					case 106: 										// 测试转速
-					{
-						strcpy(PrintBuf,"      Speed:                               300 taps/min\r\n");
-					}break;
-					case 107: 										// 量杯规格
-					{
-						sprintf(PrintBuf,"      Cylinder Size:                       %-15s\r\n",Reports_rsmp.RPT_S1CylinderSize);
-					}break;
-					case 108: 										// 计算基准，V0/V10
-					{
-						sprintf(PrintBuf,"      Calculation of Compressibility Index: V%d\r\n",Reports_rsmp.RPT_V0_V10);
-					}break;
-					case 109: 										// 初始体积
-					{
-						fDat = Reports_rsmp.RPT_S1InitialVolume;
-						fDat /= 10;		
-						sprintf(PrintBuf,"      Initial Volume:                      %5.1f ml\r\n",fDat);
-					}break;
-					case 110: 										// 样品重量
-					{
-						sprintf(PrintBuf,"      Sample Mass:                         %5.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100);
-					}break;
-					case 111:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 112:
-					{
-						strcpy(PrintBuf,"      System Settings\r\n");
-					}break;
-					case 113:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 114: 										// 时区，OQ
-					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-					}break;
-					case 115:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 116:
-					{
-						strcpy(PrintBuf,"      Test run data           Station 1\r\n");
-					}break;
-					case 117:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 118: 										// 样品重量
-					{
-						sprintf(PrintBuf,"      Sample Weight           %5.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100); 
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-							sprintf(PrintBuf,"      Sample Weight           %s\r\n",VError); 
-					}break;
-					case 119: 										// V0体积
-					{
-						fDat = Reports_rsmp.RPT_S1InitialVolume;
-						fDat /= 10;						
-						sprintf(PrintBuf,"      V0                      %5.1f ml\r\n",fDat);	//2021/11/30 星期二 14:37:43
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-							sprintf(PrintBuf,"      V0                      %s\r\n",VError); 	
-					}break;
-					case 120: 										// V10
-					{
-						fDat = Reports_rsmp.RPT_S1V10;
-						fDat /= 10;
-						sprintf(PrintBuf,"      V10                     %5.1f ml\r\n",fDat); 
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-							sprintf(PrintBuf,"      V10                     %s\r\n",VError);  	
-					}break;
-					case 121: 										// V500
-					{
-						fDat = Reports_rsmp.RPT_S1V500;
-						fDat /= 10;
-						sprintf(PrintBuf,"      V500                    %5.1f ml\r\n",fDat);
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      V500                    %s\r\n",VError);  
-					}break;
-					case 122: 										// V1250
-					{
-						fDat = Reports_rsmp.RPT_S1V1250;
-						fDat /= 10;
-						if(Reports_rsmp.RPT_TESTENDS1 == 3)
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-								sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
-						}
-						else
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
-						}
-						
-						i = 4;
-						if(i >= Reports_rsmp.RPT_TESTENDS1+1)
-							PutStep++;
-					}break;
-					case 123:
-					{
-						fDat = Reports_rsmp.RPT_S1Delay[i-4];
-						fDat /= 10;
-						if(i != Reports_rsmp.RPT_TESTENDS1)
-						{	
-							sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
-						}
-						else
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
-						}
-						
-						i++;
-						if((i < Reports_rsmp.RPT_TESTENDS1+1)&&
-							 (i < 10))
-						{
-							PutStep--;
-						}
-					}break;
-					case 124: 										// 初始密度
-					{
-						sprintf(PrintBuf,"      Initial Density         %5.2f g/ml\r\n",Reports_rsmp.RPT_S1InitialDensity); 
-						if(strlen(PrintBuf)>43)														//针对打印报告出错问题,无法判断结束位,清空数组后求他长度
-							sprintf(PrintBuf,"      Initial Density         %s\r\n",VError);	
-					}break;
-					case 125: 										// 终止密度
-					{
-						memset(PrintBuf,'\0',sizeof(PrintBuf));						//清空数组
-						sprintf(PrintBuf,"      Tapped Density          %5.2f g/ml\r\n",Reports_rsmp.RPT_S1TappedDensity);
-						if(strlen(PrintBuf)>43)														//针对打印报告出错问题,无法判断结束位,清空数组后求他长度
-							sprintf(PrintBuf,"      Tapped Density          %s\r\n",VError); 
-					}break;
-					case 126: 										// 压缩比
-					{
-						sprintf(PrintBuf,"      Hausner Ratio           %5.2f\r\n",Reports_rsmp.RPT_S1HausnerRatio);
-						if(strlen(PrintBuf)>40)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-							sprintf(PrintBuf,"      Hausner Ratio           %s\r\n",VError);
-					}break;
-					case 127: 										// 比率
-					{
-						sprintf(PrintBuf,"      Compressibility Index   %5.1f %%\r\n",Reports_rsmp.RPT_S1Compressibility); 
-						if(strlen(PrintBuf)>40)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-							sprintf(PrintBuf,"      Compressibility Index   %s\r\n",VError);
-					}break;
-					case 128:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 129:
-					{
-						strcpy(PrintBuf,"      Actual number of taps, time, and speed\r\n");
-					}break;
-					case 130:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 131: 										// 实际转速范围
-					{
-						sprintf(PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-							Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-						if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Speed min-max:      %s\r\n",RError);																	//2021/12/13 星期一 11:56:48
-					}break;
-					case 132: 										// 实际拍击次数
-					{
-						sprintf(PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-					}break;
-					case 133:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 134: 										// 测试结束状态
-					{
-						if(Reports_rsmp.RPT_TestStatus)
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test completed.");
-						else
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test abort.");
-						
-						PutStep = 176-1;
-					}break;
-					case 135: 										// 223 测试站2方法2 --------------------
-					{
-						strcpy(PrintBuf,"      Product name station 2:\r\n");
-					}break;
-					case 136:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 137: 										// 产品名称
-					{
-						sprintf(PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S2PName);
-					}break;
-					case 138: 										// 产品信息
-					{
-						strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo,17);
-						sprintf(PrintBuf,"      Information: %-17s\r\n",tbuf2);
-					}break;
-					case 139:
-					{
-						if(strlen(Reports_rsmp.RPT_S2PInfo)>17) 
-							strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+17,30); 
-						else 
-							tbuf2[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s\r\n",tbuf2);
-					}break;
-					case 140:
-					{
-						if(strlen(Reports_rsmp.RPT_S2PInfo)>47)
-							strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+47,30);
-						else
-							tbuf2[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s\r\n",tbuf2);
-					}break;
-					case 141: 										// 产品批号
-					{
-						sprintf(PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S2PBatchNb);
-					}break;
-					case 142: 										// 量杯编号
-					{
-						sprintf(PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S2CylinderNb);
-					}break;
-					case 143:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 144:
-					{
-						strcpy(PrintBuf,"      Test Parameter                       Station 2\r\n");
-					}break;
-					case 145:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 146: 										// 测试方法
-					{
-						sprintf(PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S2Method);
-					}break;
-					case 147: 										// 测试速度
-					{
-						strcpy(PrintBuf,"      Speed:                               250 taps/min\r\n");
-					}break;
-					case 148: 										// 量杯规格
-					{
-						sprintf(PrintBuf,"      Cylinder Size:                       %-15s\r\n",Reports_rsmp.RPT_S2CylinderSize);
-					}break;
-					case 149: 										// 计算基准，V0/V10
-					{
-						sprintf(PrintBuf,"      Calculation of Compressibility Index: V%d\r\n",Reports_rsmp.RPT_V0_V10);
-					}break;
-					case 150: 										// 初始体积
-					{
-						fDat = Reports_rsmp.RPT_S2InitialVolume;
-						fDat /= 10;	
-						sprintf(PrintBuf,"      Initial Volume:                      %5.1f ml\r\n",fDat);
-					}break;
-					case 151: 										// 样品质量
-					{
-						sprintf(PrintBuf,"      Sample Mass:                         %5.2f g\r\n",(float)Reports_rsmp.RPT_S2SampleMass/100);
-					}break;
-					case 152:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 153:
-					{
-						strcpy(PrintBuf,"      System Settings\r\n");
-					}break;
-					case 154:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 155: 										// 时区，OQ
-					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-					}break;
-					case 156:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 157:
-					{
-						strcpy(PrintBuf,"      Test run data           Station 2\r\n");
-					}break;
-					case 158:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 159: 										// 样品重量
-					{
-						sprintf(PrintBuf,"      Sample Weight           %5.2f g\r\n",(float)Reports_rsmp.RPT_S2SampleMass/100); 
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-							sprintf(PrintBuf,"      Sample Weight           %s\r\n",VError); 
-					}break;
-					case 160: 										// V0体积
-					{
-						fDat = Reports_rsmp.RPT_S2InitialVolume;
-						fDat /= 10;						
-						sprintf(PrintBuf,"      V0                      %5.1f ml\r\n",fDat); 
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      V0                      %s\r\n",VError); 	
-					}break;
-					case 161: 										// V10
-					{
-						fDat = Reports_rsmp.RPT_S2V10;
-						fDat /= 10;
-						sprintf(PrintBuf,"      V10                     %5.1f ml\r\n",fDat);
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-							sprintf(PrintBuf,"      V10                     %s\r\n",VError);  
-					}break;
-					case 162: 										// V500
-					{
-						fDat = Reports_rsmp.RPT_S2V500;
-						fDat /= 10;
-						sprintf(PrintBuf,"      V500                    %5.1f ml\r\n",fDat); 
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      V500                    %s\r\n",VError);
-					}break;
-					case 163: 										// V1250
-					{
-						fDat = Reports_rsmp.RPT_S2V1250;
-						fDat /= 10;
-						if(Reports_rsmp.RPT_TESTENDS2 == 3)
-						{	
-							sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-								sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
-						}
-						else
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);
-						}
-						
-						i = 4;
-						if(i >= Reports_rsmp.RPT_TESTENDS2+1)
-							PutStep++;
-					}break;
-					case 164:
-					{
-						fDat = Reports_rsmp.RPT_S2Delay[i-4];
-						fDat /= 10;
-						if(i != Reports_rsmp.RPT_TESTENDS2)
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
-						}
-						else
-						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-								sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
-						}
-						
-						i++;
-						if((i < Reports_rsmp.RPT_TESTENDS2+1)&&
-							 (i < 10))
-						{
-							PutStep--;
-						}
-					}break;
-					case 165: 										// 初始密度
-					{
-						memset(PrintBuf,'\0',sizeof(PrintBuf));						//清空数组
-						sprintf(PrintBuf,"      Initial Density         %5.2f g/ml\r\n",Reports_rsmp.RPT_S2InitialDensity); 
-						if(strlen(PrintBuf)>43)				//针对打印报告出错问题,正常报告结束位是0X0D,0X0A
-							sprintf(PrintBuf,"      Initial Density         %s\r\n",VError);
-					}break;
-					case 166: 										// 终止密度
-					{
-						memset(PrintBuf,'\0',sizeof(PrintBuf));						//清空数组
-						sprintf(PrintBuf,"      Tapped Density          %5.2f g/ml\r\n",Reports_rsmp.RPT_S2TappedDensity); 
-						if(strlen(PrintBuf)>43)				//针对打印报告出错问题,正常报告结束位是0X0D,0X0A
-							sprintf(PrintBuf,"      Tapped Density          %s\r\n",VError); 
-					}break;
-					case 167: 										// 压缩比
-					{
-						sprintf(PrintBuf,"      Hausner Ratio           %5.2f\r\n",Reports_rsmp.RPT_S2HausnerRatio); 
-						if(strlen(PrintBuf)>40)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Hausner Ratio           %s\r\n",VError);
-					}break;
-					case 168: 										// 比率
-					{
-						sprintf(PrintBuf,"      Compressibility Index   %5.1f %%\r\n",Reports_rsmp.RPT_S2Compressibility); 
-						if(strlen(PrintBuf)>42)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Compressibility Index   %s\r\n",VError);
-					}break;
-					case 169:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 170:
-					{
-						strcpy(PrintBuf,"      Actual number of taps, time, and speed\r\n");
-					}break;
-					case 171:
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 172: 										// 实际转速范围
-					{
-						sprintf(PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-							Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-						if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Speed min-max:      %s\r\n",RError);																	//2021/12/13 星期一 11:56:48
-					}break;
-					case 173: 										// 实际拍击次数
-					{
-						sprintf(PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-					}break;
-					case 174:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 175: 										// 测试结束状态
-					{
-						if(Reports_rsmp.RPT_TestStatus)
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test completed.");
-						else
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test abort.");
-					}break;
-					case 176: 										// 表脚，公共部分 ----------------------
-					{
-						// 打印测试时间 ------------------------------------------
-						if(DateFormat == 0) 									// Day,Month,Year
-							sprintf(PrintBuf,"      Test date:          %02d.%02d.20%02d %02d:%02d:%02d",
-								Reports_rsmp.RPT_Date.RTC_Date,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Year,
-								Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-						else
-						if(DateFormat == 1) 									// Year,Month,Day
-							sprintf(PrintBuf,"      Test date:          20%02d-%02d-%02d %02d:%02d:%02d",
-								Reports_rsmp.RPT_Date.RTC_Year,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date,
-								Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-						else
-						if(DateFormat == 2) 									// Month,Day,Year
-							sprintf(PrintBuf,"      Test date:          %02d/%02d/20%02d %02d:%02d:%02d",
-								Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date,Reports_rsmp.RPT_Date.RTC_Year,
-								Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-					}break;
-					case 177:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 178: 										// Yes or No
-					{
-						strcpy(PrintBuf,"      Requirements fulfilled:      YES      No\r\n");
-					}break;
-					case 179:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 180: 										// 注释
-					{
-						strcpy(PrintBuf,"      Comments\r\n");
-					}break;
-					case 181:
-					{
-						//strcpy(PrintBuf,"      ______________________________________________________________________\r\n");
-						strcpy(PrintBuf,"      ______________________________________________________________________\r\n");
-					}break;
-					case 182:
-					{
-						strcpy(PrintBuf,"      ______________________________________________________________________\r\n");
-						PutStep++;
-						PutStep++;
-					}break;
-					case 183:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 184:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 185:
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 186: 										// 日期，签名
-					{
-						strcpy(PrintBuf,"      ______________________________________________________________________\r\n");
-					}break;
-					case 187:
-					{
-						strcpy(PrintBuf,"      Operator                    Date                    Signature \r\n");
-					}break;
-					default:
-					{
-						PutStep = 0xff;
-					}break;
-				}
-			}
-			
-			if(PutStep < 0xff)
-			{
-				tcp_client_sendbuf = (u8 *)PrintBuf;
-				//while(tcp_client_flag&(1<<7));
-				
-				tcp_client_flag|=1<<7;//标记要发送数据
-				//res = 1;
-				//delay_ms(2000);
-				PutStep++;
-			}
-		}
-		
-		if(PutStep == 0xff)
-		{
-			if(!(tcp_client_flag&1<<7))
-			{
-				delay_ms(2000);
-				break;
-			}
-		}
-		
-		if(tcp_client_flag&1<<5) 						//是否连接上?
-		{
-			if(connflag==0)
-			{ 
-				//LCD_ShowString(30,190,lcddev.width-30,lcddev.height-190,16,"STATUS:Connected   ");//提示消息		
-				//POINT_COLOR=RED;
-				//LCD_ShowString(30,210,lcddev.width-30,lcddev.height-190,16,"Receive Data:");//提示消息		
-				//POINT_COLOR=BLUE;//蓝色字体
-				RS232_SendString("STATUS:Connected\r\n");
-				RS232_SendString("Receive Data: \r\n");
-				connflag=1;//标记连接了
-			} 
-		}
-		else 
-		if(connflag)
-		{
- 			//LCD_ShowString(30,190,190,16,16,"STATUS:Disconnected");
-			//LCD_Fill(30,210,lcddev.width-1,lcddev.height-1,WHITE);//清屏
-			RS232_SendString("STATUS:Disconnected\r\n");
-			connflag=0;	//标记连接断开了
-		} 
-		
-		lwip_periodic_handle();
-		delay_ms(2);
-		
-		t++;
-		if(t==200)
-		{
-			if(connflag==0&&(tcp_client_flag&1<<5)==0)//未连接上,则尝试重连
-			{ 
-				tcp_client_connection_close(tcppcb,0);//关闭连接
-				tcppcb=tcp_new();	//创建一个新的pcb
-				if(tcppcb)			//创建成功
-				{ 
-					tcp_connect(tcppcb,&rmtipaddr,PrtPort,tcp_client_connected);//连接到目的地址的指定端口上,当连接成功后回调tcp_client_connected()函数
-				}
-			}
-			t=0;
-			LED0=!LED0;
-		}
-		
-		if(TIMER_TimeOut(TIMER_GENERAL)) 		// 判断是否超时
-		{
-			OverTime = 3; 														// 服务器端无响应
-			break;
-		}
-	}
-	
-	//osDelay(100);
-	tcp_client_connection_close(tcppcb,0);					//关闭TCP Client连接
-	myfree(SRAMIN,tbuf);
-	
-	return OverTime;
-}*/
 
 char UsbLanPrtUsp(void)
 {
@@ -8615,8 +2728,7 @@ char UsbLanPrtUsp(void)
 					}break;
 					case 32: 											// 时区，OQ
 					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
+						sprintf(PrintBuf,"      Qualification status: %9s\r\n",Reports_rsmp.RPT_OQ);
 					}break;
 					case 33:
 					{
@@ -8652,7 +2764,7 @@ char UsbLanPrtUsp(void)
 						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
 							sprintf(PrintBuf,"      V10                     %s\r\n",VError);  	
 					}break;
-					case 39: 											// V500体积
+					case 39: 											// V490体积
 					{
 						fDat = Reports_rsmp.RPT_S1V500;
 						fDat /= 10;
@@ -8660,7 +2772,7 @@ char UsbLanPrtUsp(void)
 						if(strlen(PrintBuf)>43)											//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
 							sprintf(PrintBuf,"      V500                    %s\r\n",VError); 
 					}break;
-					case 40: 											// V1250体积
+					case 40: 											// V750体积
 					{
 						fDat = Reports_rsmp.RPT_S1V1250;
 						fDat /= 10;
@@ -8687,15 +2799,15 @@ char UsbLanPrtUsp(void)
 						fDat /= 10;
 						if(i != Reports_rsmp.RPT_TESTENDS1)
 						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
+							sprintf(PrintBuf,"      V%4d                   %5.1f ml\r\n",RUN_CYC[i],fDat);
 							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
+								sprintf(PrintBuf,"      V%4d                   %s\r\n",RUN_CYC[i],VError);	
 						}
 						else
 						{	
-							sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
+							sprintf(PrintBuf,"      V%4d                   %5.1f ml(Final)\r\n",RUN_CYC[i],fDat);
 							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
+								sprintf(PrintBuf,"      V%4d                   %s(Final)\r\n",RUN_CYC[i],VError);	
 						}
 						
 						i++;
@@ -8864,8 +2976,7 @@ char UsbLanPrtUsp(void)
 					}break;
 					case 73: 											// 时区，OQ
 					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
+						sprintf(PrintBuf,"      Qualification status: %9s\r\n",Reports_rsmp.RPT_OQ);
 					}break;
 					case 74:
 					{
@@ -8905,7 +3016,7 @@ char UsbLanPrtUsp(void)
 						if(strlen(PrintBuf)>66)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
 							sprintf(PrintBuf,"      V10                     %s\r\n",VError);  
 					}break;
-					case 80: 											// V500
+					case 80: 											// V490
 					{
 						fDat = Reports_rsmp.RPT_S1V500;
 						fDat /= 10;
@@ -8915,7 +3026,7 @@ char UsbLanPrtUsp(void)
 						if(strlen(PrintBuf)>66)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
 							sprintf(PrintBuf,"      V500                    %s\r\n",VError); 
 					}break;
-					case 81: 											// V1250
+					case 81: 											// V750
 					{
 						fDat = Reports_rsmp.RPT_S1V1250;
 						fDat /= 10;
@@ -9017,7 +3128,7 @@ char UsbLanPrtUsp(void)
 								strcpy(tbuf2,"\0");
 						}
 						
-						sprintf(PrintBuf,"      V1250                   %13s         %13s\r\n",tbuf1,tbuf2);
+						sprintf(PrintBuf,"      V%4d                   %13s         %13s\r\n",RUN_CYC[i],tbuf1,tbuf2);
 						
 						i++;
 						if((i < Reports_rsmp.RPT_TESTENDS1+1)||
@@ -9197,8 +3308,7 @@ char UsbLanPrtUsp(void)
 					}break;
 					case 114: 										// 时区，OQ
 					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
+						sprintf(PrintBuf,"      Qualification status: %9s\r\n",Reports_rsmp.RPT_OQ);
 					}break;
 					case 115:
 					{
@@ -9234,7 +3344,7 @@ char UsbLanPrtUsp(void)
 						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
 							sprintf(PrintBuf,"      V10                     %s\r\n",VError);  	
 					}break;
-					case 121: 										// V500
+					case 121: 										// V490
 					{
 						fDat = Reports_rsmp.RPT_S1V500;
 						fDat /= 10;
@@ -9242,7 +3352,7 @@ char UsbLanPrtUsp(void)
 						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
 							sprintf(PrintBuf,"      V500                    %s\r\n",VError);  
 					}break;
-					case 122: 										// V1250
+					case 122: 										// V750
 					{
 						fDat = Reports_rsmp.RPT_S1V1250;
 						fDat /= 10;
@@ -9269,15 +3379,15 @@ char UsbLanPrtUsp(void)
 						fDat /= 10;
 						if(i != Reports_rsmp.RPT_TESTENDS1)
 						{	
-							sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
+							sprintf(PrintBuf,"      V%4d                   %5.1f ml\r\n",RUN_CYC[i],fDat);
 							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
+								sprintf(PrintBuf,"      V%4d                   %s\r\n",RUN_CYC[i],VError);	
 						}
 						else
 						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
+							sprintf(PrintBuf,"      V%4d                   %5.1f ml(Final)\r\n",RUN_CYC[i],fDat);
 							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
+								sprintf(PrintBuf,"      V%4d                   %s(Final)\r\n",RUN_CYC[i],VError);
 						}
 						
 						i++;
@@ -9443,8 +3553,7 @@ char UsbLanPrtUsp(void)
 					}break;
 					case 155: 										// 时区，OQ
 					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
+						sprintf(PrintBuf,"      Qualification status: %9s\r\n",Reports_rsmp.RPT_OQ);
 					}break;
 					case 156:
 					{
@@ -9478,9 +3587,9 @@ char UsbLanPrtUsp(void)
 						fDat /= 10;
 						sprintf(PrintBuf,"      V10                     %5.1f ml\r\n",fDat);
 						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-							sprintf(PrintBuf,"      V10                     %s\r\n",VError);  
+							sprintf(PrintBuf,"      V10                     %s\r\n",VError);
 					}break;
-					case 162: 										// V500
+					case 162: 										// V490
 					{
 						fDat = Reports_rsmp.RPT_S2V500;
 						fDat /= 10;
@@ -9488,7 +3597,7 @@ char UsbLanPrtUsp(void)
 						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
 							sprintf(PrintBuf,"      V500                    %s\r\n",VError);
 					}break;
-					case 163: 										// V1250
+					case 163: 										// V750
 					{
 						fDat = Reports_rsmp.RPT_S2V1250;
 						fDat /= 10;
@@ -9515,15 +3624,15 @@ char UsbLanPrtUsp(void)
 						fDat /= 10;
 						if(i != Reports_rsmp.RPT_TESTENDS2)
 						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
+							sprintf(PrintBuf,"      V%4d                   %5.1f ml\r\n",RUN_CYC[i],fDat);
 							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
+								sprintf(PrintBuf,"      V%4d                   %s\r\n",RUN_CYC[i],VError);
 						}
 						else
 						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
+							sprintf(PrintBuf,"      V%4d                   %5.1f ml(Final)\r\n",RUN_CYC[i],fDat);
 							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-								sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
+								sprintf(PrintBuf,"      V%4d                   %s(Final)\r\n",RUN_CYC[i],VError);
 						}
 						
 						i++;
@@ -9863,8 +3972,7 @@ char UsbLanPrtUsp(void)
 					}break;
 					case 32: 											// 时区，OQ
 					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
+						sprintf(PrintBuf,"      Qualification status: %9s\r\n",Reports_rsmp.RPT_OQ);
 					}break;
 					case 33:
 					{
@@ -9900,7 +4008,7 @@ char UsbLanPrtUsp(void)
 						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
 							sprintf(PrintBuf,"      V10                     %s\r\n",VError);  	
 					}break;
-					case 39: 											// V500体积
+					case 39: 											// V490体积
 					{
 						fDat = Reports_rsmp.RPT_S1V500;
 						fDat /= 10;
@@ -9908,7 +4016,7 @@ char UsbLanPrtUsp(void)
 						if(strlen(PrintBuf)>43)											//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
 							sprintf(PrintBuf,"      V500                    %s\r\n",VError); 
 					}break;
-					case 40: 											// V1250体积
+					case 40: 											// V750体积
 					{
 						fDat = Reports_rsmp.RPT_S1V1250;
 						fDat /= 10;
@@ -9922,7 +4030,7 @@ char UsbLanPrtUsp(void)
 						{
 							sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
 							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
+								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);
 						}
 						
 						i = 4;
@@ -9935,15 +4043,15 @@ char UsbLanPrtUsp(void)
 						fDat /= 10;
 						if(i != Reports_rsmp.RPT_TESTENDS1)
 						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
+							sprintf(PrintBuf,"      V%4d                   %5.1f ml\r\n",RUN_CYC[i],fDat);
 							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
+								sprintf(PrintBuf,"      V%4d                   %s\r\n",RUN_CYC[i],VError);	
 						}
 						else
 						{	
-							sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
+							sprintf(PrintBuf,"      V%4d                   %5.1f ml(Final)\r\n",RUN_CYC[i],fDat);
 							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
+								sprintf(PrintBuf,"      V%4d                   %s(Final)\r\n",RUN_CYC[i],VError);	
 						}
 						
 						i++;
@@ -10112,8 +4220,7 @@ char UsbLanPrtUsp(void)
 					}break;
 					case 73: 											// 时区，OQ
 					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
+						sprintf(PrintBuf,"      Qualification status: %9s\r\n",Reports_rsmp.RPT_OQ);
 					}break;
 					case 74:
 					{
@@ -10153,7 +4260,7 @@ char UsbLanPrtUsp(void)
 						if(strlen(PrintBuf)>66)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
 							sprintf(PrintBuf,"      V10                     %s\r\n",VError);  
 					}break;
-					case 80: 											// V500
+					case 80: 											// V490
 					{
 						fDat = Reports_rsmp.RPT_S1V500;
 						fDat /= 10;
@@ -10163,7 +4270,7 @@ char UsbLanPrtUsp(void)
 						if(strlen(PrintBuf)>66)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
 							sprintf(PrintBuf,"      V500                    %s\r\n",VError); 
 					}break;
-					case 81: 											// V1250
+					case 81: 											// V750
 					{
 						fDat = Reports_rsmp.RPT_S1V1250;
 						fDat /= 10;
@@ -10265,7 +4372,7 @@ char UsbLanPrtUsp(void)
 								strcpy(tbuf2,"\0");
 						}
 						
-						sprintf(PrintBuf,"      V1250                   %13s         %13s\r\n",tbuf1,tbuf2);
+						sprintf(PrintBuf,"      V%4d                   %13s         %13s\r\n",RUN_CYC[i],tbuf1,tbuf2);
 						
 						i++;
 						if((i < Reports_rsmp.RPT_TESTENDS1+1)||
@@ -10445,8 +4552,7 @@ char UsbLanPrtUsp(void)
 					}break;
 					case 114: 										// 时区，OQ
 					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
+						sprintf(PrintBuf,"      Qualification status: %9s\r\n",Reports_rsmp.RPT_OQ);
 					}break;
 					case 115:
 					{
@@ -10482,7 +4588,7 @@ char UsbLanPrtUsp(void)
 						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
 							sprintf(PrintBuf,"      V10                     %s\r\n",VError);  	
 					}break;
-					case 121: 										// V500
+					case 121: 										// V490
 					{
 						fDat = Reports_rsmp.RPT_S1V500;
 						fDat /= 10;
@@ -10490,7 +4596,7 @@ char UsbLanPrtUsp(void)
 						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
 							sprintf(PrintBuf,"      V500                    %s\r\n",VError);  
 					}break;
-					case 122: 										// V1250
+					case 122: 										// V750
 					{
 						fDat = Reports_rsmp.RPT_S1V1250;
 						fDat /= 10;
@@ -10517,15 +4623,15 @@ char UsbLanPrtUsp(void)
 						fDat /= 10;
 						if(i != Reports_rsmp.RPT_TESTENDS1)
 						{	
-							sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
+							sprintf(PrintBuf,"      V%4d                   %5.1f ml\r\n",RUN_CYC[i],fDat);
 							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
+								sprintf(PrintBuf,"      V%4d                   %s\r\n",RUN_CYC[i],VError);	
 						}
 						else
 						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
+							sprintf(PrintBuf,"      V%4d                   %5.1f ml(Final)\r\n",RUN_CYC[i],fDat);
 							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
+								sprintf(PrintBuf,"      V%4d                   %s(Final)\r\n",RUN_CYC[i],VError);	
 						}
 						
 						i++;
@@ -10691,8 +4797,7 @@ char UsbLanPrtUsp(void)
 					}break;
 					case 155: 										// 时区，OQ
 					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
+						sprintf(PrintBuf,"      Qualification status: %9s\r\n",Reports_rsmp.RPT_OQ);
 					}break;
 					case 156:
 					{
@@ -10728,7 +4833,7 @@ char UsbLanPrtUsp(void)
 						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
 							sprintf(PrintBuf,"      V10                     %s\r\n",VError);  
 					}break;
-					case 162: 										// V500
+					case 162: 										// V490
 					{
 						fDat = Reports_rsmp.RPT_S2V500;
 						fDat /= 10;
@@ -10736,7 +4841,7 @@ char UsbLanPrtUsp(void)
 						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
 							sprintf(PrintBuf,"      V500                    %s\r\n",VError);
 					}break;
-					case 163: 										// V1250
+					case 163: 										// V750
 					{
 						fDat = Reports_rsmp.RPT_S2V1250;
 						fDat /= 10;
@@ -10763,15 +4868,15 @@ char UsbLanPrtUsp(void)
 						fDat /= 10;
 						if(i != Reports_rsmp.RPT_TESTENDS2)
 						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
+							sprintf(PrintBuf,"      V%4d                   %5.1f ml\r\n",RUN_CYC[i],fDat);
 							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      V1250                   %s\r\n",VError);	
+								sprintf(PrintBuf,"      V%4d                   %s\r\n",RUN_CYC[i],VError);	
 						}
 						else
 						{
-							sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
+							sprintf(PrintBuf,"      V%4d                   %5.1f ml(Final)\r\n",RUN_CYC[i],fDat);
 							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-								sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
+								sprintf(PrintBuf,"      V%4d                   %s(Final)\r\n",RUN_CYC[i],VError);	
 						}
 						
 						i++;
@@ -11017,1967 +5122,6 @@ char UsbLanPrtUsp(void)
 	
 	return OverTime;
 }
-
-// USP 3测试打印报告 -----------------------------------------------------------
-/*void druckergebnisUsp3(void) 						// USB 打印机
-{
-	char tbuf1[50];
-	char tbuf2[50];
-	char PrintBuf[100];
-	char RError[] = "Speed Error";							//针对报告转速出错问题加的错误提示字符串			2021/12/13 星期一 11:56:58
-	char VError[] = "Error";										//针对报告体积质量出错问题加的错误提示字符串	2021/12/13 星期一 11:56:58
-	//char type[25];
-	//u8 i;
-	//float bDat;
-	float fDat;
-	
-	//RTC_GetTime(RTC_Format_BIN, &RTC_TimeStruct);
-	//RTC_GetDate(RTC_Format_BIN, &RTC_DateStruct);
-	
-	SendPrinter("                         Tapped Density Report Test Assist\r\n");
-	SendPrinter("      ----------------------------------------------------------------------\r\n");
-	SendPrinter("\r\n");
-	
-	strcpy(tbuf1,Reports_rsmp.RPT_DeviceSerialNb);
-	sprintf(PrintBuf, "      Device serial no.:     %6s", tbuf1);
-	SendPrinter(PrintBuf);
-	      SendPrinter("        Page:                        1/1\r\n");
-	
-	//osDelay(100);
-	sprintf(PrintBuf, "      Main Firmware version: %6s", Reports_rsmp.RPT_MbVersion);
-	SendPrinter(PrintBuf);
-	sprintf(PrintBuf, "        Touch Firmware version:   %6s\r\n", Reports_rsmp.RPT_DbVersion);
-	SendPrinter(PrintBuf);
-	
-	//sprintf(PrintBuf, "      Device configuration:  %6d", (int)Reports_rsmp.RPT_DeviceType);
-	if(Reports_rsmp.RPT_DeviceType == 121)
-		strcpy(tbuf1,"USP 1, 1 Station");
-	else
-	if(Reports_rsmp.RPT_DeviceType == 122)
-		strcpy(tbuf1,"USP 2, 1 Station");
-	else
-	if(Reports_rsmp.RPT_DeviceType == 221)
-		strcpy(tbuf1,"USP 1, 2 Stations");
-	else
-	if(Reports_rsmp.RPT_DeviceType == 222)
-		strcpy(tbuf1,"USP 2, 2 Stations");
-	else
-	if(Reports_rsmp.RPT_DeviceType == 223)
-		strcpy(tbuf1,"USP 1&2, 2 Stations");
-	else
-		strcpy(tbuf1,"USP x, x Stations");
-	sprintf(PrintBuf, "      Configuration: %-20s", tbuf1);
-	SendPrinter(PrintBuf);
-	
-	//sprintf(PrintBuf, "        Print date:  20%02d-%02d-%02d %02d:%02d:%02d\r\n", RTC_DateStruct.RTC_Year,RTC_DateStruct.RTC_Month,RTC_DateStruct.RTC_Date,RTC_TimeStruct.RTC_Hours,RTC_TimeStruct.RTC_Minutes,RTC_TimeStruct.RTC_Seconds);
-	sprintf(PrintBuf, "  Print date:  %s %s\r\n", DisDateStr,DisTimeStr);
-	SendPrinter(PrintBuf);
-	SendPrinter("\r\n");
-	
-	if(Reports_rsmp.RPT_S1Method != 0) 		// 测试站一
-	{
-		SendPrinter("      Product name station 1:\r\n");
-		SendPrinter("      ----------------------------------------------------------------------\r\n");
-		sprintf(PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S1PName);
-		SendPrinter(PrintBuf);
-		
-		memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-		strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-		sprintf(PrintBuf,"      Information: %-17s\r\n",tbuf1);
-		SendPrinter(PrintBuf);
-		
-		memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-		if(strlen(Reports_rsmp.RPT_S1PInfo)>17) 
-			strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+17,30); 
-		else 
-			tbuf1[0] = '\0';
-		
-		sprintf(PrintBuf,"      %-30s\r\n",tbuf1);
-		SendPrinter(PrintBuf);
-		
-		memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-		if(strlen(Reports_rsmp.RPT_S1PInfo)>47)
-			strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+47,30);
-		else
-			tbuf1[0] = '\0';
-		
-		sprintf(PrintBuf,"      %-30s\r\n",tbuf1);
-		SendPrinter(PrintBuf);
-		
-		sprintf(PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S1PBatchNb);
-		SendPrinter(PrintBuf);
-		
-		sprintf(PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S1CylinderNb);
-		SendPrinter(PrintBuf);
-		
-		SendPrinter("\r\n");
-		SendPrinter("      Test Parameter                       Station 1\r\n");
-		SendPrinter("      ----------------------------------------------------------------------\r\n");
-		//sprintf(PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S1Method);
-		strcpy(PrintBuf,"      USP method:                          USP 3\r\n");
-		SendPrinter(PrintBuf);
-		
-		//strcpy(PrintBuf,"      Speed:                               300 taps/min\r\n");
-		sprintf(PrintBuf,"      Speed:                               %3d taps/min\r\n",Reports_rsmp.RPT_S1Speed);
-		SendPrinter(PrintBuf);
-		
-		//sprintf(PrintBuf,"      Cylinder Size:                       %-15s\r\n",Reports_rsmp.RPT_S1CylinderSize);
-		strcpy(PrintBuf,"      Vessel Size:                         100 ml\r\n");
-		SendPrinter(PrintBuf);
-		
-		//sprintf(PrintBuf,"      Calculation of Compressibility Index: V%d\r\n",Reports_rsmp.RPT_V0_V10);
-		//SendPrinter(PrintBuf);
-		
-		//fDat = Reports_rsmp.RPT_S1InitialVolume;
-		//fDat /= 10;		
-		//sprintf(PrintBuf,"      Initial Volume:                      %5.1f ml\r\n",fDat);
-		//SendPrinter(PrintBuf);
-		
-		//sprintf(PrintBuf,"      Sample Mass:                         %5.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100);
-		//SendPrinter(PrintBuf);
-		
-		SendPrinter("\r\n");
-		SendPrinter("      System Settings\r\n");
-		SendPrinter("      ----------------------------------------------------------------------\r\n");
-		sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-			Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-		SendPrinter(PrintBuf);
-		
-		SendPrinter("\r\n");
-		SendPrinter("      Test run data           Station 1\r\n");
-		SendPrinter("      ----------------------------------------------------------------------\r\n");
-		//sprintf(PrintBuf,"      Sample Weight           %5.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100);
-		sprintf(PrintBuf,"      Vessel Weight           %6.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100);
-		if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-			//sprintf(PrintBuf,"      Sample Weight           %s\r\n",VError);
-			sprintf(PrintBuf,"      Vessel Weight           %s\r\n",VError);
-		SendPrinter(PrintBuf);
-
-		//fDat = Reports_rsmp.RPT_S1InitialVolume;
-		//fDat /= 10;						
-		//sprintf(PrintBuf,"      V0                      %5.1f ml\r\n",fDat);	//2021/11/30 星期二 14:37:43
-		//if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-		//	sprintf(PrintBuf,"      V0                      %s\r\n",VError); 	
-		//SendPrinter(PrintBuf);	
-		
-		fDat = Reports_rsmp.RPT_S1V10;
-		fDat /= 10;
-		//sprintf(PrintBuf,"      V10                     %5.1f ml\r\n",fDat);
-		sprintf(PrintBuf,"      mV1(200 taps)           %6.2f g\r\n",fDat);
-		if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-			//sprintf(PrintBuf,"      V10                     %s\r\n",VError);
-			sprintf(PrintBuf,"      mV1(200 taps)           %s\r\n",VError);
-		SendPrinter(PrintBuf);							//
-		
-		fDat = Reports_rsmp.RPT_S1V500;
-		fDat /= 10;
-		if(Reports_rsmp.RPT_TESTENDS1 == 2)
-		{
-			//sprintf(PrintBuf,"      V500                    %5.1f ml\r\n",fDat); 
-			sprintf(PrintBuf,"      mV2(400 taps)           %6.2f g(Final)\r\n",fDat); 
-			if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				//sprintf(PrintBuf,"      V500                    %s\r\n",VError);
-				sprintf(PrintBuf,"      mV2(400 taps)           %s(Final)\r\n",VError);
-		}
-		else
-		{
-			//sprintf(PrintBuf,"      V500                    %5.1f ml\r\n",fDat);
-			sprintf(PrintBuf,"      mV2(400 taps)           %6.2f g\r\n",fDat);
-			if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				//sprintf(PrintBuf,"      V500                    %s\r\n",VError);
-				sprintf(PrintBuf,"      mV2(400 taps)           %s\r\n",VError);
-		}
-		SendPrinter(PrintBuf);							//
-
-		fDat = Reports_rsmp.RPT_S1V1250;
-		fDat /= 10;
-		if(Reports_rsmp.RPT_TESTENDS1 == 3)
-		{
-			//sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-			sprintf(PrintBuf,"      mV3(200 taps)           %6.2f g(Final)\r\n",fDat);
-			if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-				//sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);
-				sprintf(PrintBuf,"      mV3(200 taps)           %s(Final)\r\n",VError);
-			
-			SendPrinter(PrintBuf);
-		}
-		else
-		if(Reports_rsmp.RPT_TESTENDS1 > 3)
-		{
-			//sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-			sprintf(PrintBuf,"      mV3(200 taps)           %6.2f g\r\n",fDat);
-			if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-				//sprintf(PrintBuf,"      V1250                   %s\r\n",VError);
-				sprintf(PrintBuf,"      mV3(200 taps)           %s\r\n",VError);
-			
-			SendPrinter(PrintBuf);
-		}	
-		
-		fDat = Reports_rsmp.RPT_S1Delay[0];
-		fDat /= 10;
-		if(Reports_rsmp.RPT_TESTENDS1 == 4)
-		{	
-			//sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-			sprintf(PrintBuf,"      mV4(200 taps)           %6.2f g(Final)\r\n",fDat);
-			if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				//sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);
-				sprintf(PrintBuf,"      mV4(200 taps)           %s(Final)\r\n",VError);
-			
-			SendPrinter(PrintBuf);
-		}
-		else
-		if(Reports_rsmp.RPT_TESTENDS1 > 4)
-		{
-			//sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-			sprintf(PrintBuf,"      mV4(200 taps)           %6.2f g\r\n",fDat);
-			if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-				//sprintf(PrintBuf,"      V1250                   %s\r\n",VError);
-				sprintf(PrintBuf,"      mV4(200 taps)           %s\r\n",VError);
-			
-			SendPrinter(PrintBuf);
-		}
-		
-		fDat = Reports_rsmp.RPT_S1Delay[1];
-		fDat /= 10;
-		if(Reports_rsmp.RPT_TESTENDS1 == 5)
-		{
-			if(Reports_rsmp.RPT_TestStatus == 1)
-			{	
-				//sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-				sprintf(PrintBuf,"      mV5(200 taps)           %6.2f g(Final)\r\n",fDat);
-				if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-					//sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);
-					sprintf(PrintBuf,"      mV5(200 taps)           %s(Final)\r\n",VError);
-			}
-			else
-			{
-				//sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-				sprintf(PrintBuf,"      mV5(200 taps)           %6.2f g\r\n",fDat);
-				if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-					//sprintf(PrintBuf,"      V1250                   %s\r\n",VError);
-					sprintf(PrintBuf,"      mV5(200 taps)           %s\r\n",VError);
-			}
-			
-			SendPrinter(PrintBuf);
-		}
-		
-		//sprintf(PrintBuf,"      Initial Density         %5.2f g/ml\r\n",Reports_rsmp.RPT_S1InitialDensity); 
-		//if(strlen(PrintBuf)>43)														//针对打印报告出错问题,无法判断结束位,清空数组后求他长度
-		//	sprintf(PrintBuf,"      Initial Density         %s\r\n",VError);	
-		//SendPrinter(PrintBuf);
-		
-		SendPrinter("\r\n");
-		memset(PrintBuf,'\0',sizeof(PrintBuf));						//清空数组
-		sprintf(PrintBuf,"      Tapped Density          %6.2f g/ml\r\n",Reports_rsmp.RPT_S1TappedDensity);
-		if(strlen(PrintBuf)>43)														//针对打印报告出错问题,无法判断结束位,清空数组后求他长度
-			sprintf(PrintBuf,"      Tapped Density          %s\r\n",VError); 
-		SendPrinter(PrintBuf);
-		
-		//sprintf(PrintBuf,"      Hausner Ratio           %5.2f\r\n",Reports_rsmp.RPT_S1HausnerRatio);
-		//if(strlen(PrintBuf)>40)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-		//	sprintf(PrintBuf,"      Hausner Ratio           %s\r\n",VError);
-		//SendPrinter(PrintBuf);
-		
-		//sprintf(PrintBuf,"      Compressibility Index   %5.1f %%\r\n",Reports_rsmp.RPT_S1Compressibility); 
-		//if(strlen(PrintBuf)>40)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-		//	sprintf(PrintBuf,"      Compressibility Index   %s\r\n",VError);
-		//SendPrinter(PrintBuf);
-		
-		SendPrinter("\r\n");
-		SendPrinter("      Actual number of taps, time, and speed\r\n");
-		SendPrinter("      ----------------------------------------------------------------------\r\n");
-		sprintf(PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-			Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-		if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-			sprintf(PrintBuf,"      Speed min-max:      %s\r\n",RError);																	//2021/12/13 星期一 11:56:48
-		SendPrinter(PrintBuf);
-		
-		sprintf(PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-		SendPrinter(PrintBuf);
-		
-		SendPrinter("\r\n");
-		if(Reports_rsmp.RPT_TestStatus)
-			sprintf(PrintBuf,"      Status:             %s\r\n","Test completed.");
-		else
-			sprintf(PrintBuf,"      Status:             %s\r\n","Test abort.");
-		SendPrinter(PrintBuf);
-	}
-	else
-	if(Reports_rsmp.RPT_S2Method != 0) 		// 测试站二
-	{
-		SendPrinter("      Product name station 2:\r\n");
-		SendPrinter("      ----------------------------------------------------------------------\r\n");
-		sprintf(PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S2PName);
-		SendPrinter(PrintBuf);
-		
-		memset(tbuf2,'\0',sizeof(tbuf2));						//清空数组
-		strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo,17);
-		sprintf(PrintBuf,"      Information: %-17s\r\n",tbuf2);
-		SendPrinter(PrintBuf);
-		
-		memset(tbuf2,'\0',sizeof(tbuf2));						//清空数组
-		if(strlen(Reports_rsmp.RPT_S2PInfo)>17) 
-			strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+17,30); 
-		else 
-			tbuf2[0] = '\0';
-		
-		sprintf(PrintBuf,"      %-30s\r\n",tbuf2);
-		SendPrinter(PrintBuf);
-		
-		memset(tbuf2,'\0',sizeof(tbuf2));						//清空数组
-		if(strlen(Reports_rsmp.RPT_S2PInfo)>47)
-			strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+47,30);
-		else
-			tbuf2[0] = '\0';
-		
-		sprintf(PrintBuf,"      %-30s\r\n",tbuf2);
-		SendPrinter(PrintBuf);
-		
-		sprintf(PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S2PBatchNb);
-		SendPrinter(PrintBuf);
-		
-		sprintf(PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S2CylinderNb);
-		SendPrinter(PrintBuf);
-		
-		SendPrinter("\r\n");
-		SendPrinter("      Test Parameter                       Station 2\r\n");
-		SendPrinter("      ----------------------------------------------------------------------\r\n");
-		//sprintf(PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S2Method);
-		strcpy(PrintBuf,"      USP method:                          USP 3\r\n");
-		SendPrinter(PrintBuf);
-		
-		//strcpy(PrintBuf,"      Speed:                               250 taps/min\r\n");
-		sprintf(PrintBuf,"      Speed:                               %3d taps/min\r\n",Reports_rsmp.RPT_S2Speed);
-		SendPrinter(PrintBuf);
-		
-		//sprintf(PrintBuf,"      Cylinder Size:                       %-15s\r\n",Reports_rsmp.RPT_S2CylinderSize);
-		strcpy(PrintBuf,"      Vessel Size:                         100 ml\r\n");
-		SendPrinter(PrintBuf);
-		
-		//sprintf(PrintBuf,"      Calculation of Compressibility Index: V%d\r\n",Reports_rsmp.RPT_V0_V10);
-		//SendPrinter(PrintBuf);
-		
-		//fDat = Reports_rsmp.RPT_S2InitialVolume;
-		//fDat /= 10;	
-		//sprintf(PrintBuf,"      Initial Volume:                      %5.1f ml\r\n",fDat);
-		//SendPrinter(PrintBuf);
-		
-		//sprintf(PrintBuf,"      Sample Mass:                         %5.2f g\r\n",(float)Reports_rsmp.RPT_S2SampleMass/100);
-		//SendPrinter(PrintBuf);
-		
-		SendPrinter("\r\n");
-		SendPrinter("      System Settings\r\n");
-		SendPrinter("      ----------------------------------------------------------------------\r\n");
-		sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-			Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-		SendPrinter(PrintBuf);
-		
-		SendPrinter("\r\n");
-		SendPrinter("      Test run data           Station 2\r\n");
-		SendPrinter("      ----------------------------------------------------------------------\r\n");
-		//sprintf(PrintBuf,"      Sample Weight           %5.2f g\r\n",(float)Reports_rsmp.RPT_S2SampleMass/100); 
-		sprintf(PrintBuf,"      Vessel Weight           %6.2f g\r\n",(float)Reports_rsmp.RPT_S2SampleMass/100); 
-		if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-			//sprintf(PrintBuf,"      Sample Weight           %s\r\n",VError);
-			sprintf(PrintBuf,"      Vessel Weight           %s\r\n",VError);
-		SendPrinter(PrintBuf);
-
-		//fDat = Reports_rsmp.RPT_S2InitialVolume;
-		//fDat /= 10;						
-		//sprintf(PrintBuf,"      V0                      %5.1f ml\r\n",fDat); 
-		//if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-		//	sprintf(PrintBuf,"      V0                      %s\r\n",VError); 	
-		//SendPrinter(PrintBuf);														//2021/11/30 星期二 14:37:43
-		
-		fDat = Reports_rsmp.RPT_S2V10;
-		fDat /= 10;
-		//sprintf(PrintBuf,"      V10                     %5.1f ml\r\n",fDat);
-		sprintf(PrintBuf,"      mV1(200 taps)           %6.2f g\r\n",fDat);
-		if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-			//sprintf(PrintBuf,"      V10                     %s\r\n",VError);
-			sprintf(PrintBuf,"      mV1(200 taps)           %s\r\n",VError);
-		SendPrinter(PrintBuf);							//
-		
-		fDat = Reports_rsmp.RPT_S2V500;
-		fDat /= 10;
-		if(Reports_rsmp.RPT_TESTENDS2 == 2)
-		{
-			//sprintf(PrintBuf,"      V500                    %5.1f ml\r\n",fDat); 
-			sprintf(PrintBuf,"      mV2(400 taps)           %6.2f g(Final)\r\n",fDat); 
-			if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				//sprintf(PrintBuf,"      V500                    %s\r\n",VError);
-				sprintf(PrintBuf,"      mV2(400 taps)           %s(Final)\r\n",VError);
-		}
-		else
-		{
-			//sprintf(PrintBuf,"      V500                    %5.1f ml\r\n",fDat); 
-			sprintf(PrintBuf,"      mV2(400 taps)           %6.2f g\r\n",fDat); 
-			if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				//sprintf(PrintBuf,"      V500                    %s\r\n",VError);
-				sprintf(PrintBuf,"      mV2(400 taps)           %s\r\n",VError);
-		}
-		SendPrinter(PrintBuf);							//
-
-		fDat = Reports_rsmp.RPT_S2V1250;
-		fDat /= 10;
-		if(Reports_rsmp.RPT_TESTENDS2 == 3)
-		{	
-			//sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-			sprintf(PrintBuf,"      mV3(200 taps)           %6.2f g(Final)\r\n",fDat);
-			if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-				//sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);
-				sprintf(PrintBuf,"      mV3(200 taps)           %s(Final)\r\n",VError);
-			
-			SendPrinter(PrintBuf);
-		}
-		else
-		if(Reports_rsmp.RPT_TESTENDS2 > 3)
-		{
-			//sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-			sprintf(PrintBuf,"      mV3(200 taps)           %6.2f g\r\n",fDat);
-			if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-				//sprintf(PrintBuf,"      V1250                   %s\r\n",VError);
-				sprintf(PrintBuf,"      mV3(200 taps)           %s\r\n",VError);
-			
-			SendPrinter(PrintBuf);
-		}
-		
-		fDat = Reports_rsmp.RPT_S2Delay[0];
-		fDat /= 10;
-		if(Reports_rsmp.RPT_TESTENDS2 == 4)
-		{
-			//sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-			sprintf(PrintBuf,"      mV4(200 taps)           %6.2f g(Final)\r\n",fDat);
-			if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-				//sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
-				sprintf(PrintBuf,"      mV4(200 taps)           %s(Final)\r\n",VError);	
-			
-			SendPrinter(PrintBuf);
-		}
-		else
-		if(Reports_rsmp.RPT_TESTENDS2 > 4)
-		{
-			//sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-			sprintf(PrintBuf,"      mV4(200 taps)           %6.2f g\r\n",fDat);
-			if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-				//sprintf(PrintBuf,"      V1250                   %s\r\n",VError);
-				sprintf(PrintBuf,"      mV4(200 taps)           %s\r\n",VError);
-			
-			SendPrinter(PrintBuf);
-		}
-		
-		fDat = Reports_rsmp.RPT_S2Delay[1];
-		fDat /= 10;
-		if(Reports_rsmp.RPT_TESTENDS2 == 5)
-		{
-			if(Reports_rsmp.RPT_TestStatus == 1)
-			{
-				//sprintf(PrintBuf,"      V1250                   %5.1f ml(Final)\r\n",fDat);
-				sprintf(PrintBuf,"      mV5(200 taps)           %6.2f g(Final)\r\n",fDat);
-				if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-					//sprintf(PrintBuf,"      V1250                   %s(Final)\r\n",VError);	
-					sprintf(PrintBuf,"      mV5(200 taps)           %s(Final)\r\n",VError);	
-			}
-			else
-			{
-				//sprintf(PrintBuf,"      V1250                   %5.1f ml\r\n",fDat);
-				sprintf(PrintBuf,"      mV5(200 taps)           %6.2f g\r\n",fDat);
-				if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-					//sprintf(PrintBuf,"      V1250                   %s\r\n",VError);
-					sprintf(PrintBuf,"      mV5(200 taps)           %s\r\n",VError);
-			}
-			
-			SendPrinter(PrintBuf);
-		}
-		
-		//memset(PrintBuf,'\0',sizeof(PrintBuf));						//清空数组
-		//sprintf(PrintBuf,"      Initial Density         %5.2f g/ml\r\n",Reports_rsmp.RPT_S2InitialDensity); 
-		//if(strlen(PrintBuf)>43)				//针对打印报告出错问题,正常报告结束位是0X0D,0X0A
-		//	sprintf(PrintBuf,"      Initial Density         %s\r\n",VError);
-		//SendPrinter(PrintBuf);
-		
-		SendPrinter("\r\n");
-		memset(PrintBuf,'\0',sizeof(PrintBuf));						//清空数组
-		sprintf(PrintBuf,"      Tapped Density          %6.2f g/ml\r\n",Reports_rsmp.RPT_S2TappedDensity); 
-		if(strlen(PrintBuf)>43)				//针对打印报告出错问题,正常报告结束位是0X0D,0X0A
-			sprintf(PrintBuf,"      Tapped Density          %s\r\n",VError); 
-		SendPrinter(PrintBuf);
-		
-		//sprintf(PrintBuf,"      Hausner Ratio           %5.2f\r\n",Reports_rsmp.RPT_S2HausnerRatio); 
-		//if(strlen(PrintBuf)>40)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-		//	sprintf(PrintBuf,"      Hausner Ratio           %s\r\n",VError);
-		//SendPrinter(PrintBuf);
-		
-		//sprintf(PrintBuf,"      Compressibility Index   %5.1f %%\r\n",Reports_rsmp.RPT_S2Compressibility); 
-		//if(strlen(PrintBuf)>42)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-		//	sprintf(PrintBuf,"      Compressibility Index   %s\r\n",VError);
-		//SendPrinter(PrintBuf);
-		
-		SendPrinter("\r\n");
-		SendPrinter("      Actual number of taps, time, and speed\r\n");
-		SendPrinter("      ----------------------------------------------------------------------\r\n");
-		sprintf(PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-			Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-		if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-			sprintf(PrintBuf,"      Speed min-max:      %s\r\n",RError);																	//2021/12/13 星期一 11:56:48
-		SendPrinter(PrintBuf);
-		
-		sprintf(PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-		SendPrinter(PrintBuf);
-		
-		SendPrinter("\r\n");
-		if(Reports_rsmp.RPT_TestStatus)
-			sprintf(PrintBuf,"      Status:             %s\r\n","Test completed.");
-		else
-			sprintf(PrintBuf,"      Status:             %s\r\n","Test abort.");
-		SendPrinter(PrintBuf);
-	}
-	else
-	{
-		;
-	}
-	
-	// 打印测试时间 ------------------------------------------
-	if(DateFormat == 0) 									// Day,Month,Year
-		sprintf(PrintBuf,"      Test date:          %02d.%02d.20%02d %02d:%02d:%02d",
-			Reports_rsmp.RPT_Date.RTC_Date,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Year,
-			Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-	else
-	if(DateFormat == 1) 									// Year,Month,Day
-		sprintf(PrintBuf,"      Test date:          20%02d-%02d-%02d %02d:%02d:%02d",
-			Reports_rsmp.RPT_Date.RTC_Year,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date,
-			Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-	else
-	if(DateFormat == 2) 									// Month,Day,Year
-		sprintf(PrintBuf,"      Test date:          %02d/%02d/20%02d %02d:%02d:%02d",
-			Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date,Reports_rsmp.RPT_Date.RTC_Year,
-			Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-	
-	SendPrinter(PrintBuf);
-	
-	SendPrinter("\r\n");
-	SendPrinter("      Requirements fulfilled:      YES      No\r\n");
-	SendPrinter("\r\n");
-	SendPrinter("      Comments\r\n");
-	//SendPrinter("      ______________________________________________________________________\r\n");
-	SendPrinter("      ______________________________________________________________________\r\n");
-	SendPrinter("      ______________________________________________________________________\r\n");
-	SendPrinter("\r\n");
-	SendPrinter("\r\n");
-	SendPrinter("\r\n");
-	SendPrinter("      ______________________________________________________________________\r\n");
-	SendPrinter("      Operator                    Date                    Signature \r\n");
-}*/
-
-/*char LanPrtUsp3(void) 								// 网络打印机
-{
-	//char Namebuf[50];
-	char tbuf1[50];
-	char tbuf2[50];
-	char PrintBuf[100];
-	//char Catalogue_1[15];
-	
-	u8 PutStep = 0;
-	//char Y,M,D,h,m,s;
-	//char VincReState;
-	char OverTime = 0;
-	//char TestEndNb;
-	
-	struct tcp_pcb *tcppcb; 							// 定义一个TCP服务器控制块
-	struct ip_addr rmtipaddr; 						// 远端ip地址
-	u8 *tbuf;
- 	//u8 res=0;		
-	u8 t=0; 
-	u8 connflag=0; 												// 连接标记
-	
-	u8 i;
-	//float bDat;
-	float fDat;
-	
-	char RError[] = "Speed Error";			// 针对报告转速出错问题加的错误提示字符串			2021/12/13 星期一 11:56:58
-	char VError[] = "Error";						// 针对报告体积质量出错问题加的错误提示字符串	2021/12/13 星期一 11:56:58
-	
-	tbuf=mymalloc(SRAMIN,200);						// 申请内存
-	if(tbuf==NULL)
-	{
-		OverTime = 1; 										// 内存申请失败
-		return OverTime; 									// 内存申请失败了,直接退出
-	}
-	
-	tcppcb=tcp_new(); 										// 创建一个新的pcb
-	if(tcppcb) 														// 创建成功
-	{
-		//IP4_ADDR(&rmtipaddr,lwipdev.remoteip[0],lwipdev.remoteip[1],lwipdev.remoteip[2],lwipdev.remoteip[3]); 
-		//IP4_ADDR(&rmtipaddr,192,168,1,2); 
-		IP4_ADDR(&rmtipaddr,PrtIP[0],PrtIP[1],PrtIP[2],PrtIP[3]); 
-		//连接到目的地址的指定端口上,当连接成功后回调tcp_client_connected()函数
-		//tcp_connect(tcppcb,&rmtipaddr,TcpPort,tcp_client_connected);
-		tcp_connect(tcppcb,&rmtipaddr,PrtPort,tcp_client_connected);
- 	}
- 	else
- 	{
- 		OverTime = 2; 										// pcb创建失败
- 		return OverTime;
- 	}
- 	
- 	TIMER_Start(TIMER_GENERAL, TO_20SEC);	// 启动延时定时器
-	
-	while(1)
-	{
-		if((connflag)&&(!(tcp_client_flag&1<<7)))
-		{
-			memset(tbuf1,'\0',sizeof(tbuf1));						//清空数组
-			memset(tbuf2,'\0',sizeof(tbuf2));						//清空数组
-			memset(PrintBuf,'\0',sizeof(PrintBuf));						//清空数组
-			
-			if(PrintFormat == 0) 							// PCL
-			{
-				;
-				switch(PutStep)
-				{
-					case 0: 											// 表头
-					{
-						strcpy(PrintBuf,"                         Tapped Density Report Test Assist\r\n");
-					}break;
-					case 1: 											// 长线
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-						
-						PutStep++;
-					}break;
-					case 2: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-						//strcpy(PrintBuf,"       \xda\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xbf\n\r");
-					}break;
-					case 3: 											// 设备序列号
-					{
-						strcpy(tbuf1,Reports_rsmp.RPT_DeviceSerialNb);
-						sprintf(PrintBuf, "      Device serial no.:     %6s", tbuf1);
-					}break;
-					case 4: 											// 打印页码
-					{
-						strcpy(PrintBuf,"        Page:                        1/1\r\n");
-					}break;
-					case 5: 											// 主控板版本号
-					{
-						//osDelay(100);
-						sprintf(PrintBuf, "      Main Firmware version: %6s", Reports_rsmp.RPT_MbVersion);
-					}break;
-					case 6: 											// 触摸板版本号
-					{
-						sprintf(PrintBuf, "        Touch Firmware version:   %6s\r\n", Reports_rsmp.RPT_DbVersion);
-					}break;
-					case 7: 											// 机型显示，工作站数量及方法
-					{
-						//sprintf(PrintBuf, "      Device configuration:  %6d", (int)Reports_rsmp.RPT_DeviceType);
-						if(Reports_rsmp.RPT_DeviceType == 121)
-							strcpy(tbuf1,"USP 1, 1 Station");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 122)
-							strcpy(tbuf1,"USP 2, 1 Station");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 221)
-							strcpy(tbuf1,"USP 1, 2 Stations");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 222)
-							strcpy(tbuf1,"USP 2, 2 Stations");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 223)
-							strcpy(tbuf1,"USP 1&2, 2 Stations");
-						else
-							strcpy(tbuf1,"USP x, x Stations");
-						sprintf(PrintBuf, "      Configuration: %-20s", tbuf1);
-					}break;
-					case 8: 											// 日期，时间
-					{
-						//sprintf(PrintBuf, "        Print date:  20%02d-%02d-%02d %02d:%02d:%02d\r\n", RTC_DateStruct.RTC_Year,RTC_DateStruct.RTC_Month,RTC_DateStruct.RTC_Date,RTC_TimeStruct.RTC_Hours,RTC_TimeStruct.RTC_Minutes,RTC_TimeStruct.RTC_Seconds);
-						sprintf(PrintBuf, "  Print date:  %s %s\r\n", DisDateStr,DisTimeStr);
-					}break;
-					case 9: 											// 测试站选择
-					{
-						strcpy(PrintBuf,"\r\n");
-						
-						if(Reports_rsmp.RPT_S1Method != 0) 		// 测试站一
-						{
-							PutStep = 10-1;
-						}
-						else
-						if(Reports_rsmp.RPT_S2Method != 0) 		// 测试站二
-						{
-							PutStep = 50-1;
-						}
-						else
-						{
-							PutStep = 0xff;
-						}
-					}break;
-					case 10: 											// 测试站一 -----------------------------
-					{
-						strcpy(PrintBuf,"      Product name station 1:\r\n");
-					}break;
-					case 11: 											// 长线
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 12: 											// 产品名称
-					{
-						sprintf(PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S1PName);
-					}break;
-					case 13: 											// 产品信息1
-					{
-						strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-						sprintf(PrintBuf,"      Information: %-17s\r\n",tbuf1);
-					}break;
-					case 14: 											// 产品信息2
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>17) 
-							strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+17,30); 
-						else 
-							tbuf1[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s\r\n",tbuf1);
-					}break;
-					case 15: 											// 产品信息3
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>47)
-							strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+47,30);
-						else
-							tbuf1[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s\r\n",tbuf1);
-					}break;
-					case 16: 											// 产品批号
-					{
-						sprintf(PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S1PBatchNb);
-					}break;
-					case 17: 											// 量杯编号
-					{
-						sprintf(PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S1CylinderNb);
-					}break;
-					case 18: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 19: 											// 设置参数
-					{
-						strcpy(PrintBuf,"      Test Parameter                       Station 1\r\n");
-					}break;
-					case 20: 											// 长线
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 21: 											// 测试方法
-					{
-						//sprintf(PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S1Method);
-						strcpy(PrintBuf,"      USP method:                          USP 3\r\n");
-					}break;
-					case 22: 											// 设定转速
-					{
-						//if(Reports_rsmp.RPT_DeviceType == 121)
-						//	strcpy(PrintBuf,"      Speed:                               300 taps/min\r\n");
-						//else
-						//	strcpy(PrintBuf,"      Speed:                               250 taps/min\r\n");
-						
-						sprintf(PrintBuf,"      Speed:                               %d taps/min\r\n",(u16)Reports_rsmp.RPT_S1Speed);
-					}break;
-					case 23: 											// 量杯规格
-					{
-						//sprintf(PrintBuf,"      Cylinder Size:                       %-15s\r\n",Reports_rsmp.RPT_S1CylinderSize);
-						strcpy(PrintBuf,"      Cylinder Size:                       100 ml\r\n");
-					}break;
-					case 24: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 25: 											// 系统设置
-					{
-						strcpy(PrintBuf,"      System Settings\r\n");
-					}break;
-					case 26: 											// 长线
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 27: 											// 时区，OQ
-					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-					}break;
-					case 28: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 29: 											// 测试日期
-					{
-						strcpy(PrintBuf,"      Test run data           Station 1\r\n");
-					}break;
-					case 30: 											// 长线
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 31: 											// 样本重量
-					{
-						//sprintf(PrintBuf,"      Sample Weight           %5.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100); 
-						sprintf(PrintBuf,"      Vessel Weight           %6.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100); 
-						if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Vessel Weight           %s\r\n",VError); 			//Mark 3
-					}break;
-					case 32: 											// mV1
-					{
-						fDat = Reports_rsmp.RPT_S1V10;
-						fDat /= 10;
-						
-						sprintf(PrintBuf,"      mV1(200 taps)           %6.2f ml\r\n",fDat); 
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      mV1(200 taps)           %s\r\n",VError);
-					}break;
-					case 33: 											// mV2
-					{
-						fDat = Reports_rsmp.RPT_S1V500;
-						fDat /= 10;
-						
-						if(Reports_rsmp.RPT_TESTENDS1 == 2)
-						{
-							sprintf(PrintBuf,"      mV2(400 taps)           %6.2f ml(Final)\r\n",fDat); 
-							if(strlen(PrintBuf)>50)											//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      mV2(400 taps)           %s(Final)\r\n",VError);
-							
-							PutStep = 37-1;
-						}
-						else
-						{
-							sprintf(PrintBuf,"      mV2(400 taps)           %6.2f ml\r\n",fDat); 
-							if(strlen(PrintBuf)>43)											//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      mV2(400 taps)           %s\r\n",VError);
-						}
-					}break;
-					case 34: 											// mV3
-					{
-						fDat = Reports_rsmp.RPT_S1V1250;
-						fDat /= 10;
-						
-						if(Reports_rsmp.RPT_TESTENDS1 == 3)
-						{
-							sprintf(PrintBuf,"      mV3(200 taps)           %6.2f ml(Final)\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      mV3(200 taps)           %s(Final)\r\n",VError);
-							
-							PutStep = 37-1;
-						}
-						else
-						{
-							sprintf(PrintBuf,"      mV3(200 taps)           %6.2f ml\r\n",fDat);
-							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      mV3(200 taps)           %s\r\n",VError);	
-						}
-					}break;
-					case 35: 											// mV4
-					{
-						fDat = Reports_rsmp.RPT_S1Delay[0];
-						fDat /= 10;
-						
-						if(Reports_rsmp.RPT_TESTENDS1 == 4)
-						{
-							sprintf(PrintBuf,"      mV%d(200 taps)           %6.2f ml(Final)\r\n",i,fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      mV%d(200 taps)           %s(Final)\r\n",i,VError);
-							
-							PutStep = 37-1;
-						}
-						else
-						{
-							sprintf(PrintBuf,"      mV%d(200 taps)           %6.2f ml\r\n",i,fDat);
-							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      mV%d(200 taps)           %s\r\n",i,VError);	
-						}
-					}break;
-					case 36: 											// mV5
-					{
-						fDat = Reports_rsmp.RPT_S1Delay[1];
-						fDat /= 10;
-						
-						if(Reports_rsmp.RPT_TESTENDS1 == 5)
-						{
-							if(Reports_rsmp.RPT_TestStatus == 1)
-							{
-								sprintf(PrintBuf,"      mV%d(200 taps)           %6.2f ml(Final)\r\n",i,fDat);
-								if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-									sprintf(PrintBuf,"      mV%d(200 taps)           %s(Final)\r\n",i,VError);
-								
-								PutStep = 37-1;
-							}
-							else
-							{
-								sprintf(PrintBuf,"      mV%d(200 taps)           %6.2f ml\r\n",i,fDat);
-								if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-									sprintf(PrintBuf,"      mV%d(200 taps)           %s\r\n",i,VError);	
-							}
-						}
-						
-					}break;
-					case 37: 											// 终止密度
-					{
-						sprintf(PrintBuf,"\r\n      Tapped Density          %5.2f g/ml\r\n",Reports_rsmp.RPT_S1TappedDensity);
-						if(strlen(PrintBuf)>44)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"\r\n      Tapped Density          %s\r\n",VError);
-					}break;
-					case 38: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 39: 											// 拍击次数，时间，速度
-					{
-						strcpy(PrintBuf,"      Actual number of taps, time, and speed\r\n");
-					}break;
-					case 40: 											// 长线
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 41: 											// 实际转速范围
-					{
-						sprintf(PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-							Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-						if(strlen(PrintBuf)>50)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Speed min-max:      %s\r\n",RError);																	//2021/12/13 星期一 11:56:48
-					}break;
-					case 42: 											// 拍击次数
-					{
-						sprintf(PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-					}break;
-					case 43: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 44: 											// 测试结束状态
-					{
-						if(Reports_rsmp.RPT_TestStatus)
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test completed.");
-						else
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test abort.");
-						
-						PutStep = 85-1;
-					}break;
-					case 50: 											// 测试站二 --------------------
-					{
-						strcpy(PrintBuf,"      Product name station 2:\r\n");
-					}break;
-					case 51: 											// 长线
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 52: 											// 产品名称
-					{
-						sprintf(PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S2PName);
-					}break;
-					case 53: 											// 产品信息1
-					{
-						strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo,17);
-						sprintf(PrintBuf,"      Information: %-17s\r\n",tbuf2);
-					}break;
-					case 54: 											// 产品信息2
-					{
-						if(strlen(Reports_rsmp.RPT_S2PInfo)>17) 
-							strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+17,30); 
-						else 
-							tbuf2[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s\r\n",tbuf2);
-					}break;
-					case 55: 											// 产品信息3
-					{
-						if(strlen(Reports_rsmp.RPT_S2PInfo)>47)
-							strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+47,30);
-						else
-							tbuf2[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s\r\n",tbuf2);
-					}break;
-					case 56: 											// 产品批号
-					{
-						sprintf(PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S2PBatchNb);
-					}break;
-					case 57: 											// 量杯编号
-					{
-						sprintf(PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S2CylinderNb);
-					}break;
-					case 58: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 59: 											// 测试参数
-					{
-						strcpy(PrintBuf,"      Test Parameter                       Station 2\r\n");
-					}break;
-					case 60: 											// 长线
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 61: 											// 测试方法
-					{
-						//sprintf(PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S2Method);
-						strcpy(PrintBuf,"      USP method:                          USP 3\r\n");
-					}break;
-					case 62: 											// 测试速度
-					{
-						//strcpy(PrintBuf,"      Speed:                               250 taps/min\r\n");
-						sprintf(PrintBuf,"      Speed:                               %d taps/min\r\n",(u16)Reports_rsmp.RPT_S2Speed);
-					}break;
-					case 63: 											// 量杯规格
-					{
-						//sprintf(PrintBuf,"      Cylinder Size:                       %-15s\r\n",Reports_rsmp.RPT_S2CylinderSize);
-						strcpy(PrintBuf,"      Cylinder Size:                       100 ml\r\n");
-					}break;
-					case 64: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 65: 											// 系统设置
-					{
-						strcpy(PrintBuf,"      System Settings\r\n");
-					}break;
-					case 66: 											// 长线
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 67: 											// 时区，OQ
-					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-					}break;
-					case 68: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 69: 											// 测试日期
-					{
-						strcpy(PrintBuf,"      Test run data           Station 2\r\n");
-					}break;
-					case 70: 											// 长线
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 71: 											// 样品重量
-					{
-						sprintf(PrintBuf,"      Vessel Weight           %6.2f g\r\n",(float)Reports_rsmp.RPT_S2SampleMass/100); 
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-							sprintf(PrintBuf,"      Vessel Weight           %s\r\n",VError); 
-					}break;
-					case 72: 											// mV1
-					{
-						fDat = Reports_rsmp.RPT_S2V10;
-						fDat /= 10;
-						
-						sprintf(PrintBuf,"      mV1(200 taps)           %6.2f ml\r\n",fDat);
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-							sprintf(PrintBuf,"      mV1(200 taps)           %s\r\n",VError);
-					}break;
-					case 73: 											// mV2
-					{
-						fDat = Reports_rsmp.RPT_S2V500;
-						fDat /= 10;
-						
-						if(Reports_rsmp.RPT_TESTENDS2 == 2)
-						{	
-							sprintf(PrintBuf,"      mV2(400 taps)           %6.2f ml(Final)\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-								sprintf(PrintBuf,"      mV2(400 taps)           %s(Final)\r\n",VError);
-							
-							PutStep = 77 - 1;
-						}
-						else
-						{
-							sprintf(PrintBuf,"      mV2(400 taps)           %6.2f ml\r\n",fDat);
-							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-								sprintf(PrintBuf,"      mV2(400 taps)           %s\r\n",VError);
-						}
-					}break;
-					case 74: 											// mV3
-					{
-						fDat = Reports_rsmp.RPT_S2V1250;
-						fDat /= 10;
-						
-						if(Reports_rsmp.RPT_TESTENDS2 == 3)
-						{	
-							sprintf(PrintBuf,"      mV3(200 taps)           %6.2f ml(Final)\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-								sprintf(PrintBuf,"      mV3(200 taps)           %s(Final)\r\n",VError);
-							
-							PutStep = 77 - 1;
-						}
-						else
-						{
-							sprintf(PrintBuf,"      mV3(200 taps)           %6.2f ml\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-								sprintf(PrintBuf,"      mV3(200 taps)           %s\r\n",VError);
-						}
-					}break;
-					case 75: 											// mV4
-					{
-						fDat = Reports_rsmp.RPT_S2Delay[0];
-						fDat /= 10;
-						
-						if(Reports_rsmp.RPT_TESTENDS2 == 4)
-						{
-							sprintf(PrintBuf,"      mV4(200 taps)           %6.2f ml(Final)\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-								sprintf(PrintBuf,"      mV4(200 taps)           %s(Final)\r\n",VError);
-							
-							PutStep = 77 - 1;
-						}
-						else
-						{
-							sprintf(PrintBuf,"      mV4(200 taps)           %6.2f ml\r\n",fDat);
-							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      mV4(200 taps)           %s\r\n",VError);	
-						}
-					}break;
-					case 76: 											// mV5
-					{
-						fDat = Reports_rsmp.RPT_S2Delay[1];
-						fDat /= 10;
-						
-						if(Reports_rsmp.RPT_TESTENDS2 == 5)
-						{
-							if(Reports_rsmp.RPT_TestStatus == 1)
-							{
-								sprintf(PrintBuf,"      mV5(200 taps)           %6.2f ml(Final)\r\n",fDat);
-								if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-									sprintf(PrintBuf,"      mV5(200 taps)           %s(Final)\r\n",VError);
-								
-								PutStep = 77 - 1;
-							}
-							else
-							{
-								sprintf(PrintBuf,"      mV5(200 taps)           %6.2f ml\r\n",fDat);
-								if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-									sprintf(PrintBuf,"      mV5(200 taps)           %s\r\n",VError);
-							}
-						}
-					}break;
-					case 77: 											// 终止密度
-					{
-						memset(PrintBuf,'\0',sizeof(PrintBuf));						//清空数组
-						sprintf(PrintBuf,"\r\n      Tapped Density          %5.2f g/ml\r\n",Reports_rsmp.RPT_S2TappedDensity); 
-						if(strlen(PrintBuf)>44)				//针对打印报告出错问题,正常报告结束位是0X0D,0X0A
-							sprintf(PrintBuf,"\r\n      Tapped Density          %s\r\n",VError); 
-					}break;
-					case 78: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 79: 											// 拍击次数，时间，速度
-					{
-						strcpy(PrintBuf,"      Actual number of taps, time, and speed\r\n");
-					}break;
-					case 80: 											// 长线
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 81: 											// 实际转速范围
-					{
-						sprintf(PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-							Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-						if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Speed min-max:      %s\r\n",RError);																	//2021/12/13 星期一 11:56:48
-					}break;
-					case 82: 											// 实际拍击次数
-					{
-						sprintf(PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-					}break;
-					case 83: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 84: 											// 测试结束状态
-					{
-						if(Reports_rsmp.RPT_TestStatus)
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test completed.");
-						else
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test abort.");
-					}break;
-					case 85: 											// 表脚，公共部分 ----------------------
-					{
-						// 打印测试时间 ------------------------------------------
-						if(DateFormat == 0) 									// Day,Month,Year
-							sprintf(PrintBuf,"      Test date:          %02d.%02d.20%02d %02d:%02d:%02d",
-								Reports_rsmp.RPT_Date.RTC_Date,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Year,
-								Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-						else
-						if(DateFormat == 1) 									// Year,Month,Day
-							sprintf(PrintBuf,"      Test date:          20%02d-%02d-%02d %02d:%02d:%02d",
-								Reports_rsmp.RPT_Date.RTC_Year,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date,
-								Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-						else
-						if(DateFormat == 2) 									// Month,Day,Year
-							sprintf(PrintBuf,"      Test date:          %02d/%02d/20%02d %02d:%02d:%02d",
-								Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date,Reports_rsmp.RPT_Date.RTC_Year,
-								Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-					}break;
-					case 86: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 87: 											// Yes or No
-					{
-						strcpy(PrintBuf,"      Requirements fulfilled:      YES      No\r\n");
-					}break;
-					case 88: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 89: 											// 注释
-					{
-						strcpy(PrintBuf,"      Comments\r\n");
-					}break;
-					case 90: 											// 长线
-					{
-						//strcpy(PrintBuf,"      ______________________________________________________________________\r\n");
-						strcpy(PrintBuf,"      ______________________________________________________________________\r\n");
-					}break;
-					case 91: 											// 长线
-					{
-						strcpy(PrintBuf,"      ______________________________________________________________________\r\n");
-						PutStep++;
-						PutStep++;
-					}break;
-					case 92: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 93: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 94: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 95: 											// 长线
-					{
-						strcpy(PrintBuf,"      ______________________________________________________________________\r\n");
-					}break;
-					case 96: 											// 日期，签名
-					{
-						strcpy(PrintBuf,"      Operator                    Date                    Signature \r\n");
-					}break;
-					default:
-					{
-						PutStep = 0xff;
-					}break;
-				}
-			}
-			else 															// ASC II
-			{
-				;
-				switch(PutStep)
-				{
-					case 0: 											// 表头
-					{
-						strcpy(PrintBuf,"                         Tapped Density Report Test Assist\r\n");
-					}break;
-					case 1: 											// 长线
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-						
-						PutStep++;
-					}break;
-					case 2: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-						//strcpy(PrintBuf,"       \xda\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xc4\xbf\n\r");
-					}break;
-					case 3: 											// 设备序列号
-					{
-						strcpy(tbuf1,Reports_rsmp.RPT_DeviceSerialNb);
-						sprintf(PrintBuf, "      Device serial no.:     %6s", tbuf1);
-					}break;
-					case 4: 											// 打印页码
-					{
-						strcpy(PrintBuf,"        Page:                        1/1\r\n");
-					}break;
-					case 5: 											// 主控板版本号
-					{
-						//osDelay(100);
-						sprintf(PrintBuf, "      Main Firmware version: %6s", Reports_rsmp.RPT_MbVersion);
-					}break;
-					case 6: 											// 触摸板版本号
-					{
-						sprintf(PrintBuf, "        Touch Firmware version:   %6s\r\n", Reports_rsmp.RPT_DbVersion);
-					}break;
-					case 7: 											// 机型显示，工作站数量及方法
-					{
-						//sprintf(PrintBuf, "      Device configuration:  %6d", (int)Reports_rsmp.RPT_DeviceType);
-						if(Reports_rsmp.RPT_DeviceType == 121)
-							strcpy(tbuf1,"USP 1, 1 Station");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 122)
-							strcpy(tbuf1,"USP 2, 1 Station");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 221)
-							strcpy(tbuf1,"USP 1, 2 Stations");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 222)
-							strcpy(tbuf1,"USP 2, 2 Stations");
-						else
-						if(Reports_rsmp.RPT_DeviceType == 223)
-							strcpy(tbuf1,"USP 1&2, 2 Stations");
-						else
-							strcpy(tbuf1,"USP x, x Stations");
-						sprintf(PrintBuf, "      Configuration: %-20s", tbuf1);
-					}break;
-					case 8: 											// 日期，时间
-					{
-						//sprintf(PrintBuf, "        Print date:  20%02d-%02d-%02d %02d:%02d:%02d\r\n", RTC_DateStruct.RTC_Year,RTC_DateStruct.RTC_Month,RTC_DateStruct.RTC_Date,RTC_TimeStruct.RTC_Hours,RTC_TimeStruct.RTC_Minutes,RTC_TimeStruct.RTC_Seconds);
-						sprintf(PrintBuf, "  Print date:  %s %s\r\n", DisDateStr,DisTimeStr);
-					}break;
-					case 9: 											// 测试站选择
-					{
-						strcpy(PrintBuf,"\r\n");
-						
-						if(Reports_rsmp.RPT_S1Method != 0) 		// 测试站一
-						{
-							PutStep = 10-1;
-						}
-						else
-						if(Reports_rsmp.RPT_S2Method != 0) 		// 测试站二
-						{
-							PutStep = 50-1;
-						}
-						else
-						{
-							PutStep = 0xff;
-						}
-					}break;
-					case 10: 											// 测试站一 -----------------------------
-					{
-						strcpy(PrintBuf,"      Product name station 1:\r\n");
-					}break;
-					case 11: 											// 长线
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 12: 											// 产品名称
-					{
-						sprintf(PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S1PName);
-					}break;
-					case 13: 											// 产品信息1
-					{
-						strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-						sprintf(PrintBuf,"      Information: %-17s\r\n",tbuf1);
-					}break;
-					case 14: 											// 产品信息2
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>17) 
-							strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+17,30); 
-						else 
-							tbuf1[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s\r\n",tbuf1);
-					}break;
-					case 15: 											// 产品信息3
-					{
-						if(strlen(Reports_rsmp.RPT_S1PInfo)>47)
-							strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo+47,30);
-						else
-							tbuf1[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s\r\n",tbuf1);
-					}break;
-					case 16: 											// 产品批号
-					{
-						sprintf(PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S1PBatchNb);
-					}break;
-					case 17: 											// 量杯编号
-					{
-						sprintf(PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S1CylinderNb);
-					}break;
-					case 18: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 19: 											// 设置参数
-					{
-						strcpy(PrintBuf,"      Test Parameter                       Station 1\r\n");
-					}break;
-					case 20: 											// 长线
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 21: 											// 测试方法
-					{
-						//sprintf(PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S1Method);
-						strcpy(PrintBuf,"      USP method:                          USP 3\r\n");
-					}break;
-					case 22: 											// 设定转速
-					{
-						//if(Reports_rsmp.RPT_DeviceType == 121)
-						//	strcpy(PrintBuf,"      Speed:                               300 taps/min\r\n");
-						//else
-						//	strcpy(PrintBuf,"      Speed:                               250 taps/min\r\n");
-						
-						sprintf(PrintBuf,"      Speed:                               %d taps/min\r\n",(u16)Reports_rsmp.RPT_S1Speed);
-					}break;
-					case 23: 											// 量杯规格
-					{
-						//sprintf(PrintBuf,"      Cylinder Size:                       %-15s\r\n",Reports_rsmp.RPT_S1CylinderSize);
-						strcpy(PrintBuf,"      Cylinder Size:                       100 ml\r\n");
-					}break;
-					case 24: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 25: 											// 系统设置
-					{
-						strcpy(PrintBuf,"      System Settings\r\n");
-					}break;
-					case 26: 											// 长线
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 27: 											// 时区，OQ
-					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-					}break;
-					case 28: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 29: 											// 测试日期
-					{
-						strcpy(PrintBuf,"      Test run data           Station 1\r\n");
-					}break;
-					case 30: 											// 长线
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 31: 											// 样本重量
-					{
-						//sprintf(PrintBuf,"      Sample Weight           %5.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100); 
-						sprintf(PrintBuf,"      Vessel Weight           %6.2f g\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100); 
-						if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Vessel Weight           %s\r\n",VError); 			//Mark 3
-					}break;
-					case 32: 											// mV1
-					{
-						fDat = Reports_rsmp.RPT_S1V10;
-						fDat /= 10;
-						
-						sprintf(PrintBuf,"      mV1(200 taps)           %6.2f ml\r\n",fDat); 
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      mV1(200 taps)           %s\r\n",VError);
-					}break;
-					case 33: 											// mV2
-					{
-						fDat = Reports_rsmp.RPT_S1V500;
-						fDat /= 10;
-						
-						if(Reports_rsmp.RPT_TESTENDS1 == 2)
-						{
-							sprintf(PrintBuf,"      mV2(400 taps)           %6.2f ml(Final)\r\n",fDat); 
-							if(strlen(PrintBuf)>50)											//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      mV2(400 taps)           %s(Final)\r\n",VError);
-							
-							PutStep = 37-1;
-						}
-						else
-						{
-							sprintf(PrintBuf,"      mV2(400 taps)           %6.2f ml\r\n",fDat); 
-							if(strlen(PrintBuf)>43)											//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      mV2(400 taps)           %s\r\n",VError);
-						}
-					}break;
-					case 34: 											// mV3
-					{
-						fDat = Reports_rsmp.RPT_S1V1250;
-						fDat /= 10;
-						
-						if(Reports_rsmp.RPT_TESTENDS1 == 3)
-						{
-							sprintf(PrintBuf,"      mV3(200 taps)           %6.2f ml(Final)\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      mV3(200 taps)           %s(Final)\r\n",VError);
-							
-							PutStep = 37-1;
-						}
-						else
-						{
-							sprintf(PrintBuf,"      mV3(200 taps)           %6.2f ml\r\n",fDat);
-							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      mV3(200 taps)           %s\r\n",VError);	
-						}
-					}break;
-					case 35: 											// mV4
-					{
-						fDat = Reports_rsmp.RPT_S1Delay[0];
-						fDat /= 10;
-						
-						if(Reports_rsmp.RPT_TESTENDS1 == 4)
-						{
-							sprintf(PrintBuf,"      mV%d(200 taps)           %6.2f ml(Final)\r\n",i,fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      mV%d(200 taps)           %s(Final)\r\n",i,VError);
-							
-							PutStep = 37-1;
-						}
-						else
-						{
-							sprintf(PrintBuf,"      mV%d(200 taps)           %6.2f ml\r\n",i,fDat);
-							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      mV%d(200 taps)           %s\r\n",i,VError);	
-						}
-					}break;
-					case 36: 											// mV5
-					{
-						fDat = Reports_rsmp.RPT_S1Delay[1];
-						fDat /= 10;
-						
-						if(Reports_rsmp.RPT_TESTENDS1 == 5)
-						{
-							if(Reports_rsmp.RPT_TestStatus == 1)
-							{
-								sprintf(PrintBuf,"      mV%d(200 taps)           %6.2f ml(Final)\r\n",i,fDat);
-								if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-									sprintf(PrintBuf,"      mV%d(200 taps)           %s(Final)\r\n",i,VError);
-								
-								PutStep = 37-1;
-							}
-							else
-							{
-								sprintf(PrintBuf,"      mV%d(200 taps)           %6.2f ml\r\n",i,fDat);
-								if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-									sprintf(PrintBuf,"      mV%d(200 taps)           %s\r\n",i,VError);	
-							}
-						}
-						
-					}break;
-					case 37: 											// 终止密度
-					{
-						sprintf(PrintBuf,"\r\n      Tapped Density          %5.2f g/ml\r\n",Reports_rsmp.RPT_S1TappedDensity);
-						if(strlen(PrintBuf)>44)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"\r\n      Tapped Density          %s\r\n",VError);
-					}break;
-					case 38: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 39: 											// 拍击次数，时间，速度
-					{
-						strcpy(PrintBuf,"      Actual number of taps, time, and speed\r\n");
-					}break;
-					case 40: 											// 长线
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 41: 											// 实际转速范围
-					{
-						sprintf(PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-							Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-						if(strlen(PrintBuf)>50)				//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Speed min-max:      %s\r\n",RError);																	//2021/12/13 星期一 11:56:48
-					}break;
-					case 42: 											// 拍击次数
-					{
-						sprintf(PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-					}break;
-					case 43: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 44: 											// 测试结束状态
-					{
-						if(Reports_rsmp.RPT_TestStatus)
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test completed.");
-						else
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test abort.");
-						
-						PutStep = 85-1;
-					}break;
-					case 50: 											// 测试站二 --------------------
-					{
-						strcpy(PrintBuf,"      Product name station 2:\r\n");
-					}break;
-					case 51: 											// 长线
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 52: 											// 产品名称
-					{
-						sprintf(PrintBuf,"      Name:        %-17s\r\n",Reports_rsmp.RPT_S2PName);
-					}break;
-					case 53: 											// 产品信息1
-					{
-						strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo,17);
-						sprintf(PrintBuf,"      Information: %-17s\r\n",tbuf2);
-					}break;
-					case 54: 											// 产品信息2
-					{
-						if(strlen(Reports_rsmp.RPT_S2PInfo)>17) 
-							strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+17,30); 
-						else 
-							tbuf2[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s\r\n",tbuf2);
-					}break;
-					case 55: 											// 产品信息3
-					{
-						if(strlen(Reports_rsmp.RPT_S2PInfo)>47)
-							strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo+47,30);
-						else
-							tbuf2[0] = '\0';
-						
-						sprintf(PrintBuf,"      %-30s\r\n",tbuf2);
-					}break;
-					case 56: 											// 产品批号
-					{
-						sprintf(PrintBuf,"      Batch Number:    %15s\r\n",Reports_rsmp.RPT_S2PBatchNb);
-					}break;
-					case 57: 											// 量杯编号
-					{
-						sprintf(PrintBuf,"      Cylinder Number: %15s\r\n",Reports_rsmp.RPT_S2CylinderNb);
-					}break;
-					case 58: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 59: 											// 测试参数
-					{
-						strcpy(PrintBuf,"      Test Parameter                       Station 2\r\n");
-					}break;
-					case 60: 											// 长线
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 61: 											// 测试方法
-					{
-						//sprintf(PrintBuf,"      USP method:                          USP %d\r\n",(u16)Reports_rsmp.RPT_S2Method);
-						strcpy(PrintBuf,"      USP method:                          USP 3\r\n");
-					}break;
-					case 62: 											// 测试速度
-					{
-						//strcpy(PrintBuf,"      Speed:                               250 taps/min\r\n");
-						sprintf(PrintBuf,"      Speed:                               %d taps/min\r\n",(u16)Reports_rsmp.RPT_S2Speed);
-					}break;
-					case 63: 											// 量杯规格
-					{
-						//sprintf(PrintBuf,"      Cylinder Size:                       %-15s\r\n",Reports_rsmp.RPT_S2CylinderSize);
-						strcpy(PrintBuf,"      Cylinder Size:                       100 ml\r\n");
-					}break;
-					case 64: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 65: 											// 系统设置
-					{
-						strcpy(PrintBuf,"      System Settings\r\n");
-					}break;
-					case 66: 											// 长线
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 67: 											// 时区，OQ
-					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-					}break;
-					case 68: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 69: 											// 测试日期
-					{
-						strcpy(PrintBuf,"      Test run data           Station 2\r\n");
-					}break;
-					case 70: 											// 长线
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 71: 											// 样品重量
-					{
-						sprintf(PrintBuf,"      Vessel Weight           %6.2f g\r\n",(float)Reports_rsmp.RPT_S2SampleMass/100); 
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-							sprintf(PrintBuf,"      Vessel Weight           %s\r\n",VError); 
-					}break;
-					case 72: 											// mV1
-					{
-						fDat = Reports_rsmp.RPT_S2V10;
-						fDat /= 10;
-						
-						sprintf(PrintBuf,"      mV1(200 taps)           %6.2f ml\r\n",fDat);
-						if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-							sprintf(PrintBuf,"      mV1(200 taps)           %s\r\n",VError);
-					}break;
-					case 73: 											// mV2
-					{
-						fDat = Reports_rsmp.RPT_S2V500;
-						fDat /= 10;
-						
-						if(Reports_rsmp.RPT_TESTENDS2 == 2)
-						{	
-							sprintf(PrintBuf,"      mV2(400 taps)           %6.2f ml(Final)\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-								sprintf(PrintBuf,"      mV2(400 taps)           %s(Final)\r\n",VError);
-							
-							PutStep = 77 - 1;
-						}
-						else
-						{
-							sprintf(PrintBuf,"      mV2(400 taps)           %6.2f ml\r\n",fDat);
-							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错
-								sprintf(PrintBuf,"      mV2(400 taps)           %s\r\n",VError);
-						}
-					}break;
-					case 74: 											// mV3
-					{
-						fDat = Reports_rsmp.RPT_S2V1250;
-						fDat /= 10;
-						
-						if(Reports_rsmp.RPT_TESTENDS2 == 3)
-						{	
-							sprintf(PrintBuf,"      mV3(200 taps)           %6.2f ml(Final)\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-								sprintf(PrintBuf,"      mV3(200 taps)           %s(Final)\r\n",VError);
-							
-							PutStep = 77 - 1;
-						}
-						else
-						{
-							sprintf(PrintBuf,"      mV3(200 taps)           %6.2f ml\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-								sprintf(PrintBuf,"      mV3(200 taps)           %s\r\n",VError);
-						}
-					}break;
-					case 75: 											// mV4
-					{
-						fDat = Reports_rsmp.RPT_S2Delay[0];
-						fDat /= 10;
-						
-						if(Reports_rsmp.RPT_TESTENDS2 == 4)
-						{
-							sprintf(PrintBuf,"      mV4(200 taps)           %6.2f ml(Final)\r\n",fDat);
-							if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-								sprintf(PrintBuf,"      mV4(200 taps)           %s(Final)\r\n",VError);
-							
-							PutStep = 77 - 1;
-						}
-						else
-						{
-							sprintf(PrintBuf,"      mV4(200 taps)           %6.2f ml\r\n",fDat);
-							if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-								sprintf(PrintBuf,"      mV4(200 taps)           %s\r\n",VError);	
-						}
-					}break;
-					case 76: 											// mV5
-					{
-						fDat = Reports_rsmp.RPT_S2Delay[1];
-						fDat /= 10;
-						
-						if(Reports_rsmp.RPT_TESTENDS2 == 5)
-						{
-							if(Reports_rsmp.RPT_TestStatus == 1)
-							{
-								sprintf(PrintBuf,"      mV5(200 taps)           %6.2f ml(Final)\r\n",fDat);
-								if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错		
-									sprintf(PrintBuf,"      mV5(200 taps)           %s(Final)\r\n",VError);
-								
-								PutStep = 77 - 1;
-							}
-							else
-							{
-								sprintf(PrintBuf,"      mV5(200 taps)           %6.2f ml\r\n",fDat);
-								if(strlen(PrintBuf)>43)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-									sprintf(PrintBuf,"      mV5(200 taps)           %s\r\n",VError);
-							}
-						}
-					}break;
-					case 77: 											// 终止密度
-					{
-						memset(PrintBuf,'\0',sizeof(PrintBuf));						//清空数组
-						sprintf(PrintBuf,"\r\n      Tapped Density          %5.2f g/ml\r\n",Reports_rsmp.RPT_S2TappedDensity); 
-						if(strlen(PrintBuf)>44)				//针对打印报告出错问题,正常报告结束位是0X0D,0X0A
-							sprintf(PrintBuf,"\r\n      Tapped Density          %s\r\n",VError); 
-					}break;
-					case 78: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 79: 											// 拍击次数，时间，速度
-					{
-						strcpy(PrintBuf,"      Actual number of taps, time, and speed\r\n");
-					}break;
-					case 80: 											// 长线
-					{
-						strcpy(PrintBuf,"      ----------------------------------------------------------------------\r\n");
-					}break;
-					case 81: 											// 实际转速范围
-					{
-						sprintf(PrintBuf,"      Speed min-max:      %5.1f-%5.1f taps/min\r\n",
-							Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-						if(strlen(PrintBuf)>50)												//针对打印报告出错问题,判断字符串长度,不出现超长字符串都不会出错	
-							sprintf(PrintBuf,"      Speed min-max:      %s\r\n",RError);																	//2021/12/13 星期一 11:56:48
-					}break;
-					case 82: 											// 实际拍击次数
-					{
-						sprintf(PrintBuf,"      Number of taps:     %4d\r\n",Reports_rsmp.RPT_RealTapsNb); 
-					}break;
-					case 83: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 84: 											// 测试结束状态
-					{
-						if(Reports_rsmp.RPT_TestStatus)
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test completed.");
-						else
-							sprintf(PrintBuf,"      Status:             %s\r\n","Test abort.");
-					}break;
-					case 85: 											// 表脚，公共部分 ----------------------
-					{
-						// 打印测试时间 ------------------------------------------
-						if(DateFormat == 0) 									// Day,Month,Year
-							sprintf(PrintBuf,"      Test date:          %02d.%02d.20%02d %02d:%02d:%02d",
-								Reports_rsmp.RPT_Date.RTC_Date,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Year,
-								Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-						else
-						if(DateFormat == 1) 									// Year,Month,Day
-							sprintf(PrintBuf,"      Test date:          20%02d-%02d-%02d %02d:%02d:%02d",
-								Reports_rsmp.RPT_Date.RTC_Year,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date,
-								Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-						else
-						if(DateFormat == 2) 									// Month,Day,Year
-							sprintf(PrintBuf,"      Test date:          %02d/%02d/20%02d %02d:%02d:%02d",
-								Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date,Reports_rsmp.RPT_Date.RTC_Year,
-								Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-					}break;
-					case 86: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 87: 											// Yes or No
-					{
-						strcpy(PrintBuf,"      Requirements fulfilled:      YES      No\r\n");
-					}break;
-					case 88: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 89: 											// 注释
-					{
-						strcpy(PrintBuf,"      Comments\r\n");
-					}break;
-					case 90: 											// 长线
-					{
-						//strcpy(PrintBuf,"      ______________________________________________________________________\r\n");
-						strcpy(PrintBuf,"      ______________________________________________________________________\r\n");
-					}break;
-					case 91: 											// 长线
-					{
-						strcpy(PrintBuf,"      ______________________________________________________________________\r\n");
-						PutStep++;
-						PutStep++;
-					}break;
-					case 92: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 93: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 94: 											// 空行
-					{
-						strcpy(PrintBuf,"\r\n");
-					}break;
-					case 95: 											// 长线
-					{
-						strcpy(PrintBuf,"      ______________________________________________________________________\r\n");
-					}break;
-					case 96: 											// 日期，签名
-					{
-						strcpy(PrintBuf,"      Operator                    Date                    Signature \r\n");
-					}break;
-					default:
-					{
-						PutStep = 0xff;
-					}break;
-				}
-			}
-			
-			if(PutStep < 0xff)
-			{
-				tcp_client_sendbuf = (u8 *)PrintBuf;
-				//while(tcp_client_flag&(1<<7));
-				
-				tcp_client_flag|=1<<7;//标记要发送数据
-				//res = 1;
-				//delay_ms(2000);
-				PutStep++;
-			}
-		}
-		
-		if(PutStep == 0xff)
-		{
-			if(!(tcp_client_flag&1<<7))
-			{
-				delay_ms(2000);
-				break;
-			}
-		}
-		
-		if(tcp_client_flag&1<<5) 						//是否连接上?
-		{
-			if(connflag==0)
-			{ 
-				//LCD_ShowString(30,190,lcddev.width-30,lcddev.height-190,16,"STATUS:Connected   ");//提示消息		
-				//POINT_COLOR=RED;
-				//LCD_ShowString(30,210,lcddev.width-30,lcddev.height-190,16,"Receive Data:");//提示消息		
-				//POINT_COLOR=BLUE;//蓝色字体
-				RS232_SendString("STATUS:Connected\r\n");
-				RS232_SendString("Receive Data: \r\n");
-				connflag=1;//标记连接了
-			} 
-		}
-		else 
-		if(connflag)
-		{
- 			//LCD_ShowString(30,190,190,16,16,"STATUS:Disconnected");
-			//LCD_Fill(30,210,lcddev.width-1,lcddev.height-1,WHITE);//清屏
-			RS232_SendString("STATUS:Disconnected\r\n");
-			connflag=0;	//标记连接断开了
-		} 
-		
-		lwip_periodic_handle();
-		delay_ms(2);
-		
-		t++;
-		if(t==200)
-		{
-			if(connflag==0&&(tcp_client_flag&1<<5)==0)//未连接上,则尝试重连
-			{ 
-				tcp_client_connection_close(tcppcb,0);//关闭连接
-				tcppcb=tcp_new();	//创建一个新的pcb
-				if(tcppcb)			//创建成功
-				{ 
-					tcp_connect(tcppcb,&rmtipaddr,PrtPort,tcp_client_connected);//连接到目的地址的指定端口上,当连接成功后回调tcp_client_connected()函数
-				}
-			}
-			t=0;
-			LED0=!LED0;
-		}
-		
-		if(TIMER_TimeOut(TIMER_GENERAL)) 		// 判断是否超时
-		{
-			OverTime = 3; 														// 服务器端无响应
-			break;
-		}
-	}
-	
-	//osDelay(100);
-	tcp_client_connection_close(tcppcb,0);					//关闭TCP Client连接
-	myfree(SRAMIN,tbuf);
-	
-	return OverTime;
-}*/
 
 char UsbLanPrtUsp3(void) 								// USB+网络打印机
 {
@@ -13239,8 +5383,7 @@ char UsbLanPrtUsp3(void) 								// USB+网络打印机
 					}break;
 					case 27: 											// 时区，OQ
 					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
+						sprintf(PrintBuf,"      Qualification status: %9s\r\n",Reports_rsmp.RPT_OQ);
 					}break;
 					case 28: 											// 空行
 					{
@@ -13506,8 +5649,7 @@ char UsbLanPrtUsp3(void) 								// USB+网络打印机
 					}break;
 					case 67: 											// 时区，OQ
 					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
+						sprintf(PrintBuf,"      Qualification status: %9s\r\n",Reports_rsmp.RPT_OQ);
 					}break;
 					case 68: 											// 空行
 					{
@@ -13937,8 +6079,7 @@ char UsbLanPrtUsp3(void) 								// USB+网络打印机
 					}break;
 					case 27: 											// 时区，OQ
 					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
+						sprintf(PrintBuf,"      Qualification status: %9s\r\n",Reports_rsmp.RPT_OQ);
 					}break;
 					case 28: 											// 空行
 					{
@@ -14204,8 +6345,7 @@ char UsbLanPrtUsp3(void) 								// USB+网络打印机
 					}break;
 					case 67: 											// 时区，OQ
 					{
-						sprintf(PrintBuf,"      Time zone:   %10s %3s	   Qualification status: %9s\r\n",
-							Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
+						sprintf(PrintBuf,"      Qualification status: %9s\r\n",Reports_rsmp.RPT_OQ);
 					}break;
 					case 68: 											// 空行
 					{
@@ -14550,156 +6690,6 @@ char UsbLanPrtUsp3(void) 								// USB+网络打印机
 	
 	return OverTime;
 }
-
-// 凸轮高度验证报告打印 --------------------------------------------------------
-/*void druckergebnisOQtapHeight(void)
-{
-	char tbuf1[50];
-	//char tbuf2[50];
-	char PrintBuf[100];
-	//char type[25];
-	//u8 i;
-	
-	//RTC_GetTime(RTC_Format_BIN, &RTC_TimeStruct);
-	//RTC_GetDate(RTC_Format_BIN, &RTC_DateStruct);
-	
-	SendPrinter("                         Qualification of tap height Report\r\n");
-	SendPrinter("      ----------------------------------------------------------------------\r\n");
-	SendPrinter("\r\n");
-	
-	strcpy(tbuf1,Reports_rsmp.RPT_DeviceSerialNb);
-	sprintf(PrintBuf, "      Device serial no.:     %6s", tbuf1);
-	SendPrinter(PrintBuf);
-	      SendPrinter("        Page:                        1/1\r\n");
-	
-	sprintf(PrintBuf, "      Main Firmware version: %6s", MAIN_FIRMWARE_VERSION);
-	SendPrinter(PrintBuf);
-	sprintf(PrintBuf, "        Touch Firmware version:   %6s\r\n", TOUCH_FIRMWARE_VERSION);
-	SendPrinter(PrintBuf);
-	
-	sprintf(PrintBuf, "      Device configuration:  %6d", (int)DeviceID);
-	SendPrinter(PrintBuf);
-	//sprintf(PrintBuf, "        Print date:  20%02d-%02d-%02d %02d:%02d:%02d\r\n", 
-	//	RTC_DateStruct.RTC_Year,RTC_DateStruct.RTC_Month,RTC_DateStruct.RTC_Date,
-	//	RTC_TimeStruct.RTC_Hours,RTC_TimeStruct.RTC_Minutes,RTC_TimeStruct.RTC_Seconds);
-	sprintf(PrintBuf, "        Print date:  %s %s\r\n", DisDateStr,DisTimeStr);
-	SendPrinter(PrintBuf);
-	SendPrinter("\r\n");
-	
-	SendPrinter("      Test Parameter                       Station 1          Station 2\r\n");
-	SendPrinter("      ----------------------------------------------------------------------\r\n");
-	sprintf(PrintBuf,"      USP method:                          USP %1d              USP %1d\r\n",(u16)TD_Method,(u16)TD_Method);
-	SendPrinter(PrintBuf);
-	sprintf(PrintBuf,"      Number of strokes:                     %3d                %3d\r\n",NumberOfTaps,NumberOfTaps);
-	SendPrinter(PrintBuf);
-	sprintf(PrintBuf,"      Min. strokes height:                  %4s mm            %4s mm\r\n",StrokeHeightMinStr,StrokeHeightMinStr);
-	SendPrinter(PrintBuf);
-	sprintf(PrintBuf,"      Max. strokes height:                  %4s mm            %4s mm\r\n",StrokeHeightMaxStr,StrokeHeightMaxStr);
-	SendPrinter(PrintBuf);
-	SendPrinter("\r\n");
-	
-	// 测试完成状态 ------------------------------------------
-	if(TestStatus)
-		sprintf(PrintBuf,"      Qualification Status:        %s\r\n","Test completed.");
-	else
-		sprintf(PrintBuf,"      Qualification Status:        %s\r\n","Test abort.");
-	SendPrinter(PrintBuf);
-	
-	// 打印测试日期 ------------------------------------------
-	//sprintf(PrintBuf,"      Qualification date:          20%02d-%02d-%02d %02d:%02d:%02d\r\n", 
-	//	RTC_DateStruct.RTC_Year,RTC_DateStruct.RTC_Month,RTC_DateStruct.RTC_Date,
-	//	RTC_TimeStruct.RTC_Hours,RTC_TimeStruct.RTC_Minutes,RTC_TimeStruct.RTC_Seconds);
-	sprintf(PrintBuf, "        Print date:  %s %s\r\n", DisDateStr,DisTimeStr);
-	SendPrinter(PrintBuf);
-	
-	SendPrinter("\r\n");
-	SendPrinter("      Requirements fulfilled:      YES      No\r\n");
-	SendPrinter("\r\n");
-	SendPrinter("      Comments\r\n");
-	//SendPrinter("      ______________________________________________________________________\r\n");
-	SendPrinter("      ______________________________________________________________________\r\n");
-	SendPrinter("      ______________________________________________________________________\r\n");
-	SendPrinter("\r\n");
-	SendPrinter("\r\n");
-	SendPrinter("\r\n");
-	SendPrinter("      ______________________________________________________________________\r\n");
-	SendPrinter("      Operator                    Date                    Signature \r\n");
-	
-}*/
-
-// 拍击次数验证报告打印 --------------------------------------------------------
-/*void druckergebnisOQtapCount(void)
-{
-	char tbuf1[50];
-	//char tbuf2[50];
-	char PrintBuf[100];
-	//char type[25];
-	//u8 i;
-	
-	//RTC_GetTime(RTC_Format_BIN, &RTC_TimeStruct);
-	//RTC_GetDate(RTC_Format_BIN, &RTC_DateStruct);
-	
-	SendPrinter("                         Qualification of tap count Report\r\n");
-	SendPrinter("      ----------------------------------------------------------------------\r\n");
-	SendPrinter("\r\n");
-	
-	strcpy(tbuf1,Reports_rsmp.RPT_DeviceSerialNb);
-	sprintf(PrintBuf, "      Device serial no.:     %6s", tbuf1);
-	SendPrinter(PrintBuf);
-	      SendPrinter("        Page:                        1/1\r\n");
-	
-	sprintf(PrintBuf, "      Main Firmware version: %6s", MAIN_FIRMWARE_VERSION);
-	SendPrinter(PrintBuf);
-	sprintf(PrintBuf, "        Touch Firmware version:   %6s\r\n", TOUCH_FIRMWARE_VERSION);
-	SendPrinter(PrintBuf);
-	
-	sprintf(PrintBuf, "      Device configuration:  %6d", (int)DeviceID);
-	SendPrinter(PrintBuf);
-	//sprintf(PrintBuf, "        Print date:  20%02d-%02d-%02d %02d:%02d:%02d\r\n", 
-	//	RTC_DateStruct.RTC_Year,RTC_DateStruct.RTC_Month,RTC_DateStruct.RTC_Date,
-	//	RTC_TimeStruct.RTC_Hours,RTC_TimeStruct.RTC_Minutes,RTC_TimeStruct.RTC_Seconds);
-	sprintf(PrintBuf, "        Print date:  %s %s\r\n", DisDateStr,DisTimeStr);
-	SendPrinter(PrintBuf);
-	SendPrinter("\r\n");
-	
-	SendPrinter("      Test Parameter                       Station 1          Station 2\r\n");
-	SendPrinter("      ----------------------------------------------------------------------\r\n");
-	sprintf(PrintBuf,"      USP method:                          USP %1d              USP %1d\r\n",(u16)TD_Method,(u16)TD_Method);
-	SendPrinter(PrintBuf);
-	sprintf(PrintBuf,"      Number of strokes:                     %3d                %3d\r\n",NumberOfTaps,NumberOfTaps);
-	SendPrinter(PrintBuf);
-	sprintf(PrintBuf,"      Measure count:                        %4s               %4s\r\n",StrokeCountRealStr,StrokeCountRealStr);
-	SendPrinter(PrintBuf);
-	SendPrinter("\r\n");
-	
-	// 测试完成状态 ------------------------------------------
-	if(TestStatus)
-		sprintf(PrintBuf,"      Qualification Status:        %s\r\n","Test completed.");
-	else
-		sprintf(PrintBuf,"      Qualification Status:        %s\r\n","Test abort.");
-	SendPrinter(PrintBuf);
-	
-	// 打印测试日期 ------------------------------------------
-	//sprintf(PrintBuf,"      Qualification date:          20%02d-%02d-%02d %02d:%02d:%02d\r\n", 
-	//	RTC_DateStruct.RTC_Year,RTC_DateStruct.RTC_Month,RTC_DateStruct.RTC_Date,
-	//	RTC_TimeStruct.RTC_Hours,RTC_TimeStruct.RTC_Minutes,RTC_TimeStruct.RTC_Seconds);
-	sprintf(PrintBuf, "        Print date:  %s %s\r\n", DisDateStr,DisTimeStr);
-	SendPrinter(PrintBuf);
-	
-	SendPrinter("\r\n");
-	SendPrinter("      Requirements fulfilled:      YES      No\r\n");
-	SendPrinter("\r\n");
-	SendPrinter("      Comments\r\n");
-	//SendPrinter("      ______________________________________________________________________\r\n");
-	SendPrinter("      ______________________________________________________________________\r\n");
-	SendPrinter("      ______________________________________________________________________\r\n");
-	SendPrinter("\r\n");
-	SendPrinter("\r\n");
-	SendPrinter("\r\n");
-	SendPrinter("      ______________________________________________________________________\r\n");
-	SendPrinter("      Operator                    Date                    Signature \r\n");
-	
-}*/
 
 // 打印报告程序入口 ------------------------------------------------------------
 u8 ReportType = 0;
@@ -15165,7 +7155,6 @@ void Display_Handler(void)
 		
 		// CAN通信处理 -------------------------------
 		while(CBRIp0 != CBRIp1) 						// 接收到新数据
-		//if(CBRIp0 != CBRIp1)
 		{
 			if(CanRxBuf[CBRIp0][0] == 0xA5)
 			{
@@ -15351,29 +7340,29 @@ void Display_Handler(void)
 					{
 						if(DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_AON_dst) == -1) 	// OQ报警日期，未到
 						{
-							LCD_Fill(32,528,32+128,528+48,GREEN_95C11F); 			// OQ绿框
+							LCD_Fill(32,528,32+161,528+48,GREEN_95C11F); 			// OQ绿框
 							LCD_ShowIcon(45,540,24,24,WHITE,GREEN_95C11F,65,0); 		// 红绿灯图标
-							LCD_ShowSpStr(80,540,60,24,WHITE,GREEN_95C11F,Font_Rbr27,"OQ",0);
+							LCD_ShowSpStr(75,540,150,24,WHITE,GREEN_95C11F,Font_Rbr27,"OQ status",0);
 						}
 						else
 						if(DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == -1) 	// OQ有效日期，未到
 						{
-							LCD_Fill(32,528,32+128,528+48,YELLOW); 			// OQ黄框
+							LCD_Fill(32,528,32+161,528+48,YELLOW); 			// OQ黄框
 							LCD_ShowIcon(45,540,24,24,WHITE,YELLOW,65,0); 		// 红绿灯图标
-							LCD_ShowSpStr(80,540,60,24,WHITE,YELLOW,Font_Rbr27,"OQ",0);
+							LCD_ShowSpStr(75,540,150,24,WHITE,YELLOW,Font_Rbr27,"OQ status",0);
 						}
 						else 																											// OQ已过有效期
 						{
-							LCD_Fill(32,528,32+128,528+48,RED); 			// OQ红框
+							LCD_Fill(32,528,32+161,528+48,RED); 			// OQ红框
 							LCD_ShowIcon(45,540,24,24,WHITE,RED,65,0); 		// 红绿灯图标
-							LCD_ShowSpStr(80,540,60,24,WHITE,RED,Font_Rbr27,"OQ",0);
+							LCD_ShowSpStr(75,540,150,24,WHITE,RED,Font_Rbr27,"OQ status",0);
 						}
 					}
 					else
 					{
-						LCD_Fill(32,528,32+128,528+48,GRAY_878787); 			// OQ绿框
+						LCD_Fill(32,528,32+161,528+48,GRAY_878787); 			// OQ绿框
 						LCD_ShowIcon(45,540,24,24,WHITE,GRAY_878787,65,0); 		// 红绿灯图标
-						LCD_ShowSpStr(80,540,60,24,WHITE,GRAY_878787,Font_Rbr27,"OQ",0);
+						LCD_ShowSpStr(75,540,150,24,WHITE,GRAY_878787,Font_Rbr27,"OQ status",0);
 					}
 				}
 				
@@ -15469,7 +7458,7 @@ void Display_Handler(void)
 								BEEPER_PlayTones(tones_1khz);
 							}
 							else
-							if((cur_tpx > 32)&&(cur_tpx < 32+128)&&(cur_tpy > 528)&&(cur_tpy < 528+48)) 	// “OQ红绿灯”图标
+							if((cur_tpx > 32)&&(cur_tpx < 32+161)&&(cur_tpy > 528)&&(cur_tpy < 528+48)) 	// “OQ红绿灯”图标
 							{
 								if(OQ_PtGp.OQ_sw == 1) 						// OQ开关，打开
 								{
@@ -15858,7 +7847,7 @@ void Display_Handler(void)
 					
 					//osDelay(10);
 					LCD_ShowSpStr(47,124,1020,36,WHITE,GRAY_878787,Font_Rbb34,"TestAssist - Select Mode",0);
-					LCD_ShowSpStr(332,528,650,24,GRAY_A6A6A6,WHITE,Font_Rbr27,"Select Testing Mode",0); 	
+					LCD_ShowSpStr(332,528,650,27,GRAY_A6A6A6,WHITE,Font_Rbr27,"Select Testing Mode",0); 	
 					LCD_ShowSpStr(912,540,60,24,BLACK,WHITE,Font_Rbm22,"Abort",0);
 					
 					tm_flag = 1;
@@ -16766,7 +8755,7 @@ void Display_Handler(void)
 						{
 							LCD_ShowSpStr(175,108,450,36,WHITE,GRAY_656565,Font_Rbb34,"Hint: Time",0);
 							
-							LCD_ShowSpStr(175,185,630,24,BLACK,WHITE,Font_Rbm22,"Please enter the runtime.It can be set up to 9 Hours,59 minutes ",0);
+							LCD_ShowSpStr(175,185,630,24,BLACK,WHITE,Font_Rbm22,"Please enter the runtime.It can be set up to 9 hours,59 minutes ",0);
 							LCD_ShowSpStr(175,215,700,24,BLACK,WHITE,Font_Rbm22,"and 59 seconds.",0);
 							//LCD_ShowSpStr(175,275,700,24,BLACK,WHITE,Font_Rbr27,"Here, you select for strokes.",0);
 						}break;
@@ -18445,7 +10434,7 @@ void Display_Handler(void)
 							Test_Start = 0;
 						
 						LastPage = CurntPage;
-						CurntPage = 8; 					// 当前页面设置
+						CurntPage = 9; 					// 当前页面设置
 						cp_flag = 1;
 						
 						BEEPER_PlayTones(tones_1khz);
@@ -18471,7 +10460,8 @@ void Display_Handler(void)
 					RTC_DisRefresh(); 						// 日期时间刷新
 				}
 			}break;
-			case 8: 													// TestAssist - Starting
+
+			case 9: 													// TestAssist - Running
 			{
 				if(cp_flag) 										// 页面刷新
 				{
@@ -18494,7 +10484,7 @@ void Display_Handler(void)
 					
 					LCD_Fill(32,112,32+656,112+464,WHITE); 						// 大白框
 					LCD_Fill(32,112,32+656,112+48,GRAY_878787); 			// 小灰框
-					LCD_ShowSpStr(47,124,1020,36,WHITE,GRAY_878787,Font_Rbb34,"TestAssist - Starting",0);
+					LCD_ShowSpStr(47,124,1020,36,WHITE,GRAY_878787,Font_Rbb34,"TestAssist - Running",0);
 					
 					if(DeviceID == 223)
 					{
@@ -18656,118 +10646,6 @@ void Display_Handler(void)
 					
 					mrev_flag = 1;
 					tof_flag = 1;
-				}
-				
-				if(mspe_flag) 									// 电机运转速度刷新
-				{
-					mspe_flag = 0;
-					
-					sprintf((char*)tbuf,"%5.1f",(float)CurrSpeed/10); 
-					LCD_ShowSpStr(135,250,171,62,BLACK,GRAY_DADADA,Font_Hnb48,tbuf,0);
-					
-					if(SpeedFlag)
-					{
-						LastPage = CurntPage;
-						CurntPage = 9; 							// 当前页面设置为9
-						cp_flag = 1;
-					}
-				}
-				
-				if((mrev_flag)&& 								// 电机运转圈数刷新
-					 (TestMode == 1)) 						// 计次数模式
-				{
-					mrev_flag = 0;
-					
-					LCD_ShowSpNum(140,460,WHITE,GRAY_878787,MOTOR_Revolution,4,Font_Hnb48);
-					LCD_Fill(97,515,97+(MOTOR_Revolution*190/NumberOfTaps),515+13,RED); 	// 进度条
-					
-					if(MOTOR_Revolution >= NumberOfTaps)
-					{
-						LastPage = CurntPage;
-						CurntPage = 9; 					// 当前页面设置为9
-						cp_flag = 1;
-						//BEEPER_PlayTones(tones_1khz);
-					}
-				}
-				
-				if((tof_flag)&& 								// 电机运转圈数/时间刷新
-					 (TestMode == 2)) 						// 计时间模式
-				{
-					tof_flag = 0;
-					
-					sprintf((char*)tbuf,"%02d:%02d:%02d",(u16)(MOTOR_Times/3600),(u16)(MOTOR_Times%3600/60),(u16)(MOTOR_Times%60)); 
-					LCD_ShowSpStr(105,451,171,62,WHITE,GRAY_878787,Font_Hnb48,tbuf,0);
-					
-					LCD_Fill(97,515,97+(MOTOR_Times*190/NumberOfTimes),515+13,RED); 			// 进度条
-					
-					if(MOTOR_Times >= NumberOfTimes)
-					{
-						LastPage = CurntPage;
-						CurntPage = 9; 					// 当前页面设置为9
-						cp_flag = 1;
-						//BEEPER_PlayTones(tones_1khz);
-					}
-				}
-				
-				if(TouchFlag == 1) 							// 有触摸标志
-				{
-					TouchFlag = 0;
-					
-					if((cur_tpx > 736)&&(cur_tpx < 1020)&&(cur_tpy > 112)&&(cur_tpy < 112+255)) 	// 量筒图标
-					{
-						if(MotPause != 0)
-						{
-							MotPause = 0;
-							MOTOR_Start();
-							LCD_ShowIcon(736,112,256,255,WHITE,GREEN_3AAA35,23,0); 	// 大图标量具
-							LCD_ShowIcon(752,129,48,48,GREEN_3AAA35,WHITE,67,0); 	// 大图标量具+暂停
-						}
-						else
-						{
-							MotPause = 1;
-							MOTOR_Stop();
-							LCD_ShowIcon(736,112,256,255,WHITE,GRAY_DADADA,23,0); 	// 大图标量具
-							LCD_ShowIcon(752,129,48,48,GRAY_DADADA,WHITE,66,0); 	// 大图标量具+运行
-							
-							LCD_Fill(135,250,135+120,250+50,GRAY_DADADA); 							// 擦除数字显示
-							LCD_ShowSpStr(135,250,120,50,BLACK,GRAY_DADADA,Font_Hnb48,"   0",0);
-						}
-						
-						BEEPER_PlayTones(tones_1khz);
-					}
-					/*else
-					if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 448)&&(cur_tpy < 576)) 	// Abort
-					{
-						if(Test_Start != 0)
-							Test_Start = 0;
-						
-						LastPage = CurntPage;
-						CurntPage = 9;
-						cp_flag = 1;
-						
-						BEEPER_PlayTones(tones_1khz);
-					}*/
-				}
-				else
-				{
-					RTC_DisRefresh(); 						// 日期时间刷新
-				}
-			}break;
-			case 9: 													// TestAssist - Running
-			{
-				if(cp_flag) 										// 页面刷新
-				{
-					cp_flag = 0;
-					
-					//LCD_ClearSE(10, BLACK);
-					//LCD_ShowIcon(32,30,64,48,GRAY,BLACK,9,0); 				// 三横标
-					//LCD_Fill(32,112,32+656,112+464,WHITE); 						// 大白框
-					LCD_Fill(32,112,32+656,112+48,GRAY_878787); 							// 上灰色横条
-					LCD_ShowSpStr(47,124,1020,36,WHITE,GRAY_878787,Font_Rbb34,"TestAssist - Running",0);
-					
-					LCD_ShowIcon(736,112,256,255,WHITE,GREEN_3AAA35,23,0); 	// 大图标量具
-					LCD_ShowIcon(752,129,48,48,GREEN_3AAA35,WHITE,67,0); 	// 大图标量具+暂停
-					
 				}
 				
 				if(mspe_flag) 									// 电机运转速度刷新
@@ -18964,12 +10842,12 @@ void Display_Handler(void)
 								break;
 							}
 							
-							strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 			// 时区字符串
-							if(DaylightTime) 																									// 夏令时
+							/*strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 			// 时区字符串
+							if(DaylightTime) 														// 夏令时
 								strcpy(Reports_rsmp.RPT_SummerTime,"DST");
 							else
-								Reports_rsmp.RPT_SummerTime[0] = 0;
-							//
+								Reports_rsmp.RPT_SummerTime[0] = 0;*/
+							
 							if(DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 1||DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 0)
 								strcpy(Reports_rsmp.RPT_OQ,"No"); 															// 校验
 							else
@@ -19155,11 +11033,11 @@ void Display_Handler(void)
 								break;
 							}
 							
-							strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
-							if(DaylightTime) 																										// 夏令时
+							/*strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
+							if(DaylightTime) 															// 夏令时
 								strcpy(Reports_rsmp.RPT_SummerTime,"DST");
 							else
-								Reports_rsmp.RPT_SummerTime[0] = 0;
+								Reports_rsmp.RPT_SummerTime[0] = 0;*/
 							
 							if(DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 1||DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 0)
 								strcpy(Reports_rsmp.RPT_OQ,"No"); 															// 校验
@@ -19366,11 +11244,11 @@ void Display_Handler(void)
 							break;
 						}
 						
-						strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
-						if(DaylightTime) 																										// 夏令时
+						/*strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
+						if(DaylightTime) 															// 夏令时
 							strcpy(Reports_rsmp.RPT_SummerTime,"DST");
 						else
-							Reports_rsmp.RPT_SummerTime[0] = 0;
+							Reports_rsmp.RPT_SummerTime[0] = 0;*/
 						
 						if(DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 1||DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 0)
 							strcpy(Reports_rsmp.RPT_OQ,"No"); 															// 校验
@@ -20177,7 +12055,6 @@ void Display_Handler(void)
 				{
 					infors_flag = 0;
 					
-					//LCD_Fill(55,400,55+256,400+152,GRAY_DADADA); 					// General Information...显示框
 					LCD_Fill(55,400,55+256,400+112,GRAY_DADADA); 					// General Information...显示框
 					
 					if(InformationStr1[0] == 0)
@@ -21711,7 +13588,7 @@ void Display_Handler(void)
 					LCD_ShowSpStr(396,210,100,24,BLACK,GRAY_DADADA,Font_Rbr27,"ml",0);
 					if(TestTimes < 8)
 					{
-						LCD_ShowSpStr(396,260,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V0",0);
+						LCD_ShowSpStr(395,260,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V0",0);
 						LCD_ShowSpStr(385,295,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V10",0);
 						LCD_ShowSpStr(375,330,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V500",0);
 						LCD_ShowSpStr(365,365,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
@@ -21758,13 +13635,22 @@ void Display_Handler(void)
 #ifdef DEBUG
 						NumberOfTaps = 20;
 #else
-						NumberOfTaps = 500;
+						NumberOfTaps = 490;
+#endif
+					}
+					else
+					if(TestTimes == 2)
+					{
+#ifdef DEBUG
+						NumberOfTaps = 30;
+#else
+						NumberOfTaps = 750;
 #endif
 					}
 					else
 					{
 #ifdef DEBUG
-						NumberOfTaps = 30;
+						NumberOfTaps = 40;
 #else
 						NumberOfTaps = 1250;
 #endif
@@ -21783,8 +13669,8 @@ void Display_Handler(void)
 				{
 					Refresh_L2 = 0;
 					
-					LCD_ShowSpNum(78,393,WHITE,GRAY_878787,NumberOfTaps,4,Font_Rbr27);
-					//LCD_ShowSpStr(135,393,100,24,WHITE,GRAY_878787,Font_Rbr27,"strokes",0);
+					//LCD_ShowSpNum(78,393,WHITE,GRAY_878787,NumberOfTaps,4,Font_Rbr27);
+					LCD_ShowSpNum(78,393,WHITE,GRAY_878787,RUN_CYC[TestTimes+1],4,Font_Rbr27);
 					LCD_ShowSpStr(135,393,100,24,WHITE,GRAY_878787,Font_Rbr27,"taps",0);
 				}
 				
@@ -21808,8 +13694,11 @@ void Display_Handler(void)
 								for(i=0;i<TestTimes+1;i++)
 								{
 									LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i],0);
-									if(i>=3)
-										LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+									if(i>3)
+									{
+										sprintf(tbuf,"V%4d",RUN_CYC[i]);
+										LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+									}
 								}
 							}
 							else
@@ -21817,8 +13706,11 @@ void Display_Handler(void)
 								for(i=0;i<TestEndS1+1;i++)
 								{
 									LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i],0);
-									if(i>=3)
-										LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+									if(i>3)
+									{
+										sprintf(tbuf,"V%4d",RUN_CYC[i]);
+										LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+									}
 								}
 								
 								LCD_ShowSpStr(495,260+TestEndS1*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"-f",0);
@@ -21873,8 +13765,11 @@ void Display_Handler(void)
 									for(i=0;i<TestTimes+1;i++)
 									{
 										LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i],0);
-										if(i>=3)
-											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if(i>3)
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 								}
 								else
@@ -21882,8 +13777,11 @@ void Display_Handler(void)
 									for(i=0;i<TestEndS1+1;i++)
 									{
 										LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i],0);
-										if(i>=3)
-											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if(i>3)
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 									
 									LCD_ShowSpStr(495,260+TestEndS1*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"-f",0);
@@ -21936,8 +13834,11 @@ void Display_Handler(void)
 									for(i=0;i<TestTimes+1;i++)
 									{
 										LCD_ShowSpStr(526,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr2_T[i],0);
-										if((i>=3)&&(TestEndS1 != 0))
-											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if((i>3)&&(TestEndS1 != 0))
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 								}
 								else
@@ -21945,8 +13846,11 @@ void Display_Handler(void)
 									for(i=0;i<TestEndS2+1;i++)
 									{
 										LCD_ShowSpStr(526,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr2_T[i],0);
-										if((i>=3)&&(TestEndS1 != 0))
-											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if((i>3)&&(TestEndS1 != 0))
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 									
 									LCD_ShowSpStr(575,260+TestEndS2*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"-f",0);
@@ -22001,8 +13905,11 @@ void Display_Handler(void)
 									for(i=0;i<TestTimes+1;i++)
 									{
 										LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i],0);
-										if(i>=3)
-											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if(i>3)
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 								}
 								else
@@ -22010,8 +13917,11 @@ void Display_Handler(void)
 									for(i=0;i<TestEndS1+1;i++)
 									{
 										LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i],0);
-										if(i>=3)
-											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if(i>3)
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 									
 									LCD_ShowSpStr(495,260+TestEndS1*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"-f",0);
@@ -22061,8 +13971,11 @@ void Display_Handler(void)
 									for(i=0;i<TestTimes+1;i++)
 									{
 										LCD_ShowSpStr(526,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr2_T[i],0);
-										if((i>=3)&&(TestEndS1 != 0))
-											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if((i>3)&&(TestEndS1 != 0))
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 								}
 								else
@@ -22070,8 +13983,11 @@ void Display_Handler(void)
 									for(i=0;i<TestEndS2+1;i++)
 									{
 										LCD_ShowSpStr(526,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr2_T[i],0);
-										if((i>=3)&&(TestEndS1 != 0))
-											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if((i>3)&&(TestEndS1 != 0))
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 									
 									LCD_ShowSpStr(575,260+TestEndS2*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"-f",0);
@@ -22129,8 +14045,11 @@ void Display_Handler(void)
 									for(i=0;i<TestTimes+1;i++)
 									{
 										LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i],0);
-										if(i>=3)
-											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if(i>3)
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 								}
 								else
@@ -22138,8 +14057,11 @@ void Display_Handler(void)
 									for(i=0;i<TestEndS1+1;i++)
 									{
 										LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i],0);
-										if(i>=3)
-											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if(i>3)
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 									
 									LCD_ShowSpStr(495,260+TestEndS1*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"-f",0);
@@ -22192,8 +14114,11 @@ void Display_Handler(void)
 									for(i=0;i<TestTimes+1;i++)
 									{
 										LCD_ShowSpStr(526,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr2_T[i],0);
-										if(i>=3)
-											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if(i>3)
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 								}
 								else
@@ -22201,8 +14126,11 @@ void Display_Handler(void)
 									for(i=0;i<TestEndS2+1;i++)
 									{
 										LCD_ShowSpStr(526,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr2_T[i],0);
-										if(i>=3)
-											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if(i>3)
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 									
 									LCD_ShowSpStr(575,260+TestEndS2*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"-f",0);
@@ -22571,11 +14499,11 @@ void Display_Handler(void)
 							}
 							
 							// 设备信息 ------------------------------------
-							strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
-							if(DaylightTime) 																										// 夏令时
+							/*strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
+							if(DaylightTime) 															// 夏令时
 								strcpy(Reports_rsmp.RPT_SummerTime,"DST");
 							else
-								Reports_rsmp.RPT_SummerTime[0] = 0;
+								Reports_rsmp.RPT_SummerTime[0] = 0;*/
 							
 							if(DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 1||DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 0)
 								strcpy(Reports_rsmp.RPT_OQ,"No"); 															// 校验
@@ -22660,10 +14588,10 @@ void Display_Handler(void)
 					LCD_ShowSpStr(396,210,100,24,BLACK,GRAY_DADADA,Font_Rbr27,"ml",0);
 					if(TestTimes < 8)
 					{
-						LCD_ShowSpStr(396,260,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V0",0);
-						LCD_ShowSpStr(386,295,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V10",0);
-						LCD_ShowSpStr(377,330,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V500",0);
-						LCD_ShowSpStr(368,365,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+						LCD_ShowSpStr(395,260,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V0",0);
+						LCD_ShowSpStr(385,295,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V10",0);
+						LCD_ShowSpStr(375,330,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V500",0);
+						LCD_ShowSpStr(365,365,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
 					}
 					
 					//LCD_ShowIcon(880,112,112,128,BLACK,WHITE,22,0); 							// 大圆右三角，Start
@@ -22691,8 +14619,8 @@ void Display_Handler(void)
 				{
 					Refresh_L2 = 0;
 					
-					LCD_ShowSpNum(78,393,WHITE,GRAY_878787,NumberOfTaps,4,Font_Rbr27);
-					//LCD_ShowSpStr(135,393,100,24,WHITE,GRAY_878787,Font_Rbr27,"strokes",0);
+					//LCD_ShowSpNum(78,393,WHITE,GRAY_878787,NumberOfTaps,4,Font_Rbr27);
+					LCD_ShowSpNum(78,393,WHITE,GRAY_878787,RUN_CYC[TestTimes+1],4,Font_Rbr27);
 					LCD_ShowSpStr(135,393,100,24,WHITE,GRAY_878787,Font_Rbr27,"taps",0);
 				}
 				
@@ -22708,7 +14636,7 @@ void Display_Handler(void)
 				{
 					mrev_flag = 0;
 					
-					LCD_ShowSpNum(140,460,WHITE,GRAY_878787,MOTOR_Revolution,4,Font_Hnb48);
+					LCD_ShowSpNum(140,460,WHITE,GRAY_878787,MOTOR_Revolution+RUN_CYC[TestTimes],4,Font_Hnb48);
 					LCD_Fill(97,515,97+(MOTOR_Revolution*190/NumberOfTaps),515+13,RED); 	// 进度条
 					
 					if(MOTOR_Revolution >= NumberOfTaps)
@@ -22718,9 +14646,7 @@ void Display_Handler(void)
 						
 						if(TestEndS2 == 0)
 							TotalTaps2 += NumberOfTaps;
-						
-						//CurntPage = 22; 					// 当前页面设置
-						//cp_flag = 1;
+
 						PopWindow = 1;
 						PopWflag = 1;
 						
@@ -22750,8 +14676,11 @@ void Display_Handler(void)
 									for(i=0;i<TestTimes+1;i++)
 									{
 										LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i],0);
-										if(i>=3)
-											LCD_ShowSpStr(368,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if(i>3)
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 								}
 								else
@@ -22759,8 +14688,11 @@ void Display_Handler(void)
 									for(i=0;i<TestEndS1+1;i++)
 									{
 										LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i],0);
-										if(i>=3)
-											LCD_ShowSpStr(368,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if(i>3)
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 									
 									LCD_ShowSpStr(495,260+TestEndS1*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"-f",0);
@@ -22774,7 +14706,7 @@ void Display_Handler(void)
 									for(i=0;i<TestTimes-8+1;i++)
 									{
 										LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i+8],0);
-										LCD_ShowSpStr(368,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										LCD_ShowSpStr(365,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
 									}
 								}
 								else
@@ -22784,7 +14716,7 @@ void Display_Handler(void)
 										for(i=0;i<TestEndS1-8+1;i++)
 										{
 											LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i+8],0);
-											LCD_ShowSpStr(368,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+											LCD_ShowSpStr(365,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
 										}
 										
 										LCD_ShowSpStr(495,260+(TestEndS1-8)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"-f",0);
@@ -22813,8 +14745,11 @@ void Display_Handler(void)
 									for(i=0;i<TestTimes+1;i++)
 									{
 										LCD_ShowSpStr(526,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr2_T[i],0);
-										if(i>=3)
-											LCD_ShowSpStr(368,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if(i>3)
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 								}
 								else
@@ -22822,8 +14757,11 @@ void Display_Handler(void)
 									for(i=0;i<TestEndS2+1;i++)
 									{
 										LCD_ShowSpStr(526,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr2_T[i],0);
-										if(i>=3)
-											LCD_ShowSpStr(368,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if(i>3)
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 									
 									LCD_ShowSpStr(575,260+TestEndS2*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"-f",0);
@@ -22837,7 +14775,7 @@ void Display_Handler(void)
 									for(i=0;i<TestTimes-8+1;i++)
 									{
 										LCD_ShowSpStr(526,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr2_T[i+8],0);
-										LCD_ShowSpStr(368,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										LCD_ShowSpStr(365,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
 									}
 								}
 								else
@@ -22847,7 +14785,7 @@ void Display_Handler(void)
 										for(i=0;i<TestEndS2-8+1;i++)
 										{
 											LCD_ShowSpStr(526,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr2_T[i+8],0);
-											LCD_ShowSpStr(368,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+											LCD_ShowSpStr(365,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
 										}
 										
 										LCD_ShowSpStr(575,260+(TestEndS2-8)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"-f",0);
@@ -22882,8 +14820,11 @@ void Display_Handler(void)
 								for(i=0;i<TestTimes+1;i++)
 								{
 									LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i],0);
-									if(i>=3)
-										LCD_ShowSpStr(368,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+									if(i>3)
+									{
+										sprintf(tbuf,"V%4d",RUN_CYC[i]);
+										LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+									}
 								}
 							}
 							else
@@ -22891,8 +14832,11 @@ void Display_Handler(void)
 								for(i=0;i<TestEndS1+1;i++)
 								{
 									LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i],0);
-									if(i>=3)
-										LCD_ShowSpStr(368,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+									if(i>3)
+									{
+										sprintf(tbuf,"V%4d",RUN_CYC[i]);
+										LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+									}
 								}
 								
 								LCD_ShowSpStr(495,260+TestEndS1*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"-f",0);
@@ -22906,7 +14850,7 @@ void Display_Handler(void)
 								for(i=0;i<TestTimes-8+1;i++)
 								{
 									LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i+8],0);
-									LCD_ShowSpStr(368,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+									LCD_ShowSpStr(365,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
 								}
 							}
 							else
@@ -22916,7 +14860,7 @@ void Display_Handler(void)
 									for(i=0;i<TestEndS1-8+1;i++)
 									{
 										LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i+8],0);
-										LCD_ShowSpStr(368,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										LCD_ShowSpStr(365,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
 									}
 									
 									LCD_ShowSpStr(495,260+(TestEndS1-8)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"-f",0);
@@ -22947,8 +14891,11 @@ void Display_Handler(void)
 									for(i=0;i<TestTimes+1;i++)
 									{
 										LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i],0);
-										if(i>=3)
-											LCD_ShowSpStr(368,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if(i>3)
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 								}
 								else
@@ -22956,8 +14903,11 @@ void Display_Handler(void)
 									for(i=0;i<TestEndS1+1;i++)
 									{
 										LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i],0);
-										if(i>=3)
-											LCD_ShowSpStr(368,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if(i>3)
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 									
 									LCD_ShowSpStr(495,260+TestEndS1*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"-f",0);
@@ -22971,7 +14921,7 @@ void Display_Handler(void)
 									for(i=0;i<TestTimes-8+1;i++)
 									{
 										LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i+8],0);
-										LCD_ShowSpStr(368,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										LCD_ShowSpStr(365,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
 									}
 								}
 								else
@@ -22981,7 +14931,7 @@ void Display_Handler(void)
 										for(i=0;i<TestEndS1-8+1;i++)
 										{
 											LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i+8],0);
-											LCD_ShowSpStr(368,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+											LCD_ShowSpStr(365,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
 										}
 										
 										LCD_ShowSpStr(495,260+(TestEndS1-8)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"-f",0);
@@ -23010,8 +14960,11 @@ void Display_Handler(void)
 									for(i=0;i<TestTimes+1;i++)
 									{
 										LCD_ShowSpStr(526,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr2_T[i],0);
-										if(i>=3)
-											LCD_ShowSpStr(368,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if(i>3)
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 								}
 								else
@@ -23019,8 +14972,11 @@ void Display_Handler(void)
 									for(i=0;i<TestEndS2+1;i++)
 									{
 										LCD_ShowSpStr(526,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr2_T[i],0);
-										if(i>=3)
-											LCD_ShowSpStr(368,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if(i>3)
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 									
 									LCD_ShowSpStr(575,260+TestEndS2*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"-f",0);
@@ -23034,7 +14990,7 @@ void Display_Handler(void)
 									for(i=0;i<TestTimes-8+1;i++)
 									{
 										LCD_ShowSpStr(526,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr2_T[i+8],0);
-										LCD_ShowSpStr(368,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										LCD_ShowSpStr(365,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
 									}
 								}
 								else
@@ -23044,7 +15000,7 @@ void Display_Handler(void)
 										for(i=0;i<TestEndS2-8+1;i++)
 										{
 											LCD_ShowSpStr(526,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr2_T[i+8],0);
-											LCD_ShowSpStr(368,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+											LCD_ShowSpStr(365,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
 										}
 										
 										LCD_ShowSpStr(575,260+(TestEndS2-8)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"-f",0);
@@ -23073,8 +15029,11 @@ void Display_Handler(void)
 									for(i=0;i<TestTimes+1;i++)
 									{
 										LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i],0);
-										if(i>=3)
-											LCD_ShowSpStr(368,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if(i>3)
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 								}
 								else
@@ -23082,8 +15041,11 @@ void Display_Handler(void)
 									for(i=0;i<TestEndS1+1;i++)
 									{
 										LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i],0);
-										if(i>=3)
-											LCD_ShowSpStr(368,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if(i>3)
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 									
 									LCD_ShowSpStr(495,260+TestEndS1*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"-f",0);
@@ -23097,7 +15059,7 @@ void Display_Handler(void)
 									for(i=0;i<TestTimes-8+1;i++)
 									{
 										LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i+8],0);
-										LCD_ShowSpStr(368,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										LCD_ShowSpStr(365,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
 									}
 								}
 								else
@@ -23107,7 +15069,7 @@ void Display_Handler(void)
 										for(i=0;i<TestEndS1-8+1;i++)
 										{
 											LCD_ShowSpStr(446,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr1_T[i+8],0);
-											LCD_ShowSpStr(368,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+											LCD_ShowSpStr(365,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
 										}
 										
 										LCD_ShowSpStr(495,260+(TestEndS1-8)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"-f",0);
@@ -23133,8 +15095,11 @@ void Display_Handler(void)
 									for(i=0;i<TestTimes+1;i++)
 									{
 										LCD_ShowSpStr(526,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr2_T[i],0);
-										if(i>=3)
-											LCD_ShowSpStr(368,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if(i>3)
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 								}
 								else
@@ -23142,8 +15107,11 @@ void Display_Handler(void)
 									for(i=0;i<TestEndS2+1;i++)
 									{
 										LCD_ShowSpStr(526,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr2_T[i],0);
-										if(i>=3)
-											LCD_ShowSpStr(368,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										if(i>3)
+										{
+											sprintf(tbuf,"V%4d",RUN_CYC[i]);
+											LCD_ShowSpStr(365,365+(i-3)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,tbuf,0);
+										}
 									}
 									
 									LCD_ShowSpStr(575,260+TestEndS2*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"-f",0);
@@ -23157,7 +15125,7 @@ void Display_Handler(void)
 									for(i=0;i<TestTimes-8+1;i++)
 									{
 										LCD_ShowSpStr(526,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr2_T[i+8],0);
-										LCD_ShowSpStr(368,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+										LCD_ShowSpStr(365,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
 									}
 								}
 								else
@@ -23167,7 +15135,7 @@ void Display_Handler(void)
 										for(i=0;i<TestEndS2-8+1;i++)
 										{
 											LCD_ShowSpStr(526,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,VolumeStr2_T[i+8],0);
-											LCD_ShowSpStr(368,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
+											LCD_ShowSpStr(365,260+i*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"V1250",0);
 										}
 										
 										LCD_ShowSpStr(575,260+(TestEndS2-8)*35,100,24,BLACK,GRAY_DADADA,Font_Rbm24,"-f",0);
@@ -23190,10 +15158,7 @@ void Display_Handler(void)
 					{
 						case 1:
 						{
-							if(TestTimes < 3)
-								i = TestTimes;
-							else
-								i = 2;
+							i = TestTimes;
 							
 							LCD_Fill(160,93,160+704,93+60+270,GRAY_656565); 				// 灰色横条
 							LCD_Fill(160+5,153,160+704-5,153+270-5,WHITE); 					// 白色方框
@@ -23615,11 +15580,11 @@ void Display_Handler(void)
 							}
 							
 							// 设备信息 ------------------------------------
-							strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
-							if(DaylightTime) 																										// 夏令时
+							/*strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
+							if(DaylightTime) 															// 夏令时
 								strcpy(Reports_rsmp.RPT_SummerTime,"DST");
 							else
-								Reports_rsmp.RPT_SummerTime[0] = 0;
+								Reports_rsmp.RPT_SummerTime[0] = 0;*/
 							
 							if(DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 1||DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 0)
 								strcpy(Reports_rsmp.RPT_OQ,"No"); 															// 校验
@@ -23861,11 +15826,11 @@ void Display_Handler(void)
 											Reports_rsmp.RPT_RealTapsNb = TotalTaps1; 											// 实际拍击次数
 											
 											// 设备信息 ------------------------------------------
-											strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
-											if(DaylightTime) 																										// 夏令时
+											/*strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
+											if(DaylightTime) 															// 夏令时
 												strcpy(Reports_rsmp.RPT_SummerTime,"DST");
 											else
-												Reports_rsmp.RPT_SummerTime[0] = 0;
+												Reports_rsmp.RPT_SummerTime[0] = 0;*/
 											
 											if(DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 1||DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 0)
 												strcpy(Reports_rsmp.RPT_OQ,"No"); 															// 校验
@@ -23966,11 +15931,11 @@ void Display_Handler(void)
 											Reports_rsmp.RPT_RealTapsNb = TotalTaps2; 											// 实际拍击次数
 											
 											// 设备信息 ----------------------------------------------
-											strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
-											if(DaylightTime) 																										// 夏令时
+											/*strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
+											if(DaylightTime) 															// 夏令时
 												strcpy(Reports_rsmp.RPT_SummerTime,"DST");
 											else
-												Reports_rsmp.RPT_SummerTime[0] = 0;
+												Reports_rsmp.RPT_SummerTime[0] = 0;*/
 											
 											if(DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 1||DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 0)
 												strcpy(Reports_rsmp.RPT_OQ,"No"); 															// 校验
@@ -24183,11 +16148,11 @@ void Display_Handler(void)
 											Reports_rsmp.RPT_RealTapsNb = uiDat; 														// 实际拍击次数
 											
 											// 设备信息 ------------------------------------
-											strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
-											if(DaylightTime) 																										// 夏令时
+											/*strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
+											if(DaylightTime) 															// 夏令时
 												strcpy(Reports_rsmp.RPT_SummerTime,"DST");
 											else
-												Reports_rsmp.RPT_SummerTime[0] = 0;
+												Reports_rsmp.RPT_SummerTime[0] = 0;*/
 											
 											if(DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 1||DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 0)
 												strcpy(Reports_rsmp.RPT_OQ,"No"); 															// 校验
@@ -24538,11 +16503,11 @@ void Display_Handler(void)
 										}
 										
 										// 设备信息 ------------------------------------
-										strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
-										if(DaylightTime) 																										// 夏令时
+										/*strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
+										if(DaylightTime) 															// 夏令时
 											strcpy(Reports_rsmp.RPT_SummerTime,"DST");
 										else
-											Reports_rsmp.RPT_SummerTime[0] = 0;
+											Reports_rsmp.RPT_SummerTime[0] = 0;*/
 										
 										if(DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 1||DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 0)
 											strcpy(Reports_rsmp.RPT_OQ,"No"); 															// 校验
@@ -24748,63 +16713,64 @@ void Display_Handler(void)
 							LCD_Fill(32,212,32+720,212+100,GRAY_E8E8E8); 		// 中间灰色横条
 							LCD_Fill(32,362,32+720,362+212,GRAY_E8E8E8); 		// 中间灰色横条
 							
-							LCD_ShowSpStr(45,175,200,24,BLACK,WHITE,Font_Rbb28,"1  Status:",0);
+							LCD_ShowSpStr(45,175,200,28,BLACK,WHITE,Font_Rbb28,"1  Status:",0);
 							if(Reports_rsmp.RPT_TestStatus)
-								LCD_ShowSpStr(175,175,450,24,BLACK,WHITE,Font_Rbr27,"Test completed.",0);
+								LCD_ShowSpStr(175,175,450,28,BLACK,WHITE,Font_Rbr27,"Test completed.",0);
 							else
-								LCD_ShowSpStr(175,175,450,24,BLACK,WHITE,Font_Rbr27,"Test Abort.",0);
+								LCD_ShowSpStr(175,175,450,28,BLACK,WHITE,Font_Rbr27,"Test Abort.",0);
 							
-							LCD_ShowSpStr(45,225,200,24,BLACK,GRAY_E8E8E8,Font_Rbb28,"2  RPM: ",0);
+							LCD_ShowSpStr(45,225,200,28,BLACK,GRAY_E8E8E8,Font_Rbb28,"2  RPM: ",0);
 							sprintf((char*)tbuf,"%03d ",Reports_rsmp.RPT_S1Speed); 
-							LCD_ShowSpStr(150,225,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(150,225,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
 							
 							sprintf((char*)tbuf,"Min. %5.1f / Max. %5.1f ",Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-							LCD_ShowSpStr(175,275,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(175,275,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
 							
-							LCD_ShowSpStr(45,325,200,24,BLACK,WHITE,Font_Rbb28,"3  Taps: ",0);
+							LCD_ShowSpStr(45,325,200,28,BLACK,WHITE,Font_Rbb28,"3  Taps: ",0);
 							sprintf((char*)tbuf,"%d",Reports_rsmp.RPT_RealTapsNb); 
-							LCD_ShowSpStr(175,325,450,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(175,325,450,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							
 							// 工作站一相关信息 -------------------------------------------------
-							LCD_ShowSpStr(45,375,200,24,BLACK,GRAY_E8E8E8,Font_Rbb28,"4  Station 1:",0);
+							LCD_ShowSpStr(45,375,200,28,BLACK,GRAY_E8E8E8,Font_Rbb28,"4  Station 1:",0);
+
 							if(Reports_rsmp.RPT_S1PName[0] == '\0')
-								LCD_ShowSpStr(175,425,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Product Name 1",0);
+								LCD_ShowSpStr(175,412,450,27,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Product Name 1",0);
 							else
-								LCD_ShowSpStr(175,425,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1PName,0);
+								LCD_ShowSpStr(175,412,450,27,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1PName,0);
 							
 							if(Reports_rsmp.RPT_S1PBatchNb[0] == '\0')
-								LCD_ShowSpStr(175,450,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Batch Number 1",0);
+								LCD_ShowSpStr(175,439,450,27,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Batch Number 1",0);
 							else
-								LCD_ShowSpStr(175,450,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1PBatchNb,0);
+								LCD_ShowSpStr(175,439,450,27,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1PBatchNb,0);
 							
 							if(Reports_rsmp.RPT_S1CylinderSize[0] == '\0')
-								LCD_ShowSpStr(175,475,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Glass 1",0);
+								LCD_ShowSpStr(175,466,450,27,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Glass 1",0);
 							else
-								LCD_ShowSpStr(175,475,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1CylinderSize,0);
+								LCD_ShowSpStr(175,466,450,27,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1CylinderSize,0);
 							
 							if(Reports_rsmp.RPT_S1CylinderNb[0] == '\0')
-								LCD_ShowSpStr(175,500,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Hopper 1",0);
+								LCD_ShowSpStr(175,493,450,27,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Hopper 1",0);
 							else
-								LCD_ShowSpStr(175,500,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1CylinderNb,0);
+								LCD_ShowSpStr(175,493,450,27,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1CylinderNb,0);
 							
 							if(Reports_rsmp.RPT_S1SampleMass == 0)
-								LCD_ShowSpStr(175,525,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~999.9",0);
+								LCD_ShowSpStr(175,520,450,27,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~999.9",0);
 							else
 							{
 								fDat = Reports_rsmp.RPT_S1SampleMass;
 								fDat /= 100;
 								sprintf(tbuf,"%6.2f g",fDat);
-								LCD_ShowSpStr(175,525,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(175,520,450,27,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
 							}
 							
 							if(Reports_rsmp.RPT_S1InitialVolume == 0)
-								LCD_ShowSpStr(175,550,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~250.0",0);
+								LCD_ShowSpStr(175,547,450,27,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~250.0",0);
 							else
 							{
 								fDat = Reports_rsmp.RPT_S1InitialVolume;
 								fDat /= 10;
 								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(175,550,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(175,547,450,27,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
 							}
 						}
 						else
@@ -24813,60 +16779,60 @@ void Display_Handler(void)
 							LCD_Fill(769,300,769+62,300+145,GRAY_D7D7D7); 					// 上下滚动块
 							//LCD_Fill(32,387,32+720,387+189,GRAY_E8E8E8); 						// 中间灰色横条
 							
-							LCD_ShowSpStr(45,175,250,24,BLACK,WHITE,Font_Rbb28,"5  Test Results:",0); 	// 标题
-							LCD_ShowSpStr(325,175,250,24,BLACK,WHITE,Font_Rbb28,"Station I",0);
-							LCD_ShowSpStr(675,175,250,24,BLACK,WHITE,Font_Rbb28,"Taps",0);
+							LCD_ShowSpStr(45,175,250,28,BLACK,WHITE,Font_Rbb28,"5  Test Results:",0); 	// 标题
+							LCD_ShowSpStr(325,175,250,28,BLACK,WHITE,Font_Rbb28,"Station I",0);
+							LCD_ShowSpStr(675,175,250,28,BLACK,WHITE,Font_Rbb28,"Taps",0);
 							
-							LCD_ShowSpStr(75,225,350,24,BLACK,WHITE,Font_Rbr27,"Sample Weight:",0); 		// 样品质量
+							LCD_ShowSpStr(75,225,350,27,BLACK,WHITE,Font_Rbr27,"Sample Weight:",0); 		// 样品质量
 							fDat = Reports_rsmp.RPT_S1SampleMass;
 							fDat /= 100;
 							sprintf(tbuf,"%6.2f g",fDat);
-							LCD_ShowSpStr(325,225,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(325,225,350,27,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							
-							LCD_ShowSpStr(75,250,350,24,BLACK,WHITE,Font_Rbr27,"Volume Initial:",0); 		// 样品初始体积
+							LCD_ShowSpStr(75,225+27,350,27,BLACK,WHITE,Font_Rbr27,"Volume Initial:",0); 		// 样品初始体积
 							fDat = Reports_rsmp.RPT_S1InitialVolume;
 							fDat /= 10;
 							sprintf(tbuf,"%6.1f ml",fDat);
-							LCD_ShowSpStr(325,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(325,225+27,350,27,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							sprintf(tbuf,"%4d",0);
-							LCD_ShowSpStr(675,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(675,225+27,350,27,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							
-							LCD_ShowSpStr(75,275,350,24,BLACK,WHITE,Font_Rbr27,"Volume  1:",0);
+							LCD_ShowSpStr(75,225+27*2,350,27,BLACK,WHITE,Font_Rbr27,"Volume  1:",0);
 							fDat = Reports_rsmp.RPT_S1V10;
 							fDat /= 10;
 							sprintf(tbuf,"%6.1f ml",fDat);
-							LCD_ShowSpStr(325,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(325,225+27*2,350,27,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							sprintf(tbuf,"%4d",10);
-							LCD_ShowSpStr(675,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(675,225+27*2,350,27,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							
-							LCD_ShowSpStr(75,300,350,24,BLACK,WHITE,Font_Rbr27,"Volume  2:",0);
+							LCD_ShowSpStr(75,225+27*3,350,27,BLACK,WHITE,Font_Rbr27,"Volume  2:",0);
 							fDat = Reports_rsmp.RPT_S1V500;
 							fDat /= 10;
 							sprintf(tbuf,"%6.1f ml",fDat);
-							LCD_ShowSpStr(325,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(325,225+27*3,350,27,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							sprintf(tbuf,"%4d",500);
-							LCD_ShowSpStr(675,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(675,225+27*3,350,27,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							
-							LCD_ShowSpStr(75,325,350,24,BLACK,WHITE,Font_Rbr27,"Volume  3:",0);
+							LCD_ShowSpStr(75,225+27*4,350,27,BLACK,WHITE,Font_Rbr27,"Volume  3:",0);
 							fDat = Reports_rsmp.RPT_S1V1250;
 							fDat /= 10;
 							sprintf(tbuf,"%6.1f ml",fDat);
-							LCD_ShowSpStr(325,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(325,225+27*4,350,27,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							sprintf(tbuf,"%4d",1250);
-							LCD_ShowSpStr(675,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(675,225+27*4,350,27,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							
 							for(i=4;i<Reports_rsmp.RPT_TESTENDS1+1;i++)
 							{
 								sprintf(tbuf,"Volume  %d:",i);
-								LCD_ShowSpStr(75,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(75,360+(i-4)*27,350,27,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
 								fDat = Reports_rsmp.RPT_S1Delay[i-4];
 								fDat /= 10;
 								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(325,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(325,360+(i-4)*27,350,27,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
-								sprintf(tbuf,"%4d",1250);
-								LCD_ShowSpStr(675,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								sprintf(tbuf,"%4d",RUN_CYC[i]);
+								LCD_ShowSpStr(675,360+(i-4)*27,350,27,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							}
 						}
 						else
@@ -24877,35 +16843,35 @@ void Display_Handler(void)
 							LCD_Fill(32,362,32+720,362+50,GRAY_E8E8E8); 		// 中间灰色横条
 							LCD_Fill(32,462,32+720,462+50,GRAY_E8E8E8); 		// 中间灰色横条
 							
-							LCD_ShowSpStr(45,175,250,24,BLACK,WHITE,Font_Rbb28,"6  Statistics:",0);
-							LCD_ShowSpStr(375,175,250,24,BLACK,WHITE,Font_Rbb28,"Station I",0);
+							LCD_ShowSpStr(45,175,250,28,BLACK,WHITE,Font_Rbb28,"6  Statistics:",0);
+							LCD_ShowSpStr(375,175,250,28,BLACK,WHITE,Font_Rbb28,"Station I",0);
 							
-							LCD_ShowSpStr(75,225,350,24,BLACK,WHITE,Font_Rbr27,"Total taps:",0);
+							LCD_ShowSpStr(75,217,350,27,BLACK,WHITE,Font_Rbr27,"Total taps:",0);
 							uiDat = RUN_CYC[Reports_rsmp.RPT_TESTENDS1];
 							sprintf(tbuf,"%5d",uiDat);
-							LCD_ShowSpStr(400,225,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(400,217,350,27,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							
-							LCD_ShowSpStr(75,250,350,24,BLACK,WHITE,Font_Rbr27,"Initial Density:",0);
+							LCD_ShowSpStr(75,244,350,27,BLACK,WHITE,Font_Rbr27,"Initial Density:",0);
 							sprintf(tbuf,"%6.2f g/ml",Reports_rsmp.RPT_S1InitialDensity);
-							LCD_ShowSpStr(400,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(400,244,350,27,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							
-							LCD_ShowSpStr(75,275,350,24,BLACK,WHITE,Font_Rbr27,"Tapped Density:",0);
+							LCD_ShowSpStr(75,271,350,27,BLACK,WHITE,Font_Rbr27,"Tapped Density:",0);
 							sprintf(tbuf,"%6.2f g/ml",Reports_rsmp.RPT_S1TappedDensity);
-							LCD_ShowSpStr(400,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(400,271,350,27,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							
-							LCD_ShowSpStr(75,300,350,24,BLACK,WHITE,Font_Rbr27,"Hausner Ratio:",0);
+							LCD_ShowSpStr(75,298,350,27,BLACK,WHITE,Font_Rbr27,"Hausner Ratio:",0);
 							sprintf(tbuf,"%6.2f",Reports_rsmp.RPT_S1HausnerRatio);
-							LCD_ShowSpStr(400,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(400,298,350,27,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							
-							LCD_ShowSpStr(75,325,350,24,BLACK,WHITE,Font_Rbr27,"Compressibility Index:",0);
+							LCD_ShowSpStr(75,325,350,27,BLACK,WHITE,Font_Rbr27,"Compressibility Index:",0);
 							sprintf(tbuf,"%6.1f %%",Reports_rsmp.RPT_S1Compressibility);
-							LCD_ShowSpStr(400,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(400,325,350,27,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							
 							if(Reports_rsmp.RPT_V0_V10 == 0)
-								LCD_ShowSpStr(75,375,550,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V0.",0);
+								LCD_ShowSpStr(75,375,550,27,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V0.",0);
 							else
 							if(Reports_rsmp.RPT_V0_V10 == 10)
-								LCD_ShowSpStr(75,375,550,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V10.",0);
+								LCD_ShowSpStr(75,375,550,27,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V10.",0);
 						}
 					}
 					else
@@ -24918,69 +16884,70 @@ void Display_Handler(void)
 							LCD_Fill(32,212,32+720,212+100,GRAY_E8E8E8); 						// 中间灰色横条
 							LCD_Fill(32,362,32+720,362+212,GRAY_E8E8E8); 						// 中间灰色横条
 							
-							LCD_ShowSpStr(45,175,200,24,BLACK,WHITE,Font_Rbb28,"1  Status: ",0);
+							LCD_ShowSpStr(45,175,200,28,BLACK,WHITE,Font_Rbb28,"1  Status: ",0);
 							if(Reports_rsmp.RPT_TestStatus)
-								LCD_ShowSpStr(175,175,450,24,BLACK,WHITE,Font_Rbr27,"Test completed.",0);
+								LCD_ShowSpStr(175,175,450,28,BLACK,WHITE,Font_Rbr27,"Test completed.",0);
 							else
-								LCD_ShowSpStr(175,175,450,24,BLACK,WHITE,Font_Rbr27,"Test Abort.",0);
+								LCD_ShowSpStr(175,175,450,28,BLACK,WHITE,Font_Rbr27,"Test Abort.",0);
 							
-							LCD_ShowSpStr(45,225,200,24,BLACK,GRAY_E8E8E8,Font_Rbb28,"2  RPM: ",0);
+							LCD_ShowSpStr(45,225,200,28,BLACK,GRAY_E8E8E8,Font_Rbb28,"2  RPM: ",0);
 							sprintf((char*)tbuf,"%03d ",Reports_rsmp.RPT_S1Speed); 
-							LCD_ShowSpStr(150,223,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(150,223,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
 							
 							if(Reports_rsmp.RPT_S1MinSpeed==0&&Reports_rsmp.RPT_S1MaxSpeed==0)		//当只作第二工位时,第一工位速度为0,显示会错误2021/12/22 星期三 16:33:13
 								sprintf((char*)tbuf,"Min. %5.1f / Max. %5.1f ",Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
 							else
 								sprintf((char*)tbuf,"Min. %5.1f / Max. %5.1f ",Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-							LCD_ShowSpStr(175,275,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(175,275,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
 							
-							LCD_ShowSpStr(45,325,200,24,BLACK,WHITE,Font_Rbb28,"3  Taps: ",0);
+							LCD_ShowSpStr(45,325,200,28,BLACK,WHITE,Font_Rbb28,"3  Taps: ",0);
 							sprintf((char*)tbuf,"%d",Reports_rsmp.RPT_RealTapsNb); 
-							LCD_ShowSpStr(175,325,450,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(175,325,450,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							
 							// 工作站一相关信息 -----------------------------------------------
-							LCD_ShowSpStr(45,375,200,24,BLACK,GRAY_E8E8E8,Font_Rbb28,"4  Station 1:",0);
+							LCD_ShowSpStr(45,375,200,28,BLACK,GRAY_E8E8E8,Font_Rbb28,"4  Station 1:",0);
+							
 							if(Reports_rsmp.RPT_S1PName[0] == '\0')
-								LCD_ShowSpStr(175,425,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Product Name 1",0);
+								LCD_ShowSpStr(175,546-28*5,450,28,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Product Name 1",0);
 							else
-								LCD_ShowSpStr(175,425,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1PName,0);
+								LCD_ShowSpStr(175,546-28*5,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1PName,0);
 							
 							if(Reports_rsmp.RPT_S1PBatchNb[0] == '\0')
-								LCD_ShowSpStr(175,450,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Batch Number 1",0);
+								LCD_ShowSpStr(175,546-28*4,450,28,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Batch Number 1",0);
 							else
-								LCD_ShowSpStr(175,450,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1PBatchNb,0);
+								LCD_ShowSpStr(175,546-28*4,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1PBatchNb,0);
 							
 							if(Reports_rsmp.RPT_S1CylinderSize[0] == '\0')
-								LCD_ShowSpStr(175,475,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Glass 1",0);
+								LCD_ShowSpStr(175,546-28*3,450,28,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Glass 1",0);
 							else
-								LCD_ShowSpStr(175,475,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1CylinderSize,0);
+								LCD_ShowSpStr(175,546-28*3,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1CylinderSize,0);
 							
 							if(Reports_rsmp.RPT_S1CylinderNb[0] == '\0')
-								LCD_ShowSpStr(175,500,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Hopper 1",0);
+								LCD_ShowSpStr(175,546-28*2,450,28,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Hopper 1",0);
 							else
-								LCD_ShowSpStr(175,500,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1CylinderNb,0);
+								LCD_ShowSpStr(175,546-28*2,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1CylinderNb,0);
 							
 							if(Reports_rsmp.RPT_S1SampleMass == 0)
-								LCD_ShowSpStr(175,525,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~999.9",0);
+								LCD_ShowSpStr(175,546-28,450,28,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~999.9",0);
 							else
 							{
 								fDat = Reports_rsmp.RPT_S1SampleMass;
 								fDat /= 100;
 								sprintf(tbuf,"%6.2f g",fDat);
-								LCD_ShowSpStr(175,525,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(175,546-28,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
 							}
 							
 							if(Reports_rsmp.RPT_S1InitialVolume == 0)
-								LCD_ShowSpStr(175,550,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~250.0",0);
+								LCD_ShowSpStr(175,546,450,28,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~250.0",0);
 							else
 							{
 								fDat = Reports_rsmp.RPT_S1InitialVolume;
 								fDat /= 10;
 								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(175,550,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(175,546,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
 							}
 							
-							//LCD_ShowSpStr(45,550,650,24,BLACK,BLACK,Font_Rbb28,"5  Station 2:",0);
+							//LCD_ShowSpStr(45,550,650,28,BLACK,BLACK,Font_Rbb28,"5  Station 2:",0);
 							
 						}
 						else
@@ -24990,47 +16957,47 @@ void Display_Handler(void)
 							LCD_Fill(32,387,32+720,387+189,GRAY_E8E8E8); 						// 中间灰色横条
 							
 							// 工作站二相关信息 -----------------------------------------------
-							LCD_ShowSpStr(45,175,200,24,BLACK,WHITE,Font_Rbb28,"5  Station 2:",0);
+							LCD_ShowSpStr(45,175,200,28,BLACK,WHITE,Font_Rbb28,"5  Station 2:",0);
+
 							if(Reports_rsmp.RPT_S2PName[0] == '\0')
-								LCD_ShowSpStr(175,225,450,24,GRAY_C6C6C6,WHITE,Font_Rbr27,"Product Name 2",0);
+								LCD_ShowSpStr(175,206,450,28,GRAY_C6C6C6,WHITE,Font_Rbr27,"Product Name 2",0);
 							else
-								LCD_ShowSpStr(175,225,450,24,BLACK,WHITE,Font_Rbr27,Reports_rsmp.RPT_S2PName,0);
+								LCD_ShowSpStr(175,206,450,28,BLACK,WHITE,Font_Rbr27,Reports_rsmp.RPT_S2PName,0);
 							
 							if(Reports_rsmp.RPT_S2PBatchNb[0] == '\0')
-								LCD_ShowSpStr(175,250,450,24,GRAY_C6C6C6,WHITE,Font_Rbr27,"Batch Number 2",0);
+								LCD_ShowSpStr(175,206+28,450,28,GRAY_C6C6C6,WHITE,Font_Rbr27,"Batch Number 2",0);
 							else
-								LCD_ShowSpStr(175,250,450,24,BLACK,WHITE,Font_Rbr27,Reports_rsmp.RPT_S2PBatchNb,0);
+								LCD_ShowSpStr(175,206+28,450,28,BLACK,WHITE,Font_Rbr27,Reports_rsmp.RPT_S2PBatchNb,0);
 							
 							if(Reports_rsmp.RPT_S2CylinderSize[0] == '\0')
-								LCD_ShowSpStr(175,275,450,24,GRAY_C6C6C6,WHITE,Font_Rbr27,"Glass 2",0);
+								LCD_ShowSpStr(175,206+28*2,450,28,GRAY_C6C6C6,WHITE,Font_Rbr27,"Glass 2",0);
 							else
-								LCD_ShowSpStr(175,275,450,24,BLACK,WHITE,Font_Rbr27,Reports_rsmp.RPT_S2CylinderSize,0);
+								LCD_ShowSpStr(175,206+28*2,450,28,BLACK,WHITE,Font_Rbr27,Reports_rsmp.RPT_S2CylinderSize,0);
 							
 							if(Reports_rsmp.RPT_S2CylinderNb[0] == '\0')
-								LCD_ShowSpStr(175,300,450,24,GRAY_C6C6C6,WHITE,Font_Rbr27,"Hopper 2",0);
+								LCD_ShowSpStr(175,206+28*3,450,28,GRAY_C6C6C6,WHITE,Font_Rbr27,"Hopper 2",0);
 							else
-								LCD_ShowSpStr(175,300,450,24,BLACK,WHITE,Font_Rbr27,Reports_rsmp.RPT_S2CylinderNb,0);
+								LCD_ShowSpStr(175,206+28*3,450,28,BLACK,WHITE,Font_Rbr27,Reports_rsmp.RPT_S2CylinderNb,0);
 							
 							if(Reports_rsmp.RPT_S2SampleMass == 0)
-								LCD_ShowSpStr(175,325,450,24,GRAY_C6C6C6,WHITE,Font_Rbr27,"0~999.9",0);
+								LCD_ShowSpStr(175,206+28*4,450,28,GRAY_C6C6C6,WHITE,Font_Rbr27,"0~999.9",0);
 							else
 							{
 								fDat = Reports_rsmp.RPT_S2SampleMass;
 								fDat /= 100;
 								sprintf(tbuf,"%6.2f g",fDat);
-								LCD_ShowSpStr(175,325,450,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(175,206+28*4,450,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							}
 							
 							if(Reports_rsmp.RPT_S2InitialVolume == 0)
-								LCD_ShowSpStr(175,350,450,24,GRAY_C6C6C6,WHITE,Font_Rbr27,"0~250.0",0);
+								LCD_ShowSpStr(175,206+28*5,450,28,GRAY_C6C6C6,WHITE,Font_Rbr27,"0~250.0",0);
 							else
 							{
 								fDat = Reports_rsmp.RPT_S2InitialVolume;
 								fDat /= 10;
 								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(175,350,450,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							}
-							
+								LCD_ShowSpStr(175,206+28*5,450,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							}							
 						}
 						else
 						if(LineNb == 2) 						// 预览第三页
@@ -25041,44 +17008,44 @@ void Display_Handler(void)
 							//LCD_Fill(32,387,32+720,387+189,GRAY_E8E8E8); 						// 中间灰色横条
 							//LCD_Fill(32,538,32+720,538+38,GRAY_E8E8E8); 						// 中间灰色横条
 							
-							LCD_ShowSpStr(45,175,250,24,BLACK,WHITE,Font_Rbb28,"6  Test Results:",0); // 标题
-							LCD_ShowSpStr(325,175,250,24,BLACK,WHITE,Font_Rbb28,"Station I",0);
-							LCD_ShowSpStr(500,175,250,24,BLACK,WHITE,Font_Rbb28,"Station II",0);
-							LCD_ShowSpStr(675,175,250,24,BLACK,WHITE,Font_Rbb28,"Taps",0);
+							LCD_ShowSpStr(45,175,250,28,BLACK,WHITE,Font_Rbb28,"6  Test Results:",0); // 标题
+							LCD_ShowSpStr(325,175,250,28,BLACK,WHITE,Font_Rbb28,"Station I",0);
+							LCD_ShowSpStr(500,175,250,28,BLACK,WHITE,Font_Rbb28,"Station II",0);
+							LCD_ShowSpStr(675,175,250,28,BLACK,WHITE,Font_Rbb28,"Taps",0);
 							
-							LCD_ShowSpStr(75,225,350,24,BLACK,WHITE,Font_Rbr27,"Sample Weight:",0); 	// 样品质量
+							LCD_ShowSpStr(75,225,350,28,BLACK,WHITE,Font_Rbr27,"Sample Weight:",0); 	// 样品质量
 							fDat = Reports_rsmp.RPT_S1SampleMass;
 							fDat /= 100;
 							sprintf(tbuf,"%6.2f g",fDat);
-							LCD_ShowSpStr(325,225,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(325,225,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							fDat = Reports_rsmp.RPT_S2SampleMass;
 							fDat /= 100;
 							sprintf(tbuf,"%6.2f g",fDat);
-							LCD_ShowSpStr(500,225,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(500,225,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							
-							LCD_ShowSpStr(75,250,350,24,BLACK,WHITE,Font_Rbr27,"Volume Initial:",0); 	// 样品初始体积
+							LCD_ShowSpStr(75,225+28,350,28,BLACK,WHITE,Font_Rbr27,"Volume Initial:",0); 	// 样品初始体积
 							fDat = Reports_rsmp.RPT_S1InitialVolume;
 							fDat /= 10;
 							sprintf(tbuf,"%6.1f ml",fDat);
-							LCD_ShowSpStr(325,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(325,225+28,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							fDat = Reports_rsmp.RPT_S2InitialVolume;
 							fDat /= 10;
 							sprintf(tbuf,"%6.1f ml",fDat);
-							LCD_ShowSpStr(500,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(500,225+28,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							sprintf(tbuf,"%4d",0);
-							LCD_ShowSpStr(675,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(675,225+28,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							
-							LCD_ShowSpStr(75,275,350,24,BLACK,WHITE,Font_Rbr27,"Volume  1:",0);
+							LCD_ShowSpStr(75,225+28*2,350,28,BLACK,WHITE,Font_Rbr27,"Volume  1:",0);
 							//if(StationFlag&0x01)
 							if((Reports_rsmp.RPT_S1SampleMass != 0)&&(Reports_rsmp.RPT_S1InitialVolume != 0))
 							{
 								fDat = Reports_rsmp.RPT_S1V10;
 								fDat /= 10;
 								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(325,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(325,225+28*2,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							}
 							else
-								LCD_ShowSpStr(325,275,350,24,BLACK,WHITE,Font_Rbr27,"NA",0);
+								LCD_ShowSpStr(325,225+28*2,350,28,BLACK,WHITE,Font_Rbr27,"NA",0);
 							
 							//if(StationFlag&0x02)
 							if((Reports_rsmp.RPT_S2SampleMass != 0)&&(Reports_rsmp.RPT_S2InitialVolume != 0))
@@ -25086,21 +17053,21 @@ void Display_Handler(void)
 								fDat = Reports_rsmp.RPT_S2V10;
 								fDat /= 10;
 								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(500,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(500,225+28*2,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							}
 							else
-								LCD_ShowSpStr(500,275,350,24,BLACK,WHITE,Font_Rbr27,"NA",0);
+								LCD_ShowSpStr(500,225+28*2,350,28,BLACK,WHITE,Font_Rbr27,"NA",0);
 							sprintf(tbuf,"%4d",10);
-							LCD_ShowSpStr(675,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(675,225+28*2,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							
-							LCD_ShowSpStr(75,300,350,24,BLACK,WHITE,Font_Rbr27,"Volume  2:",0);
+							LCD_ShowSpStr(75,225+28*3,350,28,BLACK,WHITE,Font_Rbr27,"Volume  2:",0);
 							//if(StationFlag&0x01)
 							if((Reports_rsmp.RPT_S1SampleMass != 0)&&(Reports_rsmp.RPT_S1InitialVolume != 0))
 							{
 								fDat = Reports_rsmp.RPT_S1V500;
 								fDat /= 10;
 								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(325,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(325,225+28*3,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							}
 							//if(StationFlag&0x02)
 							if((Reports_rsmp.RPT_S2SampleMass != 0)&&(Reports_rsmp.RPT_S2InitialVolume != 0))
@@ -25108,19 +17075,19 @@ void Display_Handler(void)
 								fDat = Reports_rsmp.RPT_S2V500;
 								fDat /= 10;
 								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(500,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(500,225+28*3,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							}
 							sprintf(tbuf,"%4d",500);
-							LCD_ShowSpStr(675,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(675,225+28*3,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							
-							LCD_ShowSpStr(75,325,350,24,BLACK,WHITE,Font_Rbr27,"Volume  3:",0);
+							LCD_ShowSpStr(75,225+28*4,350,28,BLACK,WHITE,Font_Rbr27,"Volume  3:",0);
 							//if(StationFlag&0x01)
 							if((Reports_rsmp.RPT_S1SampleMass != 0)&&(Reports_rsmp.RPT_S1InitialVolume != 0))
 							{
 								fDat = Reports_rsmp.RPT_S1V1250;
 								fDat /= 10;
 								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(325,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(325,225+28*4,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							}
 							//if(StationFlag&0x02)
 							if((Reports_rsmp.RPT_S2SampleMass != 0)&&(Reports_rsmp.RPT_S2InitialVolume != 0))
@@ -25128,10 +17095,10 @@ void Display_Handler(void)
 								fDat = Reports_rsmp.RPT_S2V1250;
 								fDat /= 10;
 								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(500,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(500,225+28*4,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							}
 							sprintf(tbuf,"%4d",1250);
-							LCD_ShowSpStr(675,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(675,225+28*4,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							
 							if(Reports_rsmp.RPT_TESTENDS1 > Reports_rsmp.RPT_TESTENDS2)
 								ucDat = Reports_rsmp.RPT_TESTENDS1;
@@ -25140,7 +17107,7 @@ void Display_Handler(void)
 							for(i=4;i<ucDat+1;i++)
 							{
 								sprintf(tbuf,"Volume  %d:",i);
-								LCD_ShowSpStr(75,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(75,365+(i-4)*28,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
 								if((i <= Reports_rsmp.RPT_TESTENDS1)&&
 									 (Reports_rsmp.RPT_S1SampleMass != 0)&&
@@ -25149,7 +17116,7 @@ void Display_Handler(void)
 									fDat = Reports_rsmp.RPT_S1Delay[i-4];
 									fDat /= 10;
 									sprintf(tbuf,"%6.1f ml",fDat);
-									LCD_ShowSpStr(325,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+									LCD_ShowSpStr(325,365+(i-4)*28,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								}
 								
 								if((i <= Reports_rsmp.RPT_TESTENDS2)&&
@@ -25159,11 +17126,11 @@ void Display_Handler(void)
 									fDat = Reports_rsmp.RPT_S2Delay[i-4];
 									fDat /= 10;
 									sprintf(tbuf,"%6.1f ml",fDat);
-									LCD_ShowSpStr(500,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+									LCD_ShowSpStr(500,365+(i-4)*28,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								}
 								
-								sprintf(tbuf,"%4d",1250);
-								LCD_ShowSpStr(675,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								sprintf(tbuf,"%4d",RUN_CYC[i]);
+								LCD_ShowSpStr(675,365+(i-4)*28,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							}
 						}
 						else
@@ -25174,98 +17141,98 @@ void Display_Handler(void)
 							LCD_Fill(32,362,32+720,362+50,GRAY_E8E8E8); 		// 中间灰色横条
 							LCD_Fill(32,462,32+720,462+50,GRAY_E8E8E8); 		// 中间灰色横条
 							
-							LCD_ShowSpStr(45,175,250,24,BLACK,WHITE,Font_Rbb28,"7  Statistics:",0);
-							LCD_ShowSpStr(375,175,250,24,BLACK,WHITE,Font_Rbb28,"Station I",0);
-							LCD_ShowSpStr(575,175,250,24,BLACK,WHITE,Font_Rbb28,"Station II",0);
+							LCD_ShowSpStr(45,175,250,28,BLACK,WHITE,Font_Rbb28,"7  Statistics:",0);
+							LCD_ShowSpStr(375,175,250,28,BLACK,WHITE,Font_Rbb28,"Station I",0);
+							LCD_ShowSpStr(575,175,250,28,BLACK,WHITE,Font_Rbb28,"Station II",0);
 							
-							LCD_ShowSpStr(75,225,350,24,BLACK,WHITE,Font_Rbr27,"Total taps:",0);
+							LCD_ShowSpStr(75,325-28*4,350,28,BLACK,WHITE,Font_Rbr27,"Total taps:",0);
 							if((Reports_rsmp.RPT_S1SampleMass != 0)&&(Reports_rsmp.RPT_S1InitialVolume != 0))
 							{
 								uiDat = RUN_CYC[Reports_rsmp.RPT_TESTENDS1];
 								sprintf(tbuf,"%5d",uiDat);
-								LCD_ShowSpStr(400,225,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(400,325-28*4,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							}
 							else
-								LCD_ShowSpStr(400,225,350,24,BLACK,WHITE,Font_Rbr27,"NA",0);
+								LCD_ShowSpStr(400,325-28*4,350,28,BLACK,WHITE,Font_Rbr27,"NA",0);
 							
 							if((Reports_rsmp.RPT_S2SampleMass != 0)&&(Reports_rsmp.RPT_S2InitialVolume != 0))
 							{
 								uiDat = RUN_CYC[Reports_rsmp.RPT_TESTENDS2];
 								sprintf(tbuf,"%5d",uiDat);
-								LCD_ShowSpStr(600,225,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(600,325-28*4,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							}
 							else
-								LCD_ShowSpStr(600,225,350,24,BLACK,WHITE,Font_Rbr27,"NA",0);
+								LCD_ShowSpStr(600,325-28*4,350,28,BLACK,WHITE,Font_Rbr27,"NA",0);
 							
-							LCD_ShowSpStr(75,250,350,24,BLACK,WHITE,Font_Rbr27,"Initial Density:",0);
+							LCD_ShowSpStr(75,325-28*3,350,28,BLACK,WHITE,Font_Rbr27,"Initial Density:",0);
 							//if(StationFlag&0x01)
 							if((Reports_rsmp.RPT_S1SampleMass != 0)&&(Reports_rsmp.RPT_S1InitialVolume != 0))
 							{
 								//InitialDensity1 = SampleMass1/VolumeTest1[0];
 								sprintf(tbuf,"%6.2f g/ml",Reports_rsmp.RPT_S1InitialDensity);
-								LCD_ShowSpStr(400,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(400,325-28*3,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							}
 							//if(StationFlag&0x02)
 							if((Reports_rsmp.RPT_S2SampleMass != 0)&&(Reports_rsmp.RPT_S2InitialVolume != 0))
 							{
 								//InitialDensity2 = SampleMass2/VolumeTest2[0];
 								sprintf(tbuf,"%6.2f g/ml",Reports_rsmp.RPT_S2InitialDensity);
-								LCD_ShowSpStr(600,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(600,325-28*3,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							}
 							
-							LCD_ShowSpStr(75,275,350,24,BLACK,WHITE,Font_Rbr27,"Tapped Density:",0);
+							LCD_ShowSpStr(75,325-28*2,350,28,BLACK,WHITE,Font_Rbr27,"Tapped Density:",0);
 							//if(StationFlag&0x01)
 							if((Reports_rsmp.RPT_S1SampleMass != 0)&&(Reports_rsmp.RPT_S1InitialVolume != 0))
 							{
 								//TappedDensity1 = SampleMass1/VolumeTest1[TestEndS1];
 								sprintf(tbuf,"%6.2f g/ml",Reports_rsmp.RPT_S1TappedDensity);
-								LCD_ShowSpStr(400,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(400,325-28*2,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							}
 							//if(StationFlag&0x02)
 							if((Reports_rsmp.RPT_S2SampleMass != 0)&&(Reports_rsmp.RPT_S2InitialVolume != 0))
 							{
 								//TappedDensity2 = SampleMass2/VolumeTest2[TestEndS2];
 								sprintf(tbuf,"%6.2f g/ml",Reports_rsmp.RPT_S2TappedDensity);
-								LCD_ShowSpStr(600,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(600,325-28*2,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							}
 							
-							LCD_ShowSpStr(75,300,350,24,BLACK,WHITE,Font_Rbr27,"Hausner Ratio:",0);
+							LCD_ShowSpStr(75,325-28,350,28,BLACK,WHITE,Font_Rbr27,"Hausner Ratio:",0);
 							//if(StationFlag&0x01)
 							if((Reports_rsmp.RPT_S1SampleMass != 0)&&(Reports_rsmp.RPT_S1InitialVolume != 0))
 							{
 								//HausnerRatio1 = VolumeTest1[0]/VolumeTest1[TestEndS1];
 								sprintf(tbuf,"%6.2f",Reports_rsmp.RPT_S1HausnerRatio);
-								LCD_ShowSpStr(400,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(400,325-28,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							}
 							//if(StationFlag&0x02)
 							if((Reports_rsmp.RPT_S2SampleMass != 0)&&(Reports_rsmp.RPT_S2InitialVolume != 0))
 							{
 								//HausnerRatio2 = VolumeTest2[0]/VolumeTest2[TestEndS2];
 								sprintf(tbuf,"%6.2f",Reports_rsmp.RPT_S2HausnerRatio);
-								LCD_ShowSpStr(600,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(600,325-28,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							}
 							
-							LCD_ShowSpStr(75,325,350,24,BLACK,WHITE,Font_Rbr27,"Compressibility Index:",0);
+							LCD_ShowSpStr(75,325,350,28,BLACK,WHITE,Font_Rbr27,"Compressibility Index:",0);
 							//if(StationFlag&0x01)
 							if((Reports_rsmp.RPT_S1SampleMass != 0)&&(Reports_rsmp.RPT_S1InitialVolume != 0))
 							{
 								//CompressibilityIndex1 = 100*(VolumeTest1[0]-VolumeTest1[TestEndS1])/VolumeTest1[0];
 								sprintf(tbuf,"%6.1f %%",Reports_rsmp.RPT_S1Compressibility);
-								LCD_ShowSpStr(400,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(400,325,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							}
 							//if(StationFlag&0x02)
 							if((Reports_rsmp.RPT_S2SampleMass != 0)&&(Reports_rsmp.RPT_S2InitialVolume != 0))
 							{
 								//CompressibilityIndex2 = 100*(VolumeTest2[0]-VolumeTest2[TestEndS2])/VolumeTest2[0];
 								sprintf(tbuf,"%6.1f %%",Reports_rsmp.RPT_S2Compressibility);
-								LCD_ShowSpStr(600,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(600,325,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 							}
 							
 							if(Reports_rsmp.RPT_V0_V10 == 0)
-								LCD_ShowSpStr(75,375,550,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V0.",0);
+								LCD_ShowSpStr(75,375,550,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V0.",0);
 							else
 							if(Reports_rsmp.RPT_V0_V10 == 10)
-								LCD_ShowSpStr(75,375,550,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V10.",0);
+								LCD_ShowSpStr(75,375,550,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V10.",0);
 						}
 					}
 					else
@@ -25278,13 +17245,13 @@ void Display_Handler(void)
 							LCD_Fill(32,212,32+720,212+100,GRAY_E8E8E8); 	// 中间灰色横条
 							LCD_Fill(32,362,32+720,362+212,GRAY_E8E8E8); 	// 中间灰色横条
 							
-							LCD_ShowSpStr(45,175,200,24,BLACK,WHITE,Font_Rbb28,"1  Status: ",0);
+							LCD_ShowSpStr(45,175,200,28,BLACK,WHITE,Font_Rbb28,"1  Status: ",0);
 							if(Reports_rsmp.RPT_TestStatus)
-								LCD_ShowSpStr(175,175,450,24,BLACK,WHITE,Font_Rbr27,"Test completed.",0);
+								LCD_ShowSpStr(175,175,450,28,BLACK,WHITE,Font_Rbr27,"Test completed.",0);
 							else
-								LCD_ShowSpStr(175,175,450,24,BLACK,WHITE,Font_Rbr27,"Test Abort.",0);
+								LCD_ShowSpStr(175,175,450,28,BLACK,WHITE,Font_Rbr27,"Test Abort.",0);
 							
-							LCD_ShowSpStr(45,225,200,24,BLACK,GRAY_E8E8E8,Font_Rbb28,"2  RPM: ",0);
+							LCD_ShowSpStr(45,225,200,28,BLACK,GRAY_E8E8E8,Font_Rbb28,"2  RPM: ",0);
 							if(Reports_rsmp.RPT_S1Method == 1)
 								sprintf((char*)tbuf,"%03d ",300); 
 							else
@@ -25292,106 +17259,106 @@ void Display_Handler(void)
 								sprintf((char*)tbuf,"%03d ",250); 
 							else
 								sprintf((char*)tbuf,"%03d ",150);
-							LCD_ShowSpStr(150,225,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(150,225,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
 							
 							if(Reports_rsmp.RPT_S1Method == 1) 				// 方法一
 								sprintf((char*)tbuf,"Min. %5.1f / Max. %5.1f ",Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
 							else
 							if(Reports_rsmp.RPT_S2Method == 2) 				// 方法二
 								sprintf((char*)tbuf,"Min. %5.1f / Max. %5.1f ",Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-							LCD_ShowSpStr(175,275,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
+							LCD_ShowSpStr(175,275,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
 							
-							LCD_ShowSpStr(45,325,200,24,BLACK,WHITE,Font_Rbb28,"3  Taps: ",0);
+							LCD_ShowSpStr(45,325,200,28,BLACK,WHITE,Font_Rbb28,"3  Taps: ",0);
 							uiDat = Reports_rsmp.RPT_RealTapsNb;
 							sprintf((char*)tbuf,"%4d",uiDat); 
-							LCD_ShowSpStr(175,325,650,24,BLACK,WHITE,Font_Rbb28,tbuf,0);
+							LCD_ShowSpStr(175,325,650,28,BLACK,WHITE,Font_Rbb28,tbuf,0);
 							
 							if(Reports_rsmp.RPT_S1Method == 1) 				// 方法一
 							{
-								LCD_ShowSpStr(45,375,200,24,BLACK,GRAY_E8E8E8,Font_Rbb28,"4  Station 1:",0);
+								LCD_ShowSpStr(45,375,200,28,BLACK,GRAY_E8E8E8,Font_Rbb28,"4  Station 1:",0);
 								if(Reports_rsmp.RPT_S1PName[0] == '\0')
-									LCD_ShowSpStr(175,425,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Product Name 1",0);
+									LCD_ShowSpStr(175,546-28*5,450,28,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Product Name 1",0);
 								else
-									LCD_ShowSpStr(175,425,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1PName,0);
+									LCD_ShowSpStr(175,546-28*5,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1PName,0);
 								
 								if(Reports_rsmp.RPT_S1PBatchNb[0] == '\0')
-									LCD_ShowSpStr(175,450,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Batch Number 1",0);
+									LCD_ShowSpStr(175,546-28*4,450,28,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Batch Number 1",0);
 								else
-									LCD_ShowSpStr(175,450,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1PBatchNb,0);
+									LCD_ShowSpStr(175,546-28*4,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1PBatchNb,0);
 								
 								if(Reports_rsmp.RPT_S1CylinderSize[0] == '\0')
-									LCD_ShowSpStr(175,475,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Glass 1",0);
+									LCD_ShowSpStr(175,546-28*3,450,28,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Glass 1",0);
 								else
-									LCD_ShowSpStr(175,475,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1CylinderSize,0);
+									LCD_ShowSpStr(175,546-28*3,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1CylinderSize,0);
 								
 								if(Reports_rsmp.RPT_S1CylinderNb[0] == '\0')
-									LCD_ShowSpStr(175,500,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Hopper 1",0);
+									LCD_ShowSpStr(175,546-28*2,450,28,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Hopper 1",0);
 								else
-									LCD_ShowSpStr(175,500,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1CylinderNb,0);
+									LCD_ShowSpStr(175,546-28*2,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1CylinderNb,0);
 								
 								if(Reports_rsmp.RPT_S1SampleMass == 0)
-									LCD_ShowSpStr(175,525,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~999.9",0);
+									LCD_ShowSpStr(175,546-28,450,28,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~999.9",0);
 								else
 								{
 									fDat = Reports_rsmp.RPT_S1SampleMass;
 									fDat /= 100;
 									sprintf(tbuf,"%6.2f g",fDat);
-									LCD_ShowSpStr(175,525,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
+									LCD_ShowSpStr(175,546-28,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
 								}
 								
 								if(Reports_rsmp.RPT_S1InitialVolume == 0)
-									LCD_ShowSpStr(175,550,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~250.0",0);
+									LCD_ShowSpStr(175,546,450,28,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~250.0",0);
 								else
 								{
 									fDat = Reports_rsmp.RPT_S1InitialVolume;
 									fDat /= 10;
 									sprintf(tbuf,"%6.1f ml",fDat);
-									LCD_ShowSpStr(175,550,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
-								}
-								
+									LCD_ShowSpStr(175,546,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
+								}								
 							}
 							else
 							if(Reports_rsmp.RPT_S2Method == 2) 				// 方法二
 							{
-								LCD_ShowSpStr(45,375,200,24,BLACK,GRAY_E8E8E8,Font_Rbb28,"4  Station 2:",0);
+								LCD_ShowSpStr(45,375,200,28,BLACK,GRAY_E8E8E8,Font_Rbb28,"4  Station 2:",0);
+
 								if(Reports_rsmp.RPT_S2PName[0] == '\0')
-									LCD_ShowSpStr(175,425,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Product Name 2",0);
+									LCD_ShowSpStr(175,546-28*5,450,28,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Product Name 2",0);
 								else
-									LCD_ShowSpStr(175,425,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S2PName,0);
+									LCD_ShowSpStr(175,546-28*5,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S2PName,0);
 								
 								if(Reports_rsmp.RPT_S2PBatchNb[0] == '\0')
-									LCD_ShowSpStr(175,450,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Batch Number 2",0);
+									LCD_ShowSpStr(175,546-28*4,450,28,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Batch Number 2",0);
 								else
-									LCD_ShowSpStr(175,450,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S2PBatchNb,0);
+									LCD_ShowSpStr(175,546-28*4,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S2PBatchNb,0);
 								
 								if(Reports_rsmp.RPT_S2CylinderSize[0] == '\0')
-									LCD_ShowSpStr(175,475,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Glass 2",0);
+									LCD_ShowSpStr(175,546-28*3,450,28,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Glass 2",0);
 								else
-									LCD_ShowSpStr(175,475,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S2CylinderSize,0);
+									LCD_ShowSpStr(175,546-28*3,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S2CylinderSize,0);
 								
 								if(Reports_rsmp.RPT_S2CylinderNb[0] == '\0')
-									LCD_ShowSpStr(175,500,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Hopper 2",0);
+									LCD_ShowSpStr(175,546-28*2,450,28,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Hopper 2",0);
 								else
-									LCD_ShowSpStr(175,500,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S2CylinderNb,0);
+									LCD_ShowSpStr(175,546-28*2,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S2CylinderNb,0);
 								
 								if(Reports_rsmp.RPT_S2SampleMass == 0)
-									LCD_ShowSpStr(175,525,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~999.9",0);
+									LCD_ShowSpStr(175,546-28,450,28,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~999.9",0);
 								else
 								{
 									fDat = Reports_rsmp.RPT_S2SampleMass;
 									fDat /= 100;
 									sprintf(tbuf,"%6.2f g",fDat);
-									LCD_ShowSpStr(175,525,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
+									LCD_ShowSpStr(175,546-28,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
 								}
 								
 								if(Reports_rsmp.RPT_S2InitialVolume == 0)
-									LCD_ShowSpStr(175,550,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~250.0",0);
+									LCD_ShowSpStr(175,546,450,28,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~250.0",0);
 								else
 								{
 									fDat = Reports_rsmp.RPT_S2InitialVolume;
 									fDat /= 10;
 									sprintf(tbuf,"%6.1f ml",fDat);
-									LCD_ShowSpStr(175,550,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
+									LCD_ShowSpStr(175,546,450,28,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
 								}
 							
 							}
@@ -25404,123 +17371,123 @@ void Display_Handler(void)
 							
 							if(Reports_rsmp.RPT_S1Method == 1) 				// 方法一
 							{
-								LCD_ShowSpStr(45,175,250,24,BLACK,WHITE,Font_Rbb28,"5  Test Results:",0); // 标题
-								LCD_ShowSpStr(325,175,250,24,BLACK,WHITE,Font_Rbb28,"Station I",0);
-								//LCD_ShowSpStr(500,175,250,24,BLACK,WHITE,Font_Rbb28,"Station II",0);
-								LCD_ShowSpStr(675,175,250,24,BLACK,WHITE,Font_Rbb28,"Taps",0);
+								LCD_ShowSpStr(45,175,250,28,BLACK,WHITE,Font_Rbb28,"5  Test Results:",0); // 标题
+								LCD_ShowSpStr(325,175,250,28,BLACK,WHITE,Font_Rbb28,"Station I",0);
+								//LCD_ShowSpStr(500,175,250,28,BLACK,WHITE,Font_Rbb28,"Station II",0);
+								LCD_ShowSpStr(675,175,250,28,BLACK,WHITE,Font_Rbb28,"Taps",0);
 								
-								LCD_ShowSpStr(75,225,350,24,BLACK,WHITE,Font_Rbr27,"Sample Weight:",0); 	// 样品质量
+								LCD_ShowSpStr(75,225,350,28,BLACK,WHITE,Font_Rbr27,"Sample Weight:",0); 	// 样品质量
 								fDat = Reports_rsmp.RPT_S1SampleMass;
 								fDat /= 100;
 								sprintf(tbuf,"%6.2f g",fDat);
-								LCD_ShowSpStr(325,225,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(325,225,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
-								LCD_ShowSpStr(75,250,350,24,BLACK,WHITE,Font_Rbr27,"Volume Initial:",0); 	// 样品初始体积
+								LCD_ShowSpStr(75,225+28,350,28,BLACK,WHITE,Font_Rbr27,"Volume Initial:",0); 	// 样品初始体积
 								fDat = Reports_rsmp.RPT_S1InitialVolume;
 								fDat /= 10;
 								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(325,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(325,225+28,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								sprintf(tbuf,"%4d",0);
-								LCD_ShowSpStr(675,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(675,225+28,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
-								LCD_ShowSpStr(75,275,350,24,BLACK,WHITE,Font_Rbr27,"Volume  1:",0);
+								LCD_ShowSpStr(75,225+28*2,350,28,BLACK,WHITE,Font_Rbr27,"Volume  1:",0);
 								fDat = Reports_rsmp.RPT_S1V10;
 								fDat /= 10;
 								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(325,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(325,225+28*2,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								sprintf(tbuf,"%4d",10);
-								LCD_ShowSpStr(675,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(675,225+28*2,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
-								LCD_ShowSpStr(75,300,350,24,BLACK,WHITE,Font_Rbr27,"Volume  2:",0);
+								LCD_ShowSpStr(75,225+28*3,350,28,BLACK,WHITE,Font_Rbr27,"Volume  2:",0);
 								fDat = Reports_rsmp.RPT_S1V500;
 								fDat /= 10;
 								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(325,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(325,225+28*3,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								sprintf(tbuf,"%4d",500);
-								LCD_ShowSpStr(675,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(675,225+28*3,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
-								LCD_ShowSpStr(75,325,350,24,BLACK,WHITE,Font_Rbr27,"Volume  3:",0);
+								LCD_ShowSpStr(75,225+28*4,350,28,BLACK,WHITE,Font_Rbr27,"Volume  3:",0);
 								fDat = Reports_rsmp.RPT_S1V1250;
 								fDat /= 10;
 								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(325,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(325,225+28*4,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								sprintf(tbuf,"%4d",1250);
-								LCD_ShowSpStr(675,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(675,225+28*4,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
 								ucDat = Reports_rsmp.RPT_TESTENDS1;
 								for(i=4;i<ucDat+1;i++)
 								{
 									sprintf(tbuf,"Volume  %d:",i);
-									LCD_ShowSpStr(75,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+									LCD_ShowSpStr(75,365+(i-4)*28,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 									
 									fDat = Reports_rsmp.RPT_S1Delay[i-4];
 									fDat /= 10;
 									sprintf(tbuf,"%6.1f ml",fDat);
-									LCD_ShowSpStr(325,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+									LCD_ShowSpStr(325,365+(i-4)*28,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 									
-									sprintf(tbuf,"%4d",1250);
-									LCD_ShowSpStr(675,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+									sprintf(tbuf,"%4d",RUN_CYC[i]);
+									LCD_ShowSpStr(675,365+(i-4)*28,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								}
 							}
 							else
 							if(Reports_rsmp.RPT_S2Method == 2) 				// 方法二
 							{
-								LCD_ShowSpStr(45,175,250,24,BLACK,WHITE,Font_Rbb28,"5  Test Results:",0); // 标题
-								//LCD_ShowSpStr(325,175,250,24,BLACK,WHITE,Font_Rbb28,"Station I",0);
-								LCD_ShowSpStr(500,175,250,24,BLACK,WHITE,Font_Rbb28,"Station II",0);
-								LCD_ShowSpStr(675,175,250,24,BLACK,WHITE,Font_Rbb28,"Taps",0);
+								LCD_ShowSpStr(45,175,250,28,BLACK,WHITE,Font_Rbb28,"5  Test Results:",0); // 标题
+								//LCD_ShowSpStr(325,175,250,28,BLACK,WHITE,Font_Rbb28,"Station I",0);
+								LCD_ShowSpStr(500,175,250,28,BLACK,WHITE,Font_Rbb28,"Station II",0);
+								LCD_ShowSpStr(675,175,250,28,BLACK,WHITE,Font_Rbb28,"Taps",0);
 								
-								LCD_ShowSpStr(75,225,350,24,BLACK,WHITE,Font_Rbr27,"Sample Weight:",0); 	// 样品质量
+								LCD_ShowSpStr(75,225,350,28,BLACK,WHITE,Font_Rbr27,"Sample Weight:",0); 	// 样品质量
 								fDat = Reports_rsmp.RPT_S2SampleMass;
 								fDat /= 100;
 								sprintf(tbuf,"%6.2f g",fDat);
-								LCD_ShowSpStr(500,225,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(500,225,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
-								LCD_ShowSpStr(75,250,350,24,BLACK,WHITE,Font_Rbr27,"Volume Initial:",0); 	// 样品初始体积
+								LCD_ShowSpStr(75,225+28,350,28,BLACK,WHITE,Font_Rbr27,"Volume Initial:",0); 	// 样品初始体积
 								fDat = Reports_rsmp.RPT_S2InitialVolume;
 								fDat /= 10;
 								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(500,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(500,225+28,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								sprintf(tbuf,"%4d",0);
-								LCD_ShowSpStr(675,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(675,225+28,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
-								LCD_ShowSpStr(75,275,350,24,BLACK,WHITE,Font_Rbr27,"Volume  1:",0);
+								LCD_ShowSpStr(75,225+28*2,350,28,BLACK,WHITE,Font_Rbr27,"Volume  1:",0);
 								fDat = Reports_rsmp.RPT_S2V10;
 								fDat /= 10;
 								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(500,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(500,225+28*2,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								sprintf(tbuf,"%4d",10);
-								LCD_ShowSpStr(675,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(675,225+28*2,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
-								LCD_ShowSpStr(75,300,350,24,BLACK,WHITE,Font_Rbr27,"Volume  2:",0);
+								LCD_ShowSpStr(75,225+28*3,350,28,BLACK,WHITE,Font_Rbr27,"Volume  2:",0);
 								fDat = Reports_rsmp.RPT_S2V500;
 								fDat /= 10;
 								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(500,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(500,225+28*3,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								sprintf(tbuf,"%4d",500);
-								LCD_ShowSpStr(675,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(675,225+28*3,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
-								LCD_ShowSpStr(75,325,350,24,BLACK,WHITE,Font_Rbr27,"Volume  3:",0);
+								LCD_ShowSpStr(75,225+28*4,350,28,BLACK,WHITE,Font_Rbr27,"Volume  3:",0);
 								fDat = Reports_rsmp.RPT_S2V1250;
 								fDat /= 10;
 								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(500,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(500,225+28*4,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								sprintf(tbuf,"%4d",1250);
-								LCD_ShowSpStr(675,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(675,225+28*4,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
 								ucDat = Reports_rsmp.RPT_TESTENDS2;
 								for(i=4;i<ucDat+1;i++)
 								{
 									sprintf(tbuf,"Volume  %d:",i);
-									LCD_ShowSpStr(75,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+									LCD_ShowSpStr(75,365+(i-4)*28,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 									
 									fDat = Reports_rsmp.RPT_S2Delay[i-4];
 									fDat /= 10;
 									sprintf(tbuf,"%6.1f ml",fDat);
-									LCD_ShowSpStr(500,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+									LCD_ShowSpStr(500,365+(i-4)*28,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 									
-									sprintf(tbuf,"%4d",1250);
-									LCD_ShowSpStr(675,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+									sprintf(tbuf,"%4d",RUN_CYC[i]);
+									LCD_ShowSpStr(675,365+(i-4)*28,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								}
 							}
 						}
@@ -25534,76 +17501,76 @@ void Display_Handler(void)
 							
 							if(Reports_rsmp.RPT_S1Method == 1) 				// 方法一
 							{
-								LCD_ShowSpStr(45,175,250,24,BLACK,WHITE,Font_Rbb28,"6  Statistics:",0);
-								LCD_ShowSpStr(375,175,250,24,BLACK,WHITE,Font_Rbb28,"Station I",0);
+								LCD_ShowSpStr(45,175,250,28,BLACK,WHITE,Font_Rbb28,"6  Statistics:",0);
+								LCD_ShowSpStr(375,175,250,28,BLACK,WHITE,Font_Rbb28,"Station I",0);
 								
-								LCD_ShowSpStr(75,225,350,24,BLACK,WHITE,Font_Rbr27,"Total taps:",0);
+								LCD_ShowSpStr(75,325-28*4,350,28,BLACK,WHITE,Font_Rbr27,"Total taps:",0);
 								uiDat = RUN_CYC[Reports_rsmp.RPT_TESTENDS1];
 								sprintf(tbuf,"%5d",uiDat);
-								LCD_ShowSpStr(400,225,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(400,325-28*4,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
-								LCD_ShowSpStr(75,250,350,24,BLACK,WHITE,Font_Rbr27,"Initial Density:",0);
+								LCD_ShowSpStr(75,325-28*3,350,28,BLACK,WHITE,Font_Rbr27,"Initial Density:",0);
 								//InitialDensity1 = SampleMass1/VolumeTest1[0];
 								sprintf(tbuf,"%6.2f g/ml",Reports_rsmp.RPT_S1InitialDensity);
-								LCD_ShowSpStr(400,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(400,325-28*3,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
-								LCD_ShowSpStr(75,275,350,24,BLACK,WHITE,Font_Rbr27,"Tapped Density:",0);
+								LCD_ShowSpStr(75,325-28*2,350,28,BLACK,WHITE,Font_Rbr27,"Tapped Density:",0);
 								//TappedDensity1 = SampleMass1/VolumeTest1[TestEndS1];
 								sprintf(tbuf,"%6.2f g/ml",Reports_rsmp.RPT_S1TappedDensity);
-								LCD_ShowSpStr(400,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(400,325-28*2,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
-								LCD_ShowSpStr(75,300,350,24,BLACK,WHITE,Font_Rbr27,"Hausner Ratio:",0);
+								LCD_ShowSpStr(75,325-28,350,28,BLACK,WHITE,Font_Rbr27,"Hausner Ratio:",0);
 								//HausnerRatio1 = VolumeTest1[0]/VolumeTest1[TestEndS1];
 								sprintf(tbuf,"%6.2f",Reports_rsmp.RPT_S1HausnerRatio);
-								LCD_ShowSpStr(400,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(400,325-28,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
-								LCD_ShowSpStr(75,325,350,24,BLACK,WHITE,Font_Rbr27,"Compressibility Index:",0);
+								LCD_ShowSpStr(75,325,350,28,BLACK,WHITE,Font_Rbr27,"Compressibility Index:",0);
 								//CompressibilityIndex1 = 100*(VolumeTest1[0]-VolumeTest1[TestEndS1])/VolumeTest1[0];
 								sprintf(tbuf,"%6.1f %%",Reports_rsmp.RPT_S1Compressibility);
-								LCD_ShowSpStr(400,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(400,325,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
 								if(Reports_rsmp.RPT_V0_V10 == 0)
-									LCD_ShowSpStr(75,375,550,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V0.",0);
+									LCD_ShowSpStr(75,375,550,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V0.",0);
 								else
 								if(Reports_rsmp.RPT_V0_V10 == 10)
-									LCD_ShowSpStr(75,375,550,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V10.",0);
+									LCD_ShowSpStr(75,375,550,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V10.",0);
 							}
 							else
 							if(Reports_rsmp.RPT_S2Method == 2) 				// 方法二
 							{
-								LCD_ShowSpStr(45,175,250,24,BLACK,WHITE,Font_Rbb28,"6  Statistics:",0);
-								LCD_ShowSpStr(575,175,250,24,BLACK,WHITE,Font_Rbb28,"Station II",0);
+								LCD_ShowSpStr(45,175,250,28,BLACK,WHITE,Font_Rbb28,"6  Statistics:",0);
+								LCD_ShowSpStr(575,175,250,28,BLACK,WHITE,Font_Rbb28,"Station II",0);
 								
-								LCD_ShowSpStr(75,225,350,24,BLACK,WHITE,Font_Rbr27,"Total taps:",0);
+								LCD_ShowSpStr(75,325-28*4,350,28,BLACK,WHITE,Font_Rbr27,"Total taps:",0);
 								uiDat = RUN_CYC[Reports_rsmp.RPT_TESTENDS2];
 								sprintf(tbuf,"%5d",uiDat);
-								LCD_ShowSpStr(600,225,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(600,325-28*4,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
-								LCD_ShowSpStr(75,250,350,24,BLACK,WHITE,Font_Rbr27,"Initial Density:",0);
+								LCD_ShowSpStr(75,325-28*3,350,28,BLACK,WHITE,Font_Rbr27,"Initial Density:",0);
 								//InitialDensity2 = SampleMass2/VolumeTest2[0];
 								sprintf(tbuf,"%6.2f g/ml",Reports_rsmp.RPT_S2InitialDensity);
-								LCD_ShowSpStr(600,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(600,325-28*3,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
-								LCD_ShowSpStr(75,275,350,24,BLACK,WHITE,Font_Rbr27,"Tapped Density:",0);
+								LCD_ShowSpStr(75,325-28*2,350,28,BLACK,WHITE,Font_Rbr27,"Tapped Density:",0);
 								//TappedDensity2 = SampleMass2/VolumeTest2[TestEndS2];
 								sprintf(tbuf,"%6.2f g/ml",Reports_rsmp.RPT_S2TappedDensity);
-								LCD_ShowSpStr(600,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(600,325-28*2,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
-								LCD_ShowSpStr(75,300,350,24,BLACK,WHITE,Font_Rbr27,"Hausner Ratio:",0);
+								LCD_ShowSpStr(75,325-28,350,28,BLACK,WHITE,Font_Rbr27,"Hausner Ratio:",0);
 								//HausnerRatio2 = VolumeTest2[0]/VolumeTest2[TestEndS2];
 								sprintf(tbuf,"%6.2f",Reports_rsmp.RPT_S2HausnerRatio);
-								LCD_ShowSpStr(600,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(600,325-28,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
-								LCD_ShowSpStr(75,325,350,24,BLACK,WHITE,Font_Rbr27,"Compressibility Index:",0);
+								LCD_ShowSpStr(75,325,350,28,BLACK,WHITE,Font_Rbr27,"Compressibility Index:",0);
 								//CompressibilityIndex2 = 100*(VolumeTest2[0]-VolumeTest2[TestEndS2])/VolumeTest2[0];
 								sprintf(tbuf,"%6.1f %%",Reports_rsmp.RPT_S2Compressibility);
-								LCD_ShowSpStr(600,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
+								LCD_ShowSpStr(600,325,350,28,BLACK,WHITE,Font_Rbr27,tbuf,0);
 								
 								if(Reports_rsmp.RPT_V0_V10 == 0)
-									LCD_ShowSpStr(75,375,550,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V0.",0);
+									LCD_ShowSpStr(75,375,550,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V0.",0);
 								else
 								if(Reports_rsmp.RPT_V0_V10 == 10)
-									LCD_ShowSpStr(75,375,550,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V10.",0);
+									LCD_ShowSpStr(75,375,550,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V10.",0);
 							}
 						}
 					}
@@ -28438,11 +20405,11 @@ void Display_Handler(void)
 							}
 							
 							// 设备信息 ------------------------------------
-							strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
-							if(DaylightTime) 																										// 夏令时
+							/*strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
+							if(DaylightTime) 															// 夏令时
 								strcpy(Reports_rsmp.RPT_SummerTime,"DST");
 							else
-								Reports_rsmp.RPT_SummerTime[0] = 0;
+								Reports_rsmp.RPT_SummerTime[0] = 0;*/
 							
 							if(DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 1||DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 0)
 								strcpy(Reports_rsmp.RPT_OQ,"No"); 															// 校验
@@ -28831,79 +20798,7 @@ void Display_Handler(void)
 							{
 								;
 							}
-							
-							/*if((DeviceID == 121)||
-								 (DeviceID == 122)||
-								 ((DeviceID == 223)&&(TD_Method == 1)))
-							{
-								if(TestEndS1 == 0)
-								{
-									LCD_ShowSpStr(192,250,300,24,BLACK,WHITE,Font_Rbm22,"Station 1:",0);
-									LCD_ShowSpStr(280,250,100,24,BLACK,WHITE,Font_Rbm22,(char *)USP_EP_3List[i],0);
-									LCD_ShowSpStr(350,250,200,24,BLACK,WHITE,Font_Rbm22,"weight",0);
-									LCD_Fill(192,288,192+288,288+48,GRAY_DADADA);
-									LCD_ShowIcon(202,296,32,32,BLACK,GRAY_DADADA,60,0); 	// X编辑标
-									
-									sprintf(VolumeStr1_T[TestTimes+1],"%5.1f",VolumeTest1[TestTimes+1]);
-									LCD_ShowSpStr(300,299,200,24,BLACK,GRAY_DADADA,Font_Rbr27,VolumeStr1_T[TestTimes+1],0);
-									LCD_ShowSpStr(447,299,700,24,GRAY_A6A6A6,GRAY_DADADA,Font_Rbr27," g",0);
-								}
-							}
-							else
-							if((DeviceID == 221)||(DeviceID == 222))
-							{
-								if((StationFlag == 1)||(StationFlag == 3))
-								{
-									if(TestEndS1 == 0)
-									{
-										LCD_ShowSpStr(192,250,300,24,BLACK,WHITE,Font_Rbm22,"Station 1:",0);
-										LCD_ShowSpStr(280,250,100,24,BLACK,WHITE,Font_Rbm22,(char *)USP_EP_TList[i],0);
-										LCD_ShowSpStr(350,250,200,24,BLACK,WHITE,Font_Rbm22,"volume",0);
-										LCD_Fill(192,288,192+288,288+48,GRAY_DADADA);
-										LCD_ShowIcon(202,296,32,32,BLACK,GRAY_DADADA,60,0); 	// X编辑标
-										
-										sprintf(VolumeStr1_T[TestTimes+1],"%5.1f",VolumeTest1[TestTimes+1]);
-										LCD_ShowSpStr(300,299,200,24,BLACK,GRAY_DADADA,Font_Rbr27,VolumeStr1_T[TestTimes+1],0);
-										LCD_ShowSpStr(447,299,700,24,GRAY_A6A6A6,GRAY_DADADA,Font_Rbr27,"ml",0);
-									}
-								}
-							}
-							
-							if((DeviceID == 223)&&(TD_Method == 2))
-							{
-								if(TestEndS2 == 0)
-								{
-									LCD_ShowSpStr(544,250,300,24,BLACK,WHITE,Font_Rbm22,"Station 2:",0);
-									LCD_ShowSpStr(635,250,100,24,BLACK,WHITE,Font_Rbm22,(char *)USP_EP_TList[i],0);
-									LCD_ShowSpStr(700,250,200,24,BLACK,WHITE,Font_Rbm22,"volume",0);
-									LCD_Fill(544,288,544+288,288+48,GRAY_DADADA);
-									LCD_ShowIcon(554,296,32,32,BLACK,GRAY_DADADA,60,0); 	// X编辑标
-									
-									sprintf(VolumeStr2_T[TestTimes+1],"%5.1f",VolumeTest2[TestTimes+1]);
-									LCD_ShowSpStr(650,299,200,24,BLACK,GRAY_DADADA,Font_Rbr27,VolumeStr2_T[TestTimes+1],0);
-									LCD_ShowSpStr(799,299,700,24,GRAY_A6A6A6,GRAY_DADADA,Font_Rbm22,"ml",0);
-								}
-							}
-							else
-							if((DeviceID == 221)||(DeviceID == 222))
-							{
-								if((StationFlag == 2)||(StationFlag == 3))
-								{
-									if(TestEndS2 == 0)
-									{
-										LCD_ShowSpStr(544,250,300,24,BLACK,WHITE,Font_Rbm22,"Station 2:",0);
-										LCD_ShowSpStr(635,250,100,24,BLACK,WHITE,Font_Rbm22,(char *)USP_EP_TList[i],0);
-										LCD_ShowSpStr(700,250,200,24,BLACK,WHITE,Font_Rbm22,"volume",0);
-										LCD_Fill(544,288,544+288,288+48,GRAY_DADADA);
-										LCD_ShowIcon(554,296,32,32,BLACK,GRAY_DADADA,60,0); 	// X编辑标
-										
-										sprintf(VolumeStr2_T[TestTimes+1],"%5.1f",VolumeTest2[TestTimes+1]);
-										LCD_ShowSpStr(650,299,200,24,BLACK,GRAY_DADADA,Font_Rbr27,VolumeStr2_T[TestTimes+1],0);
-										LCD_ShowSpStr(799,299,700,24,GRAY_A6A6A6,GRAY_DADADA,Font_Rbm22,"ml",0);
-									}
-								}
-							}*/
-							
+														
 							LCD_Fill(608,438,608+256,438+60,GRAY_656565); 					// 灰色横条
 							LCD_Fill(608+5,438+5,608+256-5,438+60-5,GREEN_3AAA35); 					// OK按钮
 							LCD_ShowSpStr(718,452,100,36,WHITE,GREEN_3AAA35,Font_Rbb34,"Ok",0);
@@ -29123,11 +21018,11 @@ void Display_Handler(void)
 							}
 							
 							// 设备信息 ------------------------------------
-							strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
-							if(DaylightTime) 																										// 夏令时
+							/*strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
+							if(DaylightTime) 															// 夏令时
 								strcpy(Reports_rsmp.RPT_SummerTime,"DST");
 							else
-								Reports_rsmp.RPT_SummerTime[0] = 0;
+								Reports_rsmp.RPT_SummerTime[0] = 0;*/
 							
 							if(DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 1||DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 0)
 								strcpy(Reports_rsmp.RPT_OQ,"No"); 															// 校验
@@ -29323,11 +21218,11 @@ void Display_Handler(void)
 												Reports_rsmp.RPT_RealTapsNb = TotalTaps1; 												// 实际拍击次数
 												
 												// 设备信息 ------------------------------------------
-												strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 			// 时区字符串
-												if(DaylightTime) 																									// 夏令时
+												/*strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 			// 时区字符串
+												if(DaylightTime) 														// 夏令时
 													strcpy(Reports_rsmp.RPT_SummerTime,"DST");
 												else
-													Reports_rsmp.RPT_SummerTime[0] = 0;
+													Reports_rsmp.RPT_SummerTime[0] = 0;*/
 												
 												if(DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 1||DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 0)
 													strcpy(Reports_rsmp.RPT_OQ,"No"); 															// 校验
@@ -29453,11 +21348,11 @@ void Display_Handler(void)
 												Reports_rsmp.RPT_RealTapsNb = TotalTaps2; 											// 实际拍击次数
 												
 												// 设备信息 ----------------------------------------------
-												strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
-												if(DaylightTime) 																										// 夏令时
+												/*strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
+												if(DaylightTime) 															// 夏令时
 													strcpy(Reports_rsmp.RPT_SummerTime,"DST");
 												else
-													Reports_rsmp.RPT_SummerTime[0] = 0;
+													Reports_rsmp.RPT_SummerTime[0] = 0;*/
 												
 												if(DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 1||DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 0)
 													strcpy(Reports_rsmp.RPT_OQ,"No"); 															// 校验
@@ -29634,11 +21529,11 @@ void Display_Handler(void)
 											}
 											
 											// 设备信息 ------------------------------------
-											strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
-											if(DaylightTime) 																										// 夏令时
+											/*strcpy(Reports_rsmp.RPT_TimeZone,TimeZoneList[TimeZone][0]); 				// 时区字符串
+											if(DaylightTime) 															// 夏令时
 												strcpy(Reports_rsmp.RPT_SummerTime,"DST");
 											else
-												Reports_rsmp.RPT_SummerTime[0] = 0;
+												Reports_rsmp.RPT_SummerTime[0] = 0;*/
 											
 											if(DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 1||DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == 0)
 												strcpy(Reports_rsmp.RPT_OQ,"No"); 															// 校验
@@ -29850,875 +21745,6 @@ void Display_Handler(void)
 					LCD_Fill(32,160,32+800,160+416,WHITE); 						// 中间白色信息框
 					LCD_ShowIcon(768,160,64,64,GRAY_A7A7A7,WHITE,57,0); 			// 小上箭头
 					LCD_ShowIcon(768,512,64,64,GRAY_A7A7A7,WHITE,58,0); 			// 小下箭头
-					
-					/*if((Reports_rsmp.RPT_DeviceType == 121)||(Reports_rsmp.RPT_DeviceType == 122)) 					// 一个工作站，只有站1
-					{
-						if(LineNb == 0) 						// 预览第一页
-						{
-							LCD_Fill(769,225,769+62,225+145,GRAY_D7D7D7); 		// 上下滚动块
-							
-							LCD_Fill(32,212,32+720,212+100,GRAY_E8E8E8); 		// 中间灰色横条
-							LCD_Fill(32,362,32+720,362+212,GRAY_E8E8E8); 		// 中间灰色横条
-							
-							LCD_ShowSpStr(45,175,200,24,BLACK,WHITE,Font_Rbb28,"1  Status:",0);
-							if(Reports_rsmp.RPT_TestStatus)
-								LCD_ShowSpStr(175,175,450,24,BLACK,WHITE,Font_Rbr27,"Test completed.",0);
-							else
-								LCD_ShowSpStr(175,175,450,24,BLACK,WHITE,Font_Rbr27,"Test Abort.",0);
-							
-							LCD_ShowSpStr(45,225,200,24,BLACK,GRAY_E8E8E8,Font_Rbb28,"2  RPM: ",0);
-							sprintf((char*)tbuf,"%03d ",Reports_rsmp.RPT_S1Speed); 
-							LCD_ShowSpStr(150,225,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
-							
-							sprintf((char*)tbuf,"Min. %5.1f / Max. %5.1f ",Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-							LCD_ShowSpStr(175,275,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
-							
-							LCD_ShowSpStr(45,325,200,24,BLACK,WHITE,Font_Rbb28,"3  Taps: ",0);
-							sprintf((char*)tbuf,"%d",Reports_rsmp.RPT_RealTapsNb); 
-							LCD_ShowSpStr(175,325,450,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							
-							// 工作站一相关信息 -------------------------------------------------
-							LCD_ShowSpStr(45,375,200,24,BLACK,GRAY_E8E8E8,Font_Rbb28,"4  Station 1:",0);
-							if(Reports_rsmp.RPT_S1PName[0] == '\0')
-								LCD_ShowSpStr(175,425,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Product Name 1",0);
-							else
-								LCD_ShowSpStr(175,425,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1PName,0);
-							
-							if(Reports_rsmp.RPT_S1PBatchNb[0] == '\0')
-								LCD_ShowSpStr(175,450,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Batch Number 1",0);
-							else
-								LCD_ShowSpStr(175,450,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1PBatchNb,0);
-							
-							if(Reports_rsmp.RPT_S1CylinderSize[0] == '\0')
-								LCD_ShowSpStr(175,475,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Glass 1",0);
-							else
-								LCD_ShowSpStr(175,475,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1CylinderSize,0);
-							
-							if(Reports_rsmp.RPT_S1CylinderNb[0] == '\0')
-								LCD_ShowSpStr(175,500,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Hopper 1",0);
-							else
-								LCD_ShowSpStr(175,500,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1CylinderNb,0);
-							
-							if(Reports_rsmp.RPT_S1SampleMass == 0)
-								LCD_ShowSpStr(175,525,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~999.9",0);
-							else
-							{
-								fDat = Reports_rsmp.RPT_S1SampleMass;
-								fDat /= 100;
-								sprintf(tbuf,"%6.2f g",fDat);
-								LCD_ShowSpStr(175,525,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
-							}
-							
-							if(Reports_rsmp.RPT_S1InitialVolume == 0)
-								LCD_ShowSpStr(175,550,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~250.0",0);
-							else
-							{
-								fDat = Reports_rsmp.RPT_S1InitialVolume;
-								fDat /= 10;
-								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(175,550,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
-							}
-						}
-						else
-						if(LineNb == 1) 						// 预览第二页
-						{
-							LCD_Fill(769,300,769+62,300+145,GRAY_D7D7D7); 					// 上下滚动块
-							//LCD_Fill(32,387,32+720,387+189,GRAY_E8E8E8); 						// 中间灰色横条
-							
-							LCD_ShowSpStr(45,175,250,24,BLACK,WHITE,Font_Rbb28,"5  Test Results:",0); 	// 标题
-							LCD_ShowSpStr(325,175,250,24,BLACK,WHITE,Font_Rbb28,"Station I",0);
-							LCD_ShowSpStr(675,175,250,24,BLACK,WHITE,Font_Rbb28,"Taps",0);
-							
-							LCD_ShowSpStr(75,225,350,24,BLACK,WHITE,Font_Rbr27,"Sample Weight:",0); 		// 样品质量
-							fDat = Reports_rsmp.RPT_S1SampleMass;
-							fDat /= 100;
-							sprintf(tbuf,"%6.2f g",fDat);
-							LCD_ShowSpStr(325,225,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							
-							LCD_ShowSpStr(75,250,350,24,BLACK,WHITE,Font_Rbr27,"Volume Initial:",0); 		// 样品初始体积
-							fDat = Reports_rsmp.RPT_S1InitialVolume;
-							fDat /= 10;
-							sprintf(tbuf,"%6.1f ml",fDat);
-							LCD_ShowSpStr(325,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							sprintf(tbuf,"%4d",0);
-							LCD_ShowSpStr(675,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							
-							LCD_ShowSpStr(75,275,350,24,BLACK,WHITE,Font_Rbr27,"Volume  1:",0);
-							fDat = Reports_rsmp.RPT_S1V10;
-							fDat /= 10;
-							sprintf(tbuf,"%6.1f ml",fDat);
-							LCD_ShowSpStr(325,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							sprintf(tbuf,"%4d",10);
-							LCD_ShowSpStr(675,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							
-							LCD_ShowSpStr(75,300,350,24,BLACK,WHITE,Font_Rbr27,"Volume  2:",0);
-							fDat = Reports_rsmp.RPT_S1V500;
-							fDat /= 10;
-							sprintf(tbuf,"%6.1f ml",fDat);
-							LCD_ShowSpStr(325,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							sprintf(tbuf,"%4d",500);
-							LCD_ShowSpStr(675,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							
-							LCD_ShowSpStr(75,325,350,24,BLACK,WHITE,Font_Rbr27,"Volume  3:",0);
-							fDat = Reports_rsmp.RPT_S1V1250;
-							fDat /= 10;
-							sprintf(tbuf,"%6.1f ml",fDat);
-							LCD_ShowSpStr(325,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							sprintf(tbuf,"%4d",1250);
-							LCD_ShowSpStr(675,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							
-							for(i=4;i<Reports_rsmp.RPT_TESTENDS1+1;i++)
-							{
-								sprintf(tbuf,"Volume  %d:",i);
-								LCD_ShowSpStr(75,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								fDat = Reports_rsmp.RPT_S1Delay[i-4];
-								fDat /= 10;
-								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(325,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								sprintf(tbuf,"%4d",1250);
-								LCD_ShowSpStr(675,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							}
-						}
-						else
-						if(LineNb == 2) 						// 预览第三页
-						{
-							LCD_Fill(769,366,769+62,366+145,GRAY_D7D7D7); 		// 上下滚动块
-							
-							LCD_Fill(32,362,32+720,362+50,GRAY_E8E8E8); 		// 中间灰色横条
-							LCD_Fill(32,462,32+720,462+50,GRAY_E8E8E8); 		// 中间灰色横条
-							
-							LCD_ShowSpStr(45,175,250,24,BLACK,WHITE,Font_Rbb28,"6  Statistics:",0);
-							LCD_ShowSpStr(375,175,250,24,BLACK,WHITE,Font_Rbb28,"Station I",0);
-							
-							LCD_ShowSpStr(75,225,350,24,BLACK,WHITE,Font_Rbr27,"Total taps:",0);
-							uiDat = RUN_CYC[Reports_rsmp.RPT_TESTENDS1];
-							sprintf(tbuf,"%5d",uiDat);
-							LCD_ShowSpStr(400,225,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							
-							LCD_ShowSpStr(75,250,350,24,BLACK,WHITE,Font_Rbr27,"Initial Density:",0);
-							sprintf(tbuf,"%6.2f g/ml",Reports_rsmp.RPT_S1InitialDensity);
-							LCD_ShowSpStr(400,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							
-							LCD_ShowSpStr(75,275,350,24,BLACK,WHITE,Font_Rbr27,"Tapped Density:",0);
-							sprintf(tbuf,"%6.2f g/ml",Reports_rsmp.RPT_S1TappedDensity);
-							LCD_ShowSpStr(400,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							
-							LCD_ShowSpStr(75,300,350,24,BLACK,WHITE,Font_Rbr27,"Hausner Ratio:",0);
-							sprintf(tbuf,"%6.2f",Reports_rsmp.RPT_S1HausnerRatio);
-							LCD_ShowSpStr(400,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							
-							LCD_ShowSpStr(75,325,350,24,BLACK,WHITE,Font_Rbr27,"Compressibility Index:",0);
-							sprintf(tbuf,"%6.1f %%",Reports_rsmp.RPT_S1Compressibility);
-							LCD_ShowSpStr(400,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							
-							if(Reports_rsmp.RPT_V0_V10 == 0)
-								LCD_ShowSpStr(75,375,550,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V0.",0);
-							else
-							if(Reports_rsmp.RPT_V0_V10 == 10)
-								LCD_ShowSpStr(75,375,550,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V10.",0);
-						}
-					}
-					else
-					if((Reports_rsmp.RPT_DeviceType == 221)||(Reports_rsmp.RPT_DeviceType == 222)) 					// 两个工作站，有站1和站2
-					{
-						if(LineNb == 0) 						// 预览第一页
-						{
-							LCD_Fill(769,225,769+62,225+145,GRAY_D7D7D7); 		// 上下滚动块
-							
-							LCD_Fill(32,212,32+720,212+100,GRAY_E8E8E8); 						// 中间灰色横条
-							LCD_Fill(32,362,32+720,362+212,GRAY_E8E8E8); 						// 中间灰色横条
-							
-							LCD_ShowSpStr(45,175,200,24,BLACK,WHITE,Font_Rbb28,"1  Status: ",0);
-							if(Reports_rsmp.RPT_TestStatus)
-								LCD_ShowSpStr(175,175,450,24,BLACK,WHITE,Font_Rbr27,"Test completed.",0);
-							else
-								LCD_ShowSpStr(175,175,450,24,BLACK,WHITE,Font_Rbr27,"Test Abort.",0);
-							
-							LCD_ShowSpStr(45,225,200,24,BLACK,GRAY_E8E8E8,Font_Rbb28,"2  RPM: ",0);
-							sprintf((char*)tbuf,"%03d ",Reports_rsmp.RPT_S1Speed); 
-							LCD_ShowSpStr(150,223,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
-							
-							if(Reports_rsmp.RPT_S1MinSpeed==0&&Reports_rsmp.RPT_S1MaxSpeed==0)		//当只作第二工位时,第一工位速度为0,显示会错误2021/12/22 星期三 16:33:13
-								sprintf((char*)tbuf,"Min. %5.1f / Max. %5.1f ",Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-							else
-								sprintf((char*)tbuf,"Min. %5.1f / Max. %5.1f ",Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-							LCD_ShowSpStr(175,275,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
-							
-							LCD_ShowSpStr(45,325,200,24,BLACK,WHITE,Font_Rbb28,"3  Taps: ",0);
-							sprintf((char*)tbuf,"%d",Reports_rsmp.RPT_RealTapsNb); 
-							LCD_ShowSpStr(175,325,450,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							
-							// 工作站一相关信息 -----------------------------------------------
-							LCD_ShowSpStr(45,375,200,24,BLACK,GRAY_E8E8E8,Font_Rbb28,"4  Station 1:",0);
-							if(Reports_rsmp.RPT_S1PName[0] == '\0')
-								LCD_ShowSpStr(175,425,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Product Name 1",0);
-							else
-								LCD_ShowSpStr(175,425,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1PName,0);
-							
-							if(Reports_rsmp.RPT_S1PBatchNb[0] == '\0')
-								LCD_ShowSpStr(175,450,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Batch Number 1",0);
-							else
-								LCD_ShowSpStr(175,450,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1PBatchNb,0);
-							
-							if(Reports_rsmp.RPT_S1CylinderSize[0] == '\0')
-								LCD_ShowSpStr(175,475,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Glass 1",0);
-							else
-								LCD_ShowSpStr(175,475,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1CylinderSize,0);
-							
-							if(Reports_rsmp.RPT_S1CylinderNb[0] == '\0')
-								LCD_ShowSpStr(175,500,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Hopper 1",0);
-							else
-								LCD_ShowSpStr(175,500,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1CylinderNb,0);
-							
-							if(Reports_rsmp.RPT_S1SampleMass == 0)
-								LCD_ShowSpStr(175,525,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~999.9",0);
-							else
-							{
-								fDat = Reports_rsmp.RPT_S1SampleMass;
-								fDat /= 100;
-								sprintf(tbuf,"%6.2f g",fDat);
-								LCD_ShowSpStr(175,525,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
-							}
-							
-							if(Reports_rsmp.RPT_S1InitialVolume == 0)
-								LCD_ShowSpStr(175,550,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~250.0",0);
-							else
-							{
-								fDat = Reports_rsmp.RPT_S1InitialVolume;
-								fDat /= 10;
-								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(175,550,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
-							}
-							
-							//LCD_ShowSpStr(45,550,650,24,BLACK,BLACK,Font_Rbb28,"5  Station 2:",0);
-							
-						}
-						else
-						if(LineNb == 1) 						// 预览第二页
-						{
-							LCD_Fill(769,275,769+62,275+145,GRAY_D7D7D7); 		// 上下滚动块
-							LCD_Fill(32,387,32+720,387+189,GRAY_E8E8E8); 						// 中间灰色横条
-							
-							// 工作站二相关信息 -----------------------------------------------
-							LCD_ShowSpStr(45,175,200,24,BLACK,WHITE,Font_Rbb28,"5  Station 2:",0);
-							if(Reports_rsmp.RPT_S2PName[0] == '\0')
-								LCD_ShowSpStr(175,225,450,24,GRAY_C6C6C6,WHITE,Font_Rbr27,"Product Name 2",0);
-							else
-								LCD_ShowSpStr(175,225,450,24,BLACK,WHITE,Font_Rbr27,Reports_rsmp.RPT_S2PName,0);
-							
-							if(Reports_rsmp.RPT_S2PBatchNb[0] == '\0')
-								LCD_ShowSpStr(175,250,450,24,GRAY_C6C6C6,WHITE,Font_Rbr27,"Batch Number 2",0);
-							else
-								LCD_ShowSpStr(175,250,450,24,BLACK,WHITE,Font_Rbr27,Reports_rsmp.RPT_S2PBatchNb,0);
-							
-							if(Reports_rsmp.RPT_S2CylinderSize[0] == '\0')
-								LCD_ShowSpStr(175,275,450,24,GRAY_C6C6C6,WHITE,Font_Rbr27,"Glass 2",0);
-							else
-								LCD_ShowSpStr(175,275,450,24,BLACK,WHITE,Font_Rbr27,Reports_rsmp.RPT_S2CylinderSize,0);
-							
-							if(Reports_rsmp.RPT_S2CylinderNb[0] == '\0')
-								LCD_ShowSpStr(175,300,450,24,GRAY_C6C6C6,WHITE,Font_Rbr27,"Hopper 2",0);
-							else
-								LCD_ShowSpStr(175,300,450,24,BLACK,WHITE,Font_Rbr27,Reports_rsmp.RPT_S2CylinderNb,0);
-							
-							if(Reports_rsmp.RPT_S2SampleMass == 0)
-								LCD_ShowSpStr(175,325,450,24,GRAY_C6C6C6,WHITE,Font_Rbr27,"0~999.9",0);
-							else
-							{
-								fDat = Reports_rsmp.RPT_S2SampleMass;
-								fDat /= 100;
-								sprintf(tbuf,"%6.2f g",fDat);
-								LCD_ShowSpStr(175,325,450,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							}
-							
-							if(Reports_rsmp.RPT_S2InitialVolume == 0)
-								LCD_ShowSpStr(175,350,450,24,GRAY_C6C6C6,WHITE,Font_Rbr27,"0~250.0",0);
-							else
-							{
-								fDat = Reports_rsmp.RPT_S2InitialVolume;
-								fDat /= 10;
-								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(175,350,450,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							}
-							
-						}
-						else
-						if(LineNb == 2) 						// 预览第三页
-						{
-							LCD_Fill(769,325,769+62,325+145,GRAY_D7D7D7); 		// 上下滚动块
-							
-							//LCD_Fill(32,188,32+720,188+175,GRAY_E8E8E8); 						// 中间灰色横条
-							//LCD_Fill(32,387,32+720,387+189,GRAY_E8E8E8); 						// 中间灰色横条
-							//LCD_Fill(32,538,32+720,538+38,GRAY_E8E8E8); 						// 中间灰色横条
-							
-							LCD_ShowSpStr(45,175,250,24,BLACK,WHITE,Font_Rbb28,"6  Test Results:",0); // 标题
-							LCD_ShowSpStr(325,175,250,24,BLACK,WHITE,Font_Rbb28,"Station I",0);
-							LCD_ShowSpStr(500,175,250,24,BLACK,WHITE,Font_Rbb28,"Station II",0);
-							LCD_ShowSpStr(675,175,250,24,BLACK,WHITE,Font_Rbb28,"Taps",0);
-							
-							LCD_ShowSpStr(75,225,350,24,BLACK,WHITE,Font_Rbr27,"Sample Weight:",0); 	// 样品质量
-							fDat = Reports_rsmp.RPT_S1SampleMass;
-							fDat /= 100;
-							sprintf(tbuf,"%6.2f g",fDat);
-							LCD_ShowSpStr(325,225,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							fDat = Reports_rsmp.RPT_S2SampleMass;
-							fDat /= 100;
-							sprintf(tbuf,"%6.2f g",fDat);
-							LCD_ShowSpStr(500,225,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							
-							LCD_ShowSpStr(75,250,350,24,BLACK,WHITE,Font_Rbr27,"Volume Initial:",0); 	// 样品初始体积
-							fDat = Reports_rsmp.RPT_S1InitialVolume;
-							fDat /= 10;
-							sprintf(tbuf,"%6.1f ml",fDat);
-							LCD_ShowSpStr(325,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							fDat = Reports_rsmp.RPT_S2InitialVolume;
-							fDat /= 10;
-							sprintf(tbuf,"%6.1f ml",fDat);
-							LCD_ShowSpStr(500,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							sprintf(tbuf,"%4d",0);
-							LCD_ShowSpStr(675,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							
-							LCD_ShowSpStr(75,275,350,24,BLACK,WHITE,Font_Rbr27,"Volume  1:",0);
-							//if(StationFlag&0x01)
-							if((Reports_rsmp.RPT_S1SampleMass != 0)&&(Reports_rsmp.RPT_S1InitialVolume != 0))
-							{
-								fDat = Reports_rsmp.RPT_S1V10;
-								fDat /= 10;
-								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(325,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							}
-							else
-								LCD_ShowSpStr(325,275,350,24,BLACK,WHITE,Font_Rbr27,"NA",0);
-							
-							//if(StationFlag&0x02)
-							if((Reports_rsmp.RPT_S2SampleMass != 0)&&(Reports_rsmp.RPT_S2InitialVolume != 0))
-							{
-								fDat = Reports_rsmp.RPT_S2V10;
-								fDat /= 10;
-								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(500,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							}
-							else
-								LCD_ShowSpStr(500,275,350,24,BLACK,WHITE,Font_Rbr27,"NA",0);
-							sprintf(tbuf,"%4d",10);
-							LCD_ShowSpStr(675,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							
-							LCD_ShowSpStr(75,300,350,24,BLACK,WHITE,Font_Rbr27,"Volume  2:",0);
-							//if(StationFlag&0x01)
-							if((Reports_rsmp.RPT_S1SampleMass != 0)&&(Reports_rsmp.RPT_S1InitialVolume != 0))
-							{
-								fDat = Reports_rsmp.RPT_S1V500;
-								fDat /= 10;
-								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(325,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							}
-							//if(StationFlag&0x02)
-							if((Reports_rsmp.RPT_S2SampleMass != 0)&&(Reports_rsmp.RPT_S2InitialVolume != 0))
-							{
-								fDat = Reports_rsmp.RPT_S2V500;
-								fDat /= 10;
-								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(500,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							}
-							sprintf(tbuf,"%4d",500);
-							LCD_ShowSpStr(675,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							
-							LCD_ShowSpStr(75,325,350,24,BLACK,WHITE,Font_Rbr27,"Volume  3:",0);
-							//if(StationFlag&0x01)
-							if((Reports_rsmp.RPT_S1SampleMass != 0)&&(Reports_rsmp.RPT_S1InitialVolume != 0))
-							{
-								fDat = Reports_rsmp.RPT_S1V1250;
-								fDat /= 10;
-								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(325,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							}
-							//if(StationFlag&0x02)
-							if((Reports_rsmp.RPT_S2SampleMass != 0)&&(Reports_rsmp.RPT_S2InitialVolume != 0))
-							{
-								fDat = Reports_rsmp.RPT_S2V1250;
-								fDat /= 10;
-								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(500,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							}
-							sprintf(tbuf,"%4d",1250);
-							LCD_ShowSpStr(675,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							
-							if(Reports_rsmp.RPT_TESTENDS1 > Reports_rsmp.RPT_TESTENDS2)
-								ucDat = Reports_rsmp.RPT_TESTENDS1;
-							else
-								ucDat = Reports_rsmp.RPT_TESTENDS2;
-							for(i=4;i<ucDat+1;i++)
-							{
-								sprintf(tbuf,"Volume  %d:",i);
-								LCD_ShowSpStr(75,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								if((i <= Reports_rsmp.RPT_TESTENDS1)&&
-									 (Reports_rsmp.RPT_S1SampleMass != 0)&&
-									 (Reports_rsmp.RPT_S1InitialVolume != 0))
-								{
-									fDat = Reports_rsmp.RPT_S1Delay[i-4];
-									fDat /= 10;
-									sprintf(tbuf,"%6.1f ml",fDat);
-									LCD_ShowSpStr(325,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								}
-								
-								if((i <= Reports_rsmp.RPT_TESTENDS2)&&
-									 (Reports_rsmp.RPT_S2SampleMass != 0)&&
-									 (Reports_rsmp.RPT_S2InitialVolume != 0))
-								{
-									fDat = Reports_rsmp.RPT_S2Delay[i-4];
-									fDat /= 10;
-									sprintf(tbuf,"%6.1f ml",fDat);
-									LCD_ShowSpStr(500,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								}
-								
-								sprintf(tbuf,"%4d",1250);
-								LCD_ShowSpStr(675,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							}
-						}
-						else
-						if(LineNb == 3) 						// 预览第四页
-						{
-							LCD_Fill(769,366,769+62,366+145,GRAY_D7D7D7); 		// 上下滚动块
-							
-							LCD_Fill(32,362,32+720,362+50,GRAY_E8E8E8); 		// 中间灰色横条
-							LCD_Fill(32,462,32+720,462+50,GRAY_E8E8E8); 		// 中间灰色横条
-							
-							LCD_ShowSpStr(45,175,250,24,BLACK,WHITE,Font_Rbb28,"7  Statistics:",0);
-							LCD_ShowSpStr(375,175,250,24,BLACK,WHITE,Font_Rbb28,"Station I",0);
-							LCD_ShowSpStr(575,175,250,24,BLACK,WHITE,Font_Rbb28,"Station II",0);
-							
-							LCD_ShowSpStr(75,225,350,24,BLACK,WHITE,Font_Rbr27,"Total taps:",0);
-							if((Reports_rsmp.RPT_S1SampleMass != 0)&&(Reports_rsmp.RPT_S1InitialVolume != 0))
-							{
-								uiDat = RUN_CYC[Reports_rsmp.RPT_TESTENDS1];
-								sprintf(tbuf,"%5d",uiDat);
-								LCD_ShowSpStr(400,225,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							}
-							else
-								LCD_ShowSpStr(400,225,350,24,BLACK,WHITE,Font_Rbr27,"NA",0);
-							
-							if((Reports_rsmp.RPT_S2SampleMass != 0)&&(Reports_rsmp.RPT_S2InitialVolume != 0))
-							{
-								uiDat = RUN_CYC[Reports_rsmp.RPT_TESTENDS2];
-								sprintf(tbuf,"%5d",uiDat);
-								LCD_ShowSpStr(600,225,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							}
-							else
-								LCD_ShowSpStr(600,225,350,24,BLACK,WHITE,Font_Rbr27,"NA",0);
-							
-							LCD_ShowSpStr(75,250,350,24,BLACK,WHITE,Font_Rbr27,"Initial Density:",0);
-							//if(StationFlag&0x01)
-							if((Reports_rsmp.RPT_S1SampleMass != 0)&&(Reports_rsmp.RPT_S1InitialVolume != 0))
-							{
-								//InitialDensity1 = SampleMass1/VolumeTest1[0];
-								sprintf(tbuf,"%6.2f g/ml",Reports_rsmp.RPT_S1InitialDensity);
-								LCD_ShowSpStr(400,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							}
-							//if(StationFlag&0x02)
-							if((Reports_rsmp.RPT_S2SampleMass != 0)&&(Reports_rsmp.RPT_S2InitialVolume != 0))
-							{
-								//InitialDensity2 = SampleMass2/VolumeTest2[0];
-								sprintf(tbuf,"%6.2f g/ml",Reports_rsmp.RPT_S2InitialDensity);
-								LCD_ShowSpStr(600,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							}
-							
-							LCD_ShowSpStr(75,275,350,24,BLACK,WHITE,Font_Rbr27,"Tapped Density:",0);
-							//if(StationFlag&0x01)
-							if((Reports_rsmp.RPT_S1SampleMass != 0)&&(Reports_rsmp.RPT_S1InitialVolume != 0))
-							{
-								//TappedDensity1 = SampleMass1/VolumeTest1[TestEndS1];
-								sprintf(tbuf,"%6.2f g/ml",Reports_rsmp.RPT_S1TappedDensity);
-								LCD_ShowSpStr(400,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							}
-							//if(StationFlag&0x02)
-							if((Reports_rsmp.RPT_S2SampleMass != 0)&&(Reports_rsmp.RPT_S2InitialVolume != 0))
-							{
-								//TappedDensity2 = SampleMass2/VolumeTest2[TestEndS2];
-								sprintf(tbuf,"%6.2f g/ml",Reports_rsmp.RPT_S2TappedDensity);
-								LCD_ShowSpStr(600,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							}
-							
-							LCD_ShowSpStr(75,300,350,24,BLACK,WHITE,Font_Rbr27,"Hausner Ratio:",0);
-							//if(StationFlag&0x01)
-							if((Reports_rsmp.RPT_S1SampleMass != 0)&&(Reports_rsmp.RPT_S1InitialVolume != 0))
-							{
-								//HausnerRatio1 = VolumeTest1[0]/VolumeTest1[TestEndS1];
-								sprintf(tbuf,"%6.2f",Reports_rsmp.RPT_S1HausnerRatio);
-								LCD_ShowSpStr(400,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							}
-							//if(StationFlag&0x02)
-							if((Reports_rsmp.RPT_S2SampleMass != 0)&&(Reports_rsmp.RPT_S2InitialVolume != 0))
-							{
-								//HausnerRatio2 = VolumeTest2[0]/VolumeTest2[TestEndS2];
-								sprintf(tbuf,"%6.2f",Reports_rsmp.RPT_S2HausnerRatio);
-								LCD_ShowSpStr(600,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							}
-							
-							LCD_ShowSpStr(75,325,350,24,BLACK,WHITE,Font_Rbr27,"Compressibility Index:",0);
-							//if(StationFlag&0x01)
-							if((Reports_rsmp.RPT_S1SampleMass != 0)&&(Reports_rsmp.RPT_S1InitialVolume != 0))
-							{
-								//CompressibilityIndex1 = 100*(VolumeTest1[0]-VolumeTest1[TestEndS1])/VolumeTest1[0];
-								sprintf(tbuf,"%6.1f %%",Reports_rsmp.RPT_S1Compressibility);
-								LCD_ShowSpStr(400,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							}
-							//if(StationFlag&0x02)
-							if((Reports_rsmp.RPT_S2SampleMass != 0)&&(Reports_rsmp.RPT_S2InitialVolume != 0))
-							{
-								//CompressibilityIndex2 = 100*(VolumeTest2[0]-VolumeTest2[TestEndS2])/VolumeTest2[0];
-								sprintf(tbuf,"%6.1f %%",Reports_rsmp.RPT_S2Compressibility);
-								LCD_ShowSpStr(600,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-							}
-							
-							if(Reports_rsmp.RPT_V0_V10 == 0)
-								LCD_ShowSpStr(75,375,550,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V0.",0);
-							else
-							if(Reports_rsmp.RPT_V0_V10 == 10)
-								LCD_ShowSpStr(75,375,550,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V10.",0);
-						}
-					}
-					else
-					if(Reports_rsmp.RPT_DeviceType == 223) 															// 两个工作站，有站1和站2，只用其中一个
-					{
-						if(LineNb == 0) 						// 预览第一页
-						{
-							LCD_Fill(769,225,769+62,225+145,GRAY_D7D7D7); // 上下滚动块
-							
-							LCD_Fill(32,212,32+720,212+100,GRAY_E8E8E8); 	// 中间灰色横条
-							LCD_Fill(32,362,32+720,362+212,GRAY_E8E8E8); 	// 中间灰色横条
-							
-							LCD_ShowSpStr(45,175,200,24,BLACK,WHITE,Font_Rbb28,"1  Status: ",0);
-							if(Reports_rsmp.RPT_TestStatus)
-								LCD_ShowSpStr(175,175,450,24,BLACK,WHITE,Font_Rbr27,"Test completed.",0);
-							else
-								LCD_ShowSpStr(175,175,450,24,BLACK,WHITE,Font_Rbr27,"Test Abort.",0);
-							
-							LCD_ShowSpStr(45,225,200,24,BLACK,GRAY_E8E8E8,Font_Rbb28,"2  RPM: ",0);
-							if(Reports_rsmp.RPT_S1Method == 1)
-								sprintf((char*)tbuf,"%03d ",300); 
-							else
-							if(Reports_rsmp.RPT_S2Method == 2)
-								sprintf((char*)tbuf,"%03d ",250); 
-							else
-								sprintf((char*)tbuf,"%03d ",150);
-							LCD_ShowSpStr(150,225,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
-							
-							if(Reports_rsmp.RPT_S1Method == 1) 				// 方法一
-								sprintf((char*)tbuf,"Min. %5.1f / Max. %5.1f ",Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-							else
-							if(Reports_rsmp.RPT_S2Method == 2) 				// 方法二
-								sprintf((char*)tbuf,"Min. %5.1f / Max. %5.1f ",Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-							LCD_ShowSpStr(175,275,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
-							
-							LCD_ShowSpStr(45,325,200,24,BLACK,WHITE,Font_Rbb28,"3  Taps: ",0);
-							uiDat = Reports_rsmp.RPT_RealTapsNb;
-							sprintf((char*)tbuf,"%4d",uiDat); 
-							LCD_ShowSpStr(175,325,650,24,BLACK,WHITE,Font_Rbb28,tbuf,0);
-							
-							if(Reports_rsmp.RPT_S1Method == 1) 				// 方法一
-							{
-								LCD_ShowSpStr(45,375,200,24,BLACK,GRAY_E8E8E8,Font_Rbb28,"4  Station 1:",0);
-								if(Reports_rsmp.RPT_S1PName[0] == '\0')
-									LCD_ShowSpStr(175,425,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Product Name 1",0);
-								else
-									LCD_ShowSpStr(175,425,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1PName,0);
-								
-								if(Reports_rsmp.RPT_S1PBatchNb[0] == '\0')
-									LCD_ShowSpStr(175,450,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Batch Number 1",0);
-								else
-									LCD_ShowSpStr(175,450,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1PBatchNb,0);
-								
-								if(Reports_rsmp.RPT_S1CylinderSize[0] == '\0')
-									LCD_ShowSpStr(175,475,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Glass 1",0);
-								else
-									LCD_ShowSpStr(175,475,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1CylinderSize,0);
-								
-								if(Reports_rsmp.RPT_S1CylinderNb[0] == '\0')
-									LCD_ShowSpStr(175,500,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Hopper 1",0);
-								else
-									LCD_ShowSpStr(175,500,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S1CylinderNb,0);
-								
-								if(Reports_rsmp.RPT_S1SampleMass == 0)
-									LCD_ShowSpStr(175,525,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~999.9",0);
-								else
-								{
-									fDat = Reports_rsmp.RPT_S1SampleMass;
-									fDat /= 100;
-									sprintf(tbuf,"%6.2f g",fDat);
-									LCD_ShowSpStr(175,525,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
-								}
-								
-								if(Reports_rsmp.RPT_S1InitialVolume == 0)
-									LCD_ShowSpStr(175,550,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~250.0",0);
-								else
-								{
-									fDat = Reports_rsmp.RPT_S1InitialVolume;
-									fDat /= 10;
-									sprintf(tbuf,"%6.1f ml",fDat);
-									LCD_ShowSpStr(175,550,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
-								}
-								
-							}
-							else
-							if(Reports_rsmp.RPT_S2Method == 2) 				// 方法二
-							{
-								LCD_ShowSpStr(45,375,200,24,BLACK,GRAY_E8E8E8,Font_Rbb28,"4  Station 2:",0);
-								if(Reports_rsmp.RPT_S2PName[0] == '\0')
-									LCD_ShowSpStr(175,425,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Product Name 2",0);
-								else
-									LCD_ShowSpStr(175,425,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S2PName,0);
-								
-								if(Reports_rsmp.RPT_S2PBatchNb[0] == '\0')
-									LCD_ShowSpStr(175,450,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Batch Number 2",0);
-								else
-									LCD_ShowSpStr(175,450,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S2PBatchNb,0);
-								
-								if(Reports_rsmp.RPT_S2CylinderSize[0] == '\0')
-									LCD_ShowSpStr(175,475,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Glass 2",0);
-								else
-									LCD_ShowSpStr(175,475,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S2CylinderSize,0);
-								
-								if(Reports_rsmp.RPT_S2CylinderNb[0] == '\0')
-									LCD_ShowSpStr(175,500,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Hopper 2",0);
-								else
-									LCD_ShowSpStr(175,500,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,Reports_rsmp.RPT_S2CylinderNb,0);
-								
-								if(Reports_rsmp.RPT_S2SampleMass == 0)
-									LCD_ShowSpStr(175,525,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~999.9",0);
-								else
-								{
-									fDat = Reports_rsmp.RPT_S2SampleMass;
-									fDat /= 100;
-									sprintf(tbuf,"%6.2f g",fDat);
-									LCD_ShowSpStr(175,525,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
-								}
-								
-								if(Reports_rsmp.RPT_S2InitialVolume == 0)
-									LCD_ShowSpStr(175,550,450,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"0~250.0",0);
-								else
-								{
-									fDat = Reports_rsmp.RPT_S2InitialVolume;
-									fDat /= 10;
-									sprintf(tbuf,"%6.1f ml",fDat);
-									LCD_ShowSpStr(175,550,450,24,BLACK,GRAY_E8E8E8,Font_Rbr27,tbuf,0);
-								}
-							
-							}
-						}
-						else
-						if(LineNb == 1) 						// 预览第二页
-						{
-							LCD_Fill(769,300,769+62,300+145,GRAY_D7D7D7); // 上下滚动块
-							//LCD_Fill(32,387,32+720,387+189,GRAY_E8E8E8); 	// 中间灰色横条
-							
-							if(Reports_rsmp.RPT_S1Method == 1) 				// 方法一
-							{
-								LCD_ShowSpStr(45,175,250,24,BLACK,WHITE,Font_Rbb28,"5  Test Results:",0); // 标题
-								LCD_ShowSpStr(325,175,250,24,BLACK,WHITE,Font_Rbb28,"Station I",0);
-								//LCD_ShowSpStr(500,175,250,24,BLACK,WHITE,Font_Rbb28,"Station II",0);
-								LCD_ShowSpStr(675,175,250,24,BLACK,WHITE,Font_Rbb28,"Taps",0);
-								
-								LCD_ShowSpStr(75,225,350,24,BLACK,WHITE,Font_Rbr27,"Sample Weight:",0); 	// 样品质量
-								fDat = Reports_rsmp.RPT_S1SampleMass;
-								fDat /= 100;
-								sprintf(tbuf,"%6.2f g",fDat);
-								LCD_ShowSpStr(325,225,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								LCD_ShowSpStr(75,250,350,24,BLACK,WHITE,Font_Rbr27,"Volume Initial:",0); 	// 样品初始体积
-								fDat = Reports_rsmp.RPT_S1InitialVolume;
-								fDat /= 10;
-								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(325,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								sprintf(tbuf,"%4d",0);
-								LCD_ShowSpStr(675,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								LCD_ShowSpStr(75,275,350,24,BLACK,WHITE,Font_Rbr27,"Volume  1:",0);
-								fDat = Reports_rsmp.RPT_S1V10;
-								fDat /= 10;
-								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(325,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								sprintf(tbuf,"%4d",10);
-								LCD_ShowSpStr(675,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								LCD_ShowSpStr(75,300,350,24,BLACK,WHITE,Font_Rbr27,"Volume  2:",0);
-								fDat = Reports_rsmp.RPT_S1V500;
-								fDat /= 10;
-								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(325,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								sprintf(tbuf,"%4d",500);
-								LCD_ShowSpStr(675,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								LCD_ShowSpStr(75,325,350,24,BLACK,WHITE,Font_Rbr27,"Volume  3:",0);
-								fDat = Reports_rsmp.RPT_S1V1250;
-								fDat /= 10;
-								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(325,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								sprintf(tbuf,"%4d",1250);
-								LCD_ShowSpStr(675,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								ucDat = Reports_rsmp.RPT_TESTENDS1;
-								for(i=4;i<ucDat+1;i++)
-								{
-									sprintf(tbuf,"Volume  %d:",i);
-									LCD_ShowSpStr(75,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-									
-									fDat = Reports_rsmp.RPT_S1Delay[i-4];
-									fDat /= 10;
-									sprintf(tbuf,"%6.1f ml",fDat);
-									LCD_ShowSpStr(325,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-									
-									sprintf(tbuf,"%4d",1250);
-									LCD_ShowSpStr(675,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								}
-							}
-							else
-							if(Reports_rsmp.RPT_S2Method == 2) 				// 方法二
-							{
-								LCD_ShowSpStr(45,175,250,24,BLACK,WHITE,Font_Rbb28,"5  Test Results:",0); // 标题
-								//LCD_ShowSpStr(325,175,250,24,BLACK,WHITE,Font_Rbb28,"Station I",0);
-								LCD_ShowSpStr(500,175,250,24,BLACK,WHITE,Font_Rbb28,"Station II",0);
-								LCD_ShowSpStr(675,175,250,24,BLACK,WHITE,Font_Rbb28,"Taps",0);
-								
-								LCD_ShowSpStr(75,225,350,24,BLACK,WHITE,Font_Rbr27,"Sample Weight:",0); 	// 样品质量
-								fDat = Reports_rsmp.RPT_S2SampleMass;
-								fDat /= 100;
-								sprintf(tbuf,"%6.2f g",fDat);
-								LCD_ShowSpStr(500,225,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								LCD_ShowSpStr(75,250,350,24,BLACK,WHITE,Font_Rbr27,"Volume Initial:",0); 	// 样品初始体积
-								fDat = Reports_rsmp.RPT_S2InitialVolume;
-								fDat /= 10;
-								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(500,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								sprintf(tbuf,"%4d",0);
-								LCD_ShowSpStr(675,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								LCD_ShowSpStr(75,275,350,24,BLACK,WHITE,Font_Rbr27,"Volume  1:",0);
-								fDat = Reports_rsmp.RPT_S2V10;
-								fDat /= 10;
-								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(500,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								sprintf(tbuf,"%4d",10);
-								LCD_ShowSpStr(675,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								LCD_ShowSpStr(75,300,350,24,BLACK,WHITE,Font_Rbr27,"Volume  2:",0);
-								fDat = Reports_rsmp.RPT_S2V500;
-								fDat /= 10;
-								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(500,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								sprintf(tbuf,"%4d",500);
-								LCD_ShowSpStr(675,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								LCD_ShowSpStr(75,325,350,24,BLACK,WHITE,Font_Rbr27,"Volume  3:",0);
-								fDat = Reports_rsmp.RPT_S2V1250;
-								fDat /= 10;
-								sprintf(tbuf,"%6.1f ml",fDat);
-								LCD_ShowSpStr(500,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								sprintf(tbuf,"%4d",1250);
-								LCD_ShowSpStr(675,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								ucDat = Reports_rsmp.RPT_TESTENDS2;
-								for(i=4;i<ucDat+1;i++)
-								{
-									sprintf(tbuf,"Volume  %d:",i);
-									LCD_ShowSpStr(75,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-									
-									fDat = Reports_rsmp.RPT_S2Delay[i-4];
-									fDat /= 10;
-									sprintf(tbuf,"%6.1f ml",fDat);
-									LCD_ShowSpStr(500,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-									
-									sprintf(tbuf,"%4d",1250);
-									LCD_ShowSpStr(675,350+(i-4)*25,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								}
-							}
-						}
-						else
-						if(LineNb == 2) 						// 预览第三页
-						{
-							LCD_Fill(769,366,769+62,366+145,GRAY_D7D7D7); 		// 上下滚动块
-							
-							LCD_Fill(32,362,32+720,362+50,GRAY_E8E8E8); 		// 中间灰色横条
-							LCD_Fill(32,462,32+720,462+50,GRAY_E8E8E8); 		// 中间灰色横条
-							
-							if(Reports_rsmp.RPT_S1Method == 1) 				// 方法一
-							{
-								LCD_ShowSpStr(45,175,250,24,BLACK,WHITE,Font_Rbb28,"6  Statistics:",0);
-								LCD_ShowSpStr(375,175,250,24,BLACK,WHITE,Font_Rbb28,"Station I",0);
-								
-								LCD_ShowSpStr(75,225,350,24,BLACK,WHITE,Font_Rbr27,"Total taps:",0);
-								uiDat = RUN_CYC[Reports_rsmp.RPT_TESTENDS1];
-								sprintf(tbuf,"%5d",uiDat);
-								LCD_ShowSpStr(400,225,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								LCD_ShowSpStr(75,250,350,24,BLACK,WHITE,Font_Rbr27,"Initial Density:",0);
-								//InitialDensity1 = SampleMass1/VolumeTest1[0];
-								sprintf(tbuf,"%6.2f g/ml",Reports_rsmp.RPT_S1InitialDensity);
-								LCD_ShowSpStr(400,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								LCD_ShowSpStr(75,275,350,24,BLACK,WHITE,Font_Rbr27,"Tapped Density:",0);
-								//TappedDensity1 = SampleMass1/VolumeTest1[TestEndS1];
-								sprintf(tbuf,"%6.2f g/ml",Reports_rsmp.RPT_S1TappedDensity);
-								LCD_ShowSpStr(400,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								LCD_ShowSpStr(75,300,350,24,BLACK,WHITE,Font_Rbr27,"Hausner Ratio:",0);
-								//HausnerRatio1 = VolumeTest1[0]/VolumeTest1[TestEndS1];
-								sprintf(tbuf,"%6.2f",Reports_rsmp.RPT_S1HausnerRatio);
-								LCD_ShowSpStr(400,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								LCD_ShowSpStr(75,325,350,24,BLACK,WHITE,Font_Rbr27,"Compressibility Index:",0);
-								//CompressibilityIndex1 = 100*(VolumeTest1[0]-VolumeTest1[TestEndS1])/VolumeTest1[0];
-								sprintf(tbuf,"%6.1f %%",Reports_rsmp.RPT_S1Compressibility);
-								LCD_ShowSpStr(400,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								if(Reports_rsmp.RPT_V0_V10 == 0)
-									LCD_ShowSpStr(75,375,550,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V0.",0);
-								else
-								if(Reports_rsmp.RPT_V0_V10 == 10)
-									LCD_ShowSpStr(75,375,550,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V10.",0);
-							}
-							else
-							if(Reports_rsmp.RPT_S2Method == 2) 				// 方法二
-							{
-								LCD_ShowSpStr(45,175,250,24,BLACK,WHITE,Font_Rbb28,"6  Statistics:",0);
-								LCD_ShowSpStr(575,175,250,24,BLACK,WHITE,Font_Rbb28,"Station II",0);
-								
-								LCD_ShowSpStr(75,225,350,24,BLACK,WHITE,Font_Rbr27,"Total taps:",0);
-								uiDat = RUN_CYC[Reports_rsmp.RPT_TESTENDS2];
-								sprintf(tbuf,"%5d",uiDat);
-								LCD_ShowSpStr(600,225,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								LCD_ShowSpStr(75,250,350,24,BLACK,WHITE,Font_Rbr27,"Initial Density:",0);
-								//InitialDensity2 = SampleMass2/VolumeTest2[0];
-								sprintf(tbuf,"%6.2f g/ml",Reports_rsmp.RPT_S2InitialDensity);
-								LCD_ShowSpStr(600,250,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								LCD_ShowSpStr(75,275,350,24,BLACK,WHITE,Font_Rbr27,"Tapped Density:",0);
-								//TappedDensity2 = SampleMass2/VolumeTest2[TestEndS2];
-								sprintf(tbuf,"%6.2f g/ml",Reports_rsmp.RPT_S2TappedDensity);
-								LCD_ShowSpStr(600,275,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								LCD_ShowSpStr(75,300,350,24,BLACK,WHITE,Font_Rbr27,"Hausner Ratio:",0);
-								//HausnerRatio2 = VolumeTest2[0]/VolumeTest2[TestEndS2];
-								sprintf(tbuf,"%6.2f",Reports_rsmp.RPT_S2HausnerRatio);
-								LCD_ShowSpStr(600,300,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								LCD_ShowSpStr(75,325,350,24,BLACK,WHITE,Font_Rbr27,"Compressibility Index:",0);
-								//CompressibilityIndex2 = 100*(VolumeTest2[0]-VolumeTest2[TestEndS2])/VolumeTest2[0];
-								sprintf(tbuf,"%6.1f %%",Reports_rsmp.RPT_S2Compressibility);
-								LCD_ShowSpStr(600,325,350,24,BLACK,WHITE,Font_Rbr27,tbuf,0);
-								
-								if(Reports_rsmp.RPT_V0_V10 == 0)
-									LCD_ShowSpStr(75,375,550,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V0.",0);
-								else
-								if(Reports_rsmp.RPT_V0_V10 == 10)
-									LCD_ShowSpStr(75,375,550,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Compressibility Index calculation based on V10.",0);
-							}
-						}
-					}*/
 					
 					if(Reports_rsmp.RPT_S1Method != 0)
 						StationFlag = 1;
@@ -37662,10 +28688,10 @@ void Display_Handler(void)
 					//osDelay(10);
 					LCD_ShowSpStr(46,124,1020,36,WHITE,GRAY_878787,Font_Rbb34,"Qualification",0);
 					
-					LCD_ShowSpStr(110,170,680,24,BLACK,WHITE,Font_Rbr27,"Qualification of tap height",0);
-					LCD_ShowSpStr(110,220,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Qualification of tap count",0);
+					LCD_ShowSpStr(110,170,680,28,BLACK,WHITE,Font_Rbr27,"Qualification of tap height",0);
+					LCD_ShowSpStr(110,220,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Qualification of tap count",0);
 					//LCD_ShowSpStr(110,270,680,24,BLACK,WHITE,Font_Rbr27,"Test time",0);
-					LCD_ShowSpStr(110,270,680,24,BLACK,WHITE,Font_Rbr27,"Runtime",0);
+					LCD_ShowSpStr(110,270,680,28,BLACK,WHITE,Font_Rbr27,"Runtime",0);
 					
 					//LCD_ShowSpStr(110,270,680,24,BLACK,WHITE,Font_Rbr27,"Tap frequency",0);
 					//LCD_ShowSpStr(110,365,680,24,BLACK,WHITE,Font_Rbr27,"Cylinder weight check",0);
@@ -37750,13 +28776,13 @@ void Display_Handler(void)
 										{
 											LCD_Fill(32,208,32+800,208+48,GRAY_E8E8E8); 							// 小灰框
 											LCD_ShowIcon(50,215,32,32,BLACK,GRAY_E8E8E8,35,0); 				// “逆时针”
-											LCD_ShowSpStr(110,220,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Qualification of tap count",0);
+											LCD_ShowSpStr(110,220,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Qualification of tap count",0);
 										}break;
 										case 3:
 										{
 											LCD_Fill(32,256,32+800,256+48,WHITE); 										// 小白框
 											LCD_ShowIcon(54,265,24,32,BLACK,WHITE,37,0); 							// “小秒表”
-											LCD_ShowSpStr(110,270,680,24,BLACK,WHITE,Font_Rbr27,"Runtime",0);
+											LCD_ShowSpStr(110,270,680,28,BLACK,WHITE,Font_Rbr27,"Runtime",0);
 										}break;
 										/*
 										case 4:
@@ -37788,7 +28814,7 @@ void Display_Handler(void)
 									
 									LCD_Fill(32,160,32+800,160+48,BLUE_26A5D1); 							// 小兰框
 									LCD_ShowIcon(58,165,16,32,WHITE,BLUE_26A5D1,34,0); 	// “上下双箭头”
-									LCD_ShowSpStr(110,170,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Qualification of tap height",0);
+									LCD_ShowSpStr(110,170,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Qualification of tap height",0);
 									
 									Quali_Menu = 1;
 								}
@@ -37796,7 +28822,7 @@ void Display_Handler(void)
 								{
 									LCD_Fill(32,160,32+800,160+48,WHITE); 							// 小白框
 									LCD_ShowIcon(58,165,16,32,BLACK,WHITE,34,0); 	// “上下双箭头”
-									LCD_ShowSpStr(110,170,680,24,BLACK,WHITE,Font_Rbr27,"Qualification of tap height",0);
+									LCD_ShowSpStr(110,170,680,28,BLACK,WHITE,Font_Rbr27,"Qualification of tap height",0);
 									
 									LCD_ShowIcon(880,112,112,128,BLACK,GRAY_B3B3B3,27,0); 	// Enter
 									LCD_ShowSpStr(916,206,60,24,BLACK,GRAY_B3B3B3,Font_Rbr27,"Enter",0);
@@ -37822,7 +28848,7 @@ void Display_Handler(void)
 										{
 											LCD_Fill(32,160,32+800,160+48,WHITE); 										// 小白框
 											LCD_ShowIcon(58,165,16,32,BLACK,WHITE,34,0); 							// “上下双箭头”
-											LCD_ShowSpStr(110,170,680,24,BLACK,WHITE,Font_Rbr27,"Qualification of tap height",0);
+											LCD_ShowSpStr(110,170,680,28,BLACK,WHITE,Font_Rbr27,"Qualification of tap height",0);
 										}break;
 										case 2:
 										{
@@ -37832,7 +28858,7 @@ void Display_Handler(void)
 										{
 											LCD_Fill(32,256,32+800,256+48,WHITE); 										// 小白框
 											LCD_ShowIcon(54,265,24,32,BLACK,WHITE,37,0); 							// “小秒表”
-											LCD_ShowSpStr(110,270,680,24,BLACK,WHITE,Font_Rbr27,"Runtime",0);
+											LCD_ShowSpStr(110,270,680,28,BLACK,WHITE,Font_Rbr27,"Runtime",0);
 										}break;
 										/*
 										case 3:
@@ -37864,7 +28890,7 @@ void Display_Handler(void)
 									
 									LCD_Fill(32,208,32+800,208+48,BLUE_26A5D1); 									// 小兰框
 									LCD_ShowIcon(50,215,32,32,WHITE,BLUE_26A5D1,35,0); 						// “逆时针”
-									LCD_ShowSpStr(110,220,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Qualification of tap count",0);
+									LCD_ShowSpStr(110,220,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Qualification of tap count",0);
 									
 									Quali_Menu = 2;
 								}
@@ -37872,7 +28898,7 @@ void Display_Handler(void)
 								{
 									LCD_Fill(32,208,32+800,208+48,GRAY_E8E8E8); 									// 小灰框
 									LCD_ShowIcon(50,215,32,32,BLACK,GRAY_E8E8E8,35,0); 						// “逆时针”
-									LCD_ShowSpStr(110,220,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Qualification of tap count",0);
+									LCD_ShowSpStr(110,220,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Qualification of tap count",0);
 									
 									LCD_ShowIcon(880,112,112,128,BLACK,GRAY_E8E8E8,27,0); 				// Enter
 									LCD_ShowSpStr(916,206,60,24,BLACK,GRAY_E8E8E8,Font_Rbm22,"Enter",0);
@@ -37898,13 +28924,13 @@ void Display_Handler(void)
 										{
 											LCD_Fill(32,160,32+800,160+48,WHITE); 							// 小白框
 											LCD_ShowIcon(58,165,16,32,BLACK,WHITE,34,0); 	// “上下双箭头”
-											LCD_ShowSpStr(110,170,680,24,BLACK,WHITE,Font_Rbr27,"Qualification of tap height",0);
+											LCD_ShowSpStr(110,170,680,28,BLACK,WHITE,Font_Rbr27,"Qualification of tap height",0);
 										}break;
 										case 2:
 										{
 											LCD_Fill(32,208,32+800,208+48,GRAY_E8E8E8); 							// 小灰框
 											LCD_ShowIcon(50,215,32,32,BLACK,GRAY_E8E8E8,35,0); 	// “逆时针”
-											LCD_ShowSpStr(110,220,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Qualification of tap count",0);
+											LCD_ShowSpStr(110,220,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Qualification of tap count",0);
 										}break;
 										case 3:
 										{
@@ -37938,7 +28964,7 @@ void Display_Handler(void)
 									
 									LCD_Fill(32,256,32+800,256+48,BLUE_26A5D1); 									// 小兰框
 									LCD_ShowIcon(54,265,24,32,WHITE,BLUE_26A5D1,37,0); 							// “小秒表”
-									LCD_ShowSpStr(110,270,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Runtime",0);
+									LCD_ShowSpStr(110,270,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Runtime",0);
 									
 									Quali_Menu = 3;
 								}
@@ -37946,7 +28972,7 @@ void Display_Handler(void)
 								{
 									LCD_Fill(32,256,32+800,256+48,WHITE); 										// 小白框
 									LCD_ShowIcon(54,265,24,32,BLACK,WHITE,37,0); 							// “小秒表”
-									LCD_ShowSpStr(110,270,680,24,BLACK,WHITE,Font_Rbr27,"Runtime",0);
+									LCD_ShowSpStr(110,270,680,28,BLACK,WHITE,Font_Rbr27,"Runtime",0);
 									
 									LCD_ShowIcon(880,112,112,128,BLACK,GRAY_E8E8E8,27,0); 				// Enter
 									LCD_ShowSpStr(916,206,60,24,BLACK,GRAY_E8E8E8,Font_Rbm22,"Enter",0);
@@ -38259,21 +29285,19 @@ void Display_Handler(void)
 					if(PopWindow != 3)
 					{
 						LCD_Fill(32,160,32+800,160+416,WHITE); 						// 大白框
-						LCD_ShowSpStr(64,175,300,24,BLACK,WHITE,Font_Rbb28,"Enter number of taps",0);
+						LCD_ShowSpStr(64,175,300,28,BLACK,WHITE,Font_Rbb28,"Enter number of taps",0);
 						LCD_Fill(64,208,64+656,208+80,GRAY_DADADA); 							// 小灰框
 						LCD_ShowIcon(80,223,44,48,GRAY_EDEDED,GRAY_DADADA,19,0); 				// 上下循环箭头大
-						//LCD_ShowSpStr(320,225,150,50,GRAY_A6A6A6,GRAY_DADADA,Font_Hnb48,"20-300",0);
 						LCD_ShowIcon(756,223,44,48,GRAY_EDEDED,WHITE,15,0); 				// 圆圈？
 						
 						LCD_Fill(64,320,64+656,320+224,GRAY_F8F8F8); 						// 大白灰框
 						LCD_ShowSpStr(80,336,420,24,BLACK,GRAY_F8F8F8,Font_Rbm24,"Instructions",0);
-						LCD_ShowSpStr(80,386,420,50,BLACK,GRAY_F8F8F8,Font_Rbm20,"1.)	Mount the dial gauge to the holder that is attached on the top of the device.",0);
-						
-						LCD_ShowSpStr(80,436,420,50,BLACK,GRAY_F8F8F8,Font_Rbm20,"2.)	Enter number of strokes (at least 20 recommended) and press start.",0);
-						
-						//LCD_ShowSpStr(80,486,400,24,BLACK,GRAY_F8F8F8,Font_Rbm20,"3.Enter the max. Value in the pop-up.",0);
-						LCD_ShowSpStr(80,486,420,24,BLACK,GRAY_F8F8F8,Font_Rbm20,"3.)	Enter the results to the OQ protocol.",0);
-						//LCD_ShowSpStr(80,511,400,24,BLACK,GRAY_F8F8F8,Font_Rbm20,"4.Print report and sign.",0);
+
+						LCD_ShowSpStr(80,386,430,50,BLACK,GRAY_F8F8F8,Font_Rbm20,"1. Mount the dial gauge to the holder that is attached",0);
+						LCD_ShowSpStr(100,386+22,420,50,BLACK,GRAY_F8F8F8,Font_Rbm20,"on the top of the device.",0);
+						LCD_ShowSpStr(80,436,440,50,BLACK,GRAY_F8F8F8,Font_Rbm20,"2. Enter number of strokes (at least 20 recommended)",0);
+						LCD_ShowSpStr(101,436+22,420,50,BLACK,GRAY_F8F8F8,Font_Rbm20,"and press Start.",0);
+						LCD_ShowSpStr(80,486,420,24,BLACK,GRAY_F8F8F8,Font_Rbm20,"3. Enter the results to the OQ protocol.",0);
 						
 						image_disbynb(512,336,gImage_035); 								// 杠杆表
 						
@@ -38809,7 +29833,7 @@ void Display_Handler(void)
 					LCD_ShowSpStr(47,124,1020,36,WHITE,GRAY_878787,Font_Rbb34,"Qualification of tap count",0);
 					
 					LCD_Fill(32,160,32+800,160+416,WHITE); 						// 大白框
-					LCD_ShowSpStr(64,175,300,24,BLACK,WHITE,Font_Rbb28,"Enter number of taps",0);
+					LCD_ShowSpStr(64,175,300,28,BLACK,WHITE,Font_Rbb28,"Enter number of taps",0);
 					LCD_Fill(64,208,64+656,208+80,GRAY_DADADA); 							// 小灰框
 					LCD_ShowIcon(80,223,44,48,0xEF7D,GRAY_DADADA,19,0); 				// 上下循环箭头大
 					//LCD_ShowSpStr(320,225,150,50,GRAY_A6A6A6,GRAY_DADADA,Font_Hnb48,"20-300",0);
@@ -38820,13 +29844,11 @@ void Display_Handler(void)
 						LCD_Fill(64,320,64+656,320+224,GRAY_F8F8F8); 						// 大白灰框
 						LCD_ShowSpStr(80,336,400,24,BLACK,GRAY_F8F8F8,Font_Rbm24,"Instructions",0);
 						
-						LCD_ShowSpStr(80,375,420,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"1.)	Attach reflector to the support plate.",0);
-						LCD_ShowSpStr(80,400,420,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"2.)	Switch the tachometer to REV mode.",0);
-						LCD_ShowSpStr(80,425,420,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"3.)	Enter number of strokes (100 recommended).",0);
-						LCD_ShowSpStr(80,450,420,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"4.)	Press start.",0);
-						//LCD_ShowSpStr(80,475,400,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"5.Enter displayed value into pop-up.",0);
-						LCD_ShowSpStr(80,475,420,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"5.)	Enter the results to the OQ protocol.",0);
-						//LCD_ShowSpStr(80,500,400,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"6.Print report and sign.",0);
+						LCD_ShowSpStr(80,375,420,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"1. Attach reflector to the support plate.",0);
+						LCD_ShowSpStr(80,400,420,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"2. Switch the tachometer to REV mode.",0);
+						LCD_ShowSpStr(80,425,420,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"3. Enter number of strokes (100 recommended).",0);
+						LCD_ShowSpStr(80,450,420,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"4. Press Start.",0);
+						LCD_ShowSpStr(80,475,420,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"5. Enter the results to the OQ protocol.",0);
 						
 						image_disbynb(512,336,gImage_039); 								// 彩图秒表
 						
@@ -39499,7 +30521,7 @@ void Display_Handler(void)
 							
 							LCD_ShowSpStr(175,108,450,36,WHITE,GRAY_656565,Font_Rbb34,"Hint: Time",0);
 							
-							LCD_ShowSpStr(175,185,700,24,BLACK,WHITE,Font_Rbm22,"Enter the runtime. It can be set up to 9 Hours, 59 minutes and 59 seconds.",0);
+							LCD_ShowSpStr(175,185,700,24,BLACK,WHITE,Font_Rbm22,"Enter the runtime. It can be set up to 9 hours, 59 minutes and 59 seconds.",0);
 							//LCD_ShowSpStr(175,215,700,24,BLACK,WHITE,Font_Rbr27,"You can either test for a specific number of strokes, or enter a runtime.",0);
 							//LCD_ShowSpStr(175,275,700,24,BLACK,WHITE,Font_Rbr27,"Here, you select for strokes.",0);
 							
@@ -39867,12 +30889,12 @@ void Display_Handler(void)
 					LCD_Fill(64,320,64+656,320+224,GRAY_F8F8F8); 						// 大白灰框
 					LCD_ShowSpStr(80,336,400,24,BLACK,GRAY_F8F8F8,Font_Rbm24,"Instructions",0);
 					
-					LCD_ShowSpStr(80,375,400,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"1.Attach reflector to the support plate.",0);
-					LCD_ShowSpStr(80,400,400,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"2.Switch the Tachometer to RPM mode.",0);
-					LCD_ShowSpStr(80,425,400,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"3.Enter time(1 minute recommended)",0);
-					LCD_ShowSpStr(80,450,400,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"4.Press start.",0);
-					LCD_ShowSpStr(80,475,400,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"5.Enter displayed value into pop-up.",0);
-					LCD_ShowSpStr(80,500,400,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"6.Print report and sign.",0);
+					LCD_ShowSpStr(80,375,400,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"1. Attach reflector to the support plate.",0);
+					LCD_ShowSpStr(80,400,400,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"2. Switch the Tachometer to RPM mode.",0);
+					LCD_ShowSpStr(80,425,400,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"3. Enter time(1 minute recommended)",0);
+					LCD_ShowSpStr(80,450,400,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"4. Press Start.",0);
+					LCD_ShowSpStr(80,475,400,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"5. Enter displayed value into pop-up.",0);
+					LCD_ShowSpStr(80,500,400,24,BLACK,GRAY_F8F8F8,Font_Rbm22,"6. Print report and sign.",0);
 					
 					image_disbynb(512,336,gImage_039); 								// 彩图秒表
 					
@@ -40061,15 +31083,15 @@ void Display_Handler(void)
 							//LCD_ShowIcon(47,532,42,42,BLACK,WHITE,71,0); 					// Export(小)								2021/11/22 星期一 14:33:28
 							LCD_ShowIcon(52,535,32,32,BLACK,WHITE,96,0); 						// 网络图标								2022-12-11 周日 16:12:53
 							
-							LCD_ShowSpStr(110,170,680,24,BLACK,WHITE,Font_Rbr27,"Date and time",0);
-							LCD_ShowSpStr(110,216,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Printer",0);
-							LCD_ShowSpStr(110,262,680,24,BLACK,WHITE,Font_Rbr27,"Sound",0);
-							LCD_ShowSpStr(110,308,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Configuration",0);
-							LCD_ShowSpStr(110,354,680,24,BLACK,WHITE,Font_Rbr27,"USP configuration",0);
-							LCD_ShowSpStr(110,400,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"OQ light",0);
-							LCD_ShowSpStr(110,446,680,24,BLACK,WHITE,Font_Rbr27,"Password protection",0);		//2021/10/21 增加密码设置
-							LCD_ShowSpStr(110,492,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Export settings",0);				//2021/11/22 星期一 14:34:48	增加导出设置
-							LCD_ShowSpStr(110,538,680,24,BLACK,WHITE,Font_Rbr27,"Network settings SVM II",0);
+							LCD_ShowSpStr(110,170,680,27,BLACK,WHITE,Font_Rbr27,"Date and time",0);
+							LCD_ShowSpStr(110,216,680,27,BLACK,GRAY_E8E8E8,Font_Rbr27,"Printer",0);
+							LCD_ShowSpStr(110,262,680,27,BLACK,WHITE,Font_Rbr27,"Sound",0);
+							LCD_ShowSpStr(110,308,680,27,BLACK,GRAY_E8E8E8,Font_Rbr27,"Configuration",0);
+							LCD_ShowSpStr(110,354,680,27,BLACK,WHITE,Font_Rbr27,"USP configuration",0);
+							LCD_ShowSpStr(110,400,680,27,BLACK,GRAY_E8E8E8,Font_Rbr27,"OQ status",0);
+							LCD_ShowSpStr(110,446,680,27,BLACK,WHITE,Font_Rbr27,"Password protection",0);		//2021/10/21 增加密码设置
+							LCD_ShowSpStr(110,492,680,27,BLACK,GRAY_E8E8E8,Font_Rbr27,"Export settings",0);				//2021/11/22 星期一 14:34:48	增加导出设置
+							LCD_ShowSpStr(110,538,680,27,BLACK,WHITE,Font_Rbr27,"Network settings",0);
 							
 						}break;
 						case 1: 										// 第1页
@@ -40085,7 +31107,7 @@ void Display_Handler(void)
 							LCD_Fill(32,528,32+720,528+46,GRAY_E8E8E8); 						// 中间灰色横条
 							
 							LCD_ShowIcon(50,170,24,24,BLACK,GRAY_E8E8E8,61,0); 			// “打印管理图标”
-							LCD_ShowSpStr(110,170,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Reports",0);
+							LCD_ShowSpStr(110,170,680,27,BLACK,GRAY_E8E8E8,Font_Rbr27,"Reports",0);
 						}break;
 						case 2: 										// 第2页
 						{
@@ -40356,8 +31378,8 @@ void Display_Handler(void)
 												strcpy(SetDateStr, RealDateStr);
 												strcpy(SetTimeStr, RealTimeStr);
 												DateFormatSv = DateFormat;
-												TimeZoneSv = TimeZone;
-												DaylightTimeSv = DaylightTime;
+												//TimeZoneSv = TimeZone;
+												//DaylightTimeSv = DaylightTime;
 												
 												LastPage = CurntPage;
 												CurntPage = 81; 				// Date and time
@@ -40462,10 +31484,10 @@ void Display_Handler(void)
 												HotLine = 0;
 												cp_flag = 1;
 											}break;
-											case 9: 					// Network settings SVM II
+											case 9: 					// Network settings
 											{
 												LastPage = CurntPage;
-												CurntPage = 89; 									// Network settings SVM II
+												CurntPage = 89; 									// Network settings
 												
 												tmpDhcpSw = DhcpSw;
 												if(link_status_new&&EthInitStatus) 				// 检测到网线连接，连接成功
@@ -40742,7 +31764,6 @@ void Display_Handler(void)
 					LCD_ShowSpStr(62,173,200,24,BLACK,WHITE,Font_Rbm24,"Date:",0);
 					LCD_Fill(64,208,64+256,208+48,GRAY_DADADA); 							// 日期显示框
 					LCD_ShowIcon(285,217,32,32,BLACK,GRAY_DADADA,43,0); 		// 小苗
-					//LCD_ShowSpStr(78,218,200,24,BLACK,BLACK,Font_Rbr27,"07.11.2019",0);
 					
 					LCD_ShowSpStr(366,173,200,24,BLACK,WHITE,Font_Rbm24,"Date Format:",0);
 					LCD_Fill(368,208,368+256,208+48,GRAY_DADADA); 							// 日期格式显示框
@@ -40759,21 +31780,18 @@ void Display_Handler(void)
 					LCD_ShowSpStr(62,285,200,24,BLACK,WHITE,Font_Rbm24,"Time:",0);
 					LCD_Fill(64,320,64+256,320+48,GRAY_DADADA); 							// 时间显示框
 					LCD_ShowIcon(285,328,32,32,BLACK,GRAY_DADADA,40,0); 		// 圆表盘
-					//LCD_ShowSpStr(78,330,200,24,BLACK,GRAY_DADADA,Font_Rbr27,"12:04",0);
 					
-					LCD_ShowSpStr(366,285,200,24,BLACK,WHITE,Font_Rbm24,"Timezone:",0);
+					/*LCD_ShowSpStr(366,285,200,24,BLACK,WHITE,Font_Rbm24,"Timezone:",0);
 					LCD_Fill(368,320,368+256,320+48,GRAY_DADADA); 							// 时区显示框
 					LCD_ShowIcon(592,338,32,16,BLACK,GRAY_DADADA,45,0); 		// 倒三角
 					LCD_ShowSpStr(383,330,200,24,BLACK,GRAY_DADADA,Font_Rbr27,"CET ",0);
 					LCD_ShowSpStr(433,330,200,24,BLACK,GRAY_DADADA,Font_Rbr27,(char *)TimeZoneList[TimeZoneSv][0],0);
-					//if(TimeZoneSv == 15)
-					//	LCD_ShowSpStr(533,330,200,24,BLACK,GRAY_DADADA,Font_Rbr27," Berlin",0);
 					
 					LCD_ShowSpStr(64,405,200,24,BLACK,WHITE,Font_Rbm24,"Daylight saving time:",0);
 					if(DaylightTimeSv == 0)
 						LCD_Fill(270,400,270+32,400+32,GRAY_DADADA); 							// 夏令时选择框
 					else
-						LCD_ShowIcon(270,400,32,32,GRAY_DADADA,BLACK,56,0);
+						LCD_ShowIcon(270,400,32,32,GRAY_DADADA,BLACK,56,0);*/
 					
 					LCD_ShowIcon(756,496,44,48,GRAY_EDEDED,WHITE,15,0); 		// 圆圈？
 					
@@ -40834,7 +31852,7 @@ void Display_Handler(void)
 							LCD_ShowSpStr(384,267,500,26,BLACK,WHITE,Font_Rbr27,"YYYY-MM-DD",0);
 							LCD_ShowSpStr(384,315,500,26,BLACK,GRAY_DADADA,Font_Rbr27,"MM/DD/YYYY",0);
 						}break;
-						case 3: 						// 时区选择
+						/*case 3: 						// 时区选择
 						{
 							LCD_Fill(160,93,160+704,93+330,GRAY_656565); 			// 灰色横条
 							LCD_ShowSpStr(175,110,300,36,WHITE,GRAY_656565,Font_Rbb34,"Select your timezone",0);
@@ -40961,7 +31979,7 @@ void Display_Handler(void)
 							LCD_Fill(608,448,608+256,448+60,GRAY_656565); 			// 灰色横条
 							LCD_Fill(608+5,448+5,608+256-5,448+60-5,GRAY_B3B3B3); 			// 灰色横条
 							LCD_ShowSpStr(721,465,100,36,BLACK,GRAY_B3B3B3,Font_Rbb34,"Ok",0);
-						}break;
+						}break;*/
 						case 4: 						// 帮助信息
 						{
 							LCD_Fill(160,94,160+704,94+60+270,GRAY_656565); 					// 灰色横条
@@ -40989,8 +32007,7 @@ void Display_Handler(void)
 						}break;
 						default:
 						break;
-					}
-					
+					}					
 				}
 				
 				if(kps_flag) 										// 键盘显示刷新
@@ -41097,12 +32114,12 @@ void Display_Handler(void)
 								{
 									RTC_Set(SetDateStr,SetTimeStr); 							// 设置日期和时间
 									DateFormat = DateFormatSv;
-									TimeZone = TimeZoneSv;
-									DaylightTime = DaylightTimeSv;
+									//TimeZone = TimeZoneSv;
+									//DaylightTime = DaylightTimeSv;
 									
-									writeeeprom(TimeZone, ADR_TIMEZONE); 								// 保存时区
+									//writeeeprom(TimeZone, ADR_TIMEZONE); 								// 保存时区
 									writeeeprom(DateFormat, ADR_DATEFORMAT); 						// 保存日期格式
-									writeeeprom(DaylightTime, ADR_DAYLIGHTTIME); 				// 保存夏令时
+									//writeeeprom(DaylightTime, ADR_DAYLIGHTTIME); 				// 保存夏令时
 									
 									ConPan_Menu = 0;
 									LastPage = CurntPage;
@@ -41156,7 +32173,7 @@ void Display_Handler(void)
 									
 									BEEPER_PlayTones(tones_1khz);
 								}
-								else
+								/*else
 								if((cur_tpx > 368)&&(cur_tpx < 624)&&(cur_tpy > 320)&&(cur_tpy < 368)) 	// Timezone输入框
 								{
 									PopWindow = 3;
@@ -41180,7 +32197,7 @@ void Display_Handler(void)
 									}
 									
 									BEEPER_PlayTones(tones_1khz);
-								}
+								}*/
 							}
 							else 												// 有键盘显示
 							{
@@ -41576,7 +32593,7 @@ void Display_Handler(void)
 							else
 								BEEPER_PlayTones(tones_error);
 						}break;
-						case 3: 						// 时区选择
+						/*case 3: 						// 时区选择
 						{
 							if((cur_tpx > 165)&&(cur_tpx < 165+615)&&(cur_tpy > 93+75)&&(cur_tpy < 93+75+50)) 	// 第一行
 							{
@@ -41651,7 +32668,7 @@ void Display_Handler(void)
 							}
 							else
 								BEEPER_PlayTones(tones_error);
-						}break;
+						}break;*/
 						case 4: 						// 帮助菜单“OK”按键
 						{
 							if((cur_tpx > 608)&&(cur_tpx < 608+256)&&(cur_tpy > 438)&&(cur_tpy < 438+60)) 	// OK
@@ -41666,8 +32683,7 @@ void Display_Handler(void)
 						}break;
 						default:
 						break;
-					}
-					
+					}					
 				}
 				else
 				{
@@ -42060,7 +33076,7 @@ void Display_Handler(void)
 											ucDat = 0;
 											uiDat = 0;
 											
-											for(i=0;i<15;i++)
+											for(i=0;i<16;i++)
 											{
 												if((KeyInStr[i] == '.')||(KeyInStr[i] == 0))
 												{
@@ -42109,7 +33125,7 @@ void Display_Handler(void)
 											ucDat = 0;
 											uiDat = 0;
 											
-											for(i=0;i<15;i++)
+											for(i=0;i<16;i++)
 											{
 												if((KeyInStr[i] == '.')||(KeyInStr[i] == 0))
 												{
@@ -42148,7 +33164,7 @@ void Display_Handler(void)
 											ucDat = 0;
 											uiDat = 0;
 											
-											for(i=0;i<15;i++)
+											for(i=0;i<16;i++)
 											{
 												if((KeyInStr[i] == '.')||(KeyInStr[i] == 0))
 												{
@@ -43415,7 +34431,7 @@ void Display_Handler(void)
 						LCD_ShowIcon(310,35,48,48,BLACK,BLACK,93,0); 		// U盘未连接图标
 					
 					LCD_Fill(32,112,32+800,112+48,GRAY_878787); 							// 小灰框
-					LCD_ShowSpStr(47,124,1020,36,WHITE,GRAY_878787,Font_Rbb34,"OQ light",0);
+					LCD_ShowSpStr(47,124,1020,36,WHITE,GRAY_878787,Font_Rbb34,"OQ status",0);
 					
 					LCD_Fill(32,160,32+800,160+416,WHITE); 						// 大白框
 					//LCD_ShowSpStr(62,218,100,24,BLACK,WHITE,Font_Rbm24,"Hausner Ratio",0);
@@ -44742,7 +35758,7 @@ void Display_Handler(void)
 											ucDat = 0;
 											uiDat = 0;
 											
-											for(i=0;i<15;i++)
+											for(i=0;i<16;i++)
 											{
 												if((KeyInStr[i] == '.')||(KeyInStr[i] == 0))
 												{
@@ -44789,7 +35805,7 @@ void Display_Handler(void)
 											ucDat = 0;
 											uiDat = 0;
 											
-											for(i=0;i<15;i++)
+											for(i=0;i<16;i++)
 											{
 												if((KeyInStr[i] == '.')||(KeyInStr[i] == 0))
 												{
@@ -44828,7 +35844,7 @@ void Display_Handler(void)
 											ucDat = 0;
 											uiDat = 0;
 											
-											for(i=0;i<15;i++)
+											for(i=0;i<16;i++)
 											{
 												if((KeyInStr[i] == '.')||(KeyInStr[i] == 0))
 												{
@@ -45021,7 +36037,7 @@ void Display_Handler(void)
 						RTC_DisRefresh(); 					// 日期时间刷新
 				}
 			}break;
-			case 89: 													// Control Panel -> Network settings SVM II, 2022-07-08 周五 15:36:47
+			case 89: 													// Control Panel -> Network settings, 2022-07-08 周五 15:36:47
 			{
 				if(cp_flag)											// 页面刷新
 				{
@@ -45043,7 +36059,7 @@ void Display_Handler(void)
 						LCD_ShowIcon(310,35,48,48,BLACK,BLACK,93,0); 		// U盘未连接图标
 					
 					LCD_Fill(32,112,32+800,112+48,GRAY_878787); 							// 小灰框
-					LCD_ShowSpStr(47,124,1020,36,WHITE,GRAY_878787,Font_Rbb34,"Network settings SVM II",0);
+					LCD_ShowSpStr(47,124,1020,36,WHITE,GRAY_878787,Font_Rbb34,"Network settings",0);
 					
 					LCD_Fill(32,160,32+800,160+416,WHITE); 						// 大白框
 					//LCD_ShowSpStr(62,218,100,24,BLACK,WHITE,Font_Rbm24,"Hausner Ratio",0);
@@ -45380,7 +36396,7 @@ void Display_Handler(void)
 											ucDat = 0;
 											uiDat = 0;
 											
-											for(i=0;i<15;i++)
+											for(i=0;i<16;i++)
 											{
 												if((KeyInStr[i] == '.')||(KeyInStr[i] == 0))
 												{
@@ -45427,7 +36443,7 @@ void Display_Handler(void)
 											ucDat = 0;
 											uiDat = 0;
 											
-											for(i=0;i<15;i++)
+											for(i=0;i<16;i++)
 											{
 												if((KeyInStr[i] == '.')||(KeyInStr[i] == 0))
 												{
@@ -45466,7 +36482,7 @@ void Display_Handler(void)
 											ucDat = 0;
 											uiDat = 0;
 											
-											for(i=0;i<15;i++)
+											for(i=0;i<16;i++)
 											{
 												if((KeyInStr[i] == '.')||(KeyInStr[i] == 0))
 												{
@@ -45904,56 +36920,56 @@ u8 Get_CPMenu(u8 line0,u8 line1)
 				{
 					LCD_Fill(32,160,32+720,160+46,WHITE); 						// 小白框
 					LCD_ShowIcon(50,168,32,32,BLACK,WHITE,40,0); 			// “小表盘”
-					LCD_ShowSpStr(110,170,680,24,BLACK,WHITE,Font_Rbr27,"Date and time",0);
+					LCD_ShowSpStr(110,170,680,27,BLACK,WHITE,Font_Rbr27,"Date and time",0);
 				}break;
 				case 2:
 				{
 					LCD_Fill(32,206,32+720,206+46,GRAY_E8E8E8); 								// 小灰框
 					LCD_ShowIcon(50,214,32,32,BLACK,GRAY_E8E8E8,41,0); 					// “小打印机”
-					LCD_ShowSpStr(110,216,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Printer",0);
+					LCD_ShowSpStr(110,216,680,27,BLACK,GRAY_E8E8E8,Font_Rbr27,"Printer",0);
 				}break;
 				case 3:
 				{
 					LCD_Fill(32,252,32+720,252+46,WHITE); 											// 小白框
 					LCD_ShowIcon(55,262,24,24,BLACK,WHITE,42,0); 								// “小喇叭”
-					LCD_ShowSpStr(110,262,680,24,BLACK,WHITE,Font_Rbr27,"Sound",0);
+					LCD_ShowSpStr(110,262,680,27,BLACK,WHITE,Font_Rbr27,"Sound",0);
 				}break;
 				case 4:
 				{
 					LCD_Fill(32,298,32+720,298+46,GRAY_E8E8E8); 					// 小灰框
 					LCD_ShowIcon(55,308,24,24,BLACK,GRAY_E8E8E8,59,0); 					// “水平双箭头”
-					LCD_ShowSpStr(110,308,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Configuration",0);
+					LCD_ShowSpStr(110,308,680,27,BLACK,GRAY_E8E8E8,Font_Rbr27,"Configuration",0);
 				}break;
 				case 5:
 				{
 					LCD_Fill(32,344,32+720,344+46,WHITE); 								// 小白框
 					LCD_ShowIcon(55,355,24,24,BLACK,WHITE,64,0); 								// 压缩率参考体积
-					LCD_ShowSpStr(110,354,680,24,BLACK,WHITE,Font_Rbr27,"USP configuration",0);
+					LCD_ShowSpStr(110,354,680,27,BLACK,WHITE,Font_Rbr27,"USP configuration",0);
 				}break;
 				case 6:
 				{
 					LCD_Fill(32,390,32+720,390+46,GRAY_E8E8E8); 					// 小灰框
 					LCD_ShowIcon(55,400,24,24,BLACK,GRAY_E8E8E8,65,0); 					// OQ红绿灯
-					LCD_ShowSpStr(110,400,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"OQ light",0);
+					LCD_ShowSpStr(110,400,680,27,BLACK,GRAY_E8E8E8,Font_Rbr27,"OQ Status",0);
 				}break;
 				case 7:
 				{
 					LCD_Fill(32,436,32+720,436+46,WHITE); 								// 	小白框
 					LCD_ShowIcon(47,440,42,42,BLACK,WHITE,69,0); 								// 解锁的图标								2021/10/25 星期一 15:30:45
-					LCD_ShowSpStr(110,446,680,24,BLACK,WHITE,Font_Rbr27,"Password protection",0);		//2021/10/21 增加密码设置
+					LCD_ShowSpStr(110,446,680,27,BLACK,WHITE,Font_Rbr27,"Password protection",0);		//2021/10/21 增加密码设置
 				}break;
 				case 8:
 				{
 					LCD_Fill(32,482,32+720,482+46,GRAY_E8E8E8); 					// 小灰框
 					LCD_ShowIcon(47,486,42,42,BLACK,GRAY_E8E8E8,71,0); 					// Export(小)								2021/11/22 星期一 14:33:28
-					LCD_ShowSpStr(110,492,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Export settings",0);				//2021/11/22 星期一 14:34:48	增加导出设置
+					LCD_ShowSpStr(110,492,680,27,BLACK,GRAY_E8E8E8,Font_Rbr27,"Export settings",0);				//2021/11/22 星期一 14:34:48	增加导出设置
 				}break;
 				case 9:
 				{
 					LCD_Fill(32,528,32+720,528+46,WHITE); 								// 	小白框
 					//LCD_ShowIcon(47,532,42,42,BLACK,WHITE,71,0); 					// Export(小)								2021/11/22 星期一 14:33:28
 					LCD_ShowIcon(52,535,32,32,BLACK,WHITE,96,0); 						// 网络图标
-					LCD_ShowSpStr(110,538,680,24,BLACK,WHITE,Font_Rbr27,"Network settings SVM II",0);
+					LCD_ShowSpStr(110,538,680,27,BLACK,WHITE,Font_Rbr27,"Network settings",0);
 				}break;
 				default:
 				break;
@@ -45967,56 +36983,56 @@ u8 Get_CPMenu(u8 line0,u8 line1)
 					{
 						LCD_Fill(32,160,32+720,160+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(50,168,32,32,WHITE,BLUE_26A5D1,40,0); 	// “小表盘”
-						LCD_ShowSpStr(110,170,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Date and time",0);
+						LCD_ShowSpStr(110,170,680,27,WHITE,BLUE_26A5D1,Font_Rbr27,"Date and time",0);
 					}break;
 					case 2:
 					{
 						LCD_Fill(32,206,32+720,206+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(50,214,32,32,WHITE,BLUE_26A5D1,41,0); 	// “小打印机”
-						LCD_ShowSpStr(110,216,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Printer",0);
+						LCD_ShowSpStr(110,216,680,27,WHITE,BLUE_26A5D1,Font_Rbr27,"Printer",0);
 					}break;
 					case 3:
 					{
 						LCD_Fill(32,252,32+720,252+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(58,262,24,24,WHITE,BLUE_26A5D1,42,0); 	// “小喇叭”
-						LCD_ShowSpStr(110,262,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Sound",0);
+						LCD_ShowSpStr(110,262,680,27,WHITE,BLUE_26A5D1,Font_Rbr27,"Sound",0);
 					}break;
 					case 4:
 					{
 						LCD_Fill(32,298,32+720,298+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(55,308,24,24,WHITE,BLUE_26A5D1,59,0); 	// “水平双箭头”
-						LCD_ShowSpStr(110,308,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Configuration",0);
+						LCD_ShowSpStr(110,308,680,27,WHITE,BLUE_26A5D1,Font_Rbr27,"Configuration",0);
 					}break;
 					case 5:
 					{
 						LCD_Fill(32,344,32+720,344+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(55,355,24,24,WHITE,BLUE_26A5D1,64,0); 				// “计算器”
-						LCD_ShowSpStr(110,354,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"USP configuration",0);
+						LCD_ShowSpStr(110,354,680,27,WHITE,BLUE_26A5D1,Font_Rbr27,"USP configuration",0);
 					}break;
 					case 6:
 					{
 						LCD_Fill(32,390,32+720,390+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(55,400,24,24,WHITE,BLUE_26A5D1,65,0); 						// “红绿灯”
-						LCD_ShowSpStr(110,400,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"OQ light",0);
+						LCD_ShowSpStr(110,400,680,27,WHITE,BLUE_26A5D1,Font_Rbr27,"OQ Status",0);
 					}break;
 					case 7:
 					{
 						LCD_Fill(32,436,32+720,436+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(47,440,42,42,WHITE,BLUE_26A5D1,69,0); 						// “解锁图标”
-						LCD_ShowSpStr(110,446,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Password protection",0);
+						LCD_ShowSpStr(110,446,680,27,WHITE,BLUE_26A5D1,Font_Rbr27,"Password protection",0);
 					}break;
 					case 8:
 					{
 						LCD_Fill(32,482,32+720,482+46,BLUE_26A5D1); 				// 小蓝框
 						LCD_ShowIcon(47,486,42,42,WHITE,BLUE_26A5D1,71,0); 				// Export(小)								2021/11/22 星期一 14:33:28
-						LCD_ShowSpStr(110,492,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Export settings",0);				//2021/11/22 星期一 14:34:48	增加导出设置
+						LCD_ShowSpStr(110,492,680,27,WHITE,BLUE_26A5D1,Font_Rbr27,"Export settings",0);				//2021/11/22 星期一 14:34:48	增加导出设置
 					}break;
 					case 9:
 					{
 						LCD_Fill(32,528,32+720,528+46+2,BLUE_26A5D1); 				// 小蓝框
 						//LCD_ShowIcon(47,532,42,42,WHITE,BLUE_26A5D1,71,0); 					// Export(小)								2021/11/22 星期一 14:33:28
 						LCD_ShowIcon(52,535,32,32,WHITE,BLUE_26A5D1,96,0); 						// 网络图标
-						LCD_ShowSpStr(110,538,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Network settings SVM II",0);				//2022/07/08 星期五 15:03:08 增加导出设置
+						LCD_ShowSpStr(110,538,680,27,WHITE,BLUE_26A5D1,Font_Rbr27,"Network settings",0);				//2022/07/08 星期五 15:03:08 增加导出设置
 					}break;
 					default:
 					break;
@@ -46031,55 +37047,55 @@ u8 Get_CPMenu(u8 line0,u8 line1)
 				{
 					LCD_Fill(32,160,32+720,160+46,GRAY_E8E8E8); 						// 小白框
 					LCD_ShowIcon(50,170,24,24,BLACK,GRAY_E8E8E8,61,0); 			// “打印管理图标”
-					LCD_ShowSpStr(110,170,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Reports",0);
+					LCD_ShowSpStr(110,170,680,27,BLACK,GRAY_E8E8E8,Font_Rbr27,"Reports",0);
 				}break;
 				case 2:
 				{
 					LCD_Fill(32,206,32+720,206+46,WHITE); 								// 小灰框
 					LCD_ShowIcon(50,214,32,32,BLACK,WHITE,41,0); 					// “小打印机”
-					LCD_ShowSpStr(110,216,680,24,BLACK,WHITE,Font_Rbr27,"Printer",0);
+					LCD_ShowSpStr(110,216,680,27,BLACK,WHITE,Font_Rbr27,"Printer",0);
 				}break;
 				case 3:
 				{
 					LCD_Fill(32,252,32+720,252+46,GRAY_E8E8E8); 											// 小白框
 					LCD_ShowIcon(55,262,24,24,BLACK,GRAY_E8E8E8,42,0); 								// “小喇叭”
-					LCD_ShowSpStr(110,262,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Sound",0);
+					LCD_ShowSpStr(110,262,680,27,BLACK,GRAY_E8E8E8,Font_Rbr27,"Sound",0);
 				}break;
 				case 4:
 				{
 					LCD_Fill(32,298,32+720,298+46,WHITE); 					// 小灰框
 					LCD_ShowIcon(55,308,24,24,BLACK,WHITE,59,0); 					// “水平双箭头”
-					LCD_ShowSpStr(110,308,680,24,BLACK,WHITE,Font_Rbr27,"Configuration",0);
+					LCD_ShowSpStr(110,308,680,27,BLACK,WHITE,Font_Rbr27,"Configuration",0);
 				}break;
 				case 5:
 				{
 					LCD_Fill(32,344,32+720,344+46,GRAY_E8E8E8); 								// 小白框
 					LCD_ShowIcon(55,355,24,24,BLACK,GRAY_E8E8E8,64,0); 								// 压缩率参考体积
-					LCD_ShowSpStr(110,354,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"USP configuration",0);
+					LCD_ShowSpStr(110,354,680,27,BLACK,GRAY_E8E8E8,Font_Rbr27,"USP configuration",0);
 				}break;
 				case 6:
 				{
 					LCD_Fill(32,390,32+720,390+46,WHITE); 					// 小灰框
 					LCD_ShowIcon(55,400,24,24,BLACK,WHITE,65,0); 					// OQ红绿灯
-					LCD_ShowSpStr(110,400,680,24,BLACK,WHITE,Font_Rbr27,"OQ light",0);
+					LCD_ShowSpStr(110,400,680,27,BLACK,WHITE,Font_Rbr27,"OQ Status",0);
 				}break;
 				case 7:
 				{
 					LCD_Fill(32,436,32+720,436+46,GRAY_E8E8E8); 								// 	小白框
 					LCD_ShowIcon(47,440,42,42,BLACK,GRAY_E8E8E8,69,0); 								// 解锁的图标								2021/10/25 星期一 15:30:45
-					LCD_ShowSpStr(110,446,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Password protection",0);		//2021/10/21 增加密码设置
+					LCD_ShowSpStr(110,446,680,27,BLACK,GRAY_E8E8E8,Font_Rbr27,"Password protection",0);		//2021/10/21 增加密码设置
 				}break;
 				case 8:
 				{
 					LCD_Fill(32,482,32+720,482+46,WHITE); 					// 小灰框
 					LCD_ShowIcon(47,486,42,42,BLACK,WHITE,71,0); 					// Export(小)								2021/11/22 星期一 14:33:28
-					LCD_ShowSpStr(110,492,680,24,BLACK,WHITE,Font_Rbr27,"Export settings",0);				//2021/11/22 星期一 14:34:48	增加导出设置
+					LCD_ShowSpStr(110,492,680,27,BLACK,WHITE,Font_Rbr27,"Export settings",0);				//2021/11/22 星期一 14:34:48	增加导出设置
 				}break;
 				case 9:
 				{
 					LCD_Fill(32,528,32+720,528+46,GRAY_E8E8E8); 								// 	小白框
 					LCD_ShowIcon(47,532,42,42,BLACK,GRAY_E8E8E8,71,0); 					// Export(小)								2021/11/22 星期一 14:33:28
-					LCD_ShowSpStr(110,538,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Network settings SVM II",0);
+					LCD_ShowSpStr(110,538,680,27,BLACK,GRAY_E8E8E8,Font_Rbr27,"Network settings",0);
 				}break;
 				default:
 				break;
@@ -46093,55 +37109,55 @@ u8 Get_CPMenu(u8 line0,u8 line1)
 					{
 						LCD_Fill(32,160,32+720,160+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(50,170,24,24,WHITE,BLUE_26A5D1,61,0); 			// “打印管理图标”
-						LCD_ShowSpStr(110,170,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Reports",0);
+						LCD_ShowSpStr(110,170,680,27,WHITE,BLUE_26A5D1,Font_Rbr27,"Reports",0);
 					}break;
 					case 2:
 					{
 						LCD_Fill(32,206,32+720,206+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(50,214,32,32,WHITE,BLUE_26A5D1,41,0); 	// “小打印机”
-						LCD_ShowSpStr(110,216,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Printer",0);
+						LCD_ShowSpStr(110,216,680,27,WHITE,BLUE_26A5D1,Font_Rbr27,"Printer",0);
 					}break;
 					case 3:
 					{
 						LCD_Fill(32,252,32+720,252+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(58,262,24,24,WHITE,BLUE_26A5D1,42,0); 	// “小喇叭”
-						LCD_ShowSpStr(110,262,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Sound",0);
+						LCD_ShowSpStr(110,262,680,27,WHITE,BLUE_26A5D1,Font_Rbr27,"Sound",0);
 					}break;
 					case 4:
 					{
 						LCD_Fill(32,298,32+720,298+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(55,308,24,24,WHITE,BLUE_26A5D1,59,0); 	// “水平双箭头”
-						LCD_ShowSpStr(110,308,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Configuration",0);
+						LCD_ShowSpStr(110,308,680,27,WHITE,BLUE_26A5D1,Font_Rbr27,"Configuration",0);
 					}break;
 					case 5:
 					{
 						LCD_Fill(32,344,32+720,344+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(55,355,24,24,WHITE,BLUE_26A5D1,64,0); 				// “计算器”
-						LCD_ShowSpStr(110,354,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"USP configuration",0);
+						LCD_ShowSpStr(110,354,680,27,WHITE,BLUE_26A5D1,Font_Rbr27,"USP configuration",0);
 					}break;
 					case 6:
 					{
 						LCD_Fill(32,390,32+720,390+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(55,400,24,24,WHITE,BLUE_26A5D1,65,0); 						// “红绿灯”
-						LCD_ShowSpStr(110,400,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"OQ light",0);
+						LCD_ShowSpStr(110,400,680,27,WHITE,BLUE_26A5D1,Font_Rbr27,"OQ Status",0);
 					}break;
 					case 7:
 					{
 						LCD_Fill(32,436,32+720,436+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(47,440,42,42,WHITE,BLUE_26A5D1,69,0); 						// “解锁图标”
-						LCD_ShowSpStr(110,446,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Password protection",0);
+						LCD_ShowSpStr(110,446,680,27,WHITE,BLUE_26A5D1,Font_Rbr27,"Password protection",0);
 					}break;
 					case 8:
 					{
 						LCD_Fill(32,482,32+720,482+46,BLUE_26A5D1); 				// 小蓝框
 						LCD_ShowIcon(47,486,42,42,WHITE,BLUE_26A5D1,71,0); 				// Export(小)								2021/11/22 星期一 14:33:28
-						LCD_ShowSpStr(110,492,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Export settings",0);				//2021/11/22 星期一 14:34:48	增加导出设置
+						LCD_ShowSpStr(110,492,680,27,WHITE,BLUE_26A5D1,Font_Rbr27,"Export settings",0);				//2021/11/22 星期一 14:34:48	增加导出设置
 					}break;
 					case 9:
 					{
 						LCD_Fill(32,528,32+720,528+46+2,BLUE_26A5D1); 				// 小蓝框
 						LCD_ShowIcon(47,532,42,42,WHITE,BLUE_26A5D1,71,0); 				// Export(小)								2021/11/22 星期一 14:33:28
-						LCD_ShowSpStr(110,538,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Network settings SVM II",0);				//2022/07/08 星期五 15:03:08 增加导出设置
+						LCD_ShowSpStr(110,538,680,27,WHITE,BLUE_26A5D1,Font_Rbr27,"Network settings",0);				//2022/07/08 星期五 15:03:08 增加导出设置
 					}break;
 					default:
 					break;
@@ -46815,7 +37831,7 @@ void RTC_DisRefresh(void)
 			Year = RTC_DateStruct.RTC_Year;
 			
 			// 夏令时调整 ----------------------
-			if(CurntPage == 81) 								// Control Panel -> Date and time
+			/*if(CurntPage == 81) 								// Control Panel -> Date and time
 			{
 				if(DaylightTimeSv != 0)
 					Hour += 1; 
@@ -46824,7 +37840,7 @@ void RTC_DisRefresh(void)
 			{
 				if(DaylightTime != 0)
 					Hour += 1; 
-			}
+			}*/
 			
 			if(Hour > 23)
 			{
@@ -47087,572 +38103,6 @@ void XmlChange(char *s1, char *s2)
 }
 
 // 时间/次数测试报告U盘导出-----------------------------------------------------
-/*void ExportNorm(void)
-{
-	char Namebuf[50];
-	char tbuf1[50];
-	char tbuf2[50];
-	char ExportBuf[100];
-	char Catalogue_1[15];
-	
-	if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-	{
-		sprintf(Namebuf,"Tap%02d-%02dxml",
-		Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes);
-		Vinc_MKDFile("TAPS");							//建新文件夹
-		Vinc_CDFile("TAPS");							//进入这个目录
-		sprintf(Catalogue_1,"%02d-%02d-%02d",
-			Reports_rsmp.RPT_Date.RTC_Year,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date);
-	}
-	
-	if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-	{
-		sprintf(Namebuf,"Tim%02d-%02dxml",
-		Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes);
-		Vinc_MKDFile("TIME");
-		Vinc_CDFile("TIME");							//进入这个目录
-		sprintf(Catalogue_1,"%02d-%02d-%02d",
-			Reports_rsmp.RPT_Date.RTC_Year,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date);
-	}
-	
-	Vinc_MKDFile(Catalogue_1);			//创建二级目录
-	Vinc_CDFile(Catalogue_1);				//进入二级目录
-	
-	Vinc_DeleteFile(Namebuf);				//删除同一文件
-	Vinc_OpenFile(Namebuf);					//创建打开文件
-	Vinc_CloseFile(Namebuf);				//关闭文件
-	Vinc_OpenFile(Namebuf);					//打开文件
-	
-	Vinc_WriteFile(23,"<?xml version=\"1.0\"?>\r\n");				//写入第1行
-	Vinc_WriteFile(14,"<testreport>\r\n");									//写入第2行
-	Vinc_WriteFile(15,"\t<deviceinfo>\r\n");									//写入第3行
-	
-	strcpy(tbuf1,Reports_rsmp.RPT_DeviceSerialNb);
-	if((tbuf1[1] == 0xff)&(tbuf1[2] == 0xff))
-		memset(tbuf1,0x00,sizeof(tbuf1));	//清空buf1,否则文本会变成ANSI格式
-	sprintf(ExportBuf, "\t\t<serialnumber>%6s</serialnumber>\r\n", tbuf1);
-	Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  //写入第4行 serialnumber
-	Vinc_WriteFile(20,"\t\t<page>1/1</page>\r\n");					//写入第5行 page
-	
-	sprintf(ExportBuf, "\t\t<firmwaremain>v%6s</firmwaremain>\r\n", Reports_rsmp.RPT_MbVersion);
-	Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  //写入第6行 firmwaremain
-	
-	sprintf(ExportBuf, "\t\t<firmwaretouch>v%6s</firmwaretouch>\r\n", Reports_rsmp.RPT_DbVersion);
-	Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  //写入第7行 firmwaretouch
-
-	if(Reports_rsmp.RPT_DeviceType == 121)
-		strcpy(tbuf1,"USP 1, 1 Station");
-	else
-	if(Reports_rsmp.RPT_DeviceType == 122)
-		strcpy(tbuf1,"USP 2, 1 Station");
-	else
-	if(Reports_rsmp.RPT_DeviceType == 221)
-		strcpy(tbuf1,"USP 1, 2 Stations");
-	else
-	if(Reports_rsmp.RPT_DeviceType == 222)
-		strcpy(tbuf1,"USP 2, 2 Stations");
-	else
-	if(Reports_rsmp.RPT_DeviceType == 223)
-		strcpy(tbuf1,"USP 1&amp;2, 2 Stations"); 			// Gavin，2022-04-13 周三 09:37:14
-	else
-		strcpy(tbuf1,"USP x, x Stations");
-	sprintf(ExportBuf, "\t\t<configuration>%-20s</configuration>\r\n", tbuf1);
-	Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  						//写入第8行 	configuration
-	
-	sprintf(ExportBuf, "\t\t<printdate>%s,%s</printdate>\r\n", DisDateStr,DisTimeStr);
-	Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  					 	//写入第9行 printdate
-	Vinc_WriteFile(16,"\t</deviceinfo>\r\n");														 //写入第10行	deviceinfo
-
-	Vinc_WriteFile(16,"\t<productinfo>\r\n");														 //写入第11行	productinfo
-	switch(Reports_rsmp.RPT_DeviceType)
-	{
-		case 121: 													// 1个测试站，方法1，300转/分
-		case 122: 													// 1个测试站，方法2，250转/分
-		{
-			sprintf(ExportBuf,"\t\t<productname station=\"1\">%-17s</productname>\r\n",Reports_rsmp.RPT_S1PName);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第12行 	productname station = 1
-			
-			sprintf(ExportBuf,"\t\t<batchnumber station=\"1\">%15s</batchnumber>\r\n",Reports_rsmp.RPT_S1PBatchNb);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第13行 	batchnumber station="1"
-			
-						
-			sprintf(ExportBuf,"\t\t<cylinderno station=\"1\">%15s</cylinderno>\r\n",Reports_rsmp.RPT_S1CylinderNb);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第14行 	cylinderno station="1"
-			
-			strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-			sprintf(ExportBuf,"\t\t<information station=\"1\">%-17s</information>\r\n",tbuf1);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第15行 	information station="1"
-			
-			
-			
-			Vinc_WriteFile(17,"\t</productinfo>\r\n");											//写入第17行	productinfo	
-			
-			Vinc_WriteFile(18,"\t<testparameter>\r\n");											//写入第19行	testparamete
-			
-			sprintf(ExportBuf,"\t\t<uspmethod station=\"1\">%d</uspmethod>\r\n",(u16)Reports_rsmp.RPT_S1Method);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第20行 	uspmethod station="1"
-			
-			if(Reports_rsmp.RPT_DeviceType == 121)
-				strcpy(ExportBuf,"\t\t<setspeed unit=\"taps/min\" station=\"1\">300</setspeed>\r\n");
-			else
-				strcpy(ExportBuf,"\t\t<setspeed unit=\"taps/min\" station=\"1\">250</setspeed>\r\n");
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第21行 	setspeed unit="taps/min" station="1"
-			
-			
-			sprintf(ExportBuf,"\t\t<cylindervolume unit=\"ml\" station=\"1\">%-15s</cylindervolume>\r\n",Reports_rsmp.RPT_S1CylinderSize);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  				//写入第22行 	cylindervolume unit="ml" station="1"
-			
-			if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-			{
-				sprintf(ExportBuf,"\t\t<setruntap station=\"1\">%d</setruntap>\r\n",Reports_rsmp.RPT_S1SetTapsNb);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第23行 	setruntap station="1"
-				//写入25-28
-				// 2022-03-16 周三 16:54:03，Gavin，客户要求单工位机型不输出第二站信息
-				//Vinc_WriteFile(39,"\t\t<uspmethod station=\"2\"></uspmethod>\r\n");														
-				//Vinc_WriteFile(53,"\t\t<setspeed unit=\"taps/min\" station=\"2\"></setspeed>\r\n");									
-				//Vinc_WriteFile(59,"\t\t<cylindervolume unit=\"ml\" station=\"2\"></cylindervolume>\r\n");	
-				//Vinc_WriteFile(39,"\t\t<setruntap station=\"2\"></setruntap>\r\n");		
-			}
-			else
-			if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-			{
-				TimeOfHour = Reports_rsmp.RPT_S1SetRunTime/3600;
-				TimeOfMin = Reports_rsmp.RPT_S1SetRunTime%3600/60;
-				TimeOfSec = Reports_rsmp.RPT_S1SetRunTime%60;
-				sprintf(ExportBuf,"\t\t<setruntime station=\"1\">%02d:%02d:%02d</setruntime>\r\n",TimeOfHour,TimeOfMin,TimeOfSec);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第23行 	setruntime station="1"
-				//写入25-28
-				// 2022-03-16 周三 16:54:03，Gavin，客户要求单工位机型不输出第二站信息
-				//Vinc_WriteFile(39,"\t\t<uspmethod station=\"2\"></uspmethod>\r\n");														
-				//Vinc_WriteFile(53,"\t\t<setspeed unit=\"taps/min\" station=\"2\"></setspeed>\r\n");									
-				//Vinc_WriteFile(59,"\t\t<cylindervolume unit=\"ml\" station=\"2\"></cylindervolume>\r\n");	
-				//Vinc_WriteFile(41,"\t\t<setruntime station=\"2\"></setruntime>\r\n");										
-			}
-			
-
-			Vinc_WriteFile(19,"\t</testparameter>\r\n");										//写入第29行	testparamete
-			Vinc_WriteFile(18,"\t<systemsetting>\r\n");											//写入第31行	testparamete
-		
-	
-			sprintf(ExportBuf,"\t<timezone>%10s %3s</timezone>\r\n\t\t<qualification>%9s</qualification>\r\n",
-				Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第32,33行 	timezone和qualification
-			
-			Vinc_WriteFile(19,"\t</systemsetting>\r\n");										//写入第34行	testparamete
-			
-			Vinc_WriteFile(30,"\t<testrundata></testrundata>\r\n");				//写入第35.36行	testrundata
-						
-			Vinc_WriteFile(18,"\t<actualrundata>\r\n");										  //写入第39行	actualrundata
-			
-			sprintf(ExportBuf,"\t\t<speedminmax unit=\"taps/min\" station=\"1\">%5.1f-%5.1f</speedminmax>\r\n",
-				Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第40行 	speedminmax unit="taps/min" station="1"
-			
-			if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-			{
-				sprintf(ExportBuf,"\t\t<actualruntap station=\"1\">%4d</actualruntap>\r\n",Reports_rsmp.RPT_RealTapsNb);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第41行
-				// 2022-03-16 周三 16:54:03，Gavin，客户要求单工位机型不输出第二站信息
-				//Vinc_WriteFile(59,"\t\t<speedminmax unit=\"taps/min\" station=\"2\"></speedminmax>\r\n");										  //写入第44行	没有内容但必须加上
-				//Vinc_WriteFile(45,"\t\t<actualruntap station=\"2\"></actualruntap>\r\n");										 					 			  //写入第45行	没有内容但必须加上 
-			}
-			else
-			if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-			{	
-				sprintf(ExportBuf,"\t\t<actualruntime station=\"1\">%02d:%02d:%02d</actualruntime>\r\n",
-					Reports_rsmp.RPT_RealRunTime/3600,Reports_rsmp.RPT_RealRunTime%3600/60,Reports_rsmp.RPT_RealRunTime%60); 
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第41行
-				// 2022-03-16 周三 16:54:03，Gavin，客户要求单工位机型不输出第二站信息
-				//Vinc_WriteFile(59,"\t\t<speedminmax unit=\"taps/min\" station=\"2\"></speedminmax>\r\n");										  //写入第44行	没有内容但必须加上
-				//Vinc_WriteFile(47,"\t\t<actualruntime station=\"2\"></actualruntime>\r\n");										 					 			//写入第45行	没有内容但必须加上
-			}
-			
-			if(Reports_rsmp.RPT_TestStatus)
-				sprintf(ExportBuf,"\t\t<status>%s</status>\r\n","Test completed.");
-			else
-				sprintf(ExportBuf,"\t\t<status>%s</status>\r\n","Test abort.");
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第47行 	
-			
-
-		}break;
-		case 221: 													// 2个测试站，方法1，300转/分
-		case 222: 													// 2个测试站，方法2，250转/分
-		{
-			sprintf(ExportBuf,"\t\t<productname station=\"1\">%-17s</productname>\r\n",Reports_rsmp.RPT_S1PName);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);									//写入第12行 	productname station = 1
-
-			sprintf(ExportBuf,"\t\t<batchnumber station=\"1\">%15s</batchnumber>\r\n",Reports_rsmp.RPT_S1PBatchNb);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第13行 	batchnumber station="1"
-			
-			sprintf(ExportBuf,"\t\t<cylinderno station=\"1\">%15s</cylinderno>\r\n",Reports_rsmp.RPT_S1CylinderNb);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第14行 	cylinderno station="1"
-			
-			strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-			sprintf(ExportBuf,"\t\t<information station=\"1\">%-17s</information>\r\n",tbuf1);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第15行 	information station="1"
-			
-
-			sprintf(ExportBuf,"\t\t<productname station=\"2\">%-17s</productname>\r\n",Reports_rsmp.RPT_S2PName);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);									//写入第12行 	productname station = 2
-
-			sprintf(ExportBuf,"\t\t<batchnumber station=\"2\">%15s</batchnumber>\r\n",Reports_rsmp.RPT_S2PBatchNb);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第13行 	batchnumber station="2"
-			
-			sprintf(ExportBuf,"\t\t<cylinderno station=\"2\">%15s</cylinderno>\r\n",Reports_rsmp.RPT_S2CylinderNb);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第14行 	cylinderno station="2"
-			
-			strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo,17);
-			sprintf(ExportBuf,"\t\t<information station=\"2\">%-17s</information>\r\n",tbuf2);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);	
-			
-			
-			Vinc_WriteFile(17,"\t</productinfo>\r\n");										//写入第17行	productinfo	
-			
-			Vinc_WriteFile(18,"\t<testparameter>\r\n");										//写入第19行	testparamete
-			
-			
-			sprintf(ExportBuf,"\t\t<uspmethod station=\"1\">%d</uspmethod>\r\n",(u16)Reports_rsmp.RPT_S1Method);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第20行 	uspmethod station="1"
-			
-			
-			if(Reports_rsmp.RPT_DeviceType == 221)
-				strcpy(ExportBuf,"\t\t<setspeed unit=\"taps/min\" station=\"1\">300</setspeed>\r\n");
-			else
-				strcpy(ExportBuf,"\t\t<setspeed unit=\"taps/min\" station=\"1\">250</setspeed>\r\n");
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第21行 	setspeed unit="taps/min" station="1"
-			
-			sprintf(ExportBuf,"\t\t<cylindervolume unit=\"ml\" station=\"1\">%-15s</cylindervolume>\r\n",Reports_rsmp.RPT_S1CylinderSize);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第22行 	cylindervolume unit="ml" station="1"
-			
-			if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-			{
-				sprintf(ExportBuf,"\t\t<setruntap station=\"1\">%d</setruntap>\r\n",Reports_rsmp.RPT_S1SetTapsNb);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第23行 	setruntap station="1"
-				//station="2"
-				sprintf(ExportBuf,"\t\t<uspmethod station=\"2\">%d</uspmethod>\r\n",(u16)Reports_rsmp.RPT_S2Method);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第25行 	uspmethod station="2"
-				
-				if(Reports_rsmp.RPT_DeviceType == 221)
-					strcpy(ExportBuf,"\t\t<setspeed unit=\"taps/min\" station=\"2\">300</setspeed>\r\n");
-				else
-					strcpy(ExportBuf,"\t\t<setspeed unit=\"taps/min\" station=\"2\">250</setspeed>\r\n");
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第26行 	setspeed unit="taps/min" station="2"
-				
-				sprintf(ExportBuf,"\t\t<cylindervolume unit=\"ml\" station=\"2\">%-15s</cylindervolume>\r\n",Reports_rsmp.RPT_S2CylinderSize);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第27行 	cylindervolume unit="ml" station="2"
-				
-				sprintf(ExportBuf,"\t\t<setruntap station=\"2\">%d</setruntap>\r\n",Reports_rsmp.RPT_S2SetTapsNb);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第28行 	setruntap station="2"
-			}
-			else
-			if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-			{
-				TimeOfHour = Reports_rsmp.RPT_S1SetRunTime/3600;
-				TimeOfMin = Reports_rsmp.RPT_S1SetRunTime%3600/60;
-				TimeOfSec = Reports_rsmp.RPT_S1SetRunTime%60;
-				sprintf(ExportBuf,"\t\t<setruntime station=\"1\">%02d:%02d:%02d</setruntime>\r\n",TimeOfHour,TimeOfMin,TimeOfSec);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第23行 	setruntime station="1"
-				//station="2"
-				sprintf(ExportBuf,"\t\t<uspmethod station=\"2\">%d</uspmethod>\r\n",(u16)Reports_rsmp.RPT_S2Method);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第25行 	uspmethod station="2"
-				
-				if(Reports_rsmp.RPT_DeviceType == 221)
-					strcpy(ExportBuf,"\t\t<setspeed unit=\"taps/min\" station=\"2\">300</setspeed>\r\n");
-				else
-					strcpy(ExportBuf,"\t\t<setspeed unit=\"taps/min\" station=\"2\">250</setspeed>\r\n");
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第26行 	setspeed unit="taps/min" station="2"
-				
-				sprintf(ExportBuf,"\t\t<cylindervolume unit=\"ml\" station=\"2\">%-15s</cylindervolume>\r\n",Reports_rsmp.RPT_S2CylinderSize);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第27行 	cylindervolume unit="ml" station="2"
-				
-				sprintf(ExportBuf,"\t\t<setruntime station=\"2\">%02d:%02d:%02d</setruntime>\r\n",TimeOfHour,TimeOfMin,TimeOfSec);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第28行 	setruntime station="2"
-			}
-			Vinc_WriteFile(19,"\t</testparameter>\r\n");										//写入第29行	testparamete
-			Vinc_WriteFile(18,"\t<systemsetting>\r\n");											//写入第31行	systemsetting>
-		
-			
-			sprintf(ExportBuf,"\t\t<timezone>%10s %3s</timezone>\r\n\t\t<qualification>%9s</qualification>\r\n",
-				Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  				//写入第32,33行 	timezone和qualification
-			Vinc_WriteFile(19,"\t</systemsetting>\r\n");										//写入第34行	testparamete
-			
-			Vinc_WriteFile(31,"\t<testrundata> </testrundata>\r\n");				//写入第35.36行	testrundata
-			
-//			Vinc_WriteFile(17,"\t</testrundata>\r\n");										//写入第37行	testparamete
-			
-			Vinc_WriteFile(18,"\t<actualrundata>\r\n");										//写入第39行	actualrundata
-
-			sprintf(ExportBuf,"\t\t<speedminmax unit=\"taps/min\" station=\"1\">%5.1f-%5.1f</speedminmax>\r\n",
-				Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第40行 	speedminmax unit="taps/min" station="1"
-			
-			if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-			{	
-				sprintf(ExportBuf,"\t\t<actualruntap station=\"1\">%4d</actualruntap>\r\n",Reports_rsmp.RPT_RealTapsNb);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第41行
-				
-				sprintf(ExportBuf,"\t\t<speedminmax unit=\"taps/min\" station=\"2\">%5.1f-%5.1f</speedminmax>\r\n",
-				Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第44行 	speedminmax unit="taps/min" station="2"
-				
-				sprintf(ExportBuf,"\t\t<actualruntap station=\"2\">%4d</actualruntap>\r\n",Reports_rsmp.RPT_RealTapsNb);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第45行
-			}
-			else
-			if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-			{	
-				sprintf(ExportBuf,"\t\t<actualruntime station=\"1\">%02d:%02d:%02d</actualruntime>\r\n",
-					Reports_rsmp.RPT_RealRunTime/3600,Reports_rsmp.RPT_RealRunTime%3600/60,Reports_rsmp.RPT_RealRunTime%60); 
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第41行
-				
-				sprintf(ExportBuf,"\t\t<speedminmax unit=\"taps/min\" station=\"2\">%5.1f-%5.1f</speedminmax>\r\n",
-				Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第44行 	speedminmax unit="taps/min" station="2"
-				
-				sprintf(ExportBuf,"\t\t<actualruntime station=\"2\">%02d:%02d:%02d</actualruntime>\r\n",
-					Reports_rsmp.RPT_RealRunTime/3600,Reports_rsmp.RPT_RealRunTime%3600/60,Reports_rsmp.RPT_RealRunTime%60); 
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第45行
-			}
-
-			if(Reports_rsmp.RPT_TestStatus)
-				sprintf(ExportBuf,"\t\t<status>%s</status>\r\n","Test completed.");
-			else
-				sprintf(ExportBuf,"\t\t<status>%s</status>\r\n","Test abort.");
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第47行 	
-			
-		}break;
-		case 223: 													// 1个测试站，方法可选
-		{
-			if(Reports_rsmp.RPT_S1Method == 1) 					// 测试站1方法1
-			{
-				sprintf(ExportBuf,"\t\t<productname station=\"1\">%-17s</productname>\r\n",Reports_rsmp.RPT_S1PName);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);									//写入第12行 	productname station = 1
-
-				sprintf(ExportBuf,"\t\t<batchnumber station=\"1\">%15s</batchnumber>\r\n",Reports_rsmp.RPT_S1PBatchNb);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第13行 	batchnumber station="1"
-
-				sprintf(ExportBuf,"\t\t<cylinderno station=\"1\">%15s</cylinderno>\r\n",Reports_rsmp.RPT_S1CylinderNb);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第14行 	cylinderno station="1"
-				
-				strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-				sprintf(ExportBuf,"\t\t<information station=\"1\">%-17s</information>\r\n",tbuf1);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第15行 	information station="1"
-			
-				Vinc_WriteFile(17,"\t</productinfo>\r\n");										//写入第17行	productinfo	
-			
-				Vinc_WriteFile(18,"\t<testparameter>\r\n");										//写入第19行	testparamete
-			
-			
-				sprintf(ExportBuf,"\t\t<uspmethod station=\"1\">%d</uspmethod>\r\n",(u16)Reports_rsmp.RPT_S1Method);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第20行 	uspmethod station="1"
-			
-				strcpy(ExportBuf,"\t\t<setspeed unit=\"taps/min\" station=\"1\">300</setspeed>\r\n");
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第21行 	setspeed unit="taps/min" station="1"
-				
-				sprintf(ExportBuf,"\t\t<cylindervolume unit=\"ml\" station=\"1\">%-15s</cylindervolume>\r\n",Reports_rsmp.RPT_S1CylinderSize);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第22行 	cylindervolume unit="ml" station="1"
-				
-				if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-				{
-					sprintf(ExportBuf,"\t\t<setruntap station=\"1\">%d</setruntap>\r\n",Reports_rsmp.RPT_S1SetTapsNb);
-					Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第23行 	setruntap station="1"
-					//写入25-28
-					Vinc_WriteFile(39,"\t\t<uspmethod station=\"2\"></uspmethod>\r\n");														
-					Vinc_WriteFile(53,"\t\t<setspeed unit=\"taps/min\" station=\"2\"></setspeed>\r\n");									
-					Vinc_WriteFile(59,"\t\t<cylindervolume unit=\"ml\" station=\"2\"></cylindervolume>\r\n");	
-					Vinc_WriteFile(39,"\t\t<setruntap station=\"2\"></setruntap>\r\n");
-				}
-				else
-				if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-				{
-					TimeOfHour = Reports_rsmp.RPT_S1SetRunTime/3600;
-					TimeOfMin = Reports_rsmp.RPT_S1SetRunTime%3600/60;
-					TimeOfSec = Reports_rsmp.RPT_S1SetRunTime%60;
-					sprintf(ExportBuf,"\t\t<setruntime station=\"1\">%02d:%02d:%02d</setruntime>\r\n",TimeOfHour,TimeOfMin,TimeOfSec);
-					Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第23行 	setruntime station="1"
-					//写入25-28
-					Vinc_WriteFile(39,"\t\t<uspmethod station=\"2\"></uspmethod>\r\n");														
-					Vinc_WriteFile(53,"\t\t<setspeed unit=\"taps/min\" station=\"2\"></setspeed>\r\n");									
-					Vinc_WriteFile(59,"\t\t<cylindervolume unit=\"ml\" station=\"2\"></cylindervolume>\r\n");	
-					Vinc_WriteFile(41,"\t\t<setruntime station=\"2\"></setruntime>\r\n");					
-				}
-				
-				Vinc_WriteFile(19,"\t</testparameter>\r\n");										//写入第29行	testparamete
-				Vinc_WriteFile(18,"\t<systemsetting>\r\n");											//写入第31行	testparamete
-		
-				sprintf(ExportBuf,"\t\t<timezone>%10s %3s</timezone>\r\n\t\t<qualification>%9s</qualification>\r\n",
-					Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第32,33行 	timezone和qualification
-			
-				Vinc_WriteFile(19,"\t</systemsetting>\r\n");										//写入第34行	testparamete
-			
-				Vinc_WriteFile(31,"\t<testrundata> </testrundata>\r\n");				//写入第35.36行	testrundata
-			
-//				Vinc_WriteFile(17,"\t</testrundata>\r\n");											//写入第37行	testparamete
-			
-				Vinc_WriteFile(18,"\t<actualrundata>\r\n");											//写入第39行	actualrundata
-			
-				sprintf(ExportBuf,"\t\t<speedminmax unit=\"taps/min\" station=\"1\">%5.1f-%5.1f</speedminmax>\r\n",
-				Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  				//写入第40行 	speedminmax unit="taps/min" station="1"
-			
-				if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-				{	
-					sprintf(ExportBuf,"\t\t<actualruntap station=\"1\">%4d</actualruntap>\r\n",Reports_rsmp.RPT_RealTapsNb);
-					Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第41行
-					Vinc_WriteFile(59,"\t\t<speedminmax unit=\"taps/min\" station=\"2\"></speedminmax>\r\n");										  //写入第44行	没有内容但必须加上
-					Vinc_WriteFile(45,"\t\t<actualruntap station=\"2\"></actualruntap>\r\n");		
-				}
-				else
-				if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-				{	
-					sprintf(ExportBuf,"\t\t<actualruntime station=\"1\">%02d:%02d:%02d</actualruntime>\r\n",
-						Reports_rsmp.RPT_RealRunTime/3600,Reports_rsmp.RPT_RealRunTime%3600/60,Reports_rsmp.RPT_RealRunTime%60); 
-					Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第41行
-					Vinc_WriteFile(59,"\t\t<speedminmax unit=\"taps/min\" station=\"2\"></speedminmax>\r\n");										  //写入第44行	没有内容但必须加上
-					Vinc_WriteFile(47,"\t\t<actualruntime station=\"2\"></actualruntime>\r\n");										 					 			//写入第45行	没有内容但必须加上
-				}
-				if(Reports_rsmp.RPT_TestStatus)
-					sprintf(ExportBuf,"\t\t<status>%s</status>\r\n","Test completed.");
-				else
-					sprintf(ExportBuf,"\t\t<status>%s</status>\r\n","Test abort.");
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第47行 	
-			}
-			else
-			if(Reports_rsmp.RPT_S2Method == 2) 					// 测试站2方法2
-			{
-				sprintf(ExportBuf,"\t\t<productname station=\"2\">%-17s</productname>\r\n",Reports_rsmp.RPT_S2PName);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第12行 	productname station =2
-	
-				sprintf(ExportBuf,"\t\t<batchnumber station=\"2\">%15s</batchnumber>\r\n",Reports_rsmp.RPT_S2PBatchNb);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第13行 	batchnumber station="2"
-				
-				sprintf(ExportBuf,"\t\t<cylinderno station=\"2\">%15s</cylinderno>\r\n",Reports_rsmp.RPT_S2CylinderNb);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第14行 	cylinderno station="2"
-				
-				strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo,17);
-				sprintf(ExportBuf,"\t\t<information station=\"2\">%-17s</information>\r\n",tbuf2);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第15行 	information station="2"
-				
-				Vinc_WriteFile(17,"\t</productinfo>\r\n");											//写入第17行	productinfo	
-			
-				Vinc_WriteFile(18,"\t<testparameter>\r\n");											//写入第19行	testparamete
-				
-				Vinc_WriteFile(39,"\t\t<uspmethod station=\"1\"></uspmethod>\r\n");
-				Vinc_WriteFile(53,"\t\t<setspeed unit=\"taps/min\" station=\"1\"></setspeed>\r\n");									
-				Vinc_WriteFile(59,"\t\t<cylindervolume unit=\"ml\" station=\"1\"></cylindervolume>\r\n");	
-				
-
-				if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-				{
-					Vinc_WriteFile(39,"\t\t<setruntap station=\"1\"></setruntap>\r\n");		
-					sprintf(ExportBuf,"\t\t<uspmethod station=\"2\">%d</uspmethod>\r\n",(u16)Reports_rsmp.RPT_S2Method);
-					Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第25行 	uspmethod station="2"
-					
-					strcpy(ExportBuf,"\t\t<setspeed unit=\"taps/min\" station=\"2\">250</setspeed>\r\n");
-					Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第26行 	setspeed unit="taps/min" station="2"
-					sprintf(ExportBuf,"\t\t<cylindervolume unit=\"ml\" station=\"2\">%-15s</cylindervolume>\r\n",Reports_rsmp.RPT_S2CylinderSize);
-					Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第27行 	cylindervolume unit="ml" station="2"
-					
-					sprintf(ExportBuf,"\t\t<setruntap station=\"2\">%d</setruntap>\r\n",Reports_rsmp.RPT_S2SetTapsNb);
-					Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第28行 	setruntap station="2"
-				}
-				else
-				if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-				{
-					Vinc_WriteFile(41,"\t\t<setruntime station=\"1\"></setruntime>\r\n");			
-					TimeOfHour = Reports_rsmp.RPT_S2SetRunTime/3600;
-					TimeOfMin = Reports_rsmp.RPT_S2SetRunTime%3600/60;
-					TimeOfSec = Reports_rsmp.RPT_S2SetRunTime%60;
-					
-					sprintf(ExportBuf,"\t\t<uspmethod station=\"2\">%d</uspmethod>\r\n",(u16)Reports_rsmp.RPT_S2Method);
-					Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第25行 	uspmethod station="2"
-					
-					strcpy(ExportBuf,"\t\t<setspeed unit=\"taps/min\" station=\"2\">250</setspeed>\r\n");
-					Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第26行 	setspeed unit="taps/min" station="2"
-					sprintf(ExportBuf,"\t\t<cylindervolume unit=\"ml\" station=\"2\">%-15s</cylindervolume>\r\n",Reports_rsmp.RPT_S2CylinderSize);
-					Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第27行 	cylindervolume unit="ml" station="2"
-					
-					sprintf(ExportBuf,"\t\t<setruntime station=\"2\">%02d:%02d:%02d</setruntime>\r\n",TimeOfHour,TimeOfMin,TimeOfSec);
-					Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第28行 	setruntap station="2"
-				}
-				
-				Vinc_WriteFile(19,"\t</testparameter>\r\n");										//写入第29行	testparamete
-				Vinc_WriteFile(18,"\t<systemsetting>\r\n");											//写入第31行	testparamete
-				
-				sprintf(ExportBuf,"\t\t<timezone>%10s %3s</timezone>\r\n\t\t<qualification>%9s</qualification>\r\n",
-				Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第32,33行 	timezone和qualification
-			
-				Vinc_WriteFile(19,"\t</systemsetting>\r\n");										//写入第34行	testparamete
-			
-				Vinc_WriteFile(16,"\t<testrundata>\r\n");			//写入第35.36行	testrundata
-			
-				Vinc_WriteFile(17,"\t</testrundata>\r\n");										//写入第37行	testparamete
-			
-				Vinc_WriteFile(18,"\t<actualrundata>\r\n");										  //写入第39行	actualrundata
-			
-				Vinc_WriteFile(59,"\t\t<speedminmax unit=\"taps/min\" station=\"1\"></speedminmax>\r\n");										  //写入第40行	没有内容但必须加上
-				
-				
-				if(Reports_rsmp.RPT_Type == 1) 				// 计次数测试
-				{	
-					Vinc_WriteFile(45,"\t\t<actualruntap station=\"1\"></actualruntap>\r\n");										 					 			  //写入第41行	没有内容但必须加上 
-					
-					sprintf(ExportBuf,"\t\t<speedminmax unit=\"taps/min\" station=\"2\">%5.1f-%5.1f</speedminmax>\r\n",
-					Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-					Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第44行 	speedminmax unit="taps/min" station="2"
-					sprintf(ExportBuf,"\t\t<actualruntap station=\"2\">%4d</actualruntap>\r\n",Reports_rsmp.RPT_RealTapsNb);
-					Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第45行
-				}
-				else
-				if(Reports_rsmp.RPT_Type == 2) 				// 计时间测试
-				{
-					Vinc_WriteFile(47,"\t\t<actualruntime station=\"1\"></actualruntime>\r\n");										 					 			//写入第45行	没有内容但必须加上
-					
-					sprintf(ExportBuf,"\t\t<speedminmax unit=\"taps/min\" station=\"2\">%5.1f-%5.1f</speedminmax>\r\n",
-						Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-					Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第44行 	speedminmax unit="taps/min" station="2"
-					sprintf(ExportBuf,"\t\t<actualruntime station=\"2\">%02d:%02d:%02d</actualruntime>\r\n",
-					Reports_rsmp.RPT_RealRunTime/3600,Reports_rsmp.RPT_RealRunTime%3600/60,Reports_rsmp.RPT_RealRunTime%60); 
-					Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第45行
-				}
-				if(Reports_rsmp.RPT_TestStatus)
-					sprintf(ExportBuf,"\t\t<status>%s</status>\r\n","Test completed.");
-				else
-					sprintf(ExportBuf,"\t\t<status>%s</status>\r\n","Test abort.");
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第47行 	
-			}
-		}break;
-		default:
-		break;
-	}
-		//导出测试时间 ------------------------------------------
-	if(DateFormat == 0) 									// Day,Month,Year
-		sprintf(ExportBuf,"\t\t<realtestdate>%02d.%02d.20%02d %02d:%02d:%02d</realtestdate>\r\n",
-			Reports_rsmp.RPT_Date.RTC_Date,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Year,
-			Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-	else
-	if(DateFormat == 1) 									// Year,Month,Day
-		sprintf(ExportBuf,"\t\t<realtestdate>20%02d-%02d-%02d %02d:%02d:%02d</realtestdate>\r\n",
-			Reports_rsmp.RPT_Date.RTC_Year,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date,
-			Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-	else
-	if(DateFormat == 2) 									// Month,Day,Year
-		sprintf(ExportBuf,"\t\t<realtestdate>%02d/%02d/20%02d %02d:%02d:%02d</realtestdate>\r\n",
-			Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date,Reports_rsmp.RPT_Date.RTC_Year,
-			Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-	
-	Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第48行 	
-	Vinc_WriteFile(19,"\t</actualrundata>\r\n");										//写入第49行	actualrundata
-	
-	
-	Vinc_WriteFile(15,"</testreport>\r\n");									//写入第51行
-	Vinc_CloseFile(Namebuf);					//写完关闭文件
-	Vinc_CD();
-	Vinc_CD();
-}*/
 u8 LwipComInitS = 0;
 char ExportNorm(void)
 {
@@ -47730,7 +38180,7 @@ char ExportNorm(void)
 				}break;
 				case 3:
 				{
-					sprintf(ExportBuf,"\t<exportDate>%sT%s%s</exportDate>\r\n", DisDateStr,DisTimeStr,TimeZoneList[TimeZone][0]+3);
+					sprintf(ExportBuf,"\t<exportDate>%sT%s</exportDate>\r\n", DisDateStr,DisTimeStr);
 				}break;
 				case 4:
 				{
@@ -47912,7 +38362,7 @@ char ExportNorm(void)
 						sprintf(tbuf1,"%02d/%02d/20%02d",M,D,Y);
 					
 					sprintf(tbuf2,"%02d:%02d:%02d",h,m,s);
-					sprintf(ExportBuf,"\t\t\t<end>%sT%s%s</end>\r\n",tbuf1,tbuf2,Reports_rsmp.RPT_TimeZone+3);
+					sprintf(ExportBuf,"\t\t\t<end>%sT%s</end>\r\n",tbuf1,tbuf2);
 				}break;
 				case 34:
 				{
@@ -48061,7 +38511,7 @@ char ExportNorm(void)
 						sprintf(tbuf1,"%02d/%02d/20%02d",M,D,Y);
 					
 					sprintf(tbuf2,"%02d:%02d:%02d",h,m,s);
-					sprintf(ExportBuf,"\t\t\t<end>%sT%s%s</end>\r\n",tbuf1,tbuf2,Reports_rsmp.RPT_TimeZone+3);
+					sprintf(ExportBuf,"\t\t\t<end>%sT%s</end>\r\n",tbuf1,tbuf2);
 				}break;
 				case 58:
 				{
@@ -48192,7 +38642,7 @@ char ExportNorm(void)
 					}break;
 					case 3:
 					{
-						sprintf(ExportBuf,"\t<exportDate>%sT%s%s</exportDate>\r\n", DisDateStr,DisTimeStr,TimeZoneList[TimeZone][0]+3);
+						sprintf(ExportBuf,"\t<exportDate>%sT%s</exportDate>\r\n", DisDateStr,DisTimeStr);
 					}break;
 					case 4:
 					{
@@ -48374,7 +38824,7 @@ char ExportNorm(void)
 							sprintf(tbuf1,"%02d/%02d/20%02d",M,D,Y);
 						
 						sprintf(tbuf2,"%02d:%02d:%02d",h,m,s);
-						sprintf(ExportBuf,"\t\t\t<end>%sT%s%s</end>\r\n",tbuf1,tbuf2,Reports_rsmp.RPT_TimeZone+3);
+						sprintf(ExportBuf,"\t\t\t<end>%sT%s</end>\r\n",tbuf1,tbuf2);
 					}break;
 					case 34:
 					{
@@ -48523,7 +38973,7 @@ char ExportNorm(void)
 							sprintf(tbuf1,"%02d/%02d/20%02d",M,D,Y);
 						
 						sprintf(tbuf2,"%02d:%02d:%02d",h,m,s);
-						sprintf(ExportBuf,"\t\t\t<end>%sT%s%s</end>\r\n",tbuf1,tbuf2,Reports_rsmp.RPT_TimeZone+3);
+						sprintf(ExportBuf,"\t\t\t<end>%sT%s</end>\r\n",tbuf1,tbuf2);
 					}break;
 					case 58:
 					{
@@ -48628,815 +39078,6 @@ char ExportNorm(void)
 	
 	return OverTime;
 }
-
-// 压缩率测试报告U盘导出 ----------------------------------------------------------
-/*void ExportUsp(void)
-{
-	char Namebuf[50];
-	char tbuf1[50];
-	char tbuf2[50];
-	char ExportBuf[100];
-	char Catalogue_1[15];
-	u8 i;
-	
-	sprintf(Namebuf,"USP%02d-%02dxml",
-		Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes);
-	Vinc_MKDFile("EP-USP");
-	Vinc_CDFile("EP-USP");							//进入这个目录
-	sprintf(Catalogue_1,"%02d-%02d-%02d",
-	Reports_rsmp.RPT_Date.RTC_Year,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date);
-	Vinc_MKDFile(Catalogue_1);
-	Vinc_CDFile(Catalogue_1);							//进入这个目录
-	
-	Vinc_DeleteFile(Namebuf);				//删除同一文件
-	Vinc_OpenFile(Namebuf);					//创建打开文件
-	Vinc_CloseFile(Namebuf);				//关闭文件
-	Vinc_OpenFile(Namebuf);					//打开文件
-	
-	Vinc_WriteFile(23,"<?xml version=\"1.0\"?>\r\n");				//写入第1行
-	Vinc_WriteFile(14,"<testreport>\r\n");									//写入第2行
-	Vinc_WriteFile(15,"\t<deviceinfo>\r\n");								//写入第3行
-	
-	strcpy(tbuf1,Reports_rsmp.RPT_DeviceSerialNb);
-	if((tbuf1[1] == 0xff)&(tbuf1[2] == 0xff))
-		memset(tbuf1,0x00,sizeof(tbuf1));	//缓存中有0xff清空buf1,否则文本会变成ANSI格式!!
-	sprintf(ExportBuf, "\t\t<serialnumber>%6s</serialnumber>\r\n", tbuf1);
-	Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  //写入第4行 serialnumber
-	Vinc_WriteFile(20,"\t\t<page>1/1</page>\r\n");					//写入第5行 page
-	
-
-	sprintf(ExportBuf, "\t\t<firmwaremain>v%6s</firmwaremain>\r\n", Reports_rsmp.RPT_MbVersion);
-	Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  //写入第6行 firmwaremain
-	
-	sprintf(ExportBuf, "\t\t<firmwaretouch>v%6s</firmwaretouch>\r\n", Reports_rsmp.RPT_DbVersion);
-	Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  //写入第7行 firmwaretouch
-
-	if(Reports_rsmp.RPT_DeviceType == 121)
-		strcpy(tbuf1,"USP 1, 1 Station");
-	else
-	if(Reports_rsmp.RPT_DeviceType == 122)
-		strcpy(tbuf1,"USP 2, 1 Station");
-	else
-	if(Reports_rsmp.RPT_DeviceType == 221)
-		strcpy(tbuf1,"USP 1, 2 Stations");
-	else
-	if(Reports_rsmp.RPT_DeviceType == 222)
-		strcpy(tbuf1,"USP 2, 2 Stations");
-	else
-	if(Reports_rsmp.RPT_DeviceType == 223)
-		strcpy(tbuf1,"USP 1&amp;2, 2 Stations");
-	else
-		strcpy(tbuf1,"USP x, x Stations");
-	sprintf(ExportBuf, "\t\t<configuration>%-20s</configuration>\r\n", tbuf1);
-	Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  						//写入第8行 	configuration
-	
-	sprintf(ExportBuf, "\t\t<printdate>%s,%s</printdate>\r\n", DisDateStr,DisTimeStr);
-	Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  					 	//写入第9行 printdate
-	Vinc_WriteFile(16,"\t</deviceinfo>\r\n");														//写入第10行	deviceinfo
-
-	Vinc_WriteFile(16,"\t<productinfo>\r\n");														 //写入第11行	productinfo
-	switch(Reports_rsmp.RPT_DeviceType)
-	{
-		case 121: 													// 1个测试站，方法1，300转/分
-		case 122: 													// 1个测试站，方法2，250转/分
-		{
-			sprintf(ExportBuf,"\t\t<productname station=\"1\">%-17s</productname>\r\n",Reports_rsmp.RPT_S1PName);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第12行 	productname station = 1
-			
-			sprintf(ExportBuf,"\t\t<batchnumber station=\"1\">%15s</batchnumber>\r\n",Reports_rsmp.RPT_S1PBatchNb);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第13行 	batchnumber station="1"
-			
-			sprintf(ExportBuf,"\t\t<cylinderno station=\"1\">%15s</cylinderno>\r\n",Reports_rsmp.RPT_S1CylinderNb);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第14行 	cylinderno station="1"
-			
-			strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-			sprintf(ExportBuf,"\t\t<information station=\"1\">%-17s</information>\r\n",tbuf1);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第15行 	information station="1"
-			
-//			Vinc_WriteFile(43,"\t\t<productname station=\"2\"></productname>\r\n");														 //写入第17行	
-//			Vinc_WriteFile(43,"\t\t<batchnumber station=\"2\"></batchnumber>\r\n");														 //写入第18行	
-//			Vinc_WriteFile(41,"\t\t<cylinderno station=\"2\"></cylinderno>\r\n");															 //写入第19行	
-//			Vinc_WriteFile(43,"\t\t<information station=\"2\"></information>\r\n");														 //写入第20行	
-
-			Vinc_WriteFile(17,"\t</productinfo>\r\n");											//写入第21行	productinfo	
-			Vinc_WriteFile(18,"\t<testparameter>\r\n");											//写入第23行	testparamete
-			
-			sprintf(ExportBuf,"\t\t<uspmethod station=\"1\">%d</uspmethod>\r\n",(u16)Reports_rsmp.RPT_S1Method);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第25行 	uspmethod station="1"
-			
-			if(Reports_rsmp.RPT_DeviceType == 121)
-				strcpy(ExportBuf,"\t\t<setspeed unit=\"taps/min\" station=\"1\">300</setspeed>\r\n");
-			else
-				strcpy(ExportBuf,"\t\t<setspeed unit=\"taps/min\" station=\"1\">250</setspeed>\r\n");
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第26行 	setspeed unit="taps/min" station="1"
-			
-			sprintf(ExportBuf,"\t\t<cylindervolume unit=\"ml\" station=\"1\">%-15s</cylindervolume>\r\n",Reports_rsmp.RPT_S1CylinderSize);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第27行 	cylindervolume unit="ml" station="1"
-			
-			sprintf(ExportBuf,"\t\t<calculationvolume station=\"1\">V%d</calculationvolume>\r\n",Reports_rsmp.RPT_V0_V10);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第28行 	calculationvolume station="1"
-			
-			sprintf(ExportBuf,"\t\t<initialvolume station=\"1\" unit=\"ml\">%5.1f</initialvolume>\r\n",(float)Reports_rsmp.RPT_S1InitialVolume/10);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第29行 	initialvolume station="1" unit="ml"
-			
-			sprintf(ExportBuf,"\t\t<sampleweight station=\"1\" unit=\"g\">%5.2f</sampleweight>	\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第30行 	sampleweight station="1" unit="g"
-			
-//			Vinc_WriteFile(39,"\t\t<uspmethod station=\"2\"></uspmethod>\r\n");															//写入第32行
-//			Vinc_WriteFile(53,"\t\t<setspeed unit=\"taps/min\" station=\"2\"></setspeed>\r\n");							//写入第33行
-//			Vinc_WriteFile(59,"\t\t<cylindervolume unit=\"ml\" station=\"2\"></cylindervolume>\r\n");				//写入第34行
-//			Vinc_WriteFile(55,"\t\t<calculationvolume station=\"2\"></calculationvolume>\r\n");							//写入第35行
-//			Vinc_WriteFile(57,"\t\t<initialvolume station=\"2\" unit=\"ml\"></initialvolume>\r\n");					//写入第36行
-//			Vinc_WriteFile(54,"\t\t<sampleweight station=\"2\" unit=\"g\"></sampleweight>\r\n");						//写入第37行
-			
-			Vinc_WriteFile(19,"\t</testparameter>\r\n");										//写入第39行	testparamete
-			Vinc_WriteFile(18,"\t<systemsetting>\r\n");											//写入第41行	testparamete
-		
-			sprintf(ExportBuf,"\t\t<timezone>%10s %3s</timezone>\r\n\t\t<qualification>%9s</qualification>\r\n",
-				Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第42,43行 	timezone和qualification
-			
-			Vinc_WriteFile(19,"\t</systemsetting>\r\n");									//写入第44行	testparamete
-			
-			Vinc_WriteFile(16,"\t<testrundata>\r\n");											//写入第46行	testrundata
-			
-
-			sprintf(ExportBuf,"\t\t<sampleweight station=\"1\" unit=\"g\">%5.2f</sampleweight>\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100); 
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第47行 	sampleweight station="1" unit="g"
-			//Vinc_WriteFile(54,"\t\t<sampleweight station=\"2\" unit=\"g\"></sampleweight>\r\n");					  //			 station="2" unit="g"
-			
-			sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"1\" unit=\"ml\" taps=\"0\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S1InitialVolume/10); 
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第50行 	tappedvolume station="1" pos="1" unit="ml" taps="0" finalmark="0"
-			
-			sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"2\" unit=\"ml\" taps=\"10\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S1V10/10); 
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第51行 	tappedvolume station="1" pos="1" unit="ml" taps="0" finalmark="0"
-			
-			sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"3\" unit=\"ml\" taps=\"500\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S1V500/10);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第52行 	tappedvolume station="1" pos="1" unit="ml" taps="0" finalmark="0"
-			
-			if(Reports_rsmp.RPT_TESTENDS1 == 3)
-			{
-				sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"4\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"1\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S1V1250/10);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  	//如果是最后一行 写入第53行
-				Vinc_WriteFile(91,"\t\t<tappedvolume station=\"1\" pos=\"5\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-				Vinc_WriteFile(91,"\t\t<tappedvolume station=\"1\" pos=\"6\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-				Vinc_WriteFile(91,"\t\t<tappedvolume station=\"1\" pos=\"7\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-				Vinc_WriteFile(91,"\t\t<tappedvolume station=\"1\" pos=\"8\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-			}
-			else
-			{	
-				sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"4\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S1V1250/10);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  	
-			}
-			
-			for(i=4;i<10;i++)
-			{
-				if(i < Reports_rsmp.RPT_TESTENDS1+1)
-				{
-					if(i != Reports_rsmp.RPT_TESTENDS1)
-					{
-						sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"%d\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",i+1,(float)Reports_rsmp.RPT_S1Delay[i-4]/10);
-						Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-					}					
-					else
-					{	
-						sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"%d\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"1\">%5.1f</tappedvolume>\r\n",i+1,(float)Reports_rsmp.RPT_S1Delay[i-4]/10);
-						Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-						for(int j = i+2;j<9;j++)
-						{
-							sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"%d\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"></tappedvolume>\r\n",j);
-							Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-						}
-					}
-				}
-				else
-					break;
-			}
-//			Vinc_WriteFile(88,"\t\t<tappedvolume station=\"2\" pos=\"1\" unit=\"ml\" taps=\"0\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-//			Vinc_WriteFile(89,"\t\t<tappedvolume station=\"2\" pos=\"2\" unit=\"ml\" taps=\"10\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-//			Vinc_WriteFile(90,"\t\t<tappedvolume station=\"2\" pos=\"3\" unit=\"ml\" taps=\"500\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-//			Vinc_WriteFile(91,"\t\t<tappedvolume station=\"2\" pos=\"4\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-//			Vinc_WriteFile(91,"\t\t<tappedvolume station=\"2\" pos=\"5\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-//			Vinc_WriteFile(91,"\t\t<tappedvolume station=\"2\" pos=\"6\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-//			Vinc_WriteFile(91,"\t\t<tappedvolume station=\"2\" pos=\"7\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-//			Vinc_WriteFile(91,"\t\t<tappedvolume station=\"2\" pos=\"8\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"1\"> </tappedvolume>\r\n");
-
-			sprintf(ExportBuf,"\t\t<initialdensity station=\"1\" unit=\"g/ml\">%5.2f</initialdensity>\r\n",Reports_rsmp.RPT_S1InitialDensity); 
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-//			Vinc_WriteFile(62,"\t\t<initialdensity station=\"2\" unit=\"g/ml\"> </initialdensity>\r\n");
-			
-			sprintf(ExportBuf,"\t\t<tappeddensity station=\"1\" unit=\"g/ml\">%5.2f</tappeddensity>\r\n",Reports_rsmp.RPT_S1TappedDensity);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-//			Vinc_WriteFile(60,"\t\t<tappeddensity station=\"2\" unit=\"g/ml\"> </tappeddensity>\r\n");
-			
-			sprintf(ExportBuf,"\t\t<hausnerratio station=\"1\">%5.2f</hausnerratio>\r\n",Reports_rsmp.RPT_S1HausnerRatio);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-//			Vinc_WriteFile(46,"\t\t<hausnerratio station=\"2\"> </hausnerratio>\r\n");
-			
-			sprintf(ExportBuf,"\t\t<compressibilityindex station=\"1\" unit=\"%%\">%5.1f</compressibilityindex>\r\n",Reports_rsmp.RPT_S1Compressibility);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-//			Vinc_WriteFile(71,"\t\t<compressibilityindex station=\"2\" unit=\"%\"> </compressibilityindex>\r\n");
-			
-			Vinc_WriteFile(17,"\t</testrundata>\r\n");											//写入第46行	testrundata
-			
-			Vinc_WriteFile(18,"\t<actualrundata>\r\n");										//写入第49行	actualrundata
-			sprintf(ExportBuf,"\t\t<speedminmax unit=\"taps/min\" station=\"1\">%5.1f-%5.1f</speedminmax>\r\n",
-				Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-			
-			sprintf(ExportBuf,"\t\t<actualruntap station=\"1\">%4d</actualruntap>\r\n",Reports_rsmp.RPT_RealTapsNb);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第41行
-//			Vinc_WriteFile(59,"\t\t<speedminmax unit=\"taps/min\" station=\"2\"></speedminmax>\r\n");										  //没有内容但必须加上
-//			Vinc_WriteFile(45,"\t\t<actualruntap station=\"2\"></actualruntap>\r\n");										 					 			//没有内容但必须加上 
-//			
-			if(Reports_rsmp.RPT_TestStatus)
-				sprintf(ExportBuf,"\t\t<status>%s</status>\r\n","Test completed.");
-			else
-				sprintf(ExportBuf,"\t\t<status>%s</status>\r\n","Test abort.");
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  		
-		}break;
-		case 221: 													// 2个测试站，方法1，300转/分
-		case 222: 													// 2个测试站，方法2，250转/分
-		{
-			sprintf(ExportBuf,"\t\t<productname station=\"1\">%-17s</productname>\r\n",Reports_rsmp.RPT_S1PName);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第12行 	productname station = 1
-			
-			sprintf(ExportBuf,"\t\t<batchnumber station=\"1\">%15s</batchnumber>\r\n",Reports_rsmp.RPT_S1PBatchNb);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第13行 	batchnumber station="1"
-			
-			sprintf(ExportBuf,"\t\t<cylinderno station=\"1\">%15s</cylinderno>\r\n",Reports_rsmp.RPT_S1CylinderNb);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第14行 	cylinderno station="1"
-			
-			strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-			sprintf(ExportBuf,"\t\t<information station=\"1\">%-17s</information>\r\n",tbuf1);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第15行 	information station="1"
-			
-			sprintf(ExportBuf,"\t\t<productname station=\"2\">%-17s</productname>\r\n",Reports_rsmp.RPT_S2PName);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第17行 	productname station = 2
-			
-			sprintf(ExportBuf,"\t\t<batchnumber station=\"2\">%15s</batchnumber>\r\n",Reports_rsmp.RPT_S2PBatchNb);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第18行 	batchnumber station="2"
-			
-			sprintf(ExportBuf,"\t\t<cylinderno station=\"2\">%15s</cylinderno>\r\n",Reports_rsmp.RPT_S2CylinderNb);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第19行 	cylinderno station="2"
-			
-			strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo,17);
-			sprintf(ExportBuf,"\t\t<information station=\"2\">%-17s</information>\r\n",tbuf2);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第20行 	information station="2"
-			
-			Vinc_WriteFile(17,"\t</productinfo>\r\n");										//写入第21行	productinfo	
-			Vinc_WriteFile(18,"\t<testparameter>\r\n");										//写入第23行	testparamete
-			
-			sprintf(ExportBuf,"\t\t<uspmethod station=\"1\">%d</uspmethod>\r\n",(u16)Reports_rsmp.RPT_S1Method);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第25行 	uspmethod station="1"
-			
-			if(Reports_rsmp.RPT_DeviceType == 221)
-				strcpy(ExportBuf,"\t\t<setspeed unit=\"taps/min\" station=\"1\">300</setspeed>\r\n");
-			else
-				strcpy(ExportBuf,"\t\t<setspeed unit=\"taps/min\" station=\"1\">250</setspeed>\r\n");
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第26行 	setspeed unit="taps/min" station="1"
-			
-			sprintf(ExportBuf,"\t\t<cylindervolume unit=\"ml\" station=\"1\">%-15s</cylindervolume>\r\n",Reports_rsmp.RPT_S1CylinderSize);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第27行 	cylindervolume unit="ml" station="1"
-			
-			sprintf(ExportBuf,"\t\t<calculationvolume station=\"1\">V%d</calculationvolume>\r\n",Reports_rsmp.RPT_V0_V10);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第28行 	calculationvolume station="1"
-			
-			sprintf(ExportBuf,"\t\t<initialvolume station=\"1\" unit=\"ml\">%5.1f</initialvolume>\r\n",(float)Reports_rsmp.RPT_S1InitialVolume/10);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第29行 	initialvolume station="1" unit="ml"
-			
-			sprintf(ExportBuf,"\t\t<sampleweight station=\"1\" unit=\"g\">%5.2f</sampleweight>	\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第30行 	sampleweight station="1" unit="g"
-			//--------------------------------------
-						sprintf(ExportBuf,"\t\t<uspmethod station=\"2\">%d</uspmethod>\r\n",(u16)Reports_rsmp.RPT_S2Method);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第32行 	uspmethod station="2"
-			
-			if(Reports_rsmp.RPT_DeviceType == 221)
-				strcpy(ExportBuf,"\t\t<setspeed unit=\"taps/min\" station=\"2\">300</setspeed>\r\n");
-			else
-				strcpy(ExportBuf,"\t\t<setspeed unit=\"taps/min\" station=\"2\">250</setspeed>\r\n");
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第33行 	setspeed unit="taps/min" station="2"
-			
-			sprintf(ExportBuf,"\t\t<cylindervolume unit=\"ml\" station=\"2\">%-15s</cylindervolume>\r\n",Reports_rsmp.RPT_S2CylinderSize);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第34行 	cylindervolume unit="ml" station="2"
-			
-			sprintf(ExportBuf,"\t\t<cylindervolume unit=\"ml\" station=\"2\">%-15s</cylindervolume>\r\n",Reports_rsmp.RPT_S2CylinderSize);
-			
-			sprintf(ExportBuf,"\t\t<calculationvolume station=\"2\">V%d</calculationvolume>\r\n",Reports_rsmp.RPT_V0_V10);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第35行 	calculationvolume station="2"
-			
-			sprintf(ExportBuf,"\t\t<initialvolume station=\"2\" unit=\"ml\">%5.1f</initialvolume>\r\n",(float)Reports_rsmp.RPT_S2InitialVolume/10);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第36行 	initialvolume station="2" unit="ml"
-			
-			sprintf(ExportBuf,"\t\t<sampleweight station=\"2\" unit=\"g\">%5.2f</sampleweight>	\r\n",(float)Reports_rsmp.RPT_S2SampleMass/100);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第37行 	sampleweight station="2" unit="g"
-			
-			//--------------------------------------
-			
-			Vinc_WriteFile(19,"\t</testparameter>\r\n");										//写入第39行	testparamete
-			Vinc_WriteFile(18,"\t<systemsetting>\r\n");											//写入第41行	systemsetting
-			
-			sprintf(ExportBuf,"\t\t<timezone>%10s %3s</timezone>\r\n\t\t<qualification>%9s</qualification>\r\n",
-				Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第42,43行 	timezone和qualification
-			
-			Vinc_WriteFile(19,"\t</systemsetting>\r\n");									//写入第44行	testparamete
-			
-			Vinc_WriteFile(16,"\t<testrundata>\r\n");											//写入第46行	testrundata
-
-			//-------------------------------------------
-			sprintf(ExportBuf,"\t\t<sampleweight station=\"1\" unit=\"g\">%5.2f</sampleweight>\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100); 
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第47行 	sampleweight station="1" unit="g"
-			
-			sprintf(ExportBuf,"\t\t<sampleweight station=\"2\" unit=\"g\">%5.2f</sampleweight>\r\n",(float)Reports_rsmp.RPT_S2SampleMass/100); 
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第47行 	sampleweight station="2" unit="g"
-			
-			sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"1\" unit=\"ml\" taps=\"0\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S1InitialVolume/10); 
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第50行 	tappedvolume station="1" pos="1" unit="ml" taps="0" finalmark="0"
-			
-			sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"2\" unit=\"ml\" taps=\"10\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S1V10/10); 
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第51行 	tappedvolume station="1" pos="1" unit="ml" taps="0" finalmark="0"
-			
-			sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"3\" unit=\"ml\" taps=\"500\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S1V500/10);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第52行 	tappedvolume station="1" pos="1" unit="ml" taps="0" finalmark="0"
-
-			if(Reports_rsmp.RPT_TESTENDS1 == 3)
-			{
-				sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"4\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"1\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S1V1250/10);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  	//如果是最后一行 写入第53行
-				Vinc_WriteFile(91,"\t\t<tappedvolume station=\"1\" pos=\"5\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-				Vinc_WriteFile(91,"\t\t<tappedvolume station=\"1\" pos=\"6\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-				Vinc_WriteFile(91,"\t\t<tappedvolume station=\"1\" pos=\"7\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-				Vinc_WriteFile(91,"\t\t<tappedvolume station=\"1\" pos=\"8\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-			}
-			else
-			{	
-				sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"4\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S1V1250/10);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  	
-			}
-			
-			for(i=4;i<10;i++)
-			{
-				if(i < Reports_rsmp.RPT_TESTENDS1+1)
-				{
-					if(i != Reports_rsmp.RPT_TESTENDS1)
-					{
-						sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"%d\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",i+1,(float)Reports_rsmp.RPT_S1Delay[i-4]/10);
-						Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-					}					
-					else
-					{	
-						sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"%d\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"1\">%5.1f</tappedvolume>\r\n",i+1,(float)Reports_rsmp.RPT_S1Delay[i-4]/10);
-						Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-						for(int j = i+2;j<9;j++)
-						{
-							sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"%d\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"></tappedvolume>\r\n",j);
-							Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-						}
-					}
-				}
-				else
-					break;
-			}
-			//-------------------------------------------
-			
-			sprintf(ExportBuf,"\t\t<tappedvolume station=\"2\" pos=\"1\" unit=\"ml\" taps=\"0\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S2InitialVolume/10); 
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第50行 	tappedvolume station="1" pos="1" unit="ml" taps="0" finalmark="0"
-			
-			sprintf(ExportBuf,"\t\t<tappedvolume station=\"2\" pos=\"2\" unit=\"ml\" taps=\"10\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S2V10/10); 
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第51行 	tappedvolume station="1" pos="1" unit="ml" taps="0" finalmark="0"
-			
-			sprintf(ExportBuf,"\t\t<tappedvolume station=\"2\" pos=\"3\" unit=\"ml\" taps=\"500\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S2V500/10);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第52行 	tappedvolume station="1" pos="1" unit="ml" taps="0" finalmark="0"
-
-			if(Reports_rsmp.RPT_TESTENDS2 == 3)
-			{
-				sprintf(ExportBuf,"\t\t<tappedvolume station=\"2\" pos=\"4\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"1\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S2V1250/10);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  	//如果是最后一行 写入第53行
-				Vinc_WriteFile(91,"\t\t<tappedvolume station=\"2\" pos=\"5\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-				Vinc_WriteFile(91,"\t\t<tappedvolume station=\"2\" pos=\"6\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-				Vinc_WriteFile(91,"\t\t<tappedvolume station=\"2\" pos=\"7\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-				Vinc_WriteFile(91,"\t\t<tappedvolume station=\"2\" pos=\"8\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-			}
-			else
-			{	
-				sprintf(ExportBuf,"\t\t<tappedvolume station=\"2\" pos=\"4\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S2V1250/10);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  	
-			}
-			
-			for(i=4;i<10;i++)
-			{
-				if(i < Reports_rsmp.RPT_TESTENDS2+1)
-				{
-					if(i != Reports_rsmp.RPT_TESTENDS2)
-					{
-						sprintf(ExportBuf,"\t\t<tappedvolume station=\"2\" pos=\"%d\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",i+1,(float)Reports_rsmp.RPT_S2Delay[i-4]/10);
-						Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-					}					
-					else
-					{	
-						sprintf(ExportBuf,"\t\t<tappedvolume station=\"2\" pos=\"%d\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"1\">%5.1f</tappedvolume>\r\n",i+1,(float)Reports_rsmp.RPT_S2Delay[i-4]/10);
-						Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-						for(int j = i+2;j<9;j++)
-						{
-							sprintf(ExportBuf,"\t\t<tappedvolume station=\"2\" pos=\"%d\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"></tappedvolume>\r\n",j);
-							Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-						}
-					}
-				}
-				else
-					break;
-			}
-			
-			//-------------------------------------------
-			sprintf(ExportBuf,"\t\t<initialdensity station=\"1\" unit=\"g/ml\">%5.2f</initialdensity>\r\n",Reports_rsmp.RPT_S1InitialDensity); 
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-			sprintf(ExportBuf,"\t\t<initialdensity station=\"2\" unit=\"g/ml\">%5.2f</initialdensity>\r\n",Reports_rsmp.RPT_S2InitialDensity); 
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-			
-			sprintf(ExportBuf,"\t\t<tappeddensity station=\"1\" unit=\"g/ml\">%5.2f</tappeddensity>\r\n",Reports_rsmp.RPT_S1TappedDensity);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-			sprintf(ExportBuf,"\t\t<tappeddensity station=\"2\" unit=\"g/ml\">%5.2f</tappeddensity>\r\n",Reports_rsmp.RPT_S2TappedDensity);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-			
-			sprintf(ExportBuf,"\t\t<hausnerratio station=\"1\">%5.2f</hausnerratio>\r\n",Reports_rsmp.RPT_S1HausnerRatio);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-			sprintf(ExportBuf,"\t\t<hausnerratio station=\"2\">%5.2f</hausnerratio>\r\n",Reports_rsmp.RPT_S2HausnerRatio);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-			
-			sprintf(ExportBuf,"\t\t<compressibilityindex station=\"1\" unit=\"%%\">%5.1f</compressibilityindex>\r\n",Reports_rsmp.RPT_S1Compressibility);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-			sprintf(ExportBuf,"\t\t<compressibilityindex station=\"2\" unit=\"%%\">%5.1f</compressibilityindex>\r\n",Reports_rsmp.RPT_S2Compressibility);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-			
-			Vinc_WriteFile(17,"\t</testrundata>\r\n");											//写入第80行	testrundata
-			
-			Vinc_WriteFile(18,"\t<actualrundata>\r\n");										 //写入第82行	actualrundata
-			
-			sprintf(ExportBuf,"\t\t<speedminmax unit=\"taps/min\" station=\"1\">%5.1f-%5.1f</speedminmax>\r\n",
-				Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-			
-			sprintf(ExportBuf,"\t\t<actualruntap station=\"1\">%4d</actualruntap>\r\n",RUN_CYC[Reports_rsmp.RPT_TESTENDS1]);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			
-			
-			sprintf(ExportBuf,"\t\t<speedminmax unit=\"taps/min\" station=\"2\">%5.1f-%5.1f</speedminmax>\r\n",
-				Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-			
-			sprintf(ExportBuf,"\t\t<actualruntap station=\"2\">%4d</actualruntap>\r\n",RUN_CYC[Reports_rsmp.RPT_TESTENDS2]);
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			
-			
-			if(Reports_rsmp.RPT_TestStatus)
-				sprintf(ExportBuf,"\t\t<status>%s</status>\r\n","Test completed.");
-			else
-				sprintf(ExportBuf,"\t\t<status>%s</status>\r\n","Test abort.");
-			Vinc_WriteFile(strlen(ExportBuf),ExportBuf);				
-			
-		}break;
-		case 223: 													// 1个测试站，方法可选
-		{
-			if(Reports_rsmp.RPT_S1Method == 1) 					// 测试站1方法1
-			{
-				sprintf(ExportBuf,"\t\t<productname station=\"1\">%-17s</productname>\r\n",Reports_rsmp.RPT_S1PName);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第12行 	productname station = 1
-			
-				sprintf(ExportBuf,"\t\t<batchnumber station=\"1\">%15s</batchnumber>\r\n",Reports_rsmp.RPT_S1PBatchNb);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第13行 	batchnumber station="1"
-			
-				sprintf(ExportBuf,"\t\t<cylinderno station=\"1\">%15s</cylinderno>\r\n",Reports_rsmp.RPT_S1CylinderNb);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第14行 	cylinderno station="1"
-			
-				strncpy(tbuf1,Reports_rsmp.RPT_S1PInfo,17);
-				sprintf(ExportBuf,"\t\t<information station=\"1\">%-17s</information>\r\n",tbuf1);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第15行 	information station="1"
-			
-//				Vinc_WriteFile(43,"\t\t<productname station=\"2\"></productname>\r\n");														 //写入第17行	
-//				Vinc_WriteFile(43,"\t\t<batchnumber station=\"2\"></batchnumber>\r\n");														 //写入第18行	
-//				Vinc_WriteFile(41,"\t\t<cylinderno station=\"2\"></cylinderno>\r\n");															 //写入第19行	
-//				Vinc_WriteFile(43,"\t\t<information station=\"2\"></information>\r\n");														 //写入第20行	
-				
-				Vinc_WriteFile(17,"\t</productinfo>\r\n");											//写入第21行	productinfo	
-				Vinc_WriteFile(18,"\t<testparameter>\r\n");											//写入第23行	testparamete
-			
-				sprintf(ExportBuf,"\t\t<uspmethod station=\"1\">%d</uspmethod>\r\n",(u16)Reports_rsmp.RPT_S1Method);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第25行 	uspmethod station="1"
-				
-				strcpy(ExportBuf,"\t\t<setspeed unit=\"taps/min\" station=\"1\">300</setspeed>\r\n");
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第26行 	setspeed unit="taps/min" station="1"
-				
-				sprintf(ExportBuf,"\t\t<cylindervolume unit=\"ml\" station=\"1\">%-15s</cylindervolume>\r\n",Reports_rsmp.RPT_S1CylinderSize);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第27行 	cylindervolume unit="ml" station="1"
-		
-				sprintf(ExportBuf,"\t\t<calculationvolume station=\"1\">V%d</calculationvolume>\r\n",Reports_rsmp.RPT_V0_V10);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第28行 	calculationvolume station="1"
-			
-				sprintf(ExportBuf,"\t\t<initialvolume station=\"1\" unit=\"ml\">%5.1f</initialvolume>\r\n",(float)Reports_rsmp.RPT_S1InitialVolume/10);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第29行 	initialvolume station="1" unit="ml"
-			
-				sprintf(ExportBuf,"\t\t<sampleweight station=\"1\" unit=\"g\">%5.2f</sampleweight>	\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第30行 	sampleweight station="1" unit="g"
-				
-//				Vinc_WriteFile(39,"\t\t<uspmethod station=\"2\"></uspmethod>\r\n");															//写入第32行
-//				Vinc_WriteFile(53,"\t\t<setspeed unit=\"taps/min\" station=\"2\"></setspeed>\r\n");							//写入第33行
-//				Vinc_WriteFile(59,"\t\t<cylindervolume unit=\"ml\" station=\"2\"></cylindervolume>\r\n");				//写入第34行
-//				Vinc_WriteFile(55,"\t\t<calculationvolume station=\"2\"></calculationvolume>\r\n");							//写入第35行
-//				Vinc_WriteFile(57,"\t\t<initialvolume station=\"2\" unit=\"ml\"></initialvolume>\r\n");					//写入第36行
-//				Vinc_WriteFile(54,"\t\t<sampleweight station=\"2\" unit=\"g\"></sampleweight>\r\n");						//写入第37行
-
-				Vinc_WriteFile(19,"\t</testparameter>\r\n");										//写入第39行	testparamete
-				Vinc_WriteFile(18,"\t<systemsetting>\r\n");											//写入第41行	testparamete
-				
-				sprintf(ExportBuf,"\t\t<timezone>%10s %3s</timezone>\r\n\t\t<qualification>%9s</qualification>\r\n",
-				Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第42,43行 	timezone和qualification
-			
-				Vinc_WriteFile(19,"\t</systemsetting>\r\n");									//写入第44行	testparamete
-			
-				Vinc_WriteFile(16,"\t<testrundata>\r\n");											//写入第46行	testrundata
-			
-
-				sprintf(ExportBuf,"\t\t<sampleweight station=\"1\" unit=\"g\">%5.2f</sampleweight>\r\n",(float)Reports_rsmp.RPT_S1SampleMass/100); 
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第47行 	sampleweight station="1" unit="g"
-//				Vinc_WriteFile(54,"\t\t<sampleweight station=\"2\" unit=\"g\"></sampleweight>\r\n");					  //			 station="2" unit="g"
-			
-				sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"1\" unit=\"ml\" taps=\"0\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S1InitialVolume/10); 
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第50行 	tappedvolume station="1" pos="1" unit="ml" taps="0" finalmark="0"
-			
-				sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"2\" unit=\"ml\" taps=\"10\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S1V10/10); 
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第51行 	tappedvolume station="1" pos="1" unit="ml" taps="0" finalmark="0"
-			
-				sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"3\" unit=\"ml\" taps=\"500\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S1V500/10);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第52行 	tappedvolume station="1" pos="1" unit="ml" taps="0" finalmark="0"
-			
-				if(Reports_rsmp.RPT_TESTENDS1 == 3)
-				{
-					sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"4\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"1\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S1V1250/10);
-					Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  	//如果是最后一行 写入第53行
-					Vinc_WriteFile(91,"\t\t<tappedvolume station=\"1\" pos=\"5\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-					Vinc_WriteFile(91,"\t\t<tappedvolume station=\"1\" pos=\"6\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-					Vinc_WriteFile(91,"\t\t<tappedvolume station=\"1\" pos=\"7\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-					Vinc_WriteFile(91,"\t\t<tappedvolume station=\"1\" pos=\"8\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-				}
-				else
-				{	
-					sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"4\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S1V1250/10);
-					Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  	
-				}
-				
-				for(i=4;i<10;i++)
-				{
-					if(i < Reports_rsmp.RPT_TESTENDS1+1)
-					{
-						if(i != Reports_rsmp.RPT_TESTENDS1)
-						{
-							sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"%d\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",i+1,(float)Reports_rsmp.RPT_S1Delay[i-4]/10);
-							Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-						}					
-						else
-						{	
-							sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"%d\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"1\">%5.1f</tappedvolume>\r\n",i+1,(float)Reports_rsmp.RPT_S1Delay[i-4]/10);
-							Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-							for(int j = i+2;j<9;j++)
-							{
-								sprintf(ExportBuf,"\t\t<tappedvolume station=\"1\" pos=\"%d\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"></tappedvolume>\r\n",j);
-								Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-							}
-						}
-					}
-					else
-						break;
-				}
-//				Vinc_WriteFile(88,"\t\t<tappedvolume station=\"2\" pos=\"1\" unit=\"ml\" taps=\"0\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-//				Vinc_WriteFile(89,"\t\t<tappedvolume station=\"2\" pos=\"2\" unit=\"ml\" taps=\"10\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-//				Vinc_WriteFile(90,"\t\t<tappedvolume station=\"2\" pos=\"3\" unit=\"ml\" taps=\"500\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-//				Vinc_WriteFile(91,"\t\t<tappedvolume station=\"2\" pos=\"4\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-//				Vinc_WriteFile(91,"\t\t<tappedvolume station=\"2\" pos=\"5\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-//				Vinc_WriteFile(91,"\t\t<tappedvolume station=\"2\" pos=\"6\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-//				Vinc_WriteFile(91,"\t\t<tappedvolume station=\"2\" pos=\"7\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-//				Vinc_WriteFile(91,"\t\t<tappedvolume station=\"2\" pos=\"8\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"1\"> </tappedvolume>\r\n");
-
-				sprintf(ExportBuf,"\t\t<initialdensity station=\"1\" unit=\"g/ml\">%5.2f</initialdensity>\r\n",Reports_rsmp.RPT_S1InitialDensity); 
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-//				Vinc_WriteFile(62,"\t\t<initialdensity station=\"2\" unit=\"g/ml\"> </initialdensity>\r\n");
-			
-				sprintf(ExportBuf,"\t\t<tappeddensity station=\"1\" unit=\"g/ml\">%5.2f</tappeddensity>\r\n",Reports_rsmp.RPT_S1TappedDensity);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-//				Vinc_WriteFile(60,"\t\t<tappeddensity station=\"2\" unit=\"g/ml\"> </tappeddensity>\r\n");
-			
-				sprintf(ExportBuf,"\t\t<hausnerratio station=\"1\">%5.2f</hausnerratio>\r\n",Reports_rsmp.RPT_S1HausnerRatio);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-//				Vinc_WriteFile(46,"\t\t<hausnerratio station=\"2\"> </hausnerratio>\r\n");
-			
-				sprintf(ExportBuf,"\t\t<compressibilityindex station=\"1\" unit=\"%%\">%5.1f</compressibilityindex>\r\n",Reports_rsmp.RPT_S1Compressibility);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-//				Vinc_WriteFile(71,"\t\t<compressibilityindex station=\"2\" unit=\"%\"> </compressibilityindex>\r\n");
-			
-				Vinc_WriteFile(17,"\t</testrundata>\r\n");											//写入第46行	testrundata
-			
-				Vinc_WriteFile(18,"\t<actualrundata>\r\n");										//写入第49行	actualrundata
-				sprintf(ExportBuf,"\t\t<speedminmax unit=\"taps/min\" station=\"1\">%5.1f-%5.1f</speedminmax>\r\n",
-					Reports_rsmp.RPT_S1MinSpeed,Reports_rsmp.RPT_S1MaxSpeed);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-			
-				sprintf(ExportBuf,"\t\t<actualruntap station=\"1\">%4d</actualruntap>\r\n",Reports_rsmp.RPT_RealTapsNb);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第41行
-//				Vinc_WriteFile(59,"\t\t<speedminmax unit=\"taps/min\" station=\"2\"></speedminmax>\r\n");										  //没有内容但必须加上
-//				Vinc_WriteFile(45,"\t\t<actualruntap station=\"2\"></actualruntap>\r\n");										 					 			//没有内容但必须加上 
-			
-				if(Reports_rsmp.RPT_TestStatus)
-					sprintf(ExportBuf,"\t\t<status>%s</status>\r\n","Test completed.");
-				else
-					sprintf(ExportBuf,"\t\t<status>%s</status>\r\n","Test abort.");
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  		
-			}
-			else
-			if(Reports_rsmp.RPT_S2Method == 2) 					// 测试站2方法2
-			{
-//				Vinc_WriteFile(43,"\t\t<productname station=\"1\"></productname>\r\n");														 //写入第12行	
-//				Vinc_WriteFile(43,"\t\t<batchnumber station=\"1\"></batchnumber>\r\n");														 //写入第13行	
-//				Vinc_WriteFile(41,"\t\t<cylinderno station=\"1\"></cylinderno>\r\n");															 //写入第14行	
-//				Vinc_WriteFile(43,"\t\t<information station=\"1\"></information>\r\n");														 //写入第15行	
-				
-				sprintf(ExportBuf,"\t\t<productname station=\"2\">%-17s</productname>\r\n",Reports_rsmp.RPT_S2PName);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第17行 	productname station = 2
-			
-				sprintf(ExportBuf,"\t\t<batchnumber station=\"2\">%15s</batchnumber>\r\n",Reports_rsmp.RPT_S2PBatchNb);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第18行 	batchnumber station="2"
-			
-				sprintf(ExportBuf,"\t\t<cylinderno station=\"2\">%15s</cylinderno>\r\n",Reports_rsmp.RPT_S2CylinderNb);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第19行 	cylinderno station="2"
-			
-				strncpy(tbuf2,Reports_rsmp.RPT_S2PInfo,17);
-				sprintf(ExportBuf,"\t\t<information station=\"2\">%-17s</information>\r\n",tbuf2);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第20行 	information station="2"
-			
-				Vinc_WriteFile(17,"\t</productinfo>\r\n");										//写入第21行	productinfo	
-				Vinc_WriteFile(18,"\t<testparameter>\r\n");										//写入第23行	testparamete
-				
-//				Vinc_WriteFile(39,"\t\t<uspmethod station=\"1\"></uspmethod>\r\n");															//写入第25行
-//				Vinc_WriteFile(53,"\t\t<setspeed unit=\"taps/min\" station=\"1\"></setspeed>\r\n");							//写入第26行
-//				Vinc_WriteFile(59,"\t\t<cylindervolume unit=\"ml\" station=\"1\"></cylindervolume>\r\n");				//写入第27行
-//				Vinc_WriteFile(55,"\t\t<calculationvolume station=\"1\"></calculationvolume>\r\n");							//写入第28行
-//				Vinc_WriteFile(57,"\t\t<initialvolume station=\"1\" unit=\"ml\"></initialvolume>\r\n");					//写入第29行
-//				Vinc_WriteFile(54,"\t\t<sampleweight station=\"1\" unit=\"g\"></sampleweight>\r\n");						//写入第30行
-				
-				sprintf(ExportBuf,"\t\t<uspmethod station=\"2\">%d</uspmethod>\r\n",(u16)Reports_rsmp.RPT_S2Method);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第32行 	uspmethod station="2"
-			
-				strcpy(ExportBuf,"\t\t<setspeed unit=\"taps/min\" station=\"2\">250</setspeed>\r\n");
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第33行 	setspeed unit="taps/min" station="2"
-			
-				sprintf(ExportBuf,"\t\t<cylindervolume unit=\"ml\" station=\"2\">%-15s</cylindervolume>\r\n",Reports_rsmp.RPT_S2CylinderSize);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第34行 	cylindervolume unit="ml" station="2"
-			
-				sprintf(ExportBuf,"\t\t<calculationvolume station=\"2\">V%d</calculationvolume>\r\n",Reports_rsmp.RPT_V0_V10);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第35行 	calculationvolume station="2"
-			
-				sprintf(ExportBuf,"\t\t<initialvolume station=\"2\" unit=\"ml\">%5.1f</initialvolume>\r\n",(float)Reports_rsmp.RPT_S2InitialVolume/10);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第36行 	initialvolume station="2" unit="ml"
-			
-				sprintf(ExportBuf,"\t\t<sampleweight station=\"2\" unit=\"g\">%5.2f</sampleweight>	\r\n",(float)Reports_rsmp.RPT_S2SampleMass/100);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第37行 	sampleweight station="2" unit="g"
-				
-				Vinc_WriteFile(19,"\t</testparameter>\r\n");										//写入第39行	testparamete
-				Vinc_WriteFile(18,"\t<systemsetting>\r\n");											//写入第41行	testparamete
-				
-				sprintf(ExportBuf,"\t\t<timezone>%10s %3s</timezone>\r\n\t\t<qualification>%9s</qualification>\r\n",
-					Reports_rsmp.RPT_TimeZone,Reports_rsmp.RPT_SummerTime,Reports_rsmp.RPT_OQ);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第42,43行 	timezone和qualification
-			
-				Vinc_WriteFile(19,"\t</systemsetting>\r\n");									//写入第44行	testparamete
-			
-				Vinc_WriteFile(16,"\t<testrundata>\r\n");											//写入第46行	testrundata
-			
-//				Vinc_WriteFile(54,"\t\t<sampleweight station=\"1\" unit=\"g\"></sampleweight>\r\n");					  //			 station="1" unit="g"
-			
-				sprintf(ExportBuf,"\t\t<sampleweight station=\"2\" unit=\"g\">%5.2f</sampleweight>\r\n",(float)Reports_rsmp.RPT_S2SampleMass/100); 
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第47行 	sampleweight station="2" unit="g"
-				
-//				Vinc_WriteFile(88,"\t\t<tappedvolume station=\"1\" pos=\"1\" unit=\"ml\" taps=\"0\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-//				Vinc_WriteFile(89,"\t\t<tappedvolume station=\"1\" pos=\"2\" unit=\"ml\" taps=\"10\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-//				Vinc_WriteFile(90,"\t\t<tappedvolume station=\"1\" pos=\"3\" unit=\"ml\" taps=\"500\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-//				Vinc_WriteFile(91,"\t\t<tappedvolume station=\"1\" pos=\"4\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-//				Vinc_WriteFile(91,"\t\t<tappedvolume station=\"1\" pos=\"5\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-//				Vinc_WriteFile(91,"\t\t<tappedvolume station=\"1\" pos=\"6\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-//				Vinc_WriteFile(91,"\t\t<tappedvolume station=\"1\" pos=\"7\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-//				Vinc_WriteFile(91,"\t\t<tappedvolume station=\"1\" pos=\"8\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"1\"> </tappedvolume>\r\n");
-			
-				sprintf(ExportBuf,"\t\t<tappedvolume station=\"2\" pos=\"1\" unit=\"ml\" taps=\"0\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S2InitialVolume/10); 
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第50行 	tappedvolume station="2" pos="1" unit="ml" taps="0" finalmark="0"
-			
-				sprintf(ExportBuf,"\t\t<tappedvolume station=\"2\" pos=\"2\" unit=\"ml\" taps=\"10\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S2V10/10); 
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第51行 	tappedvolume station="2" pos="1" unit="ml" taps="0" finalmark="0"
-			
-				sprintf(ExportBuf,"\t\t<tappedvolume station=\"2\" pos=\"3\" unit=\"ml\" taps=\"500\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S2V500/10);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第52行 	tappedvolume station="2" pos="1" unit="ml" taps="0" finalmark="0"
-			
-				if(Reports_rsmp.RPT_TESTENDS2 == 3)
-				{
-					sprintf(ExportBuf,"\t\t<tappedvolume station=\"2\" pos=\"4\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"1\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S2V1250/10);
-					Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  	//如果是最后一行 写入第53行
-					Vinc_WriteFile(91,"\t\t<tappedvolume station=\"2\" pos=\"5\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-					Vinc_WriteFile(91,"\t\t<tappedvolume station=\"2\" pos=\"6\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-					Vinc_WriteFile(91,"\t\t<tappedvolume station=\"2\" pos=\"7\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-					Vinc_WriteFile(91,"\t\t<tappedvolume station=\"2\" pos=\"8\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"> </tappedvolume>\r\n");
-				}
-				else
-				{	
-					sprintf(ExportBuf,"\t\t<tappedvolume station=\"2\" pos=\"4\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",(float)Reports_rsmp.RPT_S2V1250/10);
-					Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  	
-				}
-				
-				for(i=4;i<10;i++)
-				{
-					if(i < Reports_rsmp.RPT_TESTENDS2+1)
-					{
-						if(i != Reports_rsmp.RPT_TESTENDS2)
-						{
-							sprintf(ExportBuf,"\t\t<tappedvolume station=\"2\" pos=\"%d\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\">%5.1f</tappedvolume>\r\n",i+1,(float)Reports_rsmp.RPT_S2Delay[i-4]/10);
-							Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-						}					
-						else
-						{	
-							sprintf(ExportBuf,"\t\t<tappedvolume station=\"2\" pos=\"%d\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"1\">%5.1f</tappedvolume>\r\n",i+1,(float)Reports_rsmp.RPT_S2Delay[i-4]/10);
-							Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-							for(int j = i+2;j<9;j++)
-							{
-								sprintf(ExportBuf,"\t\t<tappedvolume station=\"2\" pos=\"%d\" unit=\"ml\" taps=\"1250\"\r\nfinalmark=\"0\"></tappedvolume>\r\n",j);
-								Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-							}
-						}
-					}
-					else
-					 break;
-				}
-//				Vinc_WriteFile(62,"\t\t<initialdensity station=\"1\" unit=\"g/ml\"> </initialdensity>\r\n");
-				sprintf(ExportBuf,"\t\t<initialdensity station=\"2\" unit=\"g/ml\">%5.2f</initialdensity>\r\n",Reports_rsmp.RPT_S2InitialDensity); 
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-				
-//				Vinc_WriteFile(60,"\t\t<tappeddensity station=\"1\" unit=\"g/ml\"> </tappeddensity>\r\n");
-				sprintf(ExportBuf,"\t\t<tappeddensity station=\"2\" unit=\"g/ml\">%5.2f</tappeddensity>\r\n",Reports_rsmp.RPT_S2TappedDensity);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-
-//				Vinc_WriteFile(46,"\t\t<hausnerratio station=\"1\"> </hausnerratio>\r\n");
-				sprintf(ExportBuf,"\t\t<hausnerratio station=\"2\">%5.2f</hausnerratio>\r\n",Reports_rsmp.RPT_S2HausnerRatio);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-
-//				Vinc_WriteFile(71,"\t\t<compressibilityindex station=\"1\" unit=\"%\"> </compressibilityindex>\r\n");
-				sprintf(ExportBuf,"\t\t<compressibilityindex station=\"2\" unit=\"%%\">%5.1f</compressibilityindex>\r\n",Reports_rsmp.RPT_S2Compressibility);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-				
-				Vinc_WriteFile(17,"\t</testrundata>\r\n");											//
-			
-				Vinc_WriteFile(18,"\t<actualrundata>\r\n");										//
-				
-//				Vinc_WriteFile(59,"\t\t<speedminmax unit=\"taps/min\" station=\"1\"></speedminmax>\r\n");										  //没有内容但必须加上
-//				Vinc_WriteFile(45,"\t\t<actualruntap station=\"1\"></actualruntap>\r\n");										 					 			//没有内容但必须加上 
-
-				sprintf(ExportBuf,"\t\t<speedminmax unit=\"taps/min\" station=\"2\">%5.1f-%5.1f</speedminmax>\r\n",
-					Reports_rsmp.RPT_S2MinSpeed,Reports_rsmp.RPT_S2MaxSpeed);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);
-			
-				sprintf(ExportBuf,"\t\t<actualruntap station=\"2\">%4d</actualruntap>\r\n",Reports_rsmp.RPT_RealTapsNb);
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//
-				
-				if(Reports_rsmp.RPT_TestStatus)
-				sprintf(ExportBuf,"\t\t<status>%s</status>\r\n","Test completed.");
-				else
-					sprintf(ExportBuf,"\t\t<status>%s</status>\r\n","Test abort.");
-				Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  
-			}
-		}break;
-		default:
-		break;
-	}
-	
-	// 打印测试时间 ------------------------------------------
-	if(DateFormat == 0) 									// Day,Month,Year
-		sprintf(ExportBuf,"\t\t<realtestdate>%02d.%02d.20%02d %02d:%02d:%02d</realtestdate>\r\n",
-			Reports_rsmp.RPT_Date.RTC_Date,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Year,
-			Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-	else
-	if(DateFormat == 1) 									// Year,Month,Day
-		sprintf(ExportBuf,"\t\t<realtestdate>20%02d-%02d-%02d %02d:%02d:%02d</realtestdate>\r\n",
-			Reports_rsmp.RPT_Date.RTC_Year,Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date,
-			Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-	else
-	if(DateFormat == 2) 									// Month,Day,Year
-		sprintf(ExportBuf,"\t\t<realtestdate>%02d/%02d/20%02d %02d:%02d:%02d</realtestdate>\r\n",
-			Reports_rsmp.RPT_Date.RTC_Month,Reports_rsmp.RPT_Date.RTC_Date,Reports_rsmp.RPT_Date.RTC_Year,
-			Reports_rsmp.RPT_Time.RTC_Hours,Reports_rsmp.RPT_Time.RTC_Minutes,Reports_rsmp.RPT_Time.RTC_Seconds);
-	
-	Vinc_WriteFile(strlen(ExportBuf),ExportBuf);					  			//写入第48行 	
-	Vinc_WriteFile(19,"\t</actualrundata>\r\n");										//写入第49行	actualrundata
-	
-	Vinc_WriteFile(15,"</testreport>\r\n");									//写入第51行
-
-	Vinc_CloseFile(Namebuf);					//关闭文件
-	Vinc_CD();
-	Vinc_CD();
-}*/
 
 char ExportUsp(void)
 {
@@ -49554,7 +39195,7 @@ char ExportUsp(void)
 				}break;
 				case 3:
 				{
-					sprintf(ExportBuf,"\t<exportDate>%sT%s%s</exportDate>\r\n", DisDateStr,DisTimeStr,TimeZoneList[TimeZone][0]+3);
+					sprintf(ExportBuf,"\t<exportDate>%sT%s</exportDate>\r\n", DisDateStr,DisTimeStr);
 				}break;
 				case 4:
 				{
@@ -49760,9 +39401,8 @@ char ExportUsp(void)
 						PutStep--; 										// 未完待续
 					}
 					
+					sprintf(ExportBuf,"\t\t\t\t<tappedVolume taps=\"%d\" testEnd=\"%s\" unit=\"ml\">%5.1f</tappedVolume>\r\n",RUN_CYC[TestEndNb],tbuf1,(float)Reports_rsmp.RPT_S1Delay[TestEndNb-4]/10);
 					TestEndNb++;
-					//sprintf(ExportBuf,"\t\t\t\t<tappedVolume taps=\"1250\" testEnd=\"%s\" unit=\"ml\">%5.1f</tappedVolume>\r\n",tbuf1,(float)Reports_rsmp.RPT_S1Delay[TestEndNb-4]/10);
-					sprintf(ExportBuf,"\t\t\t\t<tappedVolume taps=\"1250\" testEnd=\"%s\" unit=\"ml\">%5.1f</tappedVolume>\r\n",tbuf1,(float)Reports_rsmp.RPT_S1Delay[TestEndNb-5]/10);
 				}break;
 				case 37:
 				{
@@ -49820,7 +39460,7 @@ char ExportUsp(void)
 						sprintf(tbuf1,"%02d/%02d/20%02d",M,D,Y);
 					
 					sprintf(tbuf2,"%02d:%02d:%02d",h,m,s);
-					sprintf(ExportBuf,"\t\t\t<end>%sT%s%s</end>\r\n",tbuf1,tbuf2,Reports_rsmp.RPT_TimeZone+3);
+					sprintf(ExportBuf,"\t\t\t<end>%sT%s</end>\r\n",tbuf1,tbuf2);
 				}break;
 				case 47:
 				{
@@ -49970,9 +39610,8 @@ char ExportUsp(void)
 						PutStep--; 										// 未完待续
 					}
 					
+					sprintf(ExportBuf,"\t\t\t\t<tappedVolume taps=\"%d\" testEnd=\"%s\" unit=\"ml\">%5.1f</tappedVolume>\r\n",RUN_CYC[TestEndNb],tbuf1,(float)Reports_rsmp.RPT_S2Delay[TestEndNb-4]/10);
 					TestEndNb++;
-					//sprintf(ExportBuf,"\t\t\t\t<tappedVolume taps=\"1250\" testEnd=\"%s\" unit=\"ml\">%5.1f</tappedVolume>\r\n",tbuf1,(float)Reports_rsmp.RPT_S2Delay[TestEndNb-4]/10);
-					sprintf(ExportBuf,"\t\t\t\t<tappedVolume taps=\"1250\" testEnd=\"%s\" unit=\"ml\">%5.1f</tappedVolume>\r\n",tbuf1,(float)Reports_rsmp.RPT_S2Delay[TestEndNb-5]/10);
 				}break;
 				case 73:
 				{
@@ -50030,7 +39669,7 @@ char ExportUsp(void)
 						sprintf(tbuf1,"%02d/%02d/20%02d",M,D,Y);
 					
 					sprintf(tbuf2,"%02d:%02d:%02d",h,m,s);
-					sprintf(ExportBuf,"\t\t\t<end>%sT%s%s</end>\r\n",tbuf1,tbuf2,Reports_rsmp.RPT_TimeZone+3);
+					sprintf(ExportBuf,"\t\t\t<end>%sT%s</end>\r\n",tbuf1,tbuf2);
 				}break;
 				case 83:
 				{
@@ -50303,7 +39942,7 @@ char ExportUsp3(void)
 				}break;
 				case XML_DATE_01: 								// 日期，时间
 				{
-					sprintf(ExportBuf,"\t<exportDate>%sT%s%s</exportDate>\r\n", DisDateStr,DisTimeStr,TimeZoneList[TimeZone][0]+3);
+					sprintf(ExportBuf,"\t<exportDate>%sT%s</exportDate>\r\n", DisDateStr,DisTimeStr);
 				}break;
 				case XML_TYPE_01: 								// Test
 				{
@@ -50630,7 +40269,7 @@ char ExportUsp3(void)
 						sprintf(tbuf1,"%02d/%02d/20%02d",M,D,Y);
 					
 					sprintf(tbuf2,"%02d:%02d:%02d",h,m,s);
-					sprintf(ExportBuf,"\t\t\t<end>%sT%s%s</end>\r\n",tbuf1,tbuf2,Reports_rsmp.RPT_TimeZone+3);
+					sprintf(ExportBuf,"\t\t\t<end>%sT%s</end>\r\n",tbuf1,tbuf2);
 				}break;
 				case XML_STATUS1_01: 									// <status>
 				{
@@ -50887,7 +40526,7 @@ char ExportUsp3(void)
 						sprintf(tbuf1,"%02d/%02d/20%02d",M,D,Y);
 					
 					sprintf(tbuf2,"%02d:%02d:%02d",h,m,s);
-					sprintf(ExportBuf,"\t\t\t<end>%sT%s%s</end>\r\n",tbuf1,tbuf2,Reports_rsmp.RPT_TimeZone+3);
+					sprintf(ExportBuf,"\t\t\t<end>%sT%s</end>\r\n",tbuf1,tbuf2);
 				}break;
 				case XML_STATUS2_01: 									// <status>
 				{

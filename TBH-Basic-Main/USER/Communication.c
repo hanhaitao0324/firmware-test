@@ -664,7 +664,18 @@ void Communicate_Handler(void)
 		sprintf(buf, "SHMR: %d N\r\n", SenMeaRange);
 		RS232_SendString(buf);
 		return;
-	}		
+	}
+
+	if(strncmp(RS232_RxBuffer,"SRTC ",5)==0) 			// 设置RTC偏移量
+	{
+		strcpy(buf1,&RS232_RxBuffer[5]);
+
+		i = atoi(buf1);
+		RTC_ApplySmoothCalib(i);
+		sprintf(buf, "SRTC: %d ppm\r\n", i);
+		RS232_SendString(buf);
+		return;
+	}
 
 	RS232_SendString("NA\r");
 }
@@ -676,6 +687,12 @@ void RS485_Handler(void)
 
 void Balance_Handler(void)
 {
+	// if((strncmp(Balance_RxBuffer,"SerNo.",6)==0)||
+	// 	(strncmp(Balance_RxBuffer,"I4 A ",5)==0)) 				// 电子称序列号获取
+	// {
+	// 	EBalanceRxCnt++; 															// 电子称接收计数器
+	// 	return;
+	// }
 	if((strncmp(Balance_RxBuffer,"G     ",6)==0)|| 							// 电子称
 		 (strncmp(Balance_RxBuffer,"N     ",6)==0))
 	{

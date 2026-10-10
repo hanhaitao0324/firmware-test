@@ -697,7 +697,7 @@ void StopPrinter(void)
 	GPIO_WriteBit(VINC_GPIOB, VINC_DATAREQ, 	  Bit_SET);	
 }
 
-void SendPrinter(char *str)
+void SendPrinter(const char *str)
 {
 	int ch,i,aktsend,index=0;
 
@@ -777,9 +777,9 @@ void SendPrinterCC(const char *str)
         }
 		for(i=0;i<32;i++) {
 			if(str[index]==0x0A) zeile++;
-			if((str[index] & 0x80) == 0x80 && !PrinterFrames)
-				com_put2ww(' ');
-			else
+			// if((str[index] & 0x80) == 0x80 && !PrinterFrames)
+			// 	com_put2ww(' ');
+			// else
 				com_put2ww(str[index]);
 			index++;
 			osThreadYield();	
@@ -805,9 +805,9 @@ void SendPrinterCC(const char *str)
         }
 		for(i=0;i<aktsend;i++) {
 			if(str[index]==0x0A) zeile++;
-			if((str[index] & 0x80) == 0x80 && !PrinterFrames)
-				com_put2ww(' ');
-			else
+			// if((str[index] & 0x80) == 0x80 && !PrinterFrames)
+			// 	com_put2ww(' ');
+			// else
 				com_put2ww(str[index]);
 			index++;
 			osThreadYield();

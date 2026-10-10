@@ -88,32 +88,41 @@ unsigned char gettast(void)
 unsigned char gettasto(void)
 {
 	if ( (GPIO_ReadInputDataBit(KEYS_GPIO,KEY_BOTLEFT) && \
-			GPIO_ReadInputDataBit(KEYS_GPIO,KEY_TOPLEFT) 	&& \
-			GPIO_ReadInputDataBit(KEYS_GPIO,KEY_BOTMID)		&& \
-			GPIO_ReadInputDataBit(PORT_C,KEY_TOPMID)		&& \
-			GPIO_ReadInputDataBit(KEYS_GPIO,KEY_BOTRIGHT)	&& \
-			GPIO_ReadInputDataBit(KEYS_GPIO,KEY_TOPRIGHT)	&& \
-			GPIO_ReadInputDataBit(KEYS_GPIO,KEY_BOTLEFT)) || RemoteFlg)
-  {
-    osDelay(10);
-    return(0);
-  }
+		GPIO_ReadInputDataBit(KEYS_GPIO,KEY_TOPLEFT) 	&& \
+		GPIO_ReadInputDataBit(KEYS_GPIO,KEY_BOTMID)		&& \
+		GPIO_ReadInputDataBit(PORT_C,KEY_TOPMID)		&& \
+		GPIO_ReadInputDataBit(KEYS_GPIO,KEY_BOTRIGHT)	&& \
+		GPIO_ReadInputDataBit(KEYS_GPIO,KEY_TOPRIGHT)	&& \
+		GPIO_ReadInputDataBit(KEYS_GPIO,KEY_BOTLEFT)) || RemoteFlg)
+	{
+		osDelay(10);
+		return(0);
+	}
 	osDelay(20);
-	
+
 	if(!GPIO_ReadInputDataBit(KEYS_GPIO,KEY_BOTLEFT) && !GPIO_ReadInputDataBit(KEYS_GPIO,KEY_TOPRIGHT)) 
-    return(KBD_CODE_MENU_DOWN_KBD_CODE_VALUE_UP);
+		return(KBD_CODE_MENU_DOWN_KBD_CODE_VALUE_UP);
+
+	if(!GPIO_ReadInputDataBit(KEYS_GPIO,KEY_BOTLEFT) && !GPIO_ReadInputDataBit(KEYS_GPIO,KEY_BOTRIGHT)) 
+		return(KBD_CODE_MENU_DOWN_KBD_CODE_VALUE_DOWN);
+
 	if(!GPIO_ReadInputDataBit(KEYS_GPIO,KEY_TOPLEFT)) 
 		return(KBD_CODE_MENU_UP);
+
 	if(!GPIO_ReadInputDataBit(KEYS_GPIO,KEY_BOTMID)) 
 		return(KBD_CODE_START);
+
 	if(!GPIO_ReadInputDataBit(PORT_C,KEY_TOPMID)) 
 		return(KBD_CODE_STOP);
-#ifndef DEBUG
+
+	#ifndef DEBUG
 	if(!GPIO_ReadInputDataBit(KEYS_GPIO,KEY_BOTRIGHT)) 
 		return(KBD_CODE_VALUE_DOWN);
-#endif
+	#endif
+
 	if(!GPIO_ReadInputDataBit(KEYS_GPIO,KEY_TOPRIGHT))
 		return(KBD_CODE_VALUE_UP);
+
 	if(!GPIO_ReadInputDataBit(KEYS_GPIO,KEY_BOTLEFT))
 		return(KBD_CODE_MENU_DOWN);
 

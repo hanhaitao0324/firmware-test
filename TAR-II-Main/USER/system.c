@@ -151,7 +151,7 @@ u8 SoundSw = 1; 												// 键盘音开关
 u8 tmpPSW = 0;													// 临时密码设置开关	2021/10/22 10:57:34
 u8 PasswordSW = 0;											// 密码设置开关			2021/10/22 10:57:34
 
-u8 BalanceModel = 0; 										// 电子秤型号，0：Mettler Me 54；1：Sartorius Practum；Gavin，2023-08-04 周五 12:57:13
+u8 BalanceModel = 0; 										// 电子秤型号，0.Sartorius Practum，1.Mettler Me 54；Gavin，2023-08-04 周五 12:57:13
 
 u8 tmpRepSave = 0; 											// 报告保存标志临时变量
 u8 ReportSave = 1; 											// 报告保存标志
@@ -184,7 +184,6 @@ float BalanceWeight; 										// 电子称获取的重量
 u8 WeightFlag = 0; 											// 获取重量标志
 u8 BalanceFlag = 0; 										// 电子秤配置有无标志
 u8 BalanceConnect = 0; 									// 电子称连接标志
-u8 BalanceShakeCnt = 0; 								// 系统与电子秤的握手次数
 u8 EBalanceTxCnt = 0; 									// 电子称通信发送计数器
 u8 EBalanceRxCnt = 0; 									// 电子称通信接收计数器
 u8 DrumsNb = 0; 												// 设备配置工位数量，1/2
@@ -480,6 +479,8 @@ u8 keyscan(u8 kps,u16 cdx,u16 cdy);
 
 void LCD_GetHardVer(void); 		// 获取显示板硬件版本号；
 void LCD_GetSoftVer(void); 		// 获取显示板软件版本号；
+
+void AbortPopUp(void);
 
 //清屏函数
 //color:要清屏的填充色
@@ -5269,7 +5270,6 @@ void Display_Handler(void)
 		
 		// CAN通信处理 -------------------------------
 		while(CBRIp0 != CBRIp1) 						// 接收到新数据
-		//if(CBRIp0 != CBRIp1)
 		{
 			if(CanRxBuf[CBRIp0][0] == 0xA5)
 			{
@@ -5471,29 +5471,29 @@ void Display_Handler(void)
 					{
 						if(DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_AON_dst) == -1)
 						{
-							LCD_Fill(32,528,32+128,528+48,GREEN_95C11F); 			// OQ绿框
+							LCD_Fill(32,528,32+168,528+48,GREEN_95C11F); 			// OQ绿框
 							LCD_ShowIcon(45,540,24,24,WHITE,GREEN_95C11F,65,0); 		// 红绿灯图标
-							LCD_ShowSpStr(80,540,60,24,WHITE,GREEN_95C11F,Font_Rbr27,"OQ",0);
+							LCD_ShowSpStr(80,540,120,24,WHITE,GREEN_95C11F,Font_Rbr27,"OQ status",0);
 						}
 						else
 						if(DateComp(&RTC_DateStruct,&OQ_PtGp.OQ_EON_dst) == -1)
 						{
-							LCD_Fill(32,528,32+128,528+48,YELLOW); 			// OQ黄框
+							LCD_Fill(32,528,32+168,528+48,YELLOW); 			// OQ黄框
 							LCD_ShowIcon(45,540,24,24,WHITE,YELLOW,65,0); 		// 红绿灯图标
-							LCD_ShowSpStr(80,540,60,24,WHITE,YELLOW,Font_Rbr27,"OQ",0);
+							LCD_ShowSpStr(80,540,120,24,WHITE,YELLOW,Font_Rbr27,"OQ status",0);
 						}
 						else
 						{
-							LCD_Fill(32,528,32+128,528+48,RED); 			// OQ红框
+							LCD_Fill(32,528,32+168,528+48,RED); 			// OQ红框
 							LCD_ShowIcon(45,540,24,24,WHITE,RED,65,0); 		// 红绿灯图标
-							LCD_ShowSpStr(80,540,60,24,WHITE,RED,Font_Rbr27,"OQ",0);
+							LCD_ShowSpStr(80,540,120,24,WHITE,RED,Font_Rbr27,"OQ status",0);
 						}
 					}
 					else
 					{
-						LCD_Fill(32,528,32+128,528+48,GRAY_878787); 			// OQ绿框
+						LCD_Fill(32,528,32+168,528+48,GRAY_878787); 			// OQ绿框
 						LCD_ShowIcon(45,540,24,24,WHITE,GRAY_878787,65,0); 		// 红绿灯图标
-						LCD_ShowSpStr(80,540,60,24,WHITE,GRAY_878787,Font_Rbr27,"OQ",0);
+						LCD_ShowSpStr(80,540,120,24,WHITE,GRAY_878787,Font_Rbr27,"OQ status",0);
 					}
 					
 					// 电子秤连接状态 --------------------------------
@@ -5507,53 +5507,41 @@ void Display_Handler(void)
 				{
 					if(PopWindow == 0) 						// 没有弹出窗
 					{
-						//if((BalanceConnect == 0)&& 	// 电子秤未连接
-						//	 (BalanceShakeCnt < 3)) 	// 上电检查次数
-						if(BalanceShakeCnt < 3) 	// 上电检查次数, Gavin, 2024-01-14 周日 15:35:00
+						if(flash_flag) 						// 刷新标志
 						{
-							if(flash_flag) 						// 刷新标志
+							if(WeightFlag)
 							{
-								if(WeightFlag)
+								WeightFlag = 0;
+
+								if(EBalanceTxCnt == EBalanceRxCnt)
 								{
-									WeightFlag = 0;
+									BalanceConnect = 1;
+									LCD_ShowSpStr(75+93,220,800,24,GREEN_95C11F,WHITE,Font_Rbr27,"Connected     ",0);
+								}
+								else
+								{
+									BalanceConnect = 0;
+									LCD_ShowSpStr(75+93,220,800,24,ORANGE_E94E1B,WHITE,Font_Rbr27,"Disconnected",0);
 									
-									if(EBalanceTxCnt%3 == 0)
-									{
-										BalanceShakeCnt++; 							// Gavin, 2023-12-29 周五 09:34:17
-										
-										if(EBalanceTxCnt == EBalanceRxCnt)
-										{
-											BalanceConnect = 1;
-											LCD_ShowSpStr(75+93,220,800,24,GREEN_95C11F,WHITE,Font_Rbr27,"Connected     ",0);
-											
-											BalanceShakeCnt = 3; 				// 确认连接后，直接将次数置顶，不再询问连接状态；
-										}
-										else
-										{
-											BalanceConnect = 0;
-											LCD_ShowSpStr(75+93,220,800,24,ORANGE_E94E1B,WHITE,Font_Rbr27,"Disconnected",0);
-											
-											EBalanceRxCnt = EBalanceTxCnt;
-										}
-									}
+									EBalanceRxCnt = EBalanceTxCnt;
 								}
 							}
-							else 											// 刷新标志=0
+						}
+						else 											// 刷新标志=0
+						{
+							if(WeightFlag == 0) 		// 询问电子秤标志
 							{
-								if(WeightFlag == 0) 		// 询问电子秤标志
+								WeightFlag = 1; 			// 询问电子秤标志置位
+								
+								EBalanceTxCnt++;
+								
+								if(UpdataFlag == 0) 	// 非软件升级状态
 								{
-									WeightFlag = 1; 			// 询问电子秤标志置位
-									
-									EBalanceTxCnt++;
-									
-									if(UpdataFlag == 0) 	// 非软件升级状态
-									{
-										if(BalanceModel == 0) 					// Sartorius Practum
-											RS232_SendString("\x1b\x20\x6b\x50\x5f"); 				// "kP_"，用“打印”按钮打印
-										else
-										if(BalanceModel == 1) 					// Mettler Me 54
-											RS232_SendString("\x53\x0d\x0a"); 								// "S"，询问重量
-									}
+									if(BalanceModel == 0) 					// Sartorius Practum
+										RS232_SendString("\x1b\x20\x78\x32\x5f"); 				// "x2_"，获取电子秤序列号
+									else
+									if(BalanceModel == 1) 					// Mettler Me 54
+										RS232_SendString("\x49\x34\x0d\x0a"); 								// "I4"，查询天平序列号
 								}
 							}
 						}
@@ -5648,7 +5636,7 @@ void Display_Handler(void)
 								BEEPER_PlayTones(tones_1khz);
 							}
 							else
-							if((cur_tpx > 32)&&(cur_tpx < 32+128)&&(cur_tpy > 528)&&(cur_tpy < 528+48)) 	// “OQ红绿灯”图标
+							if((cur_tpx > 32)&&(cur_tpx < 32+168)&&(cur_tpy > 528)&&(cur_tpy < 528+48)) 	// “OQ红绿灯”图标
 							{
 								if(OQ_PtGp.OQ_sw == 1)
 								{
@@ -5766,12 +5754,6 @@ void Display_Handler(void)
 					if(PopWindow == 0)
 						RTC_DisRefresh(); 					// 日期时间刷新
 				}
-				
-				if(CurntPage != 0)
-				{
-					//BalanceConnect
-					BalanceShakeCnt = 0;
-				}
 			}break;
 			case 1: 													// 方法选择页面，不再使用v0.00.17
 			{
@@ -5795,8 +5777,8 @@ void Display_Handler(void)
 					
 					LCD_ShowIcon(756,256,44,48,GRAY1,WHITE,15,0); 							// 圆圈？
 					
-					LCD_ShowSpStr(75,350,650,24,BLACK,WHITE,Font_Rbr27,"Stroke height",0); 	
-					LCD_ShowSpStr(75,400,650,24,BLACK,WHITE,Font_Rbr27,"Taps per min.",0); 	
+					LCD_ShowSpStr(75,350,650,24,BLACK,WHITE,Font_Rbr27,"Stroke height",0);
+					LCD_ShowSpStr(75,400,650,24,BLACK,WHITE,Font_Rbr27,"Taps per min.",0);
 					
 					tdm_flag = 1;
 				}
@@ -6581,8 +6563,11 @@ void Display_Handler(void)
 				{
 					PopWflag = 0;
 					
-					LCD_Fill(160,93,160+704,93+60+270,GRAY_656565); 				// 灰色横条
-					LCD_Fill(160+5,153,160+704-5,153+270-5,WHITE); 		// 白色方框
+					if(PopWindow != 5)
+					{
+						LCD_Fill(160,93,160+704,93+60+270,GRAY_656565); 				// 灰色横条
+						LCD_Fill(160+5,153,160+704-5,153+270-5,WHITE); 		// 白色方框
+					}
 					
 					switch(PopWindow)
 					{
@@ -6612,13 +6597,20 @@ void Display_Handler(void)
 							  
 							LCD_ShowSpStr(175,175,700,24,BLACK,WHITE,Font_Rbm22,"Tap for automatic emptying of the drums after finishing the test.",0);
 						}break;
+						case 5: 										// Abort
+						{
+							AbortPopUp();
+						}break;
 						default:
 						break;
 					}
 					
-					LCD_Fill(608,438,608+256,438+60,GRAY_656565); 				// 灰色横条
-					LCD_Fill(608+5,438+5,608+256-5,438+60-5,GREEN_3AAA35); 					// OK按钮
-					LCD_ShowSpStr(718,455,100,35,WHITE,GREEN_3AAA35,Font_Rbb34,"Ok",0);
+					if(PopWindow != 5)
+					{
+						LCD_Fill(608,438,608+256,438+60,GRAY_656565); 				// 灰色横条
+						LCD_Fill(608+5,438+5,608+256-5,438+60-5,GREEN_3AAA35); 					// OK按钮
+						LCD_ShowSpStr(718,455,100,35,WHITE,GREEN_3AAA35,Font_Rbb34,"Ok",0);
+					}
 				}
 				
 				if(TouchFlag) 									// 有触摸标志
@@ -6783,9 +6775,8 @@ void Display_Handler(void)
 								else
 								if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 448)&&(cur_tpy < 576)) 	// Abort
 								{
-									LastPage = CurntPage;
-									CurntPage = 0;
-									cp_flag = 1;
+									PopWindow = 5;
+									PopWflag = 1;
 									
 									BEEPER_PlayTones(tones_1khz);
 								}
@@ -6925,7 +6916,30 @@ void Display_Handler(void)
 							}
 							else
 								BEEPER_PlayTones(tones_error);
-						}
+						}break;
+						case 5:
+						{
+							if((cur_tpx > 240)&&(cur_tpx < 496)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// No
+							{
+								cp_flag = 1;
+								PopWindow = 0;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							if((cur_tpx > 528)&&(cur_tpx < 784)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// Yes
+							{
+								LastPage = CurntPage;
+								CurntPage = 0;
+								cp_flag = 1;
+								PopWindow = 0;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+								BEEPER_PlayTones(tones_error);
+						}break;
+						default:break;
 					}
 				}
 				else
@@ -7044,8 +7058,11 @@ void Display_Handler(void)
 				{
 					PopWflag = 0;
 					
-					LCD_Fill(160,93,160+704,93+60+270,GRAY_656565); 	// 灰色横条
-					LCD_Fill(160+5,153,160+704-5,153+270-5,WHITE); 		// 白色方框
+					if(PopWindow != 5)
+					{
+						LCD_Fill(160,93,160+704,93+60+270,GRAY_656565); 	// 灰色横条
+						LCD_Fill(160+5,153,160+704-5,153+270-5,WHITE); 		// 白色方框
+					}
 					
 					switch(PopWindow)
 					{
@@ -7053,7 +7070,6 @@ void Display_Handler(void)
 						{
 							LCD_ShowSpStr(175,108,450,36,WHITE,GRAY_656565,Font_Rbb34,"Hint: Time",0);
 							
-							//LCD_ShowSpStr(175,185,680,24,BLACK,WHITE,Font_Rbm22,"Enter the runtime. It can be set up to 9 Hours, 59 minutes and 59 seconds.",0);
 							LCD_ShowSpStr(175,185,680,24,BLACK,WHITE,Font_Rbm22,"Enter the runtime. It can be set from 30 seconds to ",0);
 							LCD_ShowSpStr(175,210,680,24,BLACK,WHITE,Font_Rbm22,"9 hours, 59 minutes, 59 seconds.",0);
 						}break;
@@ -7077,13 +7093,20 @@ void Display_Handler(void)
 							
 							LCD_ShowSpStr(175,185,630,24,BLACK,WHITE,Font_Rbm22,"Tap for automatic emptying of the drums after finishing the test.",0);
 						}break;
+						case 5: 										// Abort
+						{
+							AbortPopUp();
+						}break;
 						default:
 						break;
 					}
 					
-					LCD_Fill(608,438,608+256,438+60,GRAY_656565); 					// 灰色横条
-					LCD_Fill(608+5,438+5,608+256-5,438+60-5,GREEN_3AAA35); 					// OK按钮
-					LCD_ShowSpStr(718,455,100,35,WHITE,GREEN_3AAA35,Font_Rbb34,"Ok",0);
+					if(PopWindow != 5)
+					{
+						LCD_Fill(608,438,608+256,438+60,GRAY_656565); 					// 灰色横条
+						LCD_Fill(608+5,438+5,608+256-5,438+60-5,GREEN_3AAA35); 					// OK按钮
+						LCD_ShowSpStr(718,455,100,35,WHITE,GREEN_3AAA35,Font_Rbb34,"Ok",0);
+					}
 				}
 				
 				if(TouchFlag == 1) 							// 有触摸标志
@@ -7269,9 +7292,8 @@ void Display_Handler(void)
 								else
 								if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 448)&&(cur_tpy < 576)) 	// Abort
 								{
-									LastPage = CurntPage;
-									CurntPage = 0;
-									cp_flag = 1;
+									PopWindow = 5;
+									PopWflag = 1;
 									
 									BEEPER_PlayTones(tones_1khz);
 								}
@@ -7447,6 +7469,28 @@ void Display_Handler(void)
 								
 								BEEPER_PlayTones(tones_1khz);
 							}
+						}break;
+						case 5:
+						{
+							if((cur_tpx > 240)&&(cur_tpx < 496)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// No
+							{
+								cp_flag = 1;
+								PopWindow = 0;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							if((cur_tpx > 528)&&(cur_tpx < 784)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// Yes
+							{
+								LastPage = CurntPage;
+								CurntPage = 0;
+								cp_flag = 1;
+								PopWindow = 0;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+								BEEPER_PlayTones(tones_error);
 						}break;
 						default:
 						break;
@@ -7708,10 +7752,13 @@ void Display_Handler(void)
 							//LCD_ShowSpStr(72,406,100,24,BLACK,GRAY_DADADA,Font_Rbr27,"50 ml",0);
 							//LCD_ShowSpStr(72,452,100,24,BLACK,WHITE,Font_Rbr27,"25 ml",0);
 						}break;
+						case 7: 										// Abort
+						{
+							AbortPopUp();
+						}break;
 						default:
 						break;
 					}
-					
 				}
 				
 				if(TouchFlag == 1) 							// 有触摸标志
@@ -7868,9 +7915,8 @@ void Display_Handler(void)
 								else
 								if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 448)&&(cur_tpy < 576)) 	// Abort
 								{
-									LastPage = CurntPage;
-									CurntPage = 0;
-									cp_flag = 1;
+									PopWindow = 7;
+									PopWflag = 1;
 									
 									BEEPER_PlayTones(tones_1khz);
 								}
@@ -8038,6 +8084,28 @@ void Display_Handler(void)
 								BEEPER_PlayTones(tones_1khz);
 							}
 							else*/
+								BEEPER_PlayTones(tones_error);
+						}break;
+						case 7:
+						{
+							if((cur_tpx > 240)&&(cur_tpx < 496)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// No
+							{
+								cp_flag = 1;
+								PopWindow = 0;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							if((cur_tpx > 528)&&(cur_tpx < 784)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// Yes
+							{
+								LastPage = CurntPage;
+								CurntPage = 0;
+								cp_flag = 1;
+								PopWindow = 0;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
 								BEEPER_PlayTones(tones_error);
 						}break;
 						default:
@@ -8293,10 +8361,13 @@ void Display_Handler(void)
 							//LCD_ShowSpStr(72,406,100,24,BLACK,GRAY_DADADA,Font_Rbr27,"50 ml",0);
 							//LCD_ShowSpStr(72,452,100,24,BLACK,WHITE,Font_Rbr27,"25 ml",0);
 						}break;
+						case 7: 										// Abort
+						{
+							AbortPopUp();
+						}break;
 						default:
 						break;
 					}
-					
 				}
 				
 				if(TouchFlag == 1) 							// 有触摸标志
@@ -8445,9 +8516,8 @@ void Display_Handler(void)
 								else
 								if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 448)&&(cur_tpy < 576)) 	// Abort
 								{
-									LastPage = CurntPage;
-									CurntPage = 0;
-									cp_flag = 1;
+									PopWindow = 7;
+									PopWflag = 1;
 									
 									BEEPER_PlayTones(tones_1khz);
 								}
@@ -8615,6 +8685,28 @@ void Display_Handler(void)
 								BEEPER_PlayTones(tones_1khz);
 							}
 							else*/
+								BEEPER_PlayTones(tones_error);
+						}break;
+						case 7:
+						{
+							if((cur_tpx > 240)&&(cur_tpx < 496)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// No
+							{
+								cp_flag = 1;
+								PopWindow = 0;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							if((cur_tpx > 528)&&(cur_tpx < 784)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// Yes
+							{
+								LastPage = CurntPage;
+								CurntPage = 0;
+								cp_flag = 1;
+								PopWindow = 0;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
 								BEEPER_PlayTones(tones_error);
 						}break;
 						default:
@@ -8961,6 +9053,10 @@ void Display_Handler(void)
 							//LCD_Fill(608+5,438+5,608+256-5,438+60-5,GREEN_3AAA35); 					// OK按钮
 							LCD_ShowSpStr(700,455,100,35,WHITE,ORANGE_E94E1B,Font_Rbb34,"Close",0);
 						}break;
+						case 3: 										// Abort
+						{
+							AbortPopUp();
+						}break;
 						default:
 						break;
 					}
@@ -9010,10 +9106,9 @@ void Display_Handler(void)
 							{
 								if(Test_Start != 0)
 									Test_Start = 0;
-								
-								LastPage = CurntPage;
-								CurntPage = 0;
-								cp_flag = 1;
+
+								PopWindow = 3;
+								PopWflag = 1;
 								
 								BEEPER_PlayTones(tones_1khz);
 								
@@ -9039,6 +9134,28 @@ void Display_Handler(void)
 							{
 								PopWindow = 0;
 								cp_flag = 1;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+								BEEPER_PlayTones(tones_error);
+						}break;
+						case 3:
+						{
+							if((cur_tpx > 240)&&(cur_tpx < 496)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// No
+							{
+								cp_flag = 1;
+								PopWindow = 0;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							if((cur_tpx > 528)&&(cur_tpx < 784)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// Yes
+							{
+								LastPage = CurntPage;
+								CurntPage = 0;
+								cp_flag = 1;
+								PopWindow = 0;
 								
 								BEEPER_PlayTones(tones_1khz);
 							}
@@ -9369,9 +9486,6 @@ void Display_Handler(void)
 				{
 					cp_flag = 0;
 					
-					//LCD_ClearSE(20, BLACK);
-					//LCD_ShowIcon(32,30,64,48,GRAY,BLACK,9,0); 				// 三横标
-					//LCD_Fill(32,112,32+656,112+464,WHITE); 						// 大白框
 					LCD_Fill(32,112,32+656,112+48,GRAY_878787); 							// 上灰色横条
 					
 					if(TestMode == 1) 						// 计量次数模式
@@ -9388,10 +9502,11 @@ void Display_Handler(void)
 				{
 					mspe_flag = 0;
 					
-					//if(CurrSpeed < 1000) 					// 小于100转时
-					//	LCD_Fill(135,250,135+120,250+50,GRAY_DADADA); 							// 擦除数字显示
-					sprintf((char*)tbuf,"%5.1f  ",(float)CurrSpeed/10); 
-					LCD_ShowSpStr(135,250,120,50,BLACK,GRAY_DADADA,Font_Hnb48,tbuf,0);
+					sprintf((char*)tbuf,"%-5.1f  ",(float)CurrSpeed/10);
+					if(PopWindow == 0)
+						LCD_ShowSpStr(135,250,120,50,BLACK,GRAY_DADADA,Font_Hnb48,tbuf,0);
+					else
+						LCD_ShowSpStr(120,250,120,50,BLACK,GRAY_DADADA,Font_Hnb48,tbuf,0);
 				}
 				
 				switch(TestMode)
@@ -9402,9 +9517,7 @@ void Display_Handler(void)
 						{
 							mrev_flag = 0;
 							
-							LCD_ShowSpNum(140,460,WHITE,GRAY_878787,MOTOR_Revolution,4,Font_Hnb48);
-							//LCD_ShowSpNum(140,400,WHITE,GRAY_878787,Inp1_Cnt,4,Font_Hnb48);
-							
+							LCD_ShowSpNum(140,460,WHITE,GRAY_878787,MOTOR_Revolution,4,Font_Hnb48);						
 							// 进度条 ------------------------------------
 							LCD_Fill(97,515,97+(MOTOR_Revolution*190/NumberOfTaps),515+13,RED);
 							
@@ -9412,6 +9525,7 @@ void Display_Handler(void)
 								 (MOTOR_Revolution >= NumberOfTaps))
 							{
 								Test_Start = 0; 						// 测试结束
+								PopWindow = 0;
 								LastPage = CurntPage;
 								CurntPage = 10; 						// 当前页面设置为10
 								cp_flag = 1;
@@ -9613,14 +9727,15 @@ void Display_Handler(void)
 							
 							sprintf((char*)tbuf,"%02d:%02d:%02d",(u16)(MOTOR_Times/3600),(u16)(MOTOR_Times%3600/60),(u16)(MOTOR_Times%60)); 
 							LCD_ShowSpStr(105,451,171,62,WHITE,GRAY_878787,Font_Hnb48,tbuf,0);
-							
-							 // 进度条 -----------------------------------
+								
+							// 进度条 -----------------------------------
 							LCD_Fill(97,515,97+(MOTOR_Times*190/NumberOfTimes),515+13,RED);
 							
 							if((Test_Start)&&
 								 (MOTOR_Times >= NumberOfTimes))
 							{
 								Test_Start = 0; 						// 测试结束
+								PopWindow = 0;
 								
 								LastPage = CurntPage;
 								CurntPage = 10; 						// 当前页面设置为10
@@ -9840,20 +9955,16 @@ void Display_Handler(void)
 				{
 					PopWflag = 0;
 					
-					LCD_Fill(240,167,240+544,167+210,ORANGE_E94E1B); 	// 橙色标题框+底色
-					LCD_Fill(240+5,167+60,240+544-5,167+210-5,WHITE); // 白色方框
-					
 					switch(PopWindow)
 					{
 						case 1: 										// Abort
 						{
-							LCD_ShowSpStr(257,186,450,36,WHITE,ORANGE_E94E1B,Font_Rbb34,"Do you want to abort?",0);
-							
-							LCD_ShowSpStr(275,252,700,24,BLACK,WHITE,Font_Rbm22,"You are about to abort the test. ",0);
-							LCD_ShowSpStr(275,300,700,24,BLACK,WHITE,Font_Rbm22,"Are you sure you wish to abort?",0);
+							AbortPopUp();
 						}break;
 						case 2: 										// 位置传感器报错
 						{
+							LCD_Fill(240,167,240+544,167+210,ORANGE_E94E1B); 	// 橙色标题框+底色
+							LCD_Fill(240+5,167+60,240+544-5,167+210-5,WHITE); // 白色方框
 							LCD_ShowSpStr(257,186,450,36,WHITE,ORANGE_E94E1B,Font_Rbb34,"Do you want to abort?",0);
 							
 							switch(Inp1_Err)
@@ -9871,17 +9982,17 @@ void Display_Handler(void)
 									LCD_ShowSpStr(275,300,700,24,BLACK,WHITE,Font_Rbm22,"Inp1_Err ?",0);
 								break;
 							}
+					
+							LCD_Fill(240,392,240+256,392+60,ORANGE_E94E1B); 					// 橙色底
+							LCD_Fill(240+5,392+5,240+256-5,392+60-5,WHITE); 					// 白色按钮
+							LCD_ShowSpStr(354,406,100,35,BLACK,WHITE,Font_Rbb34,"No",0);
+							
+							LCD_Fill(528,392,528+256,392+60,ORANGE_E94E1B); 	// 橙色按钮
+							LCD_ShowSpStr(638,406,100,35,WHITE,ORANGE_E94E1B,Font_Rbb34,"Yes",0);
 						}break;
 						default:
 						break;
 					}
-					
-					LCD_Fill(240,392,240+256,392+60,ORANGE_E94E1B); 					// 橙色底
-					LCD_Fill(240+5,392+5,240+256-5,392+60-5,WHITE); 					// 白色按钮
-					LCD_ShowSpStr(354,406,100,35,BLACK,WHITE,Font_Rbb34,"No",0);
-					
-					LCD_Fill(528,392,528+256,392+60,ORANGE_E94E1B); 	// 橙色按钮
-					LCD_ShowSpStr(638,406,100,35,WHITE,ORANGE_E94E1B,Font_Rbb34,"Yes",0);
 				}
 				
 				if(TouchFlag == 1) 							// 有触摸标志
@@ -9920,16 +10031,14 @@ void Display_Handler(void)
 								PopWindow = 1;
 								PopWflag = 1;
 								
-								if((Test_Start)&&
-									 (MotPause == 0)) 			// 运行状态
-								{
-									MotPause = 1; 				// 暂停标志置位
-									MOTOR_Stop();
-									
-								}
+								// if((Test_Start)&&
+								// 	 (MotPause == 0)) 			// 运行状态
+								// {
+								// 	MotPause = 1; 				// 暂停标志置位
+								// 	MOTOR_Stop();
+								// }
 								
 								BEEPER_PlayTones(tones_1khz);
-								
 							}
 							else
 								BEEPER_PlayTones(tones_error);
@@ -9944,13 +10053,13 @@ void Display_Handler(void)
 								cp_flag = 1;
 								PopWindow = 0;
 								
-								if((Test_Start)&&
-									 (MotPause != 0)) 		// 暂停
-								{
-									MotPause = 0; 				// 退出暂停
-									MOTOR_Start(); 				// 启动电机
+								// if((Test_Start)&&
+								// 	 (MotPause != 0)) 		// 暂停
+								// {
+								// 	MotPause = 0; 				// 退出暂停
+								// 	MOTOR_Start(); 				// 启动电机
 									
-								}
+								// }
 								
 								BEEPER_PlayTones(tones_1khz);
 							}
@@ -10362,7 +10471,6 @@ void Display_Handler(void)
 						default:
 						break;
 					}
-					
 				}
 				
 				if(TouchFlag == 1) 							// 有触摸标志
@@ -11207,68 +11315,112 @@ void Display_Handler(void)
 					LCD_ShowSpStr(912,540,60,24,BLACK,WHITE,Font_Rbm22,"Abort",0);
 				}
 				
+				if(PopWflag) 										// 弹出框
+				{
+					PopWflag = 0;
+					
+					switch(PopWindow)
+					{
+						case 1: 										// Abort
+						{
+							AbortPopUp();
+						}break;
+						default:
+						break;
+					}
+				}
+
 				if(TouchFlag == 1) 							// 有触摸标志
 				{
 					TouchFlag = 0;
 					
-					if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 112)&&(cur_tpy < 239)) 	// Next
+					switch(PopWindow)
 					{
-						switch(DeviceID)
+						case 0:
 						{
-							case 121: 								// 一个鼓，无电子称
-							case 122: 								// 一个鼓，有电子称
+							if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 112)&&(cur_tpy < 239)) 	// Next
 							{
-								StationFlag = 1; 				// 默认第一个鼓（Left）
+								switch(DeviceID)
+								{
+									case 121: 								// 一个鼓，无电子称
+									case 122: 								// 一个鼓，有电子称
+									{
+										StationFlag = 1; 				// 默认第一个鼓（Left）
+										
+										LastPage = CurntPage;
+										CurntPage += 2; 				// 跳过两个鼓的使用选择页面，进入1号鼓信息设置页面
+										
+										cp_flag = 1;
+									}break;
+									case 221: 								// 两个鼓，无电子称
+									case 222: 								// 两个鼓，有电子称
+									{
+										StationFlag = 3; 				// 默认两个鼓都使用
+										
+										LastPage = CurntPage;
+										CurntPage++; 						// 进入两个鼓的使用选择页面
+										
+										cp_flag = 1;
+									}break;
+									default:
+									{
+										StationFlag = 0; 				// 默认两个鼓都不用
+										
+										LastPage = CurntPage;
+										CurntPage = 0; 					// 返回首页
+										
+										cp_flag = 1;
+									}break;
+								}
 								
-								LastPage = CurntPage;
-								CurntPage += 2; 				// 跳过两个鼓的使用选择页面，进入1号鼓信息设置页面
-								
-								cp_flag = 1;
-							}break;
-							case 221: 								// 两个鼓，无电子称
-							case 222: 								// 两个鼓，有电子称
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 280)&&(cur_tpy < 408)) 	// Back
 							{
-								StationFlag = 3; 				// 默认两个鼓都使用
-								
 								LastPage = CurntPage;
-								CurntPage++; 						// 进入两个鼓的使用选择页面
-								
+								CurntPage = 2;
 								cp_flag = 1;
-							}break;
-							default:
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 448)&&(cur_tpy < 576)) 	// Abort
 							{
-								StationFlag = 0; 				// 默认两个鼓都不用
+								PopWindow = 1;
+								PopWflag = 1;
 								
-								LastPage = CurntPage;
-								CurntPage = 0; 					// 返回首页
-								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+								BEEPER_PlayTones(tones_error);
+						}break;
+						case 1:
+						{
+							if((cur_tpx > 240)&&(cur_tpx < 496)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// No
+							{
 								cp_flag = 1;
-							}break;
-						}
-						
-						BEEPER_PlayTones(tones_1khz);
+								PopWindow = 0;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							if((cur_tpx > 528)&&(cur_tpx < 784)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// Yes
+							{
+								LastPage = CurntPage;
+								CurntPage = 0;
+								cp_flag = 1;
+								PopWindow = 0;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							{
+								BEEPER_PlayTones(tones_error);
+							}
+						}break;
+						default:break;
 					}
-					else
-					if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 280)&&(cur_tpy < 408)) 	// Back
-					{
-						LastPage = CurntPage;
-						CurntPage = 2;
-						cp_flag = 1;
-						
-						BEEPER_PlayTones(tones_1khz);
-					}
-					else
-					if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 448)&&(cur_tpy < 576)) 	// Abort
-					{
-						PopWindow = 0;
-						LastPage = CurntPage;
-						CurntPage = 0;
-						cp_flag = 1;
-						
-						BEEPER_PlayTones(tones_1khz);
-					}
-					else
-						BEEPER_PlayTones(tones_error);
 				}
 				else
 				{
@@ -11334,98 +11486,141 @@ void Display_Handler(void)
 					LCD_ShowSpStr(912,540,60,24,BLACK,WHITE,Font_Rbm22,"Abort",0);
 				}
 				
+				if(PopWflag) 										// 弹出框
+				{
+					PopWflag = 0;
+					
+					switch(PopWindow)
+					{
+						case 1: 										// Abort
+						{
+							AbortPopUp();
+						}break;
+						default:
+						break;
+					}
+				}
+
 				if(TouchFlag == 1) 							// 有触摸标志
 				{
 					TouchFlag = 0;
 					
-					if((cur_tpx > 250)&&(cur_tpx < 250+130)&&(cur_tpy > 450)&&(cur_tpy < 450+50)) 	// 1 Drum
+					switch(PopWindow)
 					{
-						if(StationFlag&0x01)
+						case 0:
 						{
-							StationFlag &= ~0x01;
-							LCD_ShowIcon(350,450,48,48,GRAY_DADADA,GRAY_DADADA,78,0); 					// 小对勾
-						}
-						else
+							if((cur_tpx > 250)&&(cur_tpx < 250+130)&&(cur_tpy > 450)&&(cur_tpy < 450+50)) 	// 1 Drum
+							{
+								if(StationFlag&0x01)
+								{
+									StationFlag &= ~0x01;
+									LCD_ShowIcon(350,450,48,48,GRAY_DADADA,GRAY_DADADA,78,0); 					// 小对勾
+								}
+								else
+								{
+									StationFlag |= 0x01;
+									LCD_ShowIcon(350,450,48,48,WHITE,BLUE_2EA6D0,78,0); 								// 小对勾
+								}
+								
+								if(StationFlag == 0)
+								{
+									LCD_ShowIcon(880,112,112,128,BLACK,WHITE,14,0); 										// 右箭头
+									LCD_ShowSpStr(916,204,50,24,BLACK,WHITE,Font_Rbm22,"Next",0);
+								}
+								else 
+								{
+									LCD_ShowIcon(880,112,112,128,WHITE,GREEN_42AB3E,14,0); 								// 右箭头
+									LCD_ShowSpStr(916,204,50,24,WHITE,GREEN_42AB3E,Font_Rbm22,"Next",0);
+								}
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							if((cur_tpx > 500)&&(cur_tpx < 500+130)&&(cur_tpy > 450)&&(cur_tpy < 450+50)) 	// 2 Drum
+							{
+								if(StationFlag&0x02)
+								{
+									StationFlag &= ~0x02;
+									LCD_ShowIcon(580,450,48,48,GRAY_DADADA,GRAY_DADADA,78,0); 					// 小对勾
+								}
+								else
+								{
+									StationFlag |= 0x02;
+									LCD_ShowIcon(580,450,48,48,WHITE,BLUE_2EA6D0,78,0); 								// 小对勾
+								}
+								
+								if(StationFlag == 0)
+								{
+									LCD_ShowIcon(880,112,112,128,BLACK,WHITE,14,0); 										// 右箭头
+									LCD_ShowSpStr(916,204,50,24,BLACK,WHITE,Font_Rbm22,"Next",0);
+								}
+								else 
+								{
+									LCD_ShowIcon(880,112,112,128,WHITE,GREEN_42AB3E,14,0); 								// 右箭头
+									LCD_ShowSpStr(916,204,50,24,WHITE,GREEN_42AB3E,Font_Rbm22,"Next",0);
+								}
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 112)&&(cur_tpy < 239)) 	// Next
+							{
+								if(StationFlag)
+								{
+									LastPage = CurntPage;
+									CurntPage++; 								// 进入站一信息设置
+									cp_flag = 1;
+									
+									BEEPER_PlayTones(tones_1khz);
+								}
+								else
+									BEEPER_PlayTones(tones_error);
+							}
+							else
+							if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 280)&&(cur_tpy < 408)) 	// Back
+							{
+								LastPage = CurntPage;
+								CurntPage--;
+								cp_flag = 1;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 448)&&(cur_tpy < 576)) 	// Abort
+							{
+								PopWindow = 1;
+								PopWflag = 1;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+								BEEPER_PlayTones(tones_error);
+						}break;
+						case 1:
 						{
-							StationFlag |= 0x01;
-							LCD_ShowIcon(350,450,48,48,WHITE,BLUE_2EA6D0,78,0); 								// 小对勾
-						}
-						
-						if(StationFlag == 0)
-						{
-							LCD_ShowIcon(880,112,112,128,BLACK,WHITE,14,0); 										// 右箭头
-							LCD_ShowSpStr(916,204,50,24,BLACK,WHITE,Font_Rbm22,"Next",0);
-						}
-						else 
-						{
-							LCD_ShowIcon(880,112,112,128,WHITE,GREEN_42AB3E,14,0); 								// 右箭头
-							LCD_ShowSpStr(916,204,50,24,WHITE,GREEN_42AB3E,Font_Rbm22,"Next",0);
-						}
-						
-						BEEPER_PlayTones(tones_1khz);
+							if((cur_tpx > 240)&&(cur_tpx < 496)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// No
+							{
+								cp_flag = 1;
+								PopWindow = 0;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							if((cur_tpx > 528)&&(cur_tpx < 784)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// Yes
+							{
+								LastPage = CurntPage;
+								CurntPage = 0;
+								cp_flag = 1;
+								PopWindow = 0;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							{
+								BEEPER_PlayTones(tones_error);
+							}
+						}break;
 					}
-					else
-					if((cur_tpx > 500)&&(cur_tpx < 500+130)&&(cur_tpy > 450)&&(cur_tpy < 450+50)) 	// 2 Drum
-					{
-						if(StationFlag&0x02)
-						{
-							StationFlag &= ~0x02;
-							LCD_ShowIcon(580,450,48,48,GRAY_DADADA,GRAY_DADADA,78,0); 					// 小对勾
-						}
-						else
-						{
-							StationFlag |= 0x02;
-							LCD_ShowIcon(580,450,48,48,WHITE,BLUE_2EA6D0,78,0); 								// 小对勾
-						}
-						
-						if(StationFlag == 0)
-						{
-							LCD_ShowIcon(880,112,112,128,BLACK,WHITE,14,0); 										// 右箭头
-							LCD_ShowSpStr(916,204,50,24,BLACK,WHITE,Font_Rbm22,"Next",0);
-						}
-						else 
-						{
-							LCD_ShowIcon(880,112,112,128,WHITE,GREEN_42AB3E,14,0); 								// 右箭头
-							LCD_ShowSpStr(916,204,50,24,WHITE,GREEN_42AB3E,Font_Rbm22,"Next",0);
-						}
-						
-						BEEPER_PlayTones(tones_1khz);
-					}
-					else
-					if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 112)&&(cur_tpy < 239)) 	// Next
-					{
-						if(StationFlag)
-						{
-							LastPage = CurntPage;
-							CurntPage++; 								// 进入站一信息设置
-							cp_flag = 1;
-							
-							BEEPER_PlayTones(tones_1khz);
-						}
-						else
-							BEEPER_PlayTones(tones_error);
-					}
-					else
-					if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 280)&&(cur_tpy < 408)) 	// Back
-					{
-						LastPage = CurntPage;
-						CurntPage--;
-						cp_flag = 1;
-						
-						BEEPER_PlayTones(tones_1khz);
-					}
-					else
-					if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 448)&&(cur_tpy < 576)) 	// Abort
-					{
-						PopWindow = 0;
-						LastPage = CurntPage;
-						CurntPage = 0;
-						cp_flag = 1;
-						
-						BEEPER_PlayTones(tones_1khz);
-					}
-					else
-						BEEPER_PlayTones(tones_error);
 				}
 				else
 				{
@@ -11522,8 +11717,11 @@ void Display_Handler(void)
 				{
 					PopWflag = 0;
 					
-					LCD_Fill(160,93,160+704,93+60+270,GRAY_656565); 				// 灰色横条
-					LCD_Fill(160+5,153,160+704-5,153+270-5,WHITE); 		// 白色方框
+					if(PopWindow != 5)
+					{
+						LCD_Fill(160,93,160+704,93+60+270,GRAY_656565); 				// 灰色横条
+						LCD_Fill(160+5,153,160+704-5,153+270-5,WHITE); 		// 白色方框
+					}
 					
 					switch(PopWindow)
 					{
@@ -11555,13 +11753,20 @@ void Display_Handler(void)
 							  
 							LCD_ShowSpStr(175,175,700,24,BLACK,WHITE,Font_Rbm22,"Tap for automatic emptying of the drums after finishing the test.",0);
 						}break;
+						case 5: 										// Abort
+						{
+							AbortPopUp();
+						}break;
 						default:
 						break;
 					}
 					
-					LCD_Fill(608,438,608+256,438+60,GRAY_656565); 				// 灰色横条
-					LCD_Fill(608+5,438+5,608+256-5,438+60-5,GREEN_3AAA35); 					// OK按钮
-					LCD_ShowSpStr(718,455,100,35,WHITE,GREEN_3AAA35,Font_Rbb34,"Ok",0);
+					if(PopWindow != 5)
+					{
+						LCD_Fill(608,438,608+256,438+60,GRAY_656565); 				// 灰色横条
+						LCD_Fill(608+5,438+5,608+256-5,438+60-5,GREEN_3AAA35); 					// OK按钮
+						LCD_ShowSpStr(718,455,100,35,WHITE,GREEN_3AAA35,Font_Rbb34,"Ok",0);
+					}
 				}
 				
 				if(TouchFlag) 									// 有触摸标志
@@ -11758,10 +11963,8 @@ void Display_Handler(void)
 							else
 							if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 448)&&(cur_tpy < 576)) 	// Abort
 							{
-								PopWindow = 0;
-								LastPage = CurntPage;
-								CurntPage = 0;
-								cp_flag = 1;
+								PopWindow = 5;
+								PopWflag = 1;
 								
 								BEEPER_PlayTones(tones_1khz);
 							}
@@ -11783,6 +11986,31 @@ void Display_Handler(void)
 							else
 								BEEPER_PlayTones(tones_error);
 						}
+						case 5:
+						{
+							if((cur_tpx > 240)&&(cur_tpx < 496)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// No
+							{
+								cp_flag = 1;
+								PopWindow = 0;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							if((cur_tpx > 528)&&(cur_tpx < 784)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// Yes
+							{
+								LastPage = CurntPage;
+								CurntPage = 0;
+								cp_flag = 1;
+								PopWindow = 0;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							{
+								BEEPER_PlayTones(tones_error);
+							}
+						}break;
+						default:break;
 					}
 				}
 				else
@@ -12077,10 +12305,13 @@ void Display_Handler(void)
 							LCD_Fill(608+5,438+5,608+256-5,438+60-5,GREEN_3AAA35); 					// OK按钮
 							LCD_ShowSpStr(718,452,100,36,WHITE,GREEN_3AAA35,Font_Rbb34,"Ok",0);
 						}break;
+						case 8: 										// Abort
+						{
+							AbortPopUp();
+						}break;
 						default:
 						break;
 					}
-					
 				}
 				
 				if(TouchFlag == 1) 							// 有触摸标志
@@ -12244,10 +12475,8 @@ void Display_Handler(void)
 								else
 								if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 448)&&(cur_tpy < 576)) 	// Abort
 								{
-									PopWindow = 0;
-									LastPage = CurntPage;
-									CurntPage = 0;
-									cp_flag = 1;
+									PopWindow = 8;
+									PopWflag = 1;
 									
 									BEEPER_PlayTones(tones_1khz);
 								}
@@ -12571,6 +12800,30 @@ void Display_Handler(void)
 								}
 							}
 						}break;
+						case 8:
+						{
+							if((cur_tpx > 240)&&(cur_tpx < 496)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// No
+							{
+								cp_flag = 1;
+								PopWindow = 0;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							if((cur_tpx > 528)&&(cur_tpx < 784)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// Yes
+							{
+								LastPage = CurntPage;
+								CurntPage = 0;
+								cp_flag = 1;
+								PopWindow = 0;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							{
+								BEEPER_PlayTones(tones_error);
+							}
+						}break;
 						default:
 						break;
 					}
@@ -12685,7 +12938,9 @@ void Display_Handler(void)
 				{
 					PopWflag = 0;
 					
-					LCD_Fill(32,160,32+800,160+416,WHITE); 						// 大白框
+					if(PopWindow != 3)
+						LCD_Fill(32,160,32+800,160+416,WHITE); 						// 大白框
+
 					switch(PopWindow)
 					{
 						case 1: 						// 提示
@@ -12717,6 +12972,10 @@ void Display_Handler(void)
 							LCD_ShowIcon(580,220,208,168,GRAY_878787,WHITE,51,0); 		// 大天平图标
 							
 						}break;
+						case 3: 										// Abort
+						{
+							AbortPopUp();
+						}break;
 						default:
 						break;
 					}
@@ -12727,83 +12986,112 @@ void Display_Handler(void)
 				{
 					TouchFlag = 0;
 					
-					if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 112)&&(cur_tpy < 239)) 	// Next
+					switch(PopWindow)
 					{
-						if(PopWindow == 1)
+						case 1:
+						case 2:
 						{
-							PopWindow = 2;
-							PopWflag = 1;
-							
-							BEEPER_PlayTones(tones_1khz);
-						}
-						else
-						if(PopWindow == 2)
-						{
-							if(BalanceWeight > 0)
+							if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 112)&&(cur_tpy < 239)) 	// Next
 							{
-								TestMass1Val[TestTimes*2] = BalanceWeight;
-								TestMass1Start += BalanceWeight;
-								
-								PopWindow = 0;
-								
-								LastPage = CurntPage;
-								
-								if(StationFlag&0x02) 					// 如果使用了2号鼓
-									CurntPage++;
+								if(PopWindow == 1)
+								{
+									PopWindow = 2;
+									PopWflag = 1;
+									
+									BEEPER_PlayTones(tones_1khz);
+								}
 								else
-									CurntPage += 3; 						// 如果没有用2号鼓，直接进入测试预备
+								if(PopWindow == 2)
+								{
+									if(BalanceWeight > 0)
+									{
+										TestMass1Val[TestTimes*2] = BalanceWeight;
+										TestMass1Start += BalanceWeight;
+										
+										PopWindow = 0;
+										
+										LastPage = CurntPage;
+										
+										if(StationFlag&0x02) 					// 如果使用了2号鼓
+											CurntPage++;
+										else
+											CurntPage += 3; 						// 如果没有用2号鼓，直接进入测试预备
+										
+										cp_flag = 1;
+										
+										BEEPER_PlayTones(tones_1khz);
+									}
+									else
+										BEEPER_PlayTones(tones_error);
+								}
+							}
+							else
+							if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 280)&&(cur_tpy < 408)) 	// Back
+							{
+								if(PopWindow == 1)
+								{
+									PopWindow = 0;
+									
+									LastPage = CurntPage;
+									CurntPage--;
+									
+									cp_flag = 1;
+								}
+								else
+								if(PopWindow == 2)
+								{
+									PopWindow = 1;
+									PopWflag = 1;
+								}
 								
-								cp_flag = 1;
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 448)&&(cur_tpy < 576)) 	// Abort
+							{
+								PopWindow = 3;
+								PopWflag = 1;
 								
 								BEEPER_PlayTones(tones_1khz);
 							}
 							else
 								BEEPER_PlayTones(tones_error);
-						}
+						}break;
+						case 3:
+						{
+							if((cur_tpx > 240)&&(cur_tpx < 496)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// No
+							{
+								cp_flag = 1;
+								PopWindow = 1;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							if((cur_tpx > 528)&&(cur_tpx < 784)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// Yes
+							{
+								LastPage = CurntPage;
+								PopWindow = 0;
+								
+								if(TestTimes == 0) 								// 第一次测试时中断
+								{
+									CurntPage = 0;
+								}
+								else 															// 多于一次测试时中断
+								{
+									CurntPage = 34;
+									TestStatus |= 0x01; 								// 测试状态为未完成
+								}
+								cp_flag = 1;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							{
+								BEEPER_PlayTones(tones_error);
+							}
+						}break;
+						default:break;
 					}
-					else
-					if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 280)&&(cur_tpy < 408)) 	// Back
-					{
-						if(PopWindow == 1)
-						{
-							PopWindow = 0;
-							
-							LastPage = CurntPage;
-							CurntPage--;
-							
-							cp_flag = 1;
-						}
-						else
-						if(PopWindow == 2)
-						{
-							PopWindow = 1;
-							PopWflag = 1;
-						}
-						
-						BEEPER_PlayTones(tones_1khz);
-					}
-					else
-					if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 448)&&(cur_tpy < 576)) 	// Abort
-					{
-						PopWindow = 0;
-						LastPage = CurntPage;
-						
-						if(TestTimes == 0) 								// 第一次测试时中断
-						{
-							CurntPage = 0;
-						}
-						else 															// 多于一次测试时中断
-						{
-							CurntPage = 34;
-							TestStatus |= 0x01; 								// 测试状态为未完成
-						}
-						
-						cp_flag = 1;
-						
-						BEEPER_PlayTones(tones_1khz);
-					}
-					else
-						BEEPER_PlayTones(tones_error);
 				}
 				else
 				{
@@ -13100,6 +13388,10 @@ void Display_Handler(void)
 							LCD_Fill(608+5,438+5,608+256-5,438+60-5,GREEN_3AAA35); 					// OK按钮
 							LCD_ShowSpStr(718,452,100,36,WHITE,GREEN_3AAA35,Font_Rbb34,"Ok",0);
 						}break;
+						case 8: 										// Abort
+						{
+							AbortPopUp();
+						}break;
 						default:
 						break;
 					}
@@ -13287,9 +13579,8 @@ void Display_Handler(void)
 								else
 								if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 448)&&(cur_tpy < 576)) 	// Abort
 								{
-									LastPage = CurntPage;
-									CurntPage = 0;
-									cp_flag = 1;
+									PopWindow = 8;
+									PopWflag = 1;
 									
 									BEEPER_PlayTones(tones_1khz);
 								}
@@ -13626,6 +13917,30 @@ void Display_Handler(void)
 								}
 							}
 						}break;
+						case 8:
+						{
+							if((cur_tpx > 240)&&(cur_tpx < 496)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// No
+							{
+								cp_flag = 1;
+								PopWindow = 0;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							if((cur_tpx > 528)&&(cur_tpx < 784)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// Yes
+							{
+								LastPage = CurntPage;
+								CurntPage = 0;
+								cp_flag = 1;
+								PopWindow = 0;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							{
+								BEEPER_PlayTones(tones_error);
+							}
+						}break;
 						default:
 						break;
 					}
@@ -13740,7 +14055,9 @@ void Display_Handler(void)
 				{
 					PopWflag = 0;
 					
-					LCD_Fill(32,160,32+800,160+416,WHITE); 						// 大白框
+					if(PopWindow != 3)
+						LCD_Fill(32,160,32+800,160+416,WHITE); 						// 大白框
+
 					switch(PopWindow)
 					{
 						case 1: 						// 提示
@@ -13772,6 +14089,10 @@ void Display_Handler(void)
 							LCD_ShowIcon(580,220,208,168,GRAY_878787,WHITE,51,0); 		// 大天平图标
 							
 						}break;
+						case 3: 										// Abort
+						{
+							AbortPopUp();
+						}break;
 						default:
 						break;
 					}
@@ -13781,80 +14102,109 @@ void Display_Handler(void)
 				{
 					TouchFlag = 0;
 					
-					if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 112)&&(cur_tpy < 239)) 	// Next
+					switch(PopWindow)
 					{
-						if(PopWindow == 1)
+						case 1:
+						case 2:
 						{
-							PopWindow = 2;
-							PopWflag = 1;
-							
-							BEEPER_PlayTones(tones_1khz);
-						}
-						else
-						if(PopWindow == 2)
-						{
-							if(BalanceWeight > 0)
+							if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 112)&&(cur_tpy < 239)) 	// Next
 							{
-								TestMass2Val[TestTimes*2] = BalanceWeight;
-								TestMass2Start += BalanceWeight;
+								if(PopWindow == 1)
+								{
+									PopWindow = 2;
+									PopWflag = 1;
+									
+									BEEPER_PlayTones(tones_1khz);
+								}
+								else
+								if(PopWindow == 2)
+								{
+									if(BalanceWeight > 0)
+									{
+										TestMass2Val[TestTimes*2] = BalanceWeight;
+										TestMass2Start += BalanceWeight;
+										
+										PopWindow = 0;
+										
+										LastPage = CurntPage;
+										CurntPage++;
+										
+										cp_flag = 1;
+										BEEPER_PlayTones(tones_1khz);
+									}
+									else
+										BEEPER_PlayTones(tones_error);
+								}
+								else
+									BEEPER_PlayTones(tones_error);
+							}
+							else
+							if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 280)&&(cur_tpy < 408)) 	// Back
+							{
+								if(PopWindow == 1)
+								{
+									PopWindow = 0;
+									
+									LastPage = CurntPage;
+									CurntPage--;
+									
+									cp_flag = 1;
+								}
+								else
+								if(PopWindow == 2)
+								{
+									PopWindow = 1;
+									PopWflag = 1;
+								}
 								
-								PopWindow = 0;
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 448)&&(cur_tpy < 576)) 	// Abort
+							{
+								PopWindow = 3;
+								PopWflag = 1;
 								
-								LastPage = CurntPage;
-								CurntPage++;
-								
-								cp_flag = 1;
 								BEEPER_PlayTones(tones_1khz);
 							}
 							else
 								BEEPER_PlayTones(tones_error);
-						}
-						else
-							BEEPER_PlayTones(tones_error);
+						}break;
+						case 3:
+						{
+							if((cur_tpx > 240)&&(cur_tpx < 496)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// No
+							{
+								cp_flag = 1;
+								PopWindow = 1;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							if((cur_tpx > 528)&&(cur_tpx < 784)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// Yes
+							{
+								LastPage = CurntPage;
+								PopWindow = 0;
+								
+								if(TestTimes == 0) 								// 第一次测试时中断
+								{
+									CurntPage = 0;
+								}
+								else 															// 多于一次测试时中断
+								{
+									CurntPage = 34;
+									TestStatus |= 0x01; 								// 测试状态为未完成
+								}
+								cp_flag = 1;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							{
+								BEEPER_PlayTones(tones_error);
+							}
+						}break;
+						default:break;
 					}
-					else
-					if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 280)&&(cur_tpy < 408)) 	// Back
-					{
-						if(PopWindow == 1)
-						{
-							PopWindow = 0;
-							
-							LastPage = CurntPage;
-							CurntPage--;
-							
-							cp_flag = 1;
-						}
-						else
-						if(PopWindow == 2)
-						{
-							PopWindow = 1;
-							PopWflag = 1;
-						}
-						
-						BEEPER_PlayTones(tones_1khz);
-					}
-					else
-					if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 448)&&(cur_tpy < 576)) 	// Abort
-					{
-						PopWindow = 0;
-						LastPage = CurntPage;
-						
-						if(TestTimes == 0) 								// 第一次测试时中断
-						{
-							CurntPage = 0;
-						}
-						else 															// 多于一次测试时中断
-						{
-							CurntPage = 34;
-							TestStatus |= 0x01; 								// 测试状态为未完成
-						}
-						
-						cp_flag = 1;
-						
-						BEEPER_PlayTones(tones_1khz);
-					}
-					else
-						BEEPER_PlayTones(tones_error);
 				}
 				else
 				{
@@ -14528,6 +14878,10 @@ void Display_Handler(void)
 							LCD_Fill(608,438,608+256,438+60,ORANGE_E94E1B); 					// 灰色横条
 							LCD_ShowSpStr(700,455,100,35,WHITE,ORANGE_E94E1B,Font_Rbb34,"Close",0);
 						}break;
+						case 3: 										// Abort
+						{
+							AbortPopUp();
+						}break;
 						default:
 						break;
 					}
@@ -14579,20 +14933,8 @@ void Display_Handler(void)
 							else
 							if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 448)&&(cur_tpy < 576)) 		// Abort
 							{
-								PopWindow = 0;
-								LastPage = CurntPage;
-								
-								if(TestTimes == 0) 					// 测试还未开始
-								{
-									CurntPage = 0;
-								}
-								else 												// 测试已经运行过至少一次
-								{
-									CurntPage = 34;
-									TestStatus |= 0x01; 			// 测试中断标志
-								}
-								
-								cp_flag = 1;
+								PopWindow = 3;
+								PopWflag = 1;
 								
 								BEEPER_PlayTones(tones_1khz);
 							}
@@ -14622,6 +14964,40 @@ void Display_Handler(void)
 							}
 							else
 								BEEPER_PlayTones(tones_error);
+						}break;
+						case 3:
+						{
+							if((cur_tpx > 240)&&(cur_tpx < 496)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// No
+							{
+								cp_flag = 1;
+								PopWindow = 0;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							if((cur_tpx > 528)&&(cur_tpx < 784)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// Yes
+							{
+								LastPage = CurntPage;
+								PopWindow = 0;
+								
+								if(TestTimes == 0) 					// 测试还未开始
+								{
+									CurntPage = 0;
+								}
+								else 												// 测试已经运行过至少一次
+								{
+									CurntPage = 34;
+									TestStatus |= 0x01; 			// 测试中断标志
+								}
+								
+								cp_flag = 1;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							{
+								BEEPER_PlayTones(tones_error);
+							}
 						}break;
 						default:
 						break;
@@ -14757,10 +15133,11 @@ void Display_Handler(void)
 				{
 					mspe_flag = 0;
 					
-					//if(CurrSpeed < 1000) 					// 小于100转时
-					//	LCD_Fill(135,250,135+120,250+50,GRAY_DADADA); 							// 擦除数字显示
-					sprintf((char*)tbuf,"%5.1f  ",(float)CurrSpeed/10); 
-					LCD_ShowSpStr(135,250,120,50,BLACK,GRAY_DADADA,Font_Hnb48,tbuf,0);
+					sprintf((char*)tbuf,"%-5.1f  ",(float)CurrSpeed/10);
+					if(PopWindow == 0)
+						LCD_ShowSpStr(135,250,120,50,BLACK,GRAY_DADADA,Font_Hnb48,tbuf,0);
+					else
+						LCD_ShowSpStr(120,250,120,50,BLACK,GRAY_DADADA,Font_Hnb48,tbuf,0);
 				}
 				
 				if(mrev_flag) 									// 电机运转圈数刷新
@@ -14796,6 +15173,7 @@ void Display_Handler(void)
 						LastPage = CurntPage;
 						CurntPage++;
 						cp_flag = 1;
+						PopWindow = 0;
 						
 						BEEPER_PlayTones(tones_1khz);
 					}
@@ -14822,20 +15200,16 @@ void Display_Handler(void)
 				{
 					PopWflag = 0;
 					
-					LCD_Fill(240,167,240+544,167+210,ORANGE_E94E1B); 	// 橙色标题框+底色
-					LCD_Fill(240+5,167+60,240+544-5,167+210-5,WHITE); // 白色方框
-					
 					switch(PopWindow)
 					{
 						case 1: 										// Abort
 						{
-							LCD_ShowSpStr(257,186,450,36,WHITE,ORANGE_E94E1B,Font_Rbb34,"Do you want to abort?",0);
-							
-							LCD_ShowSpStr(275,252,700,24,BLACK,WHITE,Font_Rbm22,"You are about to abort the test. ",0);
-							LCD_ShowSpStr(275,300,700,24,BLACK,WHITE,Font_Rbm22,"Are you sure you wish to abort?",0);
+							AbortPopUp();
 						}break;
 						case 2: 										// 位置传感器报错
 						{
+							LCD_Fill(240,167,240+544,167+210,ORANGE_E94E1B); 	// 橙色标题框+底色
+							LCD_Fill(240+5,167+60,240+544-5,167+210-5,WHITE); // 白色方框
 							LCD_ShowSpStr(257,186,450,36,WHITE,ORANGE_E94E1B,Font_Rbb34,"Do you want to abort?",0);
 							
 							switch(Inp1_Err)
@@ -14853,17 +15227,17 @@ void Display_Handler(void)
 									LCD_ShowSpStr(275,300,700,24,BLACK,WHITE,Font_Rbm22,"Inp1_Err ?",0);
 								break;
 							}
+					
+							LCD_Fill(240,392,240+256,392+60,ORANGE_E94E1B); 					// 橙色底
+							LCD_Fill(240+5,392+5,240+256-5,392+60-5,WHITE); 					// 白色按钮
+							LCD_ShowSpStr(354,406,100,35,BLACK,WHITE,Font_Rbb34,"No",0);
+							
+							LCD_Fill(528,392,528+256,392+60,ORANGE_E94E1B); 	// 橙色按钮
+							LCD_ShowSpStr(638,406,100,35,WHITE,ORANGE_E94E1B,Font_Rbb34,"Yes",0);
 						}break;
 						default:
 						break;
 					}
-					
-					LCD_Fill(240,392,240+256,392+60,ORANGE_E94E1B); 					// 橙色底
-					LCD_Fill(240+5,392+5,240+256-5,392+60-5,WHITE); 					// 白色按钮
-					LCD_ShowSpStr(354,406,100,35,BLACK,WHITE,Font_Rbb34,"No",0);
-					
-					LCD_Fill(528,392,528+256,392+60,ORANGE_E94E1B); 	// 橙色按钮
-					LCD_ShowSpStr(638,406,100,35,WHITE,ORANGE_E94E1B,Font_Rbb34,"Yes",0);
 				}
 				
 				if(TouchFlag == 1) 							// 有触摸标志
@@ -14902,13 +15276,13 @@ void Display_Handler(void)
 								PopWindow = 1;
 								PopWflag = 1;
 								
-								if((Test_Start)&&
-									 (MotPause == 0)) 			// 运行状态
-								{
-									MotPause = 1; 				// 暂停标志置位
-									MOTOR_Stop();
+								// if((Test_Start)&&
+								// 	 (MotPause == 0)) 			// 运行状态
+								// {
+								// 	MotPause = 1; 				// 暂停标志置位
+								// 	MOTOR_Stop();
 									
-								}
+								// }
 								
 								BEEPER_PlayTones(tones_1khz);
 								
@@ -14926,13 +15300,13 @@ void Display_Handler(void)
 								cp_flag = 1;
 								PopWindow = 0;
 								
-								if((Test_Start)&&
-									 (MotPause != 0)) 		// 暂停
-								{
-									MotPause = 0; 				// 退出暂停
-									MOTOR_Start(); 				// 启动电机
+								// if((Test_Start)&&
+								// 	 (MotPause != 0)) 		// 暂停
+								// {
+								// 	MotPause = 0; 				// 退出暂停
+								// 	MOTOR_Start(); 				// 启动电机
 									
-								}
+								// }
 								
 								BEEPER_PlayTones(tones_1khz);
 							}
@@ -14993,7 +15367,7 @@ void Display_Handler(void)
 					RTC_DisRefresh(); 						// 日期时间刷新
 				}
 			}break;
-			case 29: 													// USP Test - Emptying of drums
+			case 29: 													// USP Test - Emptying of drums		待定...
 			{
 				if(EOD_flag) 										// 清空标志
 				{
@@ -16505,7 +16879,9 @@ void Display_Handler(void)
 				{
 					PopWflag = 0;
 					
-					LCD_Fill(32,160,32+800,160+416,WHITE); 						// 大白框
+					if(PopWindow != 3)
+						LCD_Fill(32,160,32+800,160+416,WHITE); 						// 大白框
+
 					switch(PopWindow)
 					{
 						case 1: 						// 提示
@@ -16538,6 +16914,10 @@ void Display_Handler(void)
 							LCD_ShowIcon(580,220,208,168,GRAY_878787,WHITE,51,0); 		// 大天平图标
 							
 						}break;
+						case 3: 										// Abort
+						{
+							AbortPopUp();
+						}break;
 						default:
 						break;
 					}
@@ -16547,81 +16927,110 @@ void Display_Handler(void)
 				{
 					TouchFlag = 0;
 					
-					if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 112)&&(cur_tpy < 239)) 	// Next
+					switch(PopWindow)
 					{
-						if(PopWindow == 1)
+						case 1:
+						case 2:
 						{
-							PopWindow = 2;
-							PopWflag = 1;
-							
-							BEEPER_PlayTones(tones_1khz);
-						}
-						else
-						if(PopWindow == 2)
-						{
-							if((TestMass1Val[TestTimes*2+1] > TestMass1Val[TestTimes*2])||
-								 (BalanceWeight == 0))
-								BEEPER_PlayTones(tones_error);
-							else
+							if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 112)&&(cur_tpy < 239)) 	// Next
 							{
-								PopWindow = 0;
-								LastPage = CurntPage;
-								CurntPage++;
+								if(PopWindow == 1)
+								{
+									PopWindow = 2;
+									PopWflag = 1;
+									
+									BEEPER_PlayTones(tones_1khz);
+								}
+								else
+								if(PopWindow == 2)
+								{
+									if((TestMass1Val[TestTimes*2+1] > TestMass1Val[TestTimes*2])||
+										(BalanceWeight == 0))
+										BEEPER_PlayTones(tones_error);
+									else
+									{
+										PopWindow = 0;
+										LastPage = CurntPage;
+										CurntPage++;
+										
+										cp_flag = 1;
+										BEEPER_PlayTones(tones_1khz);
+									}
+								}
+								else
+									BEEPER_PlayTones(tones_error);
+							}
+							else
+							if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 280)&&(cur_tpy < 408)) 	// Back
+							{
+								/*if(PopWindow == 1)
+								{
+									PopWindow = 0;
+									
+									LastPage = CurntPage;
+									CurntPage--;
+									
+									cp_flag = 1;
+								}
+								else*/
+								if(PopWindow == 2)
+								{
+									PopWindow = 1;
+									PopWflag = 1;
+									
+									BEEPER_PlayTones(tones_1khz);
+								}
+								else
+								{
+									BEEPER_PlayTones(tones_error);
+								}
+							}
+							else
+							if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 448)&&(cur_tpy < 576)) 	// Abort
+							{
+								PopWindow = 3;
+								PopWflag = 1;
 								
-								cp_flag = 1;
 								BEEPER_PlayTones(tones_1khz);
 							}
+							else
+								BEEPER_PlayTones(tones_error);
 						}
-						else
-							BEEPER_PlayTones(tones_error);
+						case 3:
+						{
+							if((cur_tpx > 240)&&(cur_tpx < 496)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// No
+							{
+								cp_flag = 1;
+								PopWindow = 1;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							if((cur_tpx > 528)&&(cur_tpx < 784)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// Yes
+							{
+								LastPage = CurntPage;
+								PopWindow = 0;
+								
+								if(TestTimes == 0) 								// 第一次测试时中断
+								{
+									CurntPage = 0;
+								}
+								else 															// 多于一次测试时中断
+								{
+									CurntPage = 34;
+									TestStatus |= 0x01; 								// 测试状态为未完成
+								}
+								cp_flag = 1;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							{
+								BEEPER_PlayTones(tones_error);
+							}
+						}break;
+						default:break;
 					}
-					else
-					if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 280)&&(cur_tpy < 408)) 	// Back
-					{
-						/*if(PopWindow == 1)
-						{
-							PopWindow = 0;
-							
-							LastPage = CurntPage;
-							CurntPage--;
-							
-							cp_flag = 1;
-						}
-						else*/
-						if(PopWindow == 2)
-						{
-							PopWindow = 1;
-							PopWflag = 1;
-							
-							BEEPER_PlayTones(tones_1khz);
-						}
-						else
-						{
-							BEEPER_PlayTones(tones_error);
-						}
-					}
-					else
-					if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 448)&&(cur_tpy < 576)) 	// Abort
-					{
-						PopWindow = 0;
-						LastPage = CurntPage;
-						
-						if(TestTimes == 0) 								// 第一次测试时中断
-						{
-							CurntPage = 0;
-						}
-						else 															// 多于一次测试时中断
-						{
-							CurntPage = 34;
-							TestStatus |= 0x01; 								// 测试状态为未完成
-						}
-						
-						cp_flag = 1;
-						
-						BEEPER_PlayTones(tones_1khz);
-					}
-					else
-						BEEPER_PlayTones(tones_error);
 				}
 				else
 				{
@@ -16747,7 +17156,9 @@ void Display_Handler(void)
 				{
 					PopWflag = 0;
 					
-					LCD_Fill(32,160,32+800,160+416,WHITE); 						// 大白框
+					if(PopWindow != 3)
+						LCD_Fill(32,160,32+800,160+416,WHITE); 						// 大白框
+						
 					switch(PopWindow)
 					{
 						case 1: 						// 提示
@@ -16780,6 +17191,10 @@ void Display_Handler(void)
 							LCD_ShowIcon(580,220,208,168,GRAY_878787,WHITE,51,0); 		// 大天平图标
 							
 						}break;
+						case 3: 										// Abort
+						{
+							AbortPopUp();
+						}break;
 						default:
 						break;
 					}
@@ -16789,77 +17204,106 @@ void Display_Handler(void)
 				{
 					TouchFlag = 0;
 					
-					if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 112)&&(cur_tpy < 239)) 	// Next
+					switch(PopWindow)
 					{
-						if(PopWindow == 1)
+						case 1:
+						case 2:
 						{
-							PopWindow = 2;
-							PopWflag = 1;
-							
-							BEEPER_PlayTones(tones_1khz);
-						}
-						else
-						if(PopWindow == 2)
-						{
-							if((TestMass2Val[TestTimes*2+1] > TestMass2Val[TestTimes*2])||
-								 (BalanceWeight == 0))
-								BEEPER_PlayTones(tones_error);
-							else
+							if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 112)&&(cur_tpy < 239)) 	// Next
 							{
-								PopWindow = 0;
-								LastPage = CurntPage;
-								CurntPage++;
+								if(PopWindow == 1)
+								{
+									PopWindow = 2;
+									PopWflag = 1;
+									
+									BEEPER_PlayTones(tones_1khz);
+								}
+								else
+								if(PopWindow == 2)
+								{
+									if((TestMass2Val[TestTimes*2+1] > TestMass2Val[TestTimes*2])||
+										(BalanceWeight == 0))
+										BEEPER_PlayTones(tones_error);
+									else
+									{
+										PopWindow = 0;
+										LastPage = CurntPage;
+										CurntPage++;
+										
+										cp_flag = 1;
+										BEEPER_PlayTones(tones_1khz);
+									}
+								}
+								else
+									BEEPER_PlayTones(tones_error);
+							}
+							else
+							if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 280)&&(cur_tpy < 408)) 	// Back
+							{
+								if(PopWindow == 1)
+								{
+									PopWindow = 0;
+									
+									LastPage = CurntPage;
+									CurntPage--;
+									
+									cp_flag = 1;
+								}
+								else
+								if(PopWindow == 2)
+								{
+									PopWindow = 1;
+									PopWflag = 1;
+								}
 								
-								cp_flag = 1;
 								BEEPER_PlayTones(tones_1khz);
 							}
+							else
+							if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 448)&&(cur_tpy < 576)) 	// Abort
+							{
+								PopWindow = 3;
+								PopWflag = 1;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+								BEEPER_PlayTones(tones_error);
 						}
-						else
-							BEEPER_PlayTones(tones_error);
+						case 3:
+						{
+							if((cur_tpx > 240)&&(cur_tpx < 496)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// No
+							{
+								cp_flag = 1;
+								PopWindow = 1;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							if((cur_tpx > 528)&&(cur_tpx < 784)&&(cur_tpy > 392)&&(cur_tpy < 452)) 	// Yes
+							{
+								LastPage = CurntPage;
+								PopWindow = 0;
+								
+								if(TestTimes == 0) 								// 第一次测试时中断
+								{
+									CurntPage = 0;
+								}
+								else 															// 多于一次测试时中断
+								{
+									CurntPage = 34;
+									TestStatus |= 0x01; 								// 测试状态为未完成
+								}
+								cp_flag = 1;
+								
+								BEEPER_PlayTones(tones_1khz);
+							}
+							else
+							{
+								BEEPER_PlayTones(tones_error);
+							}
+						}break;
+						default:break;
 					}
-					else
-					if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 280)&&(cur_tpy < 408)) 	// Back
-					{
-						if(PopWindow == 1)
-						{
-							PopWindow = 0;
-							
-							LastPage = CurntPage;
-							CurntPage--;
-							
-							cp_flag = 1;
-						}
-						else
-						if(PopWindow == 2)
-						{
-							PopWindow = 1;
-							PopWflag = 1;
-						}
-						
-						BEEPER_PlayTones(tones_1khz);
-					}
-					else
-					if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 448)&&(cur_tpy < 576)) 	// Abort
-					{
-						PopWindow = 0;
-						LastPage = CurntPage;
-						
-						if(TestTimes == 0) 								// 第一次测试时中断
-						{
-							CurntPage = 0;
-						}
-						else 															// 多于一次测试时中断
-						{
-							CurntPage = 34;
-							TestStatus |= 0x01; 								// 测试状态为未完成
-						}
-						
-						cp_flag = 1;
-						
-						BEEPER_PlayTones(tones_1khz);
-					}
-					else
-						BEEPER_PlayTones(tones_error);
 				}
 				else
 				{
@@ -20573,7 +21017,7 @@ void Display_Handler(void)
 							LCD_Fill(160,94,160+704,94+60+270,GRAY_656565); 					// 灰色横条
 							LCD_Fill(160+5,154,160+704-5,154+270-5,WHITE); 				// 白色方框
 							
-							LCD_ShowSpStr(175,108,450,36,WHITE,GRAY_656565,Font_Rbb34,"Hint: OQ light",0);
+							LCD_ShowSpStr(175,108,450,36,WHITE,GRAY_656565,Font_Rbb34,"Hint: OQ status",0);
 							
 							LCD_ShowSpStr(175,185,700,24,BLACK,WHITE,Font_Rbm22,"Please enter the date when the OQ was performed. Based on this date and ",0);
 							LCD_ShowSpStr(175,215,700,24,BLACK,WHITE,Font_Rbm22,"the set expiration and warning days, the OQ lights' status changes.",0);
@@ -24607,7 +25051,7 @@ void Display_Handler(void)
 					LCD_Fill(32,208,32+800,208+48,GRAY_E8E8E8); 			// “中间灰色横条”
 					LCD_ShowIcon(50,215,32,32,BLACK,GRAY_E8E8E8,47,0); 	// “小圆循环”
 					LCD_Fill(32,304,32+800,304+48,GRAY_E8E8E8); 			// “中间灰色横条”
-					LCD_ShowIcon(50,265,32,32,BLACK,WHITE,38,0); 			// “小天平”
+					//LCD_ShowIcon(50,265,32,32,BLACK,WHITE,38,0); 			// “小天平”
 					//LCD_ShowIcon(50,265,32,24,BLACK,WHITE,36,0); 			// “三角波”
 					LCD_Fill(32,400,32+800,400+48,GRAY_E8E8E8); 			// “中间灰色横条”
 					//LCD_ShowIcon(54,310,24,32,BLACK,GRAY_E8E8E8,37,0); 	// “小秒表”
@@ -24617,11 +25061,11 @@ void Display_Handler(void)
 					//osDelay(10);
 					LCD_ShowSpStr(46,124,1020,36,WHITE,GRAY_878787,Font_Rbb34,"Qualification",0);
 					
-					LCD_ShowSpStr(110,170,680,24,BLACK,WHITE,Font_Rbr27,"Runtime",0);
-					LCD_ShowSpStr(110,220,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"RPM & Revolutions",0);
-					LCD_ShowSpStr(110,270,680,24,BLACK,WHITE,Font_Rbr27,"Balance",0);
-					//LCD_ShowSpStr(110,315,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Test time",0);
-					//LCD_ShowSpStr(110,365,680,24,BLACK,WHITE,Font_Rbr27,"Cylinder weight check",0);
+					LCD_ShowSpStr(110,170,680,28,BLACK,WHITE,Font_Rbr27,"Runtime",0);
+					LCD_ShowSpStr(110,220,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"RPM & Revolutions",0);
+					//LCD_ShowSpStr(110,270,680,28,BLACK,WHITE,Font_Rbr27,"Balance",0);
+					//LCD_ShowSpStr(110,315,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Test time",0);
+					//LCD_ShowSpStr(110,365,680,28,BLACK,WHITE,Font_Rbr27,"Cylinder weight check",0);
 					
 				}
 				
@@ -24689,7 +25133,7 @@ void Display_Handler(void)
 										Quali_Menu = 1;
 										LCD_Fill(32,160,32+800,160+48,BLUE_26A5D1); 								// 小兰框
 										LCD_ShowIcon(50,165,32,32,WHITE,BLUE_26A5D1,40,0); 					// “小表盘”
-										LCD_ShowSpStr(110,170,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Runtime",0);
+										LCD_ShowSpStr(110,170,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Runtime",0);
 										
 										LCD_ShowIcon(880,112,112,128,WHITE,BLUE_26A5D1,27,0); 			// Enter
 										LCD_ShowSpStr(916,206,60,24,WHITE,BLUE_26A5D1,Font_Rbm22,"Enter",0);	
@@ -24699,7 +25143,7 @@ void Display_Handler(void)
 										Quali_Menu = 0;
 										LCD_Fill(32,160,32+800,160+48,WHITE); 											// 小白框
 										LCD_ShowIcon(50,165,32,32,BLACK,WHITE,40,0); 								// “小表盘”
-										LCD_ShowSpStr(110,170,680,24,BLACK,WHITE,Font_Rbr27,"Runtime",0);
+										LCD_ShowSpStr(110,170,680,28,BLACK,WHITE,Font_Rbr27,"Runtime",0);
 										
 										LCD_ShowIcon(880,112,112,128,BLACK,GRAY_B3B3B3,27,0); 			// Enter
 										LCD_ShowSpStr(916,206,60,24,BLACK,GRAY_B3B3B3,Font_Rbr27,"Enter",0);	
@@ -24708,45 +25152,45 @@ void Display_Handler(void)
 									{
 										LCD_Fill(32,208,32+800,208+48,GRAY_E8E8E8); 							// 小灰框
 										LCD_ShowIcon(50,215,32,32,BLACK,GRAY_E8E8E8,47,0); 				// “小圆循环”
-										LCD_ShowSpStr(110,220,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"RPM & Revolutions",0);
+										LCD_ShowSpStr(110,220,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"RPM & Revolutions",0);
 										
 										Quali_Menu = 1;
 										LCD_Fill(32,160,32+800,160+48,BLUE_26A5D1); 							// 小兰框
 										LCD_ShowIcon(50,165,32,32,WHITE,BLUE_26A5D1,40,0); 				// “小表盘”
-										LCD_ShowSpStr(110,170,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Runtime",0);
+										LCD_ShowSpStr(110,170,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Runtime",0);
 									}break;
-									case 3:
+									/*case 3:
 									{
 										LCD_Fill(32,256,32+800,256+48,WHITE); 										// 小白框
 										LCD_ShowIcon(50,265,32,32,BLACK,WHITE,38,0); 							// “小天平”
-										LCD_ShowSpStr(110,270,680,24,BLACK,WHITE,Font_Rbr27,"Balance",0);
+										LCD_ShowSpStr(110,270,680,28,BLACK,WHITE,Font_Rbr27,"Balance",0);
 										
 										Quali_Menu = 1;
 										LCD_Fill(32,160,32+800,160+48,BLUE_26A5D1); 							// 小兰框
 										LCD_ShowIcon(50,165,32,32,WHITE,BLUE_26A5D1,40,0); 				// “小表盘”
-										LCD_ShowSpStr(110,170,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Runtime",0);
+										LCD_ShowSpStr(110,170,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Runtime",0);
 									}break;
-									/*case 4:
+									case 4:
 									{
 										LCD_Fill(32,304,32+800,304+48,GRAY_E8E8E8); 							// 小灰框
 										LCD_ShowIcon(54,310,24,32,BLACK,GRAY_E8E8E8,37,0); 	// “小秒表”
-										LCD_ShowSpStr(110,315,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Test time",0);
+										LCD_ShowSpStr(110,315,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Test time",0);
 										
 										Quali_Menu = 1;
 										LCD_Fill(32,160,32+800,160+48,BLUE_26A5D1); 							// 小兰框
 										LCD_ShowIcon(58,165,16,32,WHITE,BLUE_26A5D1,34,0); 	// “上下双箭头”
-										LCD_ShowSpStr(110,170,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Tap height",0);
+										LCD_ShowSpStr(110,170,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Tap height",0);
 									}break;
 									case 5:
 									{
 										LCD_Fill(32,352,32+800,352+48,WHITE); 							// 小白框
 										LCD_ShowIcon(50,360,32,32,BLACK,WHITE,38,0); 	// “小天平”
-										LCD_ShowSpStr(110,365,680,24,BLACK,WHITE,Font_Rbr27,"Cylinder weight check",0);
+										LCD_ShowSpStr(110,365,680,28,BLACK,WHITE,Font_Rbr27,"Cylinder weight check",0);
 										
 										Quali_Menu = 1;
 										LCD_Fill(32,160,32+800,160+48,BLUE_26A5D1); 							// 小兰框
 										LCD_ShowIcon(58,165,16,32,WHITE,BLUE_26A5D1,34,0); 	// “上下双箭头”
-										LCD_ShowSpStr(110,170,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Tap height",0);
+										LCD_ShowSpStr(110,170,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Tap height",0);
 									}break;*/
 									default:
 									break;
@@ -24764,7 +25208,7 @@ void Display_Handler(void)
 										Quali_Menu = 2;
 										LCD_Fill(32,208,32+800,208+48,BLUE_26A5D1); 								// 小兰框
 										LCD_ShowIcon(50,215,32,32,WHITE,BLUE_26A5D1,47,0); 					// “小圆循环”
-										LCD_ShowSpStr(110,220,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"RPM & Revolutions",0);
+										LCD_ShowSpStr(110,220,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"RPM & Revolutions",0);
 										
 										LCD_ShowIcon(880,112,112,128,WHITE,BLUE_26A5D1,27,0); 	// Enter
 										LCD_ShowSpStr(916,206,60,24,WHITE,BLUE_26A5D1,Font_Rbm22,"Enter",0);	
@@ -24773,55 +25217,55 @@ void Display_Handler(void)
 									{
 										LCD_Fill(32,160,32+800,160+48,WHITE); 											// 小白框
 										LCD_ShowIcon(50,165,32,32,BLACK,WHITE,40,0); 								// “小表盘”
-										LCD_ShowSpStr(110,170,680,24,BLACK,WHITE,Font_Rbr27,"Runtime",0);
+										LCD_ShowSpStr(110,170,680,28,BLACK,WHITE,Font_Rbr27,"Runtime",0);
 										
 										Quali_Menu = 2;
 										LCD_Fill(32,208,32+800,208+48,BLUE_26A5D1); 								// 小兰框
 										LCD_ShowIcon(50,215,32,32,WHITE,BLUE_26A5D1,47,0); 					// “小圆循环”
-										LCD_ShowSpStr(110,220,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"RPM & Revolutions",0);
+										LCD_ShowSpStr(110,220,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"RPM & Revolutions",0);
 									}break;
 									case 2:
 									{
 										Quali_Menu = 0;
 										LCD_Fill(32,208,32+800,208+48,GRAY_E8E8E8); 								// 小灰框
 										LCD_ShowIcon(50,215,32,32,BLACK,GRAY_E8E8E8,47,0); 					// “小圆循环”
-										LCD_ShowSpStr(110,220,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"RPM & Revolutions",0);
+										LCD_ShowSpStr(110,220,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"RPM & Revolutions",0);
 										
 										LCD_ShowIcon(880,112,112,128,BLACK,GRAY_E8E8E8,27,0); 			// Enter
 										LCD_ShowSpStr(916,206,60,24,BLACK,GRAY_E8E8E8,Font_Rbm22,"Enter",0);	
 									}break;
-									case 3:
+									/*case 3:
 									{
 										LCD_Fill(32,256,32+800,256+48,WHITE); 											// 小白框
 										LCD_ShowIcon(50,265,32,32,BLACK,WHITE,38,0); 								// “小天平”
-										LCD_ShowSpStr(110,270,680,24,BLACK,WHITE,Font_Rbr27,"Balance",0);
+										LCD_ShowSpStr(110,270,680,28,BLACK,WHITE,Font_Rbr27,"Balance",0);
 										
 										Quali_Menu = 2;
 										LCD_Fill(32,208,32+800,208+48,BLUE_26A5D1); 								// 小兰框
 										LCD_ShowIcon(50,215,32,32,WHITE,BLUE_26A5D1,47,0); 					// “小圆循环”
-										LCD_ShowSpStr(110,220,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"RPM & Revolutions",0);
+										LCD_ShowSpStr(110,220,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"RPM & Revolutions",0);
 									}break;
-									/*case 4:
+									case 4:
 									{
 										LCD_Fill(32,304,32+800,304+48,GRAY_E8E8E8); 							// 小灰框
 										LCD_ShowIcon(54,310,24,32,BLACK,GRAY_E8E8E8,37,0); 	// “小秒表”
-										LCD_ShowSpStr(110,315,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Test time",0);
+										LCD_ShowSpStr(110,315,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Test time",0);
 										
 										Quali_Menu = 2;
 										LCD_Fill(32,208,32+800,208+48,BLUE_26A5D1); 							// 小兰框
 										LCD_ShowIcon(50,215,32,32,WHITE,BLUE_26A5D1,35,0); 	// “逆时针”
-										LCD_ShowSpStr(110,220,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Tap count",0);
+										LCD_ShowSpStr(110,220,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Tap count",0);
 									}break;
 									case 5:
 									{
 										LCD_Fill(32,352,32+800,352+48,WHITE); 							// 小白框
 										LCD_ShowIcon(50,360,32,32,BLACK,WHITE,38,0); 	// “小天平”
-										LCD_ShowSpStr(110,365,680,24,BLACK,WHITE,Font_Rbr27,"Cylinder weight check",0);
+										LCD_ShowSpStr(110,365,680,28,BLACK,WHITE,Font_Rbr27,"Cylinder weight check",0);
 										
 										Quali_Menu = 2;
 										LCD_Fill(32,208,32+800,208+48,BLUE_26A5D1); 							// 小兰框
 										LCD_ShowIcon(50,215,32,32,WHITE,BLUE_26A5D1,35,0); 	// “逆时针”
-										LCD_ShowSpStr(110,220,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Tap count",0);
+										LCD_ShowSpStr(110,220,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Tap count",0);
 									}break;*/
 									default:
 									break;
@@ -24829,7 +25273,7 @@ void Display_Handler(void)
 								
 								BEEPER_PlayTones(tones_1khz);
 							}
-							else
+							/*else
 							if((cur_tpx > 32)&&(cur_tpx < 832)&&(cur_tpy > 256)&&(cur_tpy < 304)) 	// 第三行
 							{
 								switch(Quali_Menu)
@@ -24839,7 +25283,7 @@ void Display_Handler(void)
 										Quali_Menu = 3;
 										LCD_Fill(32,256,32+800,256+48,BLUE_26A5D1); 								// 小兰框
 										LCD_ShowIcon(50,265,32,32,WHITE,BLUE_26A5D1,38,0); 					// “小天平”
-										LCD_ShowSpStr(110,270,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Balance",0);
+										LCD_ShowSpStr(110,270,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Balance",0);
 										
 										LCD_ShowIcon(880,112,112,128,WHITE,BLUE_26A5D1,27,0); 			// Enter
 										LCD_ShowSpStr(916,206,60,24,WHITE,BLUE_26A5D1,Font_Rbm22,"Enter",0);	
@@ -24848,56 +25292,56 @@ void Display_Handler(void)
 									{
 										LCD_Fill(32,160,32+800,160+48,WHITE); 											// 小白框
 										LCD_ShowIcon(50,165,32,32,BLACK,WHITE,40,0); 								// “小表盘”
-										LCD_ShowSpStr(110,170,680,24,BLACK,WHITE,Font_Rbr27,"Runtime",0);
+										LCD_ShowSpStr(110,170,680,28,BLACK,WHITE,Font_Rbr27,"Runtime",0);
 										
 										Quali_Menu = 3;
 										LCD_Fill(32,256,32+800,256+48,BLUE_26A5D1); 								// 小兰框
 										LCD_ShowIcon(50,265,32,32,WHITE,BLUE_26A5D1,38,0); 					// “小天平”
-										LCD_ShowSpStr(110,270,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Balance",0);
+										LCD_ShowSpStr(110,270,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Balance",0);
 									}break;
 									case 2:
 									{
 										LCD_Fill(32,208,32+800,208+48,GRAY_E8E8E8); 								// 小灰框
 										LCD_ShowIcon(50,215,32,32,BLACK,GRAY_E8E8E8,47,0); 					// “小圆循环”
-										LCD_ShowSpStr(110,220,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"RPM & Revolutions",0);
+										LCD_ShowSpStr(110,220,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"RPM & Revolutions",0);
 										
 										Quali_Menu = 3;
 										LCD_Fill(32,256,32+800,256+48,BLUE_26A5D1); 								// 小兰框
 										LCD_ShowIcon(50,265,32,32,WHITE,BLUE_26A5D1,38,0); 					// “小天平”
-										LCD_ShowSpStr(110,270,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Balance",0);
+										LCD_ShowSpStr(110,270,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Balance",0);
 									}break;
 									case 3:
 									{
 										Quali_Menu = 0;
 										LCD_Fill(32,256,32+800,256+48,WHITE); 											// 小白框
 										LCD_ShowIcon(50,265,32,32,BLACK,WHITE,38,0); 								// “小天平”
-										LCD_ShowSpStr(110,270,680,24,BLACK,WHITE,Font_Rbr27,"Balance",0);
+										LCD_ShowSpStr(110,270,680,28,BLACK,WHITE,Font_Rbr27,"Balance",0);
 										
 										LCD_ShowIcon(880,112,112,128,BLACK,GRAY_E8E8E8,27,0); 			// Enter
 										LCD_ShowSpStr(916,206,60,24,BLACK,GRAY_E8E8E8,Font_Rbm22,"Enter",0);	
 									}break;
-									/*case 4:
+									case 4:
 									{
 										LCD_Fill(32,304,32+800,304+48,GRAY_E8E8E8); 							// 小灰框
 										LCD_ShowIcon(54,310,24,32,BLACK,GRAY_E8E8E8,37,0); 	// “小秒表”
-										LCD_ShowSpStr(110,315,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Test time",0);
+										LCD_ShowSpStr(110,315,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Test time",0);
 										
 										Quali_Menu = 3;
 										LCD_Fill(32,256,32+800,256+48,BLUE_26A5D1); 							// 小兰框
 										LCD_ShowIcon(50,265,32,24,WHITE,BLUE_26A5D1,36,0); 	// “三角波”
-										LCD_ShowSpStr(110,270,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Tap frequency",0);
+										LCD_ShowSpStr(110,270,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Tap frequency",0);
 									}break;
 									case 5:
 									{
 										LCD_Fill(32,352,32+800,352+48,WHITE); 							// 小白框
 										LCD_ShowIcon(50,360,32,32,BLACK,WHITE,38,0); 	// “小天平”
-										LCD_ShowSpStr(110,365,680,24,BLACK,WHITE,Font_Rbr27,"Cylinder weight check",0);
+										LCD_ShowSpStr(110,365,680,28,BLACK,WHITE,Font_Rbr27,"Cylinder weight check",0);
 										
 										Quali_Menu = 3;
 										LCD_Fill(32,256,32+800,256+48,BLUE_26A5D1); 							// 小兰框
 										LCD_ShowIcon(50,265,32,24,WHITE,BLUE_26A5D1,36,0); 	// “三角波”
-										LCD_ShowSpStr(110,270,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Tap frequency",0);
-									}break;*/
+										LCD_ShowSpStr(110,270,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Tap frequency",0);
+									}break;
 									default:
 									break;
 								}
@@ -24905,7 +25349,7 @@ void Display_Handler(void)
 								BEEPER_PlayTones(tones_1khz);
 							}
 							else
-							/*if((cur_tpx > 32)&&(cur_tpx < 832)&&(cur_tpy > 304)&&(cur_tpy < 352)) 	// 第四行
+							if((cur_tpx > 32)&&(cur_tpx < 832)&&(cur_tpy > 304)&&(cur_tpy < 352)) 	// 第四行
 							{
 								switch(Quali_Menu)
 								{
@@ -24914,7 +25358,7 @@ void Display_Handler(void)
 										Quali_Menu = 4;
 										LCD_Fill(32,304,32+800,304+48,BLUE_26A5D1); 							// 小兰框
 										LCD_ShowIcon(54,310,24,32,WHITE,BLUE_26A5D1,37,0); 	// “小秒表”
-										LCD_ShowSpStr(110,315,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Test time",0);
+										LCD_ShowSpStr(110,315,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Test time",0);
 										
 										LCD_ShowIcon(880,112,112,128,WHITE,BLUE_26A5D1,27,0); 	// Enter
 										LCD_ShowSpStr(916,206,60,24,WHITE,BLUE_26A5D1,Font_Rbm22,"Enter",0);	
@@ -24923,41 +25367,41 @@ void Display_Handler(void)
 									{
 										LCD_Fill(32,160,32+800,160+48,WHITE); 							// 小白框
 										LCD_ShowIcon(58,165,16,32,BLACK,WHITE,34,0); 	// “上下双箭头”
-										LCD_ShowSpStr(110,170,680,24,BLACK,WHITE,Font_Rbr27,"Tap height",0);
+										LCD_ShowSpStr(110,170,680,28,BLACK,WHITE,Font_Rbr27,"Tap height",0);
 										
 										Quali_Menu = 4;
 										LCD_Fill(32,304,32+800,304+48,BLUE_26A5D1); 							// 小兰框
 										LCD_ShowIcon(54,310,24,32,WHITE,BLUE_26A5D1,37,0); 	// “小秒表”
-										LCD_ShowSpStr(110,315,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Test time",0);
+										LCD_ShowSpStr(110,315,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Test time",0);
 									}break;
 									case 2:
 									{
 										LCD_Fill(32,208,32+800,208+48,GRAY_E8E8E8); 							// 小灰框
 										LCD_ShowIcon(50,215,32,32,BLACK,GRAY_E8E8E8,35,0); 	// “逆时针”
-										LCD_ShowSpStr(110,220,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Tap count",0);
+										LCD_ShowSpStr(110,220,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Tap count",0);
 										
 										Quali_Menu = 4;
 										LCD_Fill(32,304,32+800,304+48,BLUE_26A5D1); 							// 小兰框
 										LCD_ShowIcon(54,310,24,32,WHITE,BLUE_26A5D1,37,0); 	// “小秒表”
-										LCD_ShowSpStr(110,315,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Test time",0);
+										LCD_ShowSpStr(110,315,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Test time",0);
 									}break;
 									case 3:
 									{
 										LCD_Fill(32,256,32+800,256+48,WHITE); 							// 小白框
 										LCD_ShowIcon(50,265,32,24,BLACK,WHITE,36,0); 	// “三角波”
-										LCD_ShowSpStr(110,270,680,24,BLACK,WHITE,Font_Rbr27,"Tap frequency",0);
+										LCD_ShowSpStr(110,270,680,28,BLACK,WHITE,Font_Rbr27,"Tap frequency",0);
 										
 										Quali_Menu = 4;
 										LCD_Fill(32,304,32+800,304+48,BLUE_26A5D1); 							// 小兰框
 										LCD_ShowIcon(54,310,24,32,WHITE,BLUE_26A5D1,37,0); 	// “小秒表”
-										LCD_ShowSpStr(110,315,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Test time",0);
+										LCD_ShowSpStr(110,315,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Test time",0);
 									}break;
 									case 4:
 									{
 										Quali_Menu = 0;
 										LCD_Fill(32,304,32+800,304+48,GRAY_E8E8E8); 							// 小灰框
 										LCD_ShowIcon(54,310,24,32,BLACK,GRAY_E8E8E8,37,0); 	// “小秒表”
-										LCD_ShowSpStr(110,315,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Test time",0);
+										LCD_ShowSpStr(110,315,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Test time",0);
 										
 										LCD_ShowIcon(880,112,112,128,BLACK,GRAY_E8E8E8,27,0); 	// Enter
 										LCD_ShowSpStr(916,206,60,24,BLACK,GRAY_E8E8E8,Font_Rbm22,"Enter",0);	
@@ -24966,12 +25410,12 @@ void Display_Handler(void)
 									{
 										LCD_Fill(32,352,32+800,352+48,WHITE); 							// 小白框
 										LCD_ShowIcon(50,360,32,32,BLACK,WHITE,38,0); 	// “小天平”
-										LCD_ShowSpStr(110,365,680,24,BLACK,WHITE,Font_Rbr27,"Cylinder weight check",0);
+										LCD_ShowSpStr(110,365,680,28,BLACK,WHITE,Font_Rbr27,"Cylinder weight check",0);
 										
 										Quali_Menu = 4;
 										LCD_Fill(32,304,32+800,304+48,BLUE_26A5D1); 							// 小兰框
 										LCD_ShowIcon(54,310,24,32,WHITE,BLUE_26A5D1,37,0); 	// “小秒表”
-										LCD_ShowSpStr(110,315,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Test time",0);
+										LCD_ShowSpStr(110,315,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Test time",0);
 									}break;
 									default:
 									break;
@@ -24989,7 +25433,7 @@ void Display_Handler(void)
 										Quali_Menu = 5;
 										LCD_Fill(32,352,32+800,352+48,BLUE_26A5D1); 							// 小兰框
 										LCD_ShowIcon(50,360,32,32,WHITE,BLUE_26A5D1,38,0); 	// “小天平”
-										LCD_ShowSpStr(110,365,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Cylinder weight check",0);
+										LCD_ShowSpStr(110,365,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Cylinder weight check",0);
 										
 										LCD_ShowIcon(880,112,112,128,WHITE,BLUE_26A5D1,27,0); 	// Enter
 										LCD_ShowSpStr(916,206,60,24,WHITE,BLUE_26A5D1,Font_Rbm22,"Enter",0);	
@@ -24998,52 +25442,52 @@ void Display_Handler(void)
 									{
 										LCD_Fill(32,160,32+800,160+48,WHITE); 							// 小白框
 										LCD_ShowIcon(58,165,16,32,BLACK,WHITE,34,0); 	// “上下双箭头”
-										LCD_ShowSpStr(110,170,680,24,BLACK,WHITE,Font_Rbr27,"Tap height",0);
+										LCD_ShowSpStr(110,170,680,28,BLACK,WHITE,Font_Rbr27,"Tap height",0);
 										
 										Quali_Menu = 5;
 										LCD_Fill(32,352,32+800,352+48,BLUE_26A5D1); 							// 小兰框
 										LCD_ShowIcon(50,360,32,32,WHITE,BLUE_26A5D1,38,0); 	// “小天平”
-										LCD_ShowSpStr(110,365,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Cylinder weight check",0);
+										LCD_ShowSpStr(110,365,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Cylinder weight check",0);
 									}break;
 									case 2:
 									{
 										LCD_Fill(32,208,32+800,208+48,GRAY_E8E8E8); 							// 小灰框
 										LCD_ShowIcon(50,215,32,32,BLACK,GRAY_E8E8E8,35,0); 	// “逆时针”
-										LCD_ShowSpStr(110,220,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Tap count",0);
+										LCD_ShowSpStr(110,220,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Tap count",0);
 										
 										Quali_Menu = 5;
 										LCD_Fill(32,352,32+800,352+48,BLUE_26A5D1); 							// 小兰框
 										LCD_ShowIcon(50,360,32,32,WHITE,BLUE_26A5D1,38,0); 	// “小天平”
-										LCD_ShowSpStr(110,365,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Cylinder weight check",0);
+										LCD_ShowSpStr(110,365,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Cylinder weight check",0);
 									}break;
 									case 3:
 									{
 										LCD_Fill(32,256,32+800,256+48,WHITE); 							// 小白框
 										LCD_ShowIcon(50,265,32,24,BLACK,WHITE,36,0); 	// “三角波”
-										LCD_ShowSpStr(110,270,680,24,BLACK,WHITE,Font_Rbr27,"Tap frequency",0);
+										LCD_ShowSpStr(110,270,680,28,BLACK,WHITE,Font_Rbr27,"Tap frequency",0);
 										
 										Quali_Menu = 5;
 										LCD_Fill(32,352,32+800,352+48,BLUE_26A5D1); 							// 小兰框
 										LCD_ShowIcon(50,360,32,32,WHITE,BLUE_26A5D1,38,0); 	// “小天平”
-										LCD_ShowSpStr(110,365,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Cylinder weight check",0);
+										LCD_ShowSpStr(110,365,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Cylinder weight check",0);
 									}break;
 									case 4:
 									{
 										LCD_Fill(32,304,32+800,304+48,GRAY_E8E8E8); 							// 小灰框
 										LCD_ShowIcon(54,310,24,32,BLACK,GRAY_E8E8E8,37,0); 	// “小秒表”
-										LCD_ShowSpStr(110,315,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Test time",0);
+										LCD_ShowSpStr(110,315,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Test time",0);
 										
 										Quali_Menu = 5;
 										LCD_Fill(32,352,32+800,352+48,BLUE_26A5D1); 							// 小兰框
 										LCD_ShowIcon(50,360,32,32,WHITE,BLUE_26A5D1,38,0); 	// “小天平”
-										LCD_ShowSpStr(110,365,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Cylinder weight check",0);
+										LCD_ShowSpStr(110,365,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Cylinder weight check",0);
 									}break;
 									case 5:
 									{
 										Quali_Menu = 0;
 										LCD_Fill(32,352,32+800,352+48,WHITE); 							// 小白框
 										LCD_ShowIcon(50,360,32,32,BLACK,WHITE,38,0); 	// “小天平”
-										LCD_ShowSpStr(110,365,680,24,BLACK,WHITE,Font_Rbr27,"Cylinder weight check",0);
+										LCD_ShowSpStr(110,365,680,28,BLACK,WHITE,Font_Rbr27,"Cylinder weight check",0);
 										
 										LCD_ShowIcon(880,112,112,128,BLACK,GRAY_E8E8E8,27,0); 	// Enter
 										LCD_ShowSpStr(916,206,60,24,BLACK,GRAY_E8E8E8,Font_Rbm22,"Enter",0);	
@@ -25053,14 +25497,13 @@ void Display_Handler(void)
 								}
 								
 								BEEPER_PlayTones(tones_1khz);
-							}
-							else*/
+							}*/
+							else
 							if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 112)&&(cur_tpy < 239)) 	// Endter
 							{
 								if(Quali_Menu == 1) 		// Runtime
 								{
 									LastPage = CurntPage;
-									//CurntPage = 61; 						// tap height
 									CurntPage = 66; 						// Runtime
 									cp_flag = 1;
 								}
@@ -25071,7 +25514,7 @@ void Display_Handler(void)
 									CurntPage = 67;
 									cp_flag = 1;
 								}
-								else
+								/*else
 								if(Quali_Menu == 3) 		// Balance
 								{
 									LastPage = CurntPage;
@@ -25091,7 +25534,7 @@ void Display_Handler(void)
 									LastPage = CurntPage;
 									CurntPage = 65;
 									cp_flag = 1;
-								}
+								}*/
 								
 								BEEPER_PlayTones(tones_1khz);
 							}
@@ -27417,7 +27860,7 @@ void Display_Handler(void)
 						RTC_DisRefresh(); 					// 日期时间刷新
 				}
 			}break;
-			case 68: 													// Qualification -> Balance
+			/*case 68: 													// Qualification -> Balance
 			{
 				if(cp_flag)											// 页面刷新
 				{
@@ -27469,46 +27912,6 @@ void Display_Handler(void)
 					//LCD_ShowSpStr(76,298,500,24,BLACK,GRAY_DADADA,Font_Rbm24,KeyInStr,0);// 显示可见的激活码
 					L0_fresh = 1;
 				}
-				
-				/*
-				if(kps_flag) 										// 键盘显示
-				{
-					kps_flag = 0;
-					KeyPadDisplay(KeyState);
-					
-					if(KeyState != 0)
-						keybc_flag = 1; 						// 刷新键盘输入框
-				}
-
-				if(keybc_flag) 									// 键盘输入刷新
-				{
-					keybc_flag = 0;
-					
-					LCD_Fill(165,100,855,155,WHITE); 					// 白色数据输入框
-					if(strlen(KeyInStr))
-						LCD_ShowSpStr(165,100,690,55,BLACK,WHITE,KEYPAD_DISFONT,KeyInStr,0);
-					else
-						LCD_ShowSpStr(165,100,690,55,GRAY,WHITE,KEYPAD_DISFONT,"Input here...",0);
-				}
-				*/
-				/*
-				if(flash_flag)
-				{
-					if(WeightFlag)
-					{
-						WeightFlag = 0;
-						RS232_SendString("\x1b\x20\x6b\x50\x5f");
-						
-						LCD_Fill(318,280,318+225,280+50,GRAY_F8F8F8); 							// 小灰框
-						sprintf((char*)tbuf,"%8.4f g",BalanceWeight); 
-						LCD_ShowSpStr(318,280,200,50,BLACK,GRAY_F8F8F8,Font_Hnb48,tbuf,0);
-					}
-				}
-				else 
-				{
-					WeightFlag = 1;
-				}
-				*/
 				
 				if(PopWindow == 2)
 				{
@@ -27584,16 +27987,6 @@ void Display_Handler(void)
 						{
 							if(KeyState == 0)						// 没有键盘显示
 							{
-								/*if((cur_tpx > 62)&&(cur_tpx < 62+256)&&(cur_tpy > 288)&&(cur_tpy < 288+48)) 		// 输入框
-								{
-									KeyState = 1;
-									kps_flag = 1;
-
-									strcpy(KeyInStr,temKeyStr);
-									KIS_ip = strlen(KeyInStr);
-									BEEPER_PlayTones(tones_1khz);
-								}
-								else*/
 								if((cur_tpx > 880)&&(cur_tpx < 1020)&&(cur_tpy > 112)&&(cur_tpy < 112+128))  		// Start
 								{
 									if(BalanceModel == 0) 			// Sartorius Practum
@@ -27741,7 +28134,8 @@ void Display_Handler(void)
 					if(PopWindow == 0)
 						RTC_DisRefresh(); 					// 日期时间刷新
 				}
-			}break;
+			}break;*/
+			
 			// HOME菜单 - Control Panel --------------------------
 			case 80: 													// Manege Menu -> Control Panel
 			{
@@ -27771,38 +28165,6 @@ void Display_Handler(void)
 					
 					LCD_ShowIcon(768,160,64,64,GRAY_A7A7A7,WHITE,57,0); 			// 小上箭头
 					LCD_ShowIcon(768,512,64,64,GRAY_A7A7A7,WHITE,58,0); 			// 小下箭头
-					
-					/* Gavin，2023-03-15 周三 12:12:14
-					LCD_ShowIcon(50,165,32,32,BLACK,WHITE,40,0); 				// “小表盘”
-					LCD_Fill(32,208,32+800,208+48,GRAY_E8E8E8); 				// “中间灰色横条”
-					LCD_ShowIcon(50,215,32,32,BLACK,GRAY_E8E8E8,41,0); 	// “小打印机”
-					LCD_ShowIcon(55,268,24,24,BLACK,WHITE,42,0); 				// “小喇叭”
-					LCD_Fill(32,304,32+800,304+48,GRAY_E8E8E8); 				// “中间灰色横条”
-					LCD_ShowIcon(55,315,24,24,BLACK,GRAY_E8E8E8,59,0); 	// “水平双箭头”
-					//LCD_ShowIcon(55,365,24,24,BLACK,WHITE,64,0); 				// 压缩率参考体积
-					//LCD_ShowIcon(55,365,24,24,GRAY_DADADA,WHITE,64,0); 	// 压缩率参考体积
-					LCD_ShowIcon(55,365,24,24,BLACK,WHITE,65,0); 	// OQ红绿灯
-					LCD_Fill(32,400,32+800,400+48,GRAY_E8E8E8); 				// “中间灰色横条”
-					//LCD_ShowIcon(55,415,24,24,BLACK,GRAY_E8E8E8,65,0); 	// OQ红绿灯
-					LCD_ShowIcon(47,402,42,42,BLACK,GRAY_E8E8E8,69,0); 				// 解锁的图标								2021/10/25 星期一 15:30:45
-					//LCD_ShowIcon(47,452,42,42,BLACK,WHITE,69,0); 				// 解锁的图标								2021/10/25 星期一 15:30:45
-					LCD_ShowIcon(47,452,42,42,BLACK,WHITE,71,0); 	// Export(小)								2021/11/22 星期一 14:33:28
-					LCD_Fill(32,496,32+800,496+48,GRAY_E8E8E8); 				// “中间灰色横条”
-					//LCD_ShowIcon(47,503,42,42,BLACK,GRAY_E8E8E8,71,0); 	// Export(小)								2021/11/22 星期一 14:33:28
-					
-					LCD_ShowSpStr(110,170,680,24,BLACK,WHITE,Font_Rbr27,"Date and time",0);
-					LCD_ShowSpStr(110,220,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Printer",0);
-					LCD_ShowSpStr(110,270,680,24,BLACK,WHITE,Font_Rbr27,"Sound",0);
-					LCD_ShowSpStr(110,315,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Configuration",0);
-					//LCD_ShowSpStr(110,365,680,24,BLACK,WHITE,Font_Rbr27,"USP configuration",0);
-					//LCD_ShowSpStr(110,365,680,24,GRAY_DADADA,WHITE,Font_Rbr27,"Back-up",0);
-					LCD_ShowSpStr(110,365,680,24,BLACK,WHITE,Font_Rbr27,"OQ light",0);
-					//LCD_ShowSpStr(110,415,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"OQ light",0);
-					LCD_ShowSpStr(110,415,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Password protection",0);		//2021/10/21 增加密码设置
-					//LCD_ShowSpStr(110,460,680,24,BLACK,WHITE,Font_Rbr27,"Password protection",0);		//2021/10/21 增加密码设置
-					LCD_ShowSpStr(110,460,680,24,BLACK,WHITE,Font_Rbr27,"Export settings",0);				//2021/11/22 星期一 14:34:48	增加导出设置
-					//LCD_ShowSpStr(110,510,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Export settings",0);				//2021/11/22 星期一 14:34:48	增加导出设置
-					*/
 					
 					LCD_ShowIcon(880,112,112,128,BLACK,GRAY_B3B3B3,27,0); 	// Enter
 					LCD_ShowSpStr(916,206,60,24,BLACK,GRAY_B3B3B3,Font_Rbm22,"Enter",0);
@@ -27844,17 +28206,17 @@ void Display_Handler(void)
 							LCD_ShowIcon(52,486,32,32,BLACK,GRAY_E8E8E8,96,0); 			// 网络图标，2023-03-16 周四 14:51:48
 							LCD_ShowIcon(55,538,24,24,BLACK,WHITE,61,0); 						// “打印管理图标”，2023-03-16 周四 14:52:52
 							
-							LCD_ShowSpStr(110,170,680,24,BLACK,WHITE,Font_Rbr27,"Date and time",0);
-							LCD_ShowSpStr(110,216,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Printer",0);
-							LCD_ShowSpStr(110,262,680,24,BLACK,WHITE,Font_Rbr27,"Sound",0);
-							LCD_ShowSpStr(110,308,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Configuration",0);
+							LCD_ShowSpStr(110,170,680,28,BLACK,WHITE,Font_Rbr27,"Date and time",0);
+							LCD_ShowSpStr(110,216,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Printer",0);
+							LCD_ShowSpStr(110,262,680,28,BLACK,WHITE,Font_Rbr27,"Sound",0);
+							LCD_ShowSpStr(110,308,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Configuration",0);
 							
-							LCD_ShowSpStr(110,354,680,24,BLACK,WHITE,Font_Rbr27,"OQ light",0);
-							LCD_ShowSpStr(110,400,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Password protection",0);
-							LCD_ShowSpStr(110,446,680,24,BLACK,WHITE,Font_Rbr27,"Export settings",0);
+							LCD_ShowSpStr(110,354,680,28,BLACK,WHITE,Font_Rbr27,"OQ status",0);
+							LCD_ShowSpStr(110,400,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Password protection",0);
+							LCD_ShowSpStr(110,446,680,28,BLACK,WHITE,Font_Rbr27,"Export settings",0);
 							
-							LCD_ShowSpStr(110,492,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Network settings",0);
-							LCD_ShowSpStr(110,538,680,24,BLACK,WHITE,Font_Rbr27,"Reports",0);
+							LCD_ShowSpStr(110,492,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Network settings",0);
+							LCD_ShowSpStr(110,538,680,28,BLACK,WHITE,Font_Rbr27,"Reports",0);
 						}break;
 						case 1: 										// 第1页，Gavin，2023-08-04 周五 10:04:01
 						{
@@ -27862,12 +28224,12 @@ void Display_Handler(void)
 							if((DeviceID == 122)||(DeviceID == 222))
 							{
 								LCD_ShowIcon(50,165,32,32,BLACK,GRAY_E8E8E8,38,0); 			// “小天平”
-								LCD_ShowSpStr(110,170,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Balance",0);
+								LCD_ShowSpStr(110,170,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Balance",0);
 							}
 							else
 							{
 								LCD_ShowIcon(50,165,32,32,GRAY_C6C6C6,GRAY_E8E8E8,38,0); 			// “小天平”
-								LCD_ShowSpStr(110,170,680,24,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Balance",0);
+								LCD_ShowSpStr(110,170,680,28,GRAY_C6C6C6,GRAY_E8E8E8,Font_Rbr27,"Balance",0);
 							}
 							
 							LCD_Fill(32,206,32+720,206+46,WHITE); 						// 中间灰色横条
@@ -28220,10 +28582,10 @@ void Display_Handler(void)
 												cp_flag = 1;
 												tmpCMPT = CompressibilityPt;
 											}break;
-											case 6: 					// OQ light
+											case 6: 					// OQ status
 											{
 												LastPage = CurntPage;
-												CurntPage = 86; 				// OQ light
+												CurntPage = 86; 				// OQ status
 												
 												HotLine = 0;
 												cp_flag = 1;
@@ -28288,10 +28650,10 @@ void Display_Handler(void)
 												HotLine = 0;
 												cp_flag = 1;
 											}break;*/
-											case 5: 					// OQ light
+											case 5: 					// OQ status
 											{
 												LastPage = CurntPage;
-												CurntPage = 86; 				// OQ light
+												CurntPage = 86; 				// OQ status
 												
 												HotLine = 0;
 												cp_flag = 1;
@@ -28883,7 +29245,6 @@ void Display_Handler(void)
 						default:
 						break;
 					}
-					
 				}
 				
 				if(kps_flag) 										// 键盘显示刷新
@@ -29562,7 +29923,6 @@ void Display_Handler(void)
 						default:
 						break;
 					}
-					
 				}
 				else
 				{
@@ -29913,7 +30273,7 @@ void Display_Handler(void)
 											ucDat = 0;
 											uiDat = 0;
 											
-											for(i=0;i<15;i++)
+											for(i=0;i<16;i++)
 											{
 												if((KeyInStr[i] == '.')||(KeyInStr[i] == 0))
 												{
@@ -29962,7 +30322,7 @@ void Display_Handler(void)
 											ucDat = 0;
 											uiDat = 0;
 											
-											for(i=0;i<15;i++)
+											for(i=0;i<16;i++)
 											{
 												if((KeyInStr[i] == '.')||(KeyInStr[i] == 0))
 												{
@@ -30001,7 +30361,7 @@ void Display_Handler(void)
 											ucDat = 0;
 											uiDat = 0;
 											
-											for(i=0;i<15;i++)
+											for(i=0;i<16;i++)
 											{
 												if((KeyInStr[i] == '.')||(KeyInStr[i] == 0))
 												{
@@ -31213,7 +31573,7 @@ void Display_Handler(void)
 						RTC_DisRefresh(); 					// 日期时间刷新
 				}
 			}break;
-			case 86: 													// Control Panel -> OQ light
+			case 86: 													// Control Panel -> OQ status
 			{
 				if(cp_flag)											// 页面刷新
 				{
@@ -31236,7 +31596,7 @@ void Display_Handler(void)
 						LCD_ShowIcon(310,35,48,48,BLACK,BLACK,93,0); 		// U盘未连接图标
 					
 					LCD_Fill(32,112,32+800,112+48,GRAY_878787); 							// 小灰框
-					LCD_ShowSpStr(47,124,1020,36,WHITE,GRAY_878787,Font_Rbb34,"OQ light",0);
+					LCD_ShowSpStr(47,124,1020,36,WHITE,GRAY_878787,Font_Rbb34,"OQ status",0);
 					
 					LCD_Fill(32,160,32+800,160+416,WHITE); 						// 大白框
 					//LCD_ShowSpStr(62,218,100,24,BLACK,WHITE,Font_Rbm24,"Hausner Ratio",0);
@@ -31358,7 +31718,7 @@ void Display_Handler(void)
 							LCD_Fill(160,94,160+704,94+60+270,GRAY_656565); 					// 灰色横条
 							LCD_Fill(160+5,154,160+704-5,154+270-5,WHITE); 				// 白色方框
 							
-							LCD_ShowSpStr(175,108,450,36,WHITE,GRAY_656565,Font_Rbb34,"Hint: OQ light",0);
+							LCD_ShowSpStr(175,108,450,36,WHITE,GRAY_656565,Font_Rbb34,"Hint: OQ status",0);
 							
 							LCD_ShowSpStr(175,185,700,24,BLACK,WHITE,Font_Rbm22,"Define the frequency in which the OQ is performed. The recommendation ",0);
 							LCD_ShowSpStr(175,215,700,24,BLACK,WHITE,Font_Rbm22,"is 180 days. Please match with your laboratory processes and guidelines.",0);
@@ -31373,9 +31733,9 @@ void Display_Handler(void)
 							LCD_Fill(160,94,160+704,94+60+270,GRAY_656565); 					// 灰色横条
 							LCD_Fill(160+5,154,160+704-5,154+270-5,WHITE); 				// 白色方框
 							
-							LCD_ShowSpStr(175,108,450,36,WHITE,GRAY_656565,Font_Rbb34,"Hint: OQ light",0);
+							LCD_ShowSpStr(175,108,450,36,WHITE,GRAY_656565,Font_Rbb34,"Hint: OQ status",0);
 							
-							LCD_ShowSpStr(175,185,700,24,BLACK,WHITE,Font_Rbm22,"Define the duration (days) in which the OQ light on the home screen of ",0);
+							LCD_ShowSpStr(175,185,700,24,BLACK,WHITE,Font_Rbm22,"Define the duration (days) in which the OQ status on the home screen of ",0);
 							LCD_ShowSpStr(175,215,700,24,BLACK,WHITE,Font_Rbm22,"the TAR II changes to yellow to warn the user of the upcoming expiration ",0);
 							LCD_ShowSpStr(175,245,700,24,BLACK,WHITE,Font_Rbm22,"date of the previous OQ.",0);
 							
@@ -32546,7 +32906,7 @@ void Display_Handler(void)
 											ucDat = 0;
 											uiDat = 0;
 											
-											for(i=0;i<15;i++)
+											for(i=0;i<16;i++)
 											{
 												if((KeyInStr[i] == '.')||(KeyInStr[i] == 0))
 												{
@@ -32593,7 +32953,7 @@ void Display_Handler(void)
 											ucDat = 0;
 											uiDat = 0;
 											
-											for(i=0;i<15;i++)
+											for(i=0;i<16;i++)
 											{
 												if((KeyInStr[i] == '.')||(KeyInStr[i] == 0))
 												{
@@ -32632,7 +32992,7 @@ void Display_Handler(void)
 											ucDat = 0;
 											uiDat = 0;
 											
-											for(i=0;i<15;i++)
+											for(i=0;i<16;i++)
 											{
 												if((KeyInStr[i] == '.')||(KeyInStr[i] == 0))
 												{
@@ -33061,8 +33421,6 @@ void Display_Handler(void)
 										KeyState = 1;
 										kps_flag = 1;
 										
-										//strcpy(KeyInStr, SetDateStr); 
-										//KIS_ip = strlen(KeyInStr);
 										KIS_ip = 0;
 										KeyInStr[KIS_ip] = 0;
 										KIS_cd = 1;
@@ -33185,7 +33543,7 @@ void Display_Handler(void)
 											ucDat = 0;
 											uiDat = 0;
 											
-											for(i=0;i<15;i++)
+											for(i=0;i<16;i++)
 											{
 												if((KeyInStr[i] == '.')||(KeyInStr[i] == 0))
 												{
@@ -33232,7 +33590,7 @@ void Display_Handler(void)
 											ucDat = 0;
 											uiDat = 0;
 											
-											for(i=0;i<15;i++)
+											for(i=0;i<16;i++)
 											{
 												if((KeyInStr[i] == '.')||(KeyInStr[i] == 0))
 												{
@@ -33271,7 +33629,7 @@ void Display_Handler(void)
 											ucDat = 0;
 											uiDat = 0;
 											
-											for(i=0;i<15;i++)
+											for(i=0;i<16;i++)
 											{
 												if((KeyInStr[i] == '.')||(KeyInStr[i] == 0))
 												{
@@ -33941,7 +34299,7 @@ void Display_Handler(void)
 											ucDat = 0;
 											uiDat = 0;
 											
-											for(i=0;i<15;i++)
+											for(i=0;i<16;i++)
 											{
 												if((KeyInStr[i] == '.')||(KeyInStr[i] == 0))
 												{
@@ -33990,7 +34348,7 @@ void Display_Handler(void)
 											ucDat = 0;
 											uiDat = 0;
 											
-											for(i=0;i<15;i++)
+											for(i=0;i<16;i++)
 											{
 												if((KeyInStr[i] == '.')||(KeyInStr[i] == 0))
 												{
@@ -34029,7 +34387,7 @@ void Display_Handler(void)
 											ucDat = 0;
 											uiDat = 0;
 											
-											for(i=0;i<15;i++)
+											for(i=0;i<16;i++)
 											{
 												if((KeyInStr[i] == '.')||(KeyInStr[i] == 0))
 												{
@@ -34269,75 +34627,55 @@ u8 Get_CPMenu(u8 line0,u8 line1)
 				{
 					LCD_Fill(32,160,32+720,160+46,WHITE); 						// 小白框
 					LCD_ShowIcon(50,168,32,32,BLACK,WHITE,40,0); 			// “小表盘”
-					LCD_ShowSpStr(110,170,680,24,BLACK,WHITE,Font_Rbr27,"Date and time",0);
+					LCD_ShowSpStr(110,170,680,28,BLACK,WHITE,Font_Rbr27,"Date and time",0);
 				}break;
 				case 2:
 				{
 					LCD_Fill(32,206,32+720,206+46,GRAY_E8E8E8); 								// 小灰框
 					LCD_ShowIcon(50,214,32,32,BLACK,GRAY_E8E8E8,41,0); 					// “小打印机”
-					LCD_ShowSpStr(110,216,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Printer",0);
+					LCD_ShowSpStr(110,216,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Printer",0);
 				}break;
 				case 3:
 				{
 					LCD_Fill(32,252,32+720,252+46,WHITE); 											// 小白框
 					LCD_ShowIcon(55,262,24,24,BLACK,WHITE,42,0); 								// “小喇叭”
-					LCD_ShowSpStr(110,262,680,24,BLACK,WHITE,Font_Rbr27,"Sound",0);
+					LCD_ShowSpStr(110,262,680,28,BLACK,WHITE,Font_Rbr27,"Sound",0);
 				}break;
 				case 4:
 				{
 					LCD_Fill(32,298,32+720,298+46,GRAY_E8E8E8); 					// 小灰框
 					LCD_ShowIcon(55,308,24,24,BLACK,GRAY_E8E8E8,59,0); 					// “水平双箭头”
-					LCD_ShowSpStr(110,308,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Configuration",0);
+					LCD_ShowSpStr(110,308,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Configuration",0);
 				}break;
 				case 5:
 				{
-					//LCD_Fill(32,344,32+720,344+46,WHITE); 								// 小白框
-					//LCD_ShowIcon(55,355,24,24,BLACK,WHITE,64,0); 								// 压缩率参考体积
-					//LCD_ShowSpStr(110,354,680,24,BLACK,WHITE,Font_Rbr27,"USP configuration",0);
-					
 					LCD_Fill(32,344,32+720,344+46,WHITE); 					// 小灰框
 					LCD_ShowIcon(55,355,24,24,BLACK,WHITE,65,0); 					// OQ红绿灯
-					LCD_ShowSpStr(110,354,680,24,BLACK,WHITE,Font_Rbr27,"OQ light",0);
+					LCD_ShowSpStr(110,354,680,28,BLACK,WHITE,Font_Rbr27,"OQ status",0);
 				}break;
 				case 6:
 				{
-					//LCD_Fill(32,390,32+720,390+46,GRAY_E8E8E8); 					// 小灰框
-					//LCD_ShowIcon(55,400,24,24,BLACK,GRAY_E8E8E8,65,0); 					// OQ红绿灯
-					//LCD_ShowSpStr(110,400,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"OQ light",0);
-					
 					LCD_Fill(32,390,32+720,390+46,GRAY_E8E8E8); 								// 	小白框
 					LCD_ShowIcon(47,393,42,42,BLACK,GRAY_E8E8E8,69,0); 								// 解锁的图标								2021/10/25 星期一 15:30:45
-					LCD_ShowSpStr(110,400,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Password protection",0);		//2021/10/21 增加密码设置
+					LCD_ShowSpStr(110,400,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Password protection",0);		//2021/10/21 增加密码设置
 				}break;
 				case 7:
 				{
-					//LCD_Fill(32,436,32+720,436+46,WHITE); 								// 	小白框
-					//LCD_ShowIcon(47,440,42,42,BLACK,WHITE,69,0); 								// 解锁的图标								2021/10/25 星期一 15:30:45
-					//LCD_ShowSpStr(110,446,680,24,BLACK,WHITE,Font_Rbr27,"Password protection",0);		//2021/10/21 增加密码设置
-					
 					LCD_Fill(32,436,32+720,436+46,WHITE); 					// 小灰框
 					LCD_ShowIcon(47,440,42,42,BLACK,WHITE,71,0); 					// Export(小)								2021/11/22 星期一 14:33:28
-					LCD_ShowSpStr(110,446,680,24,BLACK,WHITE,Font_Rbr27,"Export settings",0);				//2021/11/22 星期一 14:34:48	增加导出设置
+					LCD_ShowSpStr(110,446,680,28,BLACK,WHITE,Font_Rbr27,"Export settings",0);				//2021/11/22 星期一 14:34:48	增加导出设置
 				}break;
 				case 8:
 				{
-					//LCD_Fill(32,482,32+720,482+46,GRAY_E8E8E8); 					// 小灰框
-					//LCD_ShowIcon(47,486,42,42,BLACK,GRAY_E8E8E8,71,0); 					// Export(小)								2021/11/22 星期一 14:33:28
-					//LCD_ShowSpStr(110,492,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Export settings",0);				//2021/11/22 星期一 14:34:48	增加导出设置
-					
 					LCD_Fill(32,482,32+720,482+46,GRAY_E8E8E8); 								// 	小白框
 					LCD_ShowIcon(52,486,32,32,BLACK,GRAY_E8E8E8,96,0); 						// 网络图标
-					LCD_ShowSpStr(110,492,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Network settings",0);
+					LCD_ShowSpStr(110,492,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Network settings",0);
 				}break;
 				case 9:
 				{
-					//LCD_Fill(32,528,32+720,528+46,WHITE); 								// 	小白框
-					//LCD_ShowIcon(52,535,32,32,BLACK,WHITE,96,0); 						// 网络图标
-					//LCD_ShowSpStr(110,538,680,24,BLACK,WHITE,Font_Rbr27,"Network settings",0);
-					
 					LCD_Fill(32,528,32+720,528+46,WHITE); 						// 小白框
 					LCD_ShowIcon(55,538,24,24,BLACK,WHITE,61,0); 			// “打印管理图标”
-					LCD_ShowSpStr(110,538,680,24,BLACK,WHITE,Font_Rbr27,"Reports",0);
+					LCD_ShowSpStr(110,538,680,28,BLACK,WHITE,Font_Rbr27,"Reports",0);
 				}break;
 				default:
 				break;
@@ -34351,75 +34689,55 @@ u8 Get_CPMenu(u8 line0,u8 line1)
 					{
 						LCD_Fill(32,160,32+720,160+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(50,168,32,32,WHITE,BLUE_26A5D1,40,0); 	// “小表盘”
-						LCD_ShowSpStr(110,170,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Date and time",0);
+						LCD_ShowSpStr(110,170,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Date and time",0);
 					}break;
 					case 2:
 					{
 						LCD_Fill(32,206,32+720,206+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(50,214,32,32,WHITE,BLUE_26A5D1,41,0); 	// “小打印机”
-						LCD_ShowSpStr(110,216,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Printer",0);
+						LCD_ShowSpStr(110,216,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Printer",0);
 					}break;
 					case 3:
 					{
 						LCD_Fill(32,252,32+720,252+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(58,262,24,24,WHITE,BLUE_26A5D1,42,0); 	// “小喇叭”
-						LCD_ShowSpStr(110,262,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Sound",0);
+						LCD_ShowSpStr(110,262,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Sound",0);
 					}break;
 					case 4:
 					{
 						LCD_Fill(32,298,32+720,298+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(55,308,24,24,WHITE,BLUE_26A5D1,59,0); 	// “水平双箭头”
-						LCD_ShowSpStr(110,308,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Configuration",0);
+						LCD_ShowSpStr(110,308,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Configuration",0);
 					}break;
 					case 5:
 					{
-						//LCD_Fill(32,344,32+720,344+46,BLUE_26A5D1); 				// 小兰框
-						//LCD_ShowIcon(55,355,24,24,WHITE,BLUE_26A5D1,64,0); 				// “计算器”
-						//LCD_ShowSpStr(110,354,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"USP configuration",0);
-						
 						LCD_Fill(32,344,32+720,344+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(55,355,24,24,WHITE,BLUE_26A5D1,65,0); 						// “红绿灯”
-						LCD_ShowSpStr(110,354,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"OQ light",0);
+						LCD_ShowSpStr(110,354,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"OQ status",0);
 					}break;
 					case 6:
 					{
-						//LCD_Fill(32,390,32+720,390+46,BLUE_26A5D1); 				// 小兰框
-						//LCD_ShowIcon(55,400,24,24,WHITE,BLUE_26A5D1,65,0); 						// “红绿灯”
-						//LCD_ShowSpStr(110,400,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"OQ light",0);
-						
 						LCD_Fill(32,390,32+720,390+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(47,393,42,42,WHITE,BLUE_26A5D1,69,0); 						// “解锁图标”
-						LCD_ShowSpStr(110,400,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Password protection",0);
+						LCD_ShowSpStr(110,400,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Password protection",0);
 					}break;
 					case 7:
 					{
-						//LCD_Fill(32,436,32+720,436+46,BLUE_26A5D1); 				// 小兰框
-						//LCD_ShowIcon(47,440,42,42,WHITE,BLUE_26A5D1,69,0); 						// “解锁图标”
-						//LCD_ShowSpStr(110,446,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Password protection",0);
-						
 						LCD_Fill(32,436,32+720,436+46,BLUE_26A5D1); 				// 小蓝框
 						LCD_ShowIcon(47,440,42,42,WHITE,BLUE_26A5D1,71,0); 				// Export(小)								2021/11/22 星期一 14:33:28
-						LCD_ShowSpStr(110,446,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Export settings",0);				//2021/11/22 星期一 14:34:48	增加导出设置
+						LCD_ShowSpStr(110,446,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Export settings",0);				//2021/11/22 星期一 14:34:48	增加导出设置
 					}break;
 					case 8:
 					{
-						//LCD_Fill(32,482,32+720,482+46,BLUE_26A5D1); 				// 小蓝框
-						//LCD_ShowIcon(47,486,42,42,WHITE,BLUE_26A5D1,71,0); 				// Export(小)								2021/11/22 星期一 14:33:28
-						//LCD_ShowSpStr(110,492,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Export settings",0);				//2021/11/22 星期一 14:34:48	增加导出设置
-						
 						LCD_Fill(32,482,32+720,482+46,BLUE_26A5D1); 				// 小蓝框
 						LCD_ShowIcon(52,486,32,32,WHITE,BLUE_26A5D1,96,0); 						// 网络图标
-						LCD_ShowSpStr(110,492,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Network settings",0);				//2022/07/08 星期五 15:03:08 增加导出设置
+						LCD_ShowSpStr(110,492,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Network settings",0);				//2022/07/08 星期五 15:03:08 增加导出设置
 					}break;
 					case 9:
 					{
-						//LCD_Fill(32,528,32+720,528+46+2,BLUE_26A5D1); 				// 小蓝框
-						//LCD_ShowIcon(52,535,32,32,WHITE,BLUE_26A5D1,96,0); 						// 网络图标
-						//LCD_ShowSpStr(110,538,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Network settings",0);				//2022/07/08 星期五 15:03:08 增加导出设置
-						
 						LCD_Fill(32,528,32+720,528+46+2,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(55,538,24,24,WHITE,BLUE_26A5D1,61,0); 			// “打印管理图标”
-						LCD_ShowSpStr(110,538,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Reports",0);
+						LCD_ShowSpStr(110,538,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Reports",0);
 					}break;
 					default:
 					break;
@@ -34434,55 +34752,55 @@ u8 Get_CPMenu(u8 line0,u8 line1)
 				{
 					LCD_Fill(32,160,32+720,160+46,GRAY_E8E8E8); 						// 小白框
 					LCD_ShowIcon(50,165,32,32,BLACK,GRAY_E8E8E8,38,0); 			// “小天平”
-					LCD_ShowSpStr(110,170,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Balance",0);
+					LCD_ShowSpStr(110,170,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Balance",0);
 				}break;
 				case 2:
 				{
 					LCD_Fill(32,206,32+720,206+46,WHITE); 								// 小灰框
 					LCD_ShowIcon(50,214,32,32,BLACK,WHITE,41,0); 					// “小打印机”
-					LCD_ShowSpStr(110,216,680,24,BLACK,WHITE,Font_Rbr27,"Printer",0);
+					LCD_ShowSpStr(110,216,680,28,BLACK,WHITE,Font_Rbr27,"Printer",0);
 				}break;
 				case 3:
 				{
 					LCD_Fill(32,252,32+720,252+46,GRAY_E8E8E8); 											// 小白框
 					LCD_ShowIcon(55,262,24,24,BLACK,GRAY_E8E8E8,42,0); 								// “小喇叭”
-					LCD_ShowSpStr(110,262,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Sound",0);
+					LCD_ShowSpStr(110,262,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Sound",0);
 				}break;
 				case 4:
 				{
 					LCD_Fill(32,298,32+720,298+46,WHITE); 					// 小灰框
 					LCD_ShowIcon(55,308,24,24,BLACK,WHITE,59,0); 					// “水平双箭头”
-					LCD_ShowSpStr(110,308,680,24,BLACK,WHITE,Font_Rbr27,"Configuration",0);
+					LCD_ShowSpStr(110,308,680,28,BLACK,WHITE,Font_Rbr27,"Configuration",0);
 				}break;
 				case 5:
 				{
 					LCD_Fill(32,344,32+720,344+46,GRAY_E8E8E8); 								// 小白框
 					LCD_ShowIcon(55,355,24,24,BLACK,GRAY_E8E8E8,64,0); 								// 压缩率参考体积
-					LCD_ShowSpStr(110,354,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"USP configuration",0);
+					LCD_ShowSpStr(110,354,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"USP configuration",0);
 				}break;
 				case 6:
 				{
 					LCD_Fill(32,390,32+720,390+46,WHITE); 					// 小灰框
 					LCD_ShowIcon(55,400,24,24,BLACK,WHITE,65,0); 					// OQ红绿灯
-					LCD_ShowSpStr(110,400,680,24,BLACK,WHITE,Font_Rbr27,"OQ light",0);
+					LCD_ShowSpStr(110,400,680,28,BLACK,WHITE,Font_Rbr27,"OQ status",0);
 				}break;
 				case 7:
 				{
 					LCD_Fill(32,436,32+720,436+46,GRAY_E8E8E8); 								// 	小白框
 					LCD_ShowIcon(47,440,42,42,BLACK,GRAY_E8E8E8,69,0); 								// 解锁的图标								2021/10/25 星期一 15:30:45
-					LCD_ShowSpStr(110,446,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Password protection",0);		//2021/10/21 增加密码设置
+					LCD_ShowSpStr(110,446,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Password protection",0);		//2021/10/21 增加密码设置
 				}break;
 				case 8:
 				{
 					LCD_Fill(32,482,32+720,482+46,WHITE); 					// 小灰框
 					LCD_ShowIcon(47,486,42,42,BLACK,WHITE,71,0); 					// Export(小)								2021/11/22 星期一 14:33:28
-					LCD_ShowSpStr(110,492,680,24,BLACK,WHITE,Font_Rbr27,"Export settings",0);				//2021/11/22 星期一 14:34:48	增加导出设置
+					LCD_ShowSpStr(110,492,680,28,BLACK,WHITE,Font_Rbr27,"Export settings",0);				//2021/11/22 星期一 14:34:48	增加导出设置
 				}break;
 				case 9:
 				{
 					LCD_Fill(32,528,32+720,528+46,GRAY_E8E8E8); 								// 	小白框
 					LCD_ShowIcon(47,532,42,42,BLACK,GRAY_E8E8E8,71,0); 					// Export(小)								2021/11/22 星期一 14:33:28
-					LCD_ShowSpStr(110,538,680,24,BLACK,GRAY_E8E8E8,Font_Rbr27,"Network settings",0);
+					LCD_ShowSpStr(110,538,680,28,BLACK,GRAY_E8E8E8,Font_Rbr27,"Network settings",0);
 				}break;
 				default:
 				break;
@@ -34496,55 +34814,55 @@ u8 Get_CPMenu(u8 line0,u8 line1)
 					{
 						LCD_Fill(32,160,32+720,160+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(50,165,32,32,WHITE,BLUE_26A5D1,38,0); 			// “小天平”
-						LCD_ShowSpStr(110,170,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Balance",0);
+						LCD_ShowSpStr(110,170,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Balance",0);
 					}break;
 					case 2:
 					{
 						LCD_Fill(32,206,32+720,206+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(50,214,32,32,WHITE,BLUE_26A5D1,41,0); 	// “小打印机”
-						LCD_ShowSpStr(110,216,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Printer",0);
+						LCD_ShowSpStr(110,216,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Printer",0);
 					}break;
 					case 3:
 					{
 						LCD_Fill(32,252,32+720,252+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(58,262,24,24,WHITE,BLUE_26A5D1,42,0); 	// “小喇叭”
-						LCD_ShowSpStr(110,262,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Sound",0);
+						LCD_ShowSpStr(110,262,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Sound",0);
 					}break;
 					case 4:
 					{
 						LCD_Fill(32,298,32+720,298+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(55,308,24,24,WHITE,BLUE_26A5D1,59,0); 	// “水平双箭头”
-						LCD_ShowSpStr(110,308,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Configuration",0);
+						LCD_ShowSpStr(110,308,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Configuration",0);
 					}break;
 					case 5:
 					{
 						LCD_Fill(32,344,32+720,344+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(55,355,24,24,WHITE,BLUE_26A5D1,64,0); 				// “计算器”
-						LCD_ShowSpStr(110,354,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"USP configuration",0);
+						LCD_ShowSpStr(110,354,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"USP configuration",0);
 					}break;
 					case 6:
 					{
 						LCD_Fill(32,390,32+720,390+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(55,400,24,24,WHITE,BLUE_26A5D1,65,0); 						// “红绿灯”
-						LCD_ShowSpStr(110,400,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"OQ light",0);
+						LCD_ShowSpStr(110,400,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"OQ status",0);
 					}break;
 					case 7:
 					{
 						LCD_Fill(32,436,32+720,436+46,BLUE_26A5D1); 				// 小兰框
 						LCD_ShowIcon(47,440,42,42,WHITE,BLUE_26A5D1,69,0); 						// “解锁图标”
-						LCD_ShowSpStr(110,446,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Password protection",0);
+						LCD_ShowSpStr(110,446,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Password protection",0);
 					}break;
 					case 8:
 					{
 						LCD_Fill(32,482,32+720,482+46,BLUE_26A5D1); 				// 小蓝框
 						LCD_ShowIcon(47,486,42,42,WHITE,BLUE_26A5D1,71,0); 				// Export(小)								2021/11/22 星期一 14:33:28
-						LCD_ShowSpStr(110,492,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Export settings",0);				//2021/11/22 星期一 14:34:48	增加导出设置
+						LCD_ShowSpStr(110,492,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Export settings",0);				//2021/11/22 星期一 14:34:48	增加导出设置
 					}break;
 					case 9:
 					{
 						LCD_Fill(32,528,32+720,528+46+2,BLUE_26A5D1); 				// 小蓝框
 						LCD_ShowIcon(47,532,42,42,WHITE,BLUE_26A5D1,71,0); 				// Export(小)								2021/11/22 星期一 14:33:28
-						LCD_ShowSpStr(110,538,680,24,WHITE,BLUE_26A5D1,Font_Rbr27,"Network settings",0);				//2022/07/08 星期五 15:03:08 增加导出设置
+						LCD_ShowSpStr(110,538,680,28,WHITE,BLUE_26A5D1,Font_Rbr27,"Network settings",0);				//2022/07/08 星期五 15:03:08 增加导出设置
 					}break;
 					default:
 					break;
@@ -34926,6 +35244,24 @@ u8 keyscan(u8 kps,u16 cdx,u16 cdy)
 		BEEPER_PlayTones(tones_1khz);
 	
 	return cn;
+}
+
+void AbortPopUp(void)		// abort弹窗
+{
+	LCD_Fill(240,167,240+544,167+210,GRAY_656565); 				// 灰色横条
+	LCD_Fill(240+5,167+60,240+544-5,167+210-5,WHITE); // 白色方框
+	
+	LCD_ShowSpStr(257,180,450,36,WHITE,GRAY_656565,Font_Rbb34,"Abort the test",0);
+	
+	LCD_ShowSpStr(275,252,700,24,BLACK,WHITE,Font_Rbm22,"Are you sure you want to abort?",0);
+	
+	LCD_Fill(240,392,240+256,392+60,GRAY_656565); 					// 灰色横条
+	LCD_Fill(240+5,392+5,240+256-5,392+60-5,WHITE); 					// 按钮
+	LCD_ShowSpStr(354,406,100,35,BLACK,WHITE,Font_Rbb34,"No",0);
+	
+	LCD_Fill(528,392,528+256,392+60,GRAY_656565); 					// 灰色横条
+	LCD_Fill(528+5,392+5,528+256-5,392+60-5,GREEN_3AAA35); 					// 按钮
+	LCD_ShowSpStr(638,406,100,35,WHITE,GREEN_3AAA35,Font_Rbb34,"Yes",0);
 }
 
 // 获取显示触摸板的硬件版本号 ------------------------------

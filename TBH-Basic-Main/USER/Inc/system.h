@@ -472,6 +472,10 @@ float GetWeight(void);
 extern User_Data User_data,User_datatemp1,User_datatemp2;
 extern Product_Mana Pro_data;
 extern ContactInfo Contact_info;
+extern QUAL_ST NewDate;
+extern QUAL_ST LastDate;
+extern RTC_TimeTypeDef RTC_TimeStruct;
+extern RTC_DateTypeDef RTC_DateStruct;
 
 // ±äÁ¿ÉùÃ÷-------------------------------------------------
 extern const uint32_t StId[16];

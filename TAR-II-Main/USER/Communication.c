@@ -177,6 +177,12 @@ void Communicate_Handler(void)
 		//BalanceWeight = 0.0103;
 		return;
 	}
+	if((strncmp(RS232_RXBuffer,"SerNo.",6)==0)||
+		(strncmp(RS232_RXBuffer,"I4 A ",5)==0)) 				// 电子称序列号获取
+	{
+		EBalanceRxCnt++; 															// 电子称接收计数器
+		return;
+	}
 	if(strncmp(RS232_RXBuffer,"S S    ",7) == 0)
 	{
 		EBalanceRxCnt++; 															// 电子称接收计数器
@@ -211,7 +217,7 @@ void Communicate_Handler(void)
 		RS232_SendString(buf);
 		UsbInUse = 0; 											// USB占用标志复位，Gavin，2023-08-10 周四 15:30:16
 		return;
-	}			
+	}
 	if(strcmp(RS232_RXBuffer,"VINCRESET")==0) 
 	{
 		VINC_Reset();

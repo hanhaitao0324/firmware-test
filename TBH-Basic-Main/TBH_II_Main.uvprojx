@@ -49,7 +49,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\FLASH\RELEASE\</OutputDirectory>
-          <OutputName>TBH_II_Main_v01_00</OutputName>
+          <OutputName>TBH_II_Main_v01_02</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
@@ -567,11 +567,6 @@
               <FileName>lan8720.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\HARDWARE\ETHERNET\lan8720.c</FilePath>
-            </File>
-            <File>
-              <FileName>tmc5160_a.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\HARDWARE\TMC5160_A\tmc5160_a.c</FilePath>
             </File>
             <File>
               <FileName>ad7190.c</FileName>
@@ -1428,11 +1423,6 @@
               <FileName>lan8720.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\HARDWARE\ETHERNET\lan8720.c</FilePath>
-            </File>
-            <File>
-              <FileName>tmc5160_a.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\HARDWARE\TMC5160_A\tmc5160_a.c</FilePath>
             </File>
             <File>
               <FileName>ad7190.c</FileName>

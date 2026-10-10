@@ -62,23 +62,25 @@ static int speedup	= 0;
 static int MaxVac		= MAXVACUM;
 
 int tmpVacuum,aktPress	=	0;
-int AutoPrint,tMode			=	0;
+int AutoPrint,tMode			=	0;	// 时间模式，0：分钟 1：小时
 int Vacuum,RedVacuum,messZeitL,messZeitH,ablZeitH,ablZeitL,Penetration;
 int mepresure[10],metimh[10],metiml[10];
 unsigned char dp1,dp2,dp3,dp4,dp10,dp20,dp30,dp40;
 unsigned int PrinterPort,PrinterPaper,PrinterLanguage,PrinterFrames;
 unsigned int DatFormat;
 uint8_t Abbruch 				= CHANCEL_NO;
-bool PresReduced 				= false;
+char PresReduced 				= 0;
 
 extern char id[];
 extern char buf[];
 extern float VacM, VacB;
 
 bool FirstReached	=	false;
-bool MessFlg			=	false;
+bool MessFlg			=	false;	// 测量是否正在进行
 bool CountFree		=	false;
 int intervall;
+int count;
+char ParaLock;	// 参数锁定
 
 void logo(void);
 void LoadFixVal(void);
@@ -127,7 +129,10 @@ static char *text23[4]={"PINV","PINV","PINV","PINV"};
 static char *text24[4]={"DEV ","DEV ","DEV ","DEV "};
 static char *text25[4]={"SNUM","SNUM","SNUM","SNUM"};
 
-static char **texte[25]={text0,text1,text3,text4,text5,text6,text7,text8,text9,text10,text11,text12,text13,text14,text15,text16,text17,text18,text19,text20,text21,text22,text23,text24,text25};
+						//	 0	   1	 2	   3	 4	   5	 6	   7	 8	    9	  10	 11	    12	   13	  14
+static char **texte[25]={text0,text1,text3,text4,text5,text6,text7,text8,text9,text10,text11,text12,text13,text14,text15,
+	 					//  15	   16	  17	 18	 	19	   20	  21	 22	    23	   24
+						text16,text17,text18,text19,text20,text21,text22,text23,text24,text25};
 static char **mtexte[6]={text0,text1,text3,text4,text5,text6};
 
 static char *textein[4]={"EIN ","ON  ","ON  ","ON  "};
@@ -230,6 +235,8 @@ void LoadFixVal(void){
 	getid(id);																																//loads the chip id into global variable
 	AutoPrint=readeeprom(ADRAUTOPRINT);
 	if(AutoPrint>1) AutoPrint=0;
+	ParaLock = readeeprom(ADRLOCKPARA);
+	if(ParaLock > 1) ParaLock = 0;
 }
 /*******************************************************************************
 * Function Name  : Display_Handler
@@ -237,144 +244,196 @@ void LoadFixVal(void){
 * Input          : None
 * Output         : None
 * Return         : None
-*******************************************************************************/	
-void Display_Handler(void){
-		if(fnkindex>=0 && fnkindex<6) {
+*******************************************************************************/
+void Display_Handler(void)
+{
+	if(fnkindex>=0 && fnkindex<6) 
+	{
+		dp10=dp20=dp30=dp40=0;
+		if(fnkindex==0 && tMode==1) dp40=1;
+		LED_Print(LED_DISPLAY_LEFT, 0, mtexte[fnkindex][Platform_Data->Language]);
+	}
+	else
+		LED_Print(LED_DISPLAY_LEFT, 0,"IERR");
+
+	switch(fnkindex) 
+	{
+		case 0:
+			sprintf(buf,"%02d%02d",messZeitH,messZeitL);
+			dp1=dp2=dp3=dp4=0;
+			dp2=1;
+			LED_Print(LED_DISPLAY_RIGHT, 0,buf);
+		break;
+		case 1:	
+			sprintf(buf,"%04d",Vacuum);
+			dp1=dp2=dp3=dp4=0;
+			LED_Print(LED_DISPLAY_RIGHT, 0,buf);
+		break;
+		case 2:
+			dp1=dp2=dp3=dp4=0;
 			dp10=dp20=dp30=dp40=0;
-			if(fnkindex==0 && tMode==1) dp40=1;
-			LED_Print(LED_DISPLAY_LEFT, 0, mtexte[fnkindex][Platform_Data->Language]);
+			if(AutoPrint)
+				LED_Print(LED_DISPLAY_RIGHT, 0,textein[Platform_Data->Language]);
+			else
+				LED_Print(LED_DISPLAY_RIGHT, 0,textaus[Platform_Data->Language]);
+		break;				
+		case 3:
+			dp1=dp2=dp3=dp4=0;
+			LED_Print(LED_DISPLAY_RIGHT, 0,"    ");			
+			break;				
+		case 4:
+			dp10=dp20=dp30=dp40=0;
+			dp1=dp2=dp3=dp4=0;
+			LED_Print(LED_DISPLAY_RIGHT, 0,"    ");			
+		break;				
+		case 5:
+			dp10=dp20=dp30=dp40=0;
+			dp1=dp2=dp3=dp4=0;
+			LED_Print(LED_DISPLAY_RIGHT, 0,"    ");			
+		break;				
+		default:
+			LED_Print(LED_DISPLAY_RIGHT, 0,"FERR");			
+		break;	
+	}
+
+	while((ch=gettast())==0);
+	BEEPER_PlayTones(tones_1khz);
+
+	if(fnkindex == 0)
+	{
+		count=0;
+		osDelay(20);
+
+		while(gettasto() == KBD_CODE_MENU_DOWN_KBD_CODE_VALUE_DOWN && count++<16) 
+		{
+			osDelay(500);
 		}
 
-		else	LED_Print(LED_DISPLAY_LEFT, 0,"IERR");
-		
-		switch(fnkindex) {
+		if(count<15) 
+			;
+		else
+		{
+			ch = 0;
+			
+			if(ParaLock == 0)
+			{
+				ParaLock = 1;
+				BEEPER_PlayTones(tones_lock);
+			}
+			else
+			{
+				ParaLock = 0;
+				BEEPER_PlayTones(tones_unlock);
+			}
+			writeeeprom(ParaLock, ADRLOCKPARA);
+		}
+	}
+
+	if(ch==KBD_CODE_STOP)
+		fnkindex=0;
+	if(ch==KBD_CODE_START) 
+	{
+		switch(fnkindex) 
+		{
 			case 0:
-				sprintf(buf,"%02d%02d",messZeitH,messZeitL);
-				dp1=dp2=dp3=dp4=0;
-				dp2=1;
-				LED_Print(LED_DISPLAY_RIGHT, 0,buf);
-				break;
-			case 1:	
-				sprintf(buf,"%04d",Vacuum);
-				dp1=dp2=dp3=dp4=0;
-				LED_Print(LED_DISPLAY_RIGHT, 0,buf);
-				break;
+				messung();
+			break;
+			case 1:
+			break;
 			case 2:
+				if(Platform_Data->Language==0) 
+				{
+					LED_Print(LED_DISPLAY_LEFT, 0,"DRUC");
+					LED_Print(LED_DISPLAY_RIGHT, 0,"KEN");						
+				}
+				else 
+				{
+					LED_Print(LED_DISPLAY_LEFT, 0,"PRIN");
+					LED_Print(LED_DISPLAY_RIGHT, 0,"TING");
+				}
+				druckergebnis();	// 打印报告
+				if(Platform_Data->Language==0)
+					LED_Print(LED_DISPLAY_LEFT, 0,"DRUK");
+				else
+					LED_Print(LED_DISPLAY_LEFT, 0,"PRIN");
 				dp1=dp2=dp3=dp4=0;
-				dp10=dp20=dp30=dp40=0;
 				if(AutoPrint)
 					LED_Print(LED_DISPLAY_RIGHT, 0,textein[Platform_Data->Language]);
 				else
 					LED_Print(LED_DISPLAY_RIGHT, 0,textaus[Platform_Data->Language]);
-				break;				
+				ch=gettast();
+			break;	
 			case 3:
-				dp1=dp2=dp3=dp4=0;
-				LED_Print(LED_DISPLAY_RIGHT, 0,"    ");			
-				break;				
+				kalibriere();	// 校正
+			break;	
 			case 4:
-				dp10=dp20=dp30=dp40=0;
-				dp1=dp2=dp3=dp4=0;
-				LED_Print(LED_DISPLAY_RIGHT, 0,"    ");			
-				break;				
+				kontrolle();	// 测试压力
+			break;	
 			case 5:
-				dp10=dp20=dp30=dp40=0;
-				dp1=dp2=dp3=dp4=0;
-				LED_Print(LED_DISPLAY_RIGHT, 0,"    ");			
-				break;				
-			default:
-				LED_Print(LED_DISPLAY_RIGHT, 0,"FERR");			
-				break;	
+				einstell();		// 设置菜单
+			break;	
+		}	
+	}
+	if(ch==KBD_CODE_MENU_UP) 
+	{
+		if(ParaLock == 0)
+		{
+			if(fnkindex<5) 
+				fnkindex++;
 		}
-
-		while((ch=gettast())==0);
-		BEEPER_PlayTones(tones_1khz);
-
-		if(ch==KBD_CODE_STOP) 
-			fnkindex=0;
-		if(ch==KBD_CODE_START) {
-			switch(fnkindex) {
-				case 0:
-					messung();
-					break;
-				case 1:
-					break;
-				case 2:
-					if(Platform_Data->Language==0) {
-						LED_Print(LED_DISPLAY_LEFT, 0,"DRUC");
-						LED_Print(LED_DISPLAY_RIGHT, 0,"KEN");						
-					}
-					else {
-						LED_Print(LED_DISPLAY_LEFT, 0,"PRIN");
-						LED_Print(LED_DISPLAY_RIGHT, 0,"TING");
-					}
-					druckergebnis();
-					if(Platform_Data->Language==0)
-						LED_Print(LED_DISPLAY_LEFT, 0,"DRUK");
-					else
-						LED_Print(LED_DISPLAY_LEFT, 0,"PRIN");
-					dp1=dp2=dp3=dp4=0;
-					if(AutoPrint)
-						LED_Print(LED_DISPLAY_RIGHT, 0,textein[Platform_Data->Language]);
-					else
-						LED_Print(LED_DISPLAY_RIGHT, 0,textaus[Platform_Data->Language]);
-					ch=gettast();
-					break;	
-				case 3:
-					kalibriere();
-					break;	
-				case 4:
-					kontrolle();
-					break;	
-				case 5:
-					einstell();
-					break;	
-			}	
-		}
-		if(ch==KBD_CODE_MENU_UP) {
-			if(fnkindex<5) fnkindex++;
-		}
-		if(ch==KBD_CODE_MENU_DOWN) {
-			if(fnkindex>0) fnkindex--;
-		}
-		if(ch==KBD_CODE_VALUE_UP) {
-			switch(fnkindex) {
+	}
+	if(ch==KBD_CODE_MENU_DOWN) 
+	{
+		if(fnkindex>0) fnkindex--;
+	}
+	if(ch==KBD_CODE_VALUE_UP) 
+	{
+		if(ParaLock == 0)
+		{
+			switch(fnkindex) 
+			{
 				case 0:
 					speedup=0;
 					if(messZeitH<100)
 						messZeitL++;
-						if(messZeitL>59) {
+					if(messZeitL>59) 
+					{
+						messZeitL=0;
+						if(messZeitH<99) messZeitH++;
+					}	 
+					sprintf(buf,"%02d%02d",messZeitH,messZeitL);
+					LED_Print(LED_DISPLAY_RIGHT, 0,buf);
+					osDelay(100);
+					while(gettasto()==KBD_CODE_VALUE_UP && messZeitH<99) 
+					{
+						if(speedup++<20)
+							messZeitL++;
+						else
+							messZeitL+=10;
+						if(messZeitL>59) 
+						{
 							messZeitL=0;
 							if(messZeitH<99) messZeitH++;
 						}	 
 						sprintf(buf,"%02d%02d",messZeitH,messZeitL);
 						LED_Print(LED_DISPLAY_RIGHT, 0,buf);
-						osDelay(100);
-						while(gettasto()==KBD_CODE_VALUE_UP && messZeitH<99) {
-							if(speedup++<20)
-								messZeitL++;
-							else
-								messZeitL+=10;
-							if(messZeitL>59) {
-								messZeitL=0;
-								if(messZeitH<99) messZeitH++;
-							}	 
-							sprintf(buf,"%02d%02d",messZeitH,messZeitL);
-							LED_Print(LED_DISPLAY_RIGHT, 0,buf);
-							if(speedup++<20)
-								osDelay(20);
-							else
-								osDelay(1);
-						}
-						writinteep(messZeitL,ADRMESSZEITL);
-						writinteep(messZeitH,ADRMESSZEITH);
-					break;
+						if(speedup++<20)
+							osDelay(20);
+						else
+							osDelay(1);
+					}
+					writinteep(messZeitL,ADRMESSZEITL);
+					writinteep(messZeitH,ADRMESSZEITH);
+				break;
 				case 1:
-					if(Vacuum<MaxVac) {
+					if(Vacuum<MaxVac) 
+					{
 						Vacuum+=1;
 						sprintf(buf,"%04d",Vacuum);
 						LED_Print(LED_DISPLAY_RIGHT, 0,buf);
 						osDelay(100);
-						while(gettasto()==KBD_CODE_VALUE_UP && Vacuum<MaxVac) {
+						while(gettasto()==KBD_CODE_VALUE_UP && Vacuum<MaxVac) 
+						{
 							if(speedup++<20)
 								Vacuum+=1;
 							else
@@ -386,56 +445,79 @@ void Display_Handler(void){
 						}
 						writinteep(Vacuum,ADRVACUUM);
 					}
-					break;		
+				break;		
 				case 2:
-					if(AutoPrint==0) {
+					if(AutoPrint==0) 
+					{
 						AutoPrint=1;
 						LED_Print(LED_DISPLAY_RIGHT, 0,textein[Platform_Data->Language]);
 					}	
-					else {
+					else 
+					{
 						AutoPrint=0;
 						LED_Print(LED_DISPLAY_RIGHT, 0,textaus[Platform_Data->Language]);
 					}	
 					writeeeprom(AutoPrint,ADRAUTOPRINT);
-			}			
-		}										
-		if(ch==KBD_CODE_VALUE_DOWN) {
-			switch(fnkindex) {
+				break;
+			}
+		}
+	}										
+	if(ch==KBD_CODE_VALUE_DOWN) 
+	{
+		if(ParaLock == 0)
+		{
+			switch(fnkindex) 
+			{
 				case 0:
 					speedup=0;		
-					if(messZeitH >= 0 && messZeitL >=0 ){
-						if(messZeitH==0){
+					if(messZeitH >= 0 && messZeitL >=0 )
+					{
+						if(messZeitH==0)
+						{
 							if(messZeitL>10) messZeitL--;
 						}
-						else {	
+						else 
+						{	
 							messZeitL--;
 						}
-						if(messZeitL<0) {
+						if(messZeitL<0) 
+						{
 							messZeitL=59;
 							if(messZeitH>0) messZeitH--;
 						}
 						sprintf(buf,"%02d%02d",messZeitH,messZeitL);
 						LED_Print(LED_DISPLAY_RIGHT, 0,buf);
 						osDelay(100);
-						while(gettasto()==KBD_CODE_VALUE_DOWN && messZeitH>=0) {
-							if(messZeitH>0) {// hier die minimale Zeit auf 10 sec. begrenzen
+						while(gettasto()==KBD_CODE_VALUE_DOWN && messZeitH>=0) 
+						{
+							if(messZeitH>0) 
+							{// hier die minimale Zeit auf 10 sec. begrenzen
 								if(speedup++<20)
 									messZeitL--;
 								else
 									messZeitL-=10;
-							}else{
-								if(speedup++<20){
+							}
+							else
+							{
+								if(speedup++<20)
+								{
 									if(messZeitL>10) messZeitL--;
-								}else{
-									if(messZeitL>11 && ((messZeitL-10)>10)){
+								}
+								else
+								{
+									if(messZeitL>11 && ((messZeitL-10)>10))
+									{
 										messZeitL-=10;
-									}else{
+									}
+									else
+									{
 										if(messZeitL>10)
-												messZeitL--;
+											messZeitL--;
 									}				
 								}
 							}								
-							if(messZeitL<0) {
+							if(messZeitL<0) 
+							{
 								messZeitL=59;
 								if(messZeitH>0) messZeitH--;
 							}
@@ -446,15 +528,17 @@ void Display_Handler(void){
 						writinteep(messZeitH,ADRMESSZEITH);
 						writinteep(messZeitL,ADRMESSZEITL);
 					}
-					break;
+				break;
 				case 1:
 					speedup=0;
-					if(Vacuum>1) {
+					if(Vacuum>1) 
+					{
 						Vacuum-=1;
 						sprintf(buf,"%04d",Vacuum);
 						LED_Print(LED_DISPLAY_RIGHT, 0,buf);
 						osDelay(100);
-						while(gettasto()==KBD_CODE_VALUE_DOWN && Vacuum>1) {
+						while(gettasto()==KBD_CODE_VALUE_DOWN && Vacuum>1) 
+						{
 							if(speedup++<20 || Vacuum<10)
 								Vacuum-=1;
 							else
@@ -465,19 +549,23 @@ void Display_Handler(void){
 						}
 						writinteep(Vacuum,ADRVACUUM);
 					}
-					break;		
+				break;		
 				case 2:
-					if(AutoPrint==0) {
+					if(AutoPrint==0) 
+					{
 						AutoPrint=1;
 						LED_Print(LED_DISPLAY_RIGHT, 0,textein[Platform_Data->Language]);
 					}	
-					else {
+					else 
+					{
 						AutoPrint=0;
 						LED_Print(LED_DISPLAY_RIGHT, 0,textaus[Platform_Data->Language]);
 					}	
 					writeeeprom(AutoPrint,ADRAUTOPRINT);
-			}			
-		}											  	
+				break;
+			}	
+		}		
+	}
 }
 /*******************************************************************************
 * Function Name  : logo
@@ -525,7 +613,7 @@ void einstell(void)
 		osDelay(500);
 	}
 	if(i<9) return;
-	BEEPER_PlayTones(tones_1khz);	
+	BEEPER_PlayTones(tones_1khz);
 
 	//AKC_RTCGetDate(&dtim);
 	
@@ -930,7 +1018,7 @@ void kalibriere(void){
 	}
 	if(i>=10) return;
 	if(ch!=KBD_CODE_MENU_DOWN_KBD_CODE_VALUE_UP) return;
-		BEEPER_PlayTones(tones_1khz);	
+		BEEPER_PlayTones(tones_1khz);
 	
 	IO_SetVentil(Bit_SET);//bel黤ten schliessen
 #ifdef DCPUMP
@@ -1184,10 +1272,10 @@ void showID(void){
 void messung(void)
 {
 	unsigned int press,intverg,index=0,anzverg=0,anzverzoegerung=5;
-  unsigned int cnt_pene_end=0;                                        //counter for pene end pieper
-  bool stopSaving=false;
+  	unsigned int cnt_pene_end=0;                                        //counter for pene end pieper
+  	bool stopSaving=false;	// 只有测得10个数据点才保存
 	FirstReached=false;
-	PresReduced=false;
+	PresReduced=0;	// 压力是否达到设定值,加压超时
 	tmpVacuum=Vacuum;
 	MessFlg=true;
 	
@@ -1196,9 +1284,9 @@ void messung(void)
 		metimh[press]=0;
 		metiml[press]=0;
 	}		
-	Abbruch=false;
-	ablZeitH=messZeitH;
-	ablZeitL=messZeitL;
+	Abbruch=false;	// 测试是否被用户中止
+	ablZeitH=messZeitH;		// 分钟
+	ablZeitL=messZeitL;		// 秒
   
 //entfernt eventuell startet pumpe hier auch nicht bei 60Hz  
 //15.11.2016	IO_SetVentil(Bit_SET);//bel黤ten schliessen
@@ -1219,7 +1307,8 @@ void messung(void)
 	intverg/=10;
 	if(intverg>2)
 		intervall=intverg-2;
-	else{
+	else
+	{
 		if(ablZeitH==0 && ablZeitL ==10)
 			intervall=0;//intverg;
 		else
@@ -1239,24 +1328,44 @@ void messung(void)
 			anzverg = anzverzoegerung; 											// Wert f黵 Anzeigeverz鰃erung 黚ernehmen
 		}
 
-		if(PresReduced) {
-				Abbruch=CHANCEL_PRESS_TIMEOUT;
-				IO_SetDcPump(Bit_RESET); // Pumpe ist im system
-				IO_SetAcPump(Bit_RESET);
-				IO_SetVentil(Bit_RESET); // bel黤ten ein
-				BEEPER_PlayTones(tones_error);
-				dp1=1;	
+		if(PresReduced != 0)
+		{
+			Abbruch=CHANCEL_PRESS_TIMEOUT;
+			IO_SetDcPump(Bit_RESET); 	// PA1-PUMP
+			IO_SetAcPump(Bit_RESET);	// PA0-RELAY
+			IO_SetVentil(Bit_RESET); 	// PC5-VENTIL
+			BEEPER_PlayTones(tones_error);
+
+			if(PresReduced == 1)
+			{
+				dp1=1;
 				sprintf(buf,"TOUT");
-				LED_Print(LED_DISPLAY_RIGHT, 1,buf);
-				osDelay(5000);
-				goto end;
-			}	else {
-					dp1=dp2=dp3=dp4=0;
 			}
+			else
+			{
+				if(Platform_Data->Language == 0)
+					sprintf(buf,"ABBR");
+				else
+					sprintf(buf,"FAIL");
+			}
+			LED_Print(LED_DISPLAY_RIGHT, 1,buf);
+			osDelay(3000);
+			while(gettasto()!=KBD_CODE_START)
+			{
+				osDelay(10);
+			}
+			BEEPER_PlayTones(tones_1khz);//按键音
+			goto end;
+		}
+		else 
+		{
+			dp1=dp2=dp3=dp4=0;
+		}
 
 		aktPress=press;
     
-		if(press>tmpVacuum+3) {														// Druck erreicht, Pumpe abschalten
+		if(press>tmpVacuum+3) 
+		{														// Druck erreicht, Pumpe abschalten
 			FirstReached=true;
 
 #ifdef DCPUMP
@@ -1264,52 +1373,65 @@ void messung(void)
 #endif
 			IO_SetAcPump(Bit_RESET);
 		}
-		if(press<tmpVacuum-3 && !GPIO_ReadInputDataBit(PORT_A, ACPUMP)) { // Druck zu niedrig, Pumpe einschalten
+		if(press<tmpVacuum-3 && !GPIO_ReadInputDataBit(PORT_A, ACPUMP)) 
+		{ // Druck zu niedrig, Pumpe einschalten
 			anzverzoegerung=10;
 			pumpe_entl_start(); //Pumpe entl黤tet starten
+			anzverg = anzverzoegerung;	// 2025-11-6 11:11 HHT
 
-    if(press<tmpVacuum+3 && !GPIO_ReadInputDataBit(PORT_A, ACPUMP)) { // Druck zu hoch, Pumpe ausschalten
+    		if(press<tmpVacuum+3 && !GPIO_ReadInputDataBit(PORT_A, ACPUMP)) 
+			{ // Druck zu hoch, Pumpe ausschalten
         
   #ifdef DCPUMP
   //			IO_SetDcPump(Bit_RESET);// Pumpe ist im system
   #else
         IO_SetAcPump(Bit_RESET);	
   #endif
-      }
+      		}
 		}
-		if(press<tmpVacuum-5) {						// wenn untere Tolleranz erreicht Zeit stoppen
+		if(press<tmpVacuum-5) 
+		{						// wenn untere Tolleranz erreicht Zeit stoppen
 			CountFree=0;										// Zeit anhalten
-		}	else {
+		}	
+		else 
+		{
 			if(FirstReached) CountFree=1;										// Zeit weiter z鋒len wenn der Druck einmal erreicht wurde und in tolleranz ist
 		}
 
-		if(intervall==0 && FirstReached && CountFree && (!stopSaving) ) {	// wenn Speicher intervall Z鋒ler 0, wenn Druck einmal erreicht, wenn Zeit nicht l鋟ft
+		if(intervall==0 && FirstReached && CountFree && (!stopSaving) ) 
+		{	// wenn Speicher intervall Z鋒ler 0, wenn Druck einmal erreicht, wenn Zeit nicht l鋟ft
 			intervall=intverg;
 			mepresure[index]=press;												 	// messwert speichern
 			metimh[index]=ablZeitH;
 			metiml[index]=ablZeitL;
-			if(index<9){
+			if(index<9)
+			{
 				index++;
 			} else
-      {
-        stopSaving = true;
-      }
+			{
+				stopSaving = true;
+			}
 		}
     
 		osDelay(50);
 	}while(gettasto()!=KBD_CODE_STOP && (ablZeitH>0 || ablZeitL>0 || (!stopSaving))); //wait untill the last measurement is done
  
 	MessFlg=false;
-	if(ablZeitH>0 || ablZeitL>0) { 			// pr黤en ob abbruch durch user
+	if(ablZeitH>0 || ablZeitL>0) 
+	{ 			// pr黤en ob abbruch durch user
 		Abbruch=CHANCEL_USER;
 		BEEPER_PlayTones(tones_error);
-	}	else {
-		if(Penetration>0) {
+	}
+	else 
+	{
+		if(Penetration>0) 
+		{
 			IO_SetDcPump(Bit_RESET);// Pumpe ist im system
 			IO_SetAcPump(Bit_RESET);
-      if(!Platform_Data->Penetration_inverse){// Penetration mit Vacuum ja / nein
-      	IO_SetVentil(Bit_RESET); // bel黤ten ein
-      }
+			if(!Platform_Data->Penetration_inverse)
+			{// Penetration mit Vacuum ja / nein
+				IO_SetVentil(Bit_RESET); // bel黤ten ein
+			}
 			dp1=dp2=dp3=dp4=0;
 			dp10=dp20=dp30=dp40=0;
 			dp2=1;
@@ -1324,19 +1446,21 @@ void messung(void)
 			}while(gettasto()!=KBD_CODE_STOP && (ablZeitH>0 || ablZeitL>0));
 			CountFree=0;										// Zeit anhalten
 			
-			if(ablZeitH>0 || ablZeitL>0) {	// pr黤en ob abbruch durch user
+			if(ablZeitH>0 || ablZeitL>0) 
+			{	// pr黤en ob abbruch durch user
 				Abbruch=CHANCEL_USER;
 				BEEPER_PlayTones(tones_error);
 				goto end;
 			}	
-			if(ablZeitH==0 && ablZeitL==0) { // Penetration (Nachlaufzeit in Minuten) abgelaufen
+			if(ablZeitH==0 && ablZeitL==0) 
+			{ // Penetration (Nachlaufzeit in Minuten) abgelaufen
 				sprintf(buf,"%02d%02d",ablZeitH,ablZeitL);
 				LED_Print(LED_DISPLAY_RIGHT, 0,buf);
-        cnt_pene_end = 3;               //3 times beep
+       			cnt_pene_end = 3;               //3 times beep
 				do {
 					BEEPER_PlayTones(tones_1khz);	
 					osDelay(500);
-          cnt_pene_end--;
+          			cnt_pene_end--;
 				}while(cnt_pene_end>0 && gettasto()==KBD_CODE_NONE);
 			}
 		}
@@ -1349,12 +1473,25 @@ end:
 
 	dp1=dp2=dp3=dp4=0;
 	dp10=dp20=dp30=dp40=0;
-	if(AutoPrint) {
-		if(Platform_Data->Language==0) {
+
+	// 显示OK
+	if(Abbruch == 0 && PresReduced == 0)
+	{
+		LED_Print(LED_DISPLAY_LEFT, 0, "    "); 
+		LED_Print(LED_DISPLAY_RIGHT, 0,"OK");
+		while(gettasto()!=KBD_CODE_START);
+		BEEPER_PlayTones(tones_1khz);//按键音
+	}
+
+	if(AutoPrint) 
+	{
+		if(Platform_Data->Language==0) 
+		{
 			LED_Print(LED_DISPLAY_LEFT, 0, "DRUC");
-			LED_Print(LED_DISPLAY_RIGHT, 0,"KEN");			
+			LED_Print(LED_DISPLAY_RIGHT, 0,"KEN");
 		}
-		else {
+		else 
+		{
 			LED_Print(LED_DISPLAY_LEFT, 0, "PRIN");
 			LED_Print(LED_DISPLAY_RIGHT, 0,"TING");			
 		}

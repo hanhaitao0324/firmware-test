@@ -40,7 +40,8 @@ char MAIN_HARDWARE_VERSION[HVER_MAX_LEN+1] = "1.00.0";
 //const char MAIN_FIRMWARE_VERSION[FVER_MAX_LEN+1] = "01.01";		// 2023-03-11 周六 14:09:28
 //const char MAIN_FIRMWARE_VERSION[FVER_MAX_LEN+1] = "01.02";		// 2023-08-04 周五 10:02:53
 //const char MAIN_FIRMWARE_VERSION[FVER_MAX_LEN+1] = "01.03";		// 2023-12-28 周四 18:43:54
-const char MAIN_FIRMWARE_VERSION[FVER_MAX_LEN+1] = "01.04";		// 2024-03-20 周三 16:58:09，无电子秤版本首页显示问题
+//const char MAIN_FIRMWARE_VERSION[FVER_MAX_LEN+1] = "01.04";		// 2024-03-20 周三 16:58:09，无电子秤版本首页显示问题
+const char MAIN_FIRMWARE_VERSION[FVER_MAX_LEN+1] = "01.05";     // 2024-11-21 周四 修复IP地址不能如预期输入的问题
 
 /// @}
 /// @}

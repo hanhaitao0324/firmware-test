@@ -76,7 +76,7 @@ u8 My_RTC_Init(void)
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE); 			// 使能PWR时钟
 	PWR_BackupAccessCmd(ENABLE); 									// 使能后备寄存器访问 
 
-	if(RTC_ReadBackupRegister(RTC_BKP_DR0)!=0xA0A0) 				// 是否第一次配置?
+	if(RTC_ReadBackupRegister(RTC_BKP_DR0)!=0xA0A2) 				// 是否第一次配置?
 	{
 		RCC_LSEConfig(RCC_LSE_ON); 									// LSE 开启    
 		while (RCC_GetFlagStatus(RCC_FLAG_LSERDY) == RESET)			// 检查指定的RCC标志位设置与否,等待低速晶振就绪
@@ -98,17 +98,46 @@ u8 My_RTC_Init(void)
 		RTC_Set_Time(14,19,0,RTC_H12_PM); 											// 设置时间
 		RTC_Set_Date(20,11,16,1); 													// 设置日期
 
-		RTC_WriteBackupRegister(RTC_BKP_DR0,0xA0A0); 						// 标记已经初始化过了
+		RTC_WriteBackupRegister(RTC_BKP_DR0,0xA0A2); 						// 标记已经初始化过了
+		RTC_ApplySmoothCalib(58);
 	}
 
-//	RTC_WriteProtectionCmd(DISABLE);
-//	RTC_WaitForSynchro();
-//	RTC_SmoothCalibConfig(RTC_SmoothCalibPeriod_32sec,
-//							RTC_SmoothCalibPlusPulses_Reset,
-//							4);
-//	RTC_WriteProtectionCmd(ENABLE);
-
 	return 0;
+}
+
+/**
+ * @brief  应用 RTC 平滑校准
+ * @param  calib_value: CALM 值，范围 0~0x1FF（对于32秒周期）
+ * @note   调用前应确保 RTC 时钟源已配置好，且已同步
+ */
+void RTC_ApplySmoothCalib(uint32_t calib_value)
+{
+    /* 1. 使能电源和备份域时钟 */
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);
+
+    /* 2. 允许访问备份域 */
+    PWR_BackupAccessCmd(ENABLE);
+
+    /* 3. 等待 RTC 寄存器同步 */
+    RTC_WaitForSynchro();
+
+    /* 4. 等待校准寄存器更新完成（RECALPF 标志清零） */
+    while (RTC_GetFlagStatus(RTC_FLAG_RECALPF) != RESET);
+
+    /* 5. 禁用 RTC 写保护 */
+    RTC_WriteProtectionCmd(DISABLE);
+
+    /* 6. 配置平滑校准：
+          - 校准周期：32 秒
+          - CALP = 0，负校准，让 RTC 变慢
+          - CALM = calib_value
+    */
+    RTC_SmoothCalibConfig(RTC_SmoothCalibPeriod_32sec,
+                          RTC_SmoothCalibPlusPulses_Reset,
+                          calib_value);
+
+    /* 7. 恢复 RTC 写保护 */
+    RTC_WriteProtectionCmd(ENABLE);
 }
 
 // 设置闹钟时间(按星期闹铃,24小时制)
@@ -165,35 +194,35 @@ void RTC_Set_AlarmA(u8 week,u8 hour,u8 min,u8 sec)
 */
 // cnt:自动重装载值.减到0,产生中断.
 void RTC_Set_WakeUp(u32 wksel,u16 cnt)
-{ 
+{
 	EXTI_InitTypeDef   EXTI_InitStructure;
-	
+
 	RTC_WakeUpCmd(DISABLE); 																	// 关闭WAKE UP
-	
+
 	RTC_WakeUpClockConfig(wksel); 														// 唤醒时钟选择
-	
+
 	RTC_SetWakeUpCounter(cnt); 																// 设置WAKE UP自动重装载寄存器
-	
-	
+
+
 	RTC_ClearITPendingBit(RTC_IT_WUT); 												// 清除RTC WAKE UP的标志
-  EXTI_ClearITPendingBit(EXTI_Line22); 											// 清除LINE22上的中断标志位 
-	 
+	EXTI_ClearITPendingBit(EXTI_Line22); 											// 清除LINE22上的中断标志位 
+		
 	RTC_ITConfig(RTC_IT_WUT,ENABLE); 													// 开启WAKE UP 定时器中断
 	RTC_WakeUpCmd( ENABLE); 																	// 开启WAKE UP 定时器　
-	
+
 	EXTI_InitStructure.EXTI_Line = EXTI_Line22; 							// LINE22
-  EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt; 			// 中断事件
-  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising; 		// 上升沿触发 
-  EXTI_InitStructure.EXTI_LineCmd = ENABLE; 								// 使能LINE22
-  
-  EXTI_Init(&EXTI_InitStructure); 													// 配置
-	
+	EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt; 			// 中断事件
+	EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising; 		// 上升沿触发 
+	EXTI_InitStructure.EXTI_LineCmd = ENABLE; 								// 使能LINE22
+
+	EXTI_Init(&EXTI_InitStructure); 													// 配置
+
 	NVIC_InitStructure.NVIC_IRQChannel = RTC_WKUP_IRQn; 
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x02; 				// 抢占优先级1
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x02; 							// 子优先级2
-  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; 					// 使能外部中断通道
-  
-  NVIC_Init(&NVIC_InitStructure); 													// 配置
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x02; 				// 抢占优先级1
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x02; 							// 子优先级2
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; 					// 使能外部中断通道
+
+	NVIC_Init(&NVIC_InitStructure); 													// 配置
 }
 
 // RTC闹钟中断服务函数
@@ -216,7 +245,6 @@ void RTC_WKUP_IRQHandler(void)
 	{ 
 		RTC_ClearFlag(RTC_FLAG_WUTF);														// 清除中断标志
 		
-		//LED1=!LED1; 
 	}
 	
 	EXTI_ClearITPendingBit(EXTI_Line22); 											// 清除中断线22的中断标志 								

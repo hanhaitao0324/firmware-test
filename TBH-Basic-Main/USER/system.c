@@ -5010,8 +5010,6 @@ void Display_Handler(void)
 						move_step = (int)readMotDat(TMC5160_XACTUAL, &MotSpiStatus);
 					}while(move_step != step);
 
-					//backreset();
-
 					if(!INP1)
 						;
 					else
@@ -51487,8 +51485,6 @@ void KeyPadDisplay(u8 kps)
 // 实时时钟刷新 --------------------------------------------
 void RTC_DisRefresh(void)
 {
-	//RTC_TimeTypeDef RTC_TimeStruct;
-	//RTC_DateTypeDef RTC_DateStruct;
 	uint8_t Hour,Minute,Day,Month,Year;
 	static uint8_t RtcSec;
 	

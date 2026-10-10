@@ -48,12 +48,21 @@ static const Tone_TypeDef tones_error[] = {
 		{   0, 0}
 };
 
-static const Tone_TypeDef tones_3beep[] = {
+static const Tone_TypeDef tones_lock[] = {
 		{4000, 3},
-		{   0,10},
-		{1000, 6},
-		{   0,10},
+		{   0, 6},
 		{4000, 3},
+		{   0, 6},
+		{4000, 3},
+		{   0, 0}
+};
+
+static const Tone_TypeDef tones_unlock[] = {
+		{1500, 3},
+		{   0, 6},
+		{1500, 3},
+		{   0, 6},
+		{1500, 3},
 		{   0, 0}
 };
 

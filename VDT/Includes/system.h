@@ -47,7 +47,7 @@ typedef struct
   char      SerialNumber[SERIAL_NUM_MAX_LEN+2];//8
 ////  uint8_t			  DeviceType;//1
 ////  uint16_t     	Password;//2
-	uint8_t 	  Language;//1
+	uint8_t 	  Language;//1    0:german 1:english
 //	uint8_t				NoLicens;//1
 //	char			messTime[6];//6
 //	int				messZeitL;//4
@@ -137,6 +137,8 @@ enum Chancel_Reason
 
 #define ADREXSICCATOR_SIZE 100  //4 byte
 #define ADRPENETRATION_INVERSE 104 	    //1 byte
+
+#define ADRLOCKPARA 105 // 1 byte
 
 #define ADRSIGNATUR 0x7FFF	    //1 byte
 #define SIGNATUR 0x57				    //1 byte

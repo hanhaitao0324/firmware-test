@@ -307,12 +307,12 @@
      Internal SRAM. */
 /* #define VECT_TAB_SRAM */
 
-//#ifndef BOOT
-//#define VECT_TAB_OFFSET  0x00 /*!< Vector Table base offset field. 
-//                                   This value must be a multiple of 0x200. */
-//#else
-#define VECT_TAB_OFFSET  0x10000 	// 使用BootLoader时修改中断向量偏移量
-//#endif
+#ifndef DEBUG
+#define VECT_TAB_OFFSET  0x10000 /*!< Vector Table base offset field. 
+                                   This value must be a multiple of 0x200. */
+#else
+#define VECT_TAB_OFFSET  0x00 	// 使用BootLoader时修改中断向量偏移量
+#endif
 
 /******************************************************************************/
 

@@ -48,9 +48,9 @@ extern u8 SoundSw; 											// 键盘音开关
 extern u8 ReportSave; 									// 报告保存标志，Gavin，2022-12-08 周四 11:14:20
 extern u8 PasswordSW;										// 密码开关 2021/10/25 12:01:46
 extern uint8_t ReportsIp; 							// 最新测试报告指针
-extern int8_t TimeZone; 								// 时区
+//extern int8_t TimeZone; 								// 时区
 extern u8 DateFormat; 									// 日期格式
-extern u8 DaylightTime; 								// 夏令时
+//extern u8 DaylightTime; 								// 夏令时
 extern u8 CompressibilityPt; 						// 压缩率计算带入参数
 
 extern OQ_ST OQ_PtGp; 									// OQ
@@ -270,9 +270,9 @@ int main(void)
 	ReportSave = readeeprom(ADR_REPSAVE); 					// 读取报告保存标志，Gavin，2022-12-08 周四 11:13:32
 	PasswordSW = readeeprom(Password_SW_ADDR);			// 读取密码开关状态 2021/10/25 12:00:56
 	ReportsIp = readeeprom(ADR_REPORTSIP); 					// 最新测试报告指针
-	TimeZone = readeeprom(ADR_TIMEZONE); 						// 时区读取
+	//TimeZone = readeeprom(ADR_TIMEZONE); 						// 时区读取
 	DateFormat = readeeprom(ADR_DATEFORMAT); 				// 日期格式
-	DaylightTime = readeeprom(ADR_DAYLIGHTTIME); 		// 夏令时
+	//DaylightTime = readeeprom(ADR_DAYLIGHTTIME); 		// 夏令时
 	CompressibilityPt = readeeprom(ADR_V0_V10); 		// 压缩率计算的带入值，V0/V10
 	if((CompressibilityPt != 0)&&(CompressibilityPt != 10))
 		CompressibilityPt = 0;

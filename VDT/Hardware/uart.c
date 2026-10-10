@@ -363,4 +363,4 @@ void com_put2ww(int c)
 {
 	while(com_putchar2(c) > 0)
 		osThreadYield();
-} 
+}

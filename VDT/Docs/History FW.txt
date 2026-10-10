@@ -1,0 +1,94 @@
+  ******************************************************************************
+  * @file    History FW.txt
+  * @author  Erweka GmbH
+  * @date    09/17/2015
+  * @Project VDT
+  * @brief   THIS FILE DOCUMENTS THE CHANGES DURING DEVELOPMENT
+  ******************************************************************************/	
+todo:
+emv Prüfung wurde noch nicht durchgeführt
+
+V2.09.0a
+10.04.2018	FW, EEPROM function improved to avoid I2C bus stall
+
+V2.08.0 
+28.02.2018	FW, Bugfix: ID on report contains smilies (special characters)
+V2.07.0 
+26.02.2018	Release version
+V2.07.1 Beta Version
+13.11.2017	FW, Read the all 12 bytes of Processor id 
+13.11.2017	FW, Der letzte Messwert wird als Druck 0 und Zeit 0 angezeigt
+
+V2.06.0 
+31.05.2017	FW, Feature 0000445 Zeit wird während Pumpenstart angehalten behoben, die Zeit wird jetzt erst angehalten wenn die Tolleranz (Solldruck -5mbar) unterschritten ist.
+31.05.2017	FW, Druckanstiegstimeout auf 3Digits inerhalb 120Sekunden eingestellt
+31.05.2017	FW, auf Ausdruck wird Penetrationseinstellung dokumentiert
+
+V2.05.0 
+02.05.2017	FW, Feature 285 Belüften vor Penetrationszeit behoben, es kann jetzt invertiert & Normal in den Settings eingestellt werden
+02.05.2017	FW, Feature 197 Seriennummer eingeben ermöglichen, auf Reports drucken, in den Settings kann die Seriennummer nur eingesehen werden
+02.05.2017	FW, Feature 197 Report Leerzeile angepasst, behoben
+11.05.2017	FW, BUG	Bei -900mBar werden im Testreport Null Werte (0:00h, 0mBar) angezeigt, behoben, der Druck muss erst einmal erreicht werden bevor die Zeit startet
+12.05.2017	FW, Feature 197 Seriennummer eingeben über Terminal PRG ermögliche.
+15.05.2017	FW, Text in Report "wars -> was " geändert
+
+V2.04.0 
+07.12.2016  FW, bug Timerstart behoben, bei sec.59 or sec.58 nach neustart einer Messung.
+06.12.2016  FW new Feature - Entlüftung nach Penetration Zeit, behoben, es wurde nicht Automatisch durchgeführt
+06.12.2016  FW bug Penetration, behoben, Penetration Setting wurde bei umstellen von Drucken on/off verstellt
+15.11.2016  FW, Pumpenentlüftungszeit verlängert auf 700ms da bei 60Hz & 450mbar kein Anlauf möglich in Venecuelar? für testzwecke
+		Zeile 999 pumpe_entl_start() eingefügt statt sodas bei ersten Anlauf auch entlüftet wird 
+
+V2.04.1 Beta Version 
+07.12.2016  FW, bug Timerstart behoben, bei sec.59 or sec.58 nach neustart einer Messung.
+06.12.2016  FW new Feature - Entlüftung nach Penetration Zeit, behoben, es wurde nicht Automatisch durchgeführt
+06.12.2016  FW bug Penetration, behoben, Penetration Setting wurde bei umstellen von Drucken on/off verstellt
+15.11.2016  FW, Pumpenentlüftungszeit verlängert auf 700ms da bei 60Hz & 450mbar kein Anlauf möglich in Venecuelar? für testzwecke
+		Zeile 999 pumpe_entl_start() eingefügt statt sodas bei ersten Anlauf auch entlüftet wird 
+V2.03.0b
+15.11.2016  FW, Pumpenentlüftungszeit verlängert auf 700ms da bei 60Hz & 450mbar kein Anlauf möglich in Venecuelar? für testzwecke
+		Zeile 999 pumpe_entl_start() eingefügt statt sodas bei ersten Anlauf auch entlüftet wird
+
+V2.02.0
+15.09.2016  FW, Dauerentlüftung der Pumpe bei jedem Druck da bei 60Hz & 400mbar kein Anlauf möglich war
+		Pumpenentlüftungszeit verlängert auf 450ms da bei 60Hz & 400mbar kein Anlauf möglich war
+
+V2.01.0
+12.07.2016  FW, wenn penetration startet wurde sofort entlüftet. behoben
+05.07.2016  FW, problem with RTC (wrong date counting), some minor changes in sourcecode;
+05.07.2016  FW, problem with Usart1 Hardware Handsake
+05.07.2016  FW, bug measurement 10 was 0 fixed
+
+Date
+V2.00.0
+19.11.2015  FW, Entlüftung wird bei dem nachziehen (pumpen) ab 399mBar verwendet sodas Pumpe leichter anlaufen kann
+13.11.2015  FW, ID wird automatisch angezeigt, alle Stellen der ID werden ausgegeben
+10.11.2015  FW, Anzeige Englisch "Mesure" geändert
+03.11.2015  FW, Exiskkator Grössenauswahl wirkt auf MaxVacum 300mm nur noch 700mbar max 
+27.10.2015  FW, Exiskkator Grössenauswahl in Admin Menu eingefügt 150,200,250,300mm
+27.10.2015  FW, Exiskkator wird mit Ausgedruckt
+27.10.2015  FW, Penetration abbruch wird jetzt ausgedruckt
+27.10.2015  FW, wenn Testzeit nicht läuft kein zwischenwert speichern
+27.10.2015  FW, Abbruch durch User, Timeout in Ausdruck geändert
+27.10.2015  FW, timeout wenn der druck nicht ereicht und zeit läuft (PRESSURE_RISE) in system.h
+19-10.2015  FW, Anzeige Monate Groß-Buchstaben
+19-10.2015  FW, Minimal einstellbare Zeit auf 10 Sec. begrenzt
+19-10.2015  FW, Rutine (Messung) für Haltedruck verbessert
+19-10.2015  FW, Anzeige-geschwindigkeit bei Druckanstieg und Haltedruck verlangsamt
+30-09.2015  FW, Anzeige geschwindigkeit verringert
+21-09.2015  FW, Drucken ID eins nach links gerückt
+09-07.2015  FW, Version auf V2.00.0 erhöht
+22-06.2015  FW, an Keil µVision5 CMSIS angepasst
+
+
+1.11	09.02.15    Zeiteingabe runterzählen bei voller minute korrigiert
+1.10	07.08.14	Martel Drucker eingebaut
+1.09	28.11.12	Kalibriermenu verriegelt
+1.08	12.10.12	MessZeit bis 1sek herunter einstellbar
+1.06	22.08.11	sporadisches Aufhägen bein Ausdruck
+1.05	01.11.10	Belüften vor penetrationszeit
+1.04	30.09.10	Penetrationszeit eingefügt
+1.03	20.09.10	Zusatzventil zur Pumpenentlastung auf DC Pumpen Motorausgang
+1.02			Erstauslieferung
+  
+  

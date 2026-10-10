@@ -33,7 +33,8 @@ const char DEVICE_FWDATE[] = "06.03.18";
 
 //const char DEVICE_VERSION[] = "2110"; 			// Gavin，2022-11-25 16:45, 增加v2.09关于打印机复位的内容
 //const char DEVICE_VERSION[] = "2120"; 				// 2023-05-17 11：08，对设置菜单中内部时钟不更新的漏洞进行了修复
-const char DEVICE_VERSION[] = "2130"; 				// 2023/11/3 周五 11:20:25，初始上电尺寸300时压力值被强制修改成700
+//const char DEVICE_VERSION[] = "2130"; 				// 2023/11/3 周五 11:20:25，初始上电尺寸300时压力值被强制修改成700
+const char DEVICE_VERSION[] = "2140"; 				// 2025-11-6 周四 11:11 增加了泵启动后压力值刷新显示的延时
 
 /// @}
 /// @}

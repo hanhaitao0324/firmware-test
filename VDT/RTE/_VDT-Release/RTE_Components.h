@@ -3,7 +3,7 @@
  * Auto generated Run-Time-Environment Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'VDT_v2130' 
+ * Project: 'VDT' 
  * Target:  'VDT-Release' 
  */
 
