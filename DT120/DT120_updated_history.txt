@@ -1,0 +1,89 @@
+DT120 firmware updated history
+======================================
+
+
+v2.04 release on 2024/07/29
+	- fix bug of date setting of 29 Feb on leap year.
+	- fix bug of printing issue when date is 29 Feb.
+	- fix bug of wrong temperature form external PT100 sensor when device is swtich ON but without external PT100 sensor.
+	- fix bug of temperature alarm.
+
+
+
+
+
+v2.03 release on 2021/03/12
+	- change max speed from 220RPM to 250 RPM.
+	- removed stirring function (CONF--STIR) from configuration menu.
+	- add infinity function (TEST--INFI) to test menu. infinity speed and run time can be set before test is start.
+
+
+v2.02b release on 2021/01/13
+	- correct internal memory of firmware, device serial number will not loss after firmware update.
+
+
+v2.02 release on 2021/01/06
+	- add ML option into TEST menu for volume setting.
+	- add BLNK option into TEST menu for method setting.
+
+v2.01 release on 2020/09/18
+	- add function, adding PWMG menu into CONF for password management.
+	- add function, adding date / time password protected function.
+	- add function, adding PWRS function into SERV menu for password reset. 
+
+
+v2.00 release on 12/03/2019
+	- remove unused brands QTEST, CALEVA and TABTEST
+	- removed unused instrument type 6 and 6S
+	- change the calibration not successful trem, use "Failed" instead of "error"
+	- change calibtation menu display, when input the real temperature into device, display will show "REAL" instead of "T37.0"
+	- fix bug. despite wrong nominal temperature. Status "Success" only when Nominal, Readout and Real temperature within tolerance +/-0.2 degree.
+	- fix bug. rename nominal temperature in Real temperature on temperature adjustment report.
+	- change time display with go function. when device reach the target runtime with go function, the time still keep counting on the display. and display start blinking while counting.
+	- removed unused command.
+
+V1.06 Release on 14/12/2017
+	- updated firmware for the display driver, frimware can correct working with hardware v1.00.0 and v1.10.0.
+	- change time display from 00:00:00 to 99:59:59 when the DT light running to time limit.
+	- optimize password input on service menu.
+	- add stirer number up to 12 station on service menu, type DT1212 is viable now.
+
+V1.05 Release on 16/01/2017
+
+   updated on 10/02/2017
+    - fix bug of missing title on testing report.
+   updated on 16/01/2017
+    - change the speed from Drehzahl to Dauer
+    - add min of the setting time for english and german report.
+
+   updated on 25/10/2016
+   - add DHC1520 serial number on the report.
+   - add DHC1520 serial number input menu on serives setting.
+   - fix bug of page number on test report.
+   - add printer reset commend on the firmware.
+
+
+V1.04 release on 13/09/2016
+
+   - fix bug of bigger font for the USB thermal printer.
+
+V1.03 release on 11/07/2016
+
+  - Change the speed and device type on german print out report.
+  - Change the device type on english report.
+
+
+v1.02 release on 13/06/2016
+
+  - add the menu to choose report language, English and German language is possible on the print out report.
+  - add the function to work with Thermal Printer MCP7870.
+  - Change the German language printing report for normal printer and thermal printer.
+
+
+v1.01 release on  18/06/2015
+
+  - change the name of instrument from DT52x to DT12x.
+  - add the update function. the PRN printer board can be updated from the DT120 mian board with same firmware updater.
+
+
+v1.00 release on 18/08/2014

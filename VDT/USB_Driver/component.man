@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v3" manifestVersion="1.0">
+  <assemblyIdentity name="mdmcpq.inf" version="6.0.6000.16386" processorArchitecture="x86" language="neutral" publicKeyToken="31bf3856ad364e35" type="driver" xmlns:cmiv3ns="urn:schemas-microsoft-com:asm.v3" cmiv3ns:date="06/21/2006" />
+  <file hash="bd8c128f1f6daf0e3fb589c6f9d08833000b5834" hashalg="SHA1" name="mdmcpq.inf" sourceName="mdmcpq.inf" importPath="$(build.nttree)\driver_infs\">
+    <infFile xmlns="urn:schemas-microsoft-com:asm.v3" />
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">gTNMwZbY9JXZsRnWNFDWV4Ba6m+QBmcMgD/+omzA1aI=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <file hash="c10be924d7b6581735a793cf4d947050e1e7c0aa" hashalg="SHA1" name="usbser.sys" destinationPath="$(runtime.drivers)\" sourceName="usbser.sys" importPath="$(build.nttree)\">
+    <asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2">
+      <dsig:Transforms xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">UTg2ykSmTmQiogpfsB3gCdmNvwNtbyUfTcsU1igIHhU=</dsig:DigestValue>
+    </asmv2:hash>
+  </file>
+  <memberships>
+    <categoryMembership>
+      <id name="Microsoft.Windows.Categories.Services" version="1.0.0.0" typeName="Service" />
+      <categoryInstance subcategory="usbser">
+        <serviceData name="usbser" displayName="USB Modem Driver" errorControl="ignore" imagePath="\SystemRoot\system32\drivers\usbser.sys" start="demand" type="kernelDriver" />
+      </categoryInstance>
+    </categoryMembership>
+  </memberships>
+  <pnpInfo xmlns="urn:schemas-microsoft-com:asm.v3" xmlns:p1="urn:schemas-microsoft-com:asm.v3" p1:isCriticalDevice="false" p1:classGuid="{4D36E96D-E325-11CE-BFC1-08002BE10318}">
+    <pnpID p1:pnpID="PCMCIA\COMPAQ-PCMCIA_28800_FAX/DATA_MODEM-C0B2" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="" p1:upperFilter="" />
+    <pnpID p1:pnpID="PCMCIA\COMPAQ-MICROCOM_420_56K_PC_CARD_MODEM-DC0A" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="" p1:upperFilter="" />
+    <pnpID p1:pnpID="PCMCIA\RIPICAB-RC288ACL-92B6" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="" p1:upperFilter="" />
+    <pnpID p1:pnpID="PCMCIA\NETELLIGENT_56K-PC_CARD_FAX_MODEM-6511" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="" p1:upperFilter="" />
+    <pnpID p1:pnpID="PCMCIA\NETELLIGENT_56K-PC_CARD_FAX_MODEM-4108" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="" p1:upperFilter="" />
+    <pnpID p1:pnpID="PCMCIA\COMPAQ_NETELLIGENT_56K_-PC_CARD_FAX_MODEM_-4365" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="" p1:upperFilter="" />
+    <pnpID p1:pnpID="PCMCIA\COMPAQ-MICROCOM_420_V.90_K56FLEX_MODEM-5B95" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="" p1:upperFilter="" />
+    <pnpID p1:pnpID="SERENUM\CPQ0415" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="" p1:upperFilter="" />
+    <pnpID p1:pnpID="SERENUM\MNP0503" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="" p1:upperFilter="" />
+    <pnpID p1:pnpID="*CPQB05C" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="" p1:upperFilter="" />
+    <pnpID p1:pnpID="USB\Vid_047e&amp;Pid_bad1" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="&quot;usbser&quot;" p1:upperFilter="" />
+    <pnpID p1:pnpID="USB\VID_047E&amp;PID_F101" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="&quot;usbser&quot;" p1:upperFilter="" />
+    <pnpID p1:pnpID="USB\VID_1183&amp;PID_4008" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="&quot;usbser&quot;" p1:upperFilter="" />
+    <pnpID p1:pnpID="USB\Vid_045a&amp;Pid_07da&amp;Rev_0100" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="&quot;usbser&quot;" p1:upperFilter="" />
+    <pnpID p1:pnpID="USB\VID_045A&amp;PID_0B4A" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="&quot;usbser&quot;" p1:upperFilter="" />
+    <pnpID p1:pnpID="USB\Vid_07b8&amp;Pid_f101" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="&quot;usbser&quot;" p1:upperFilter="" />
+    <pnpID p1:pnpID="USB\Vid_1690&amp;Pid_0101&amp;Rev_0100" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="&quot;usbser&quot;" p1:upperFilter="" />
+    <pnpID p1:pnpID="USB\VID_1395&amp;Pid_7471&amp;Rev_0100" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="&quot;usbser&quot;" p1:upperFilter="" />
+    <pnpID p1:pnpID="USB\Vid_0803&amp;Pid_9700" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="&quot;usbser&quot;" p1:upperFilter="" />
+    <pnpID p1:pnpID="USB\VID_0870&amp;PID_0001" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="&quot;usbser&quot;" p1:upperFilter="" />
+    <pnpID p1:pnpID="USB\VID_0870&amp;PID_0001" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="&quot;usbser&quot;" p1:upperFilter="" />
+    <pnpID p1:pnpID="SERENUM\MTS00B0" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="" p1:upperFilter="" />
+    <pnpID p1:pnpID="USB\Vid_06e0&amp;Pid_f104" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="&quot;usbser&quot;" p1:upperFilter="" />
+    <pnpID p1:pnpID="*AZT4021" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="" p1:upperFilter="" />
+    <pnpID p1:pnpID="*GVC0516" p1:isOriginalID="true" p1:isCompatibleID="false" p1:serviceName="" p1:lowerFilter="" p1:upperFilter="" />
+  </pnpInfo>
+  <driverPackage xmlns="urn:schemas-microsoft-com:asm.v3" xmlns:p1="urn:schemas-microsoft-com:asm.v3" p1:inbox="true" />
+</assembly>

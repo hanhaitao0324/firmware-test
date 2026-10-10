@@ -1,0 +1,379 @@
+##IAR Ninja build file
+
+
+#Rules
+rule COMPILER_XCL
+  command = "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\XclFileGenerator.exe" $xclcommand -f "$rspfile_name"
+  description = IAR_NEW_TOOL+++COMPILER_XCL+++$in
+  rspfile = $rspfile_name
+  rspfile_content = $flags
+
+rule INDEXER
+  command = "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\SourceIndexer.exe" $flags
+  depfile = $out.dep
+  description = IAR_NEW_TOOL+++INDEXER+++$out
+
+rule MAKEBROWSE
+  command = "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\makeBrowseData.exe" $flags
+  description = IAR_NEW_TOOL+++MAKEBROWSE+++$out
+
+rule PDBLINK
+  command = "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\PbdLink.exe" $flags
+  description = IAR_NEW_TOOL+++PDBLINK+++$out
+
+
+
+#Build steps
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\confmenu_tar.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\confmenu_tar.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\confmenu_tar.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\confmenu_tar.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\confmenu_tar.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\confmenu_tar.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\confmenu_tar.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\control.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\control.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\control.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\control.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\control.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\control.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\control.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\crc.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\crc.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\crc.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\crc.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\crc.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\crc.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\crc.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\edit.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\edit.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\edit.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\edit.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\edit.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\edit.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\edit.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\eeprom_tar.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\eeprom_tar.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\eeprom_tar.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\eeprom_tar.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\eeprom_tar.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\eeprom_tar.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\eeprom_tar.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\eeprom_utils.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\eeprom_utils.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\eeprom_utils.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\eeprom_utils.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\eeprom_utils.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\eeprom_utils.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\eeprom_utils.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\ekey.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\ekey.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\ekey.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\ekey.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\ekey.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\ekey.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\ekey.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\engineering_tar.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\engineering_tar.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\engineering_tar.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\engineering_tar.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\engineering_tar.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\engineering_tar.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\engineering_tar.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\external.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\external.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\external.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\external.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\external.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\external.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\external.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\font.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\font.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\font.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\font.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\font.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\font.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\font.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\global.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\global.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\global.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\global.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\global.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\global.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\global.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\kbd.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\kbd.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\kbd.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\kbd.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\kbd.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\kbd.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\kbd.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\led.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\led.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\led.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\led.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\led.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\led.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\led.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\main.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\main.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\main.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\main.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\main.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\main.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\main.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\menu.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\menu.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\menu.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\menu.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\menu.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\menu.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\menu.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\motor.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\motor.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\motor.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\motor.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\motor.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\motor.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\motor.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\parser_tar.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\parser_tar.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\parser_tar.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\parser_tar.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\parser_tar.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\parser_tar.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\parser_tar.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\printrtc.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\printrtc.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\printrtc.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\printrtc.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\printrtc.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\printrtc.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\printrtc.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\rep_strings_tar.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\rep_strings_tar.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\rep_strings_tar.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\rep_strings_tar.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\rep_strings_tar.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\rep_strings_tar.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\rep_strings_tar.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\report_tar.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\report_tar.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\report_tar.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\report_tar.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\report_tar.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\report_tar.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\report_tar.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\rs485.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\rs485.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\rs485.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\rs485.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\rs485.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\rs485.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\rs485.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\sound.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\sound.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\sound.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\sound.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\sound.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\sound.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\sound.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\spi.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\spi.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\spi.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\spi.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\spi.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\spi.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\spi.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\strings.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\strings.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\strings.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\strings.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\strings.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\strings.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\strings.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\syserror.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\syserror.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\syserror.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\syserror.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\syserror.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\syserror.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\syserror.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\test_tar.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\test_tar.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\test_tar.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\test_tar.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\test_tar.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\test_tar.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\test_tar.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\testsetup_tar.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\testsetup_tar.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\testsetup_tar.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\testsetup_tar.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\testsetup_tar.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\testsetup_tar.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\testsetup_tar.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\timedate.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\timedate.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\timedate.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\timedate.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\timedate.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\timedate.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\timedate.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\timer.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\timer.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\timer.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\timer.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\timer.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\timer.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\timer.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\updater.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\updater.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\updater.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\updater.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\updater.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\updater.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\updater.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\usb.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\usb.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\usb.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\usb.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\usb.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\usb.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\usb.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\version_tar.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\version_tar.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\version_tar.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\version_tar.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\version_tar.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\version_tar.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\version_tar.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\xtea.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\TAR-22x\C\xtea.c -xcl_file C$:\git\firmware-China\TAR-22x\BrowseInfo\xtea.xcl -macro_file C$:\git\firmware-China\TAR-22x\BrowseInfo\xtea.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\TAR-22x\C\xtea.c --cpu=m128 -ms -o C$:\git\firmware-China\TAR-22x\Debug\Obj\TAR\ -D DEVICE_TAR --remarks -y --initializers_in_flash --root_variables --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --debug -DENABLE_BIT_DEFINITIONS -e -I C$:\git\firmware-China\TAR-22x\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\TAR-22x\BrowseInfo\xtea.tmp
+  rspfile_name = C$:\git\firmware-China\TAR-22x\BrowseInfo\xtea.xcl.rsp
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\confmenu_tar.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\confmenu_tar.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\confmenu_tar.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\confmenu_tar.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\confmenu_tar.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\control.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\control.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\control.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\control.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\control.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\crc.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\crc.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\crc.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\crc.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\crc.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\edit.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\edit.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\edit.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\edit.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\edit.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\eeprom_tar.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\eeprom_tar.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\eeprom_tar.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\eeprom_tar.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\eeprom_tar.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\eeprom_utils.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\eeprom_utils.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\eeprom_utils.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\eeprom_utils.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\eeprom_utils.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\ekey.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\ekey.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\ekey.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\ekey.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\ekey.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\engineering_tar.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\engineering_tar.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\engineering_tar.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\engineering_tar.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\engineering_tar.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\external.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\external.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\external.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\external.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\external.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\font.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\font.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\font.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\font.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\font.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\global.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\global.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\global.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\global.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\global.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\kbd.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\kbd.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\kbd.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\kbd.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\kbd.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\led.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\led.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\led.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\led.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\led.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\main.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\main.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\main.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\main.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\main.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\menu.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\menu.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\menu.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\menu.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\menu.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\motor.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\motor.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\motor.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\motor.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\motor.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\parser_tar.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\parser_tar.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\parser_tar.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\parser_tar.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\parser_tar.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\printrtc.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\printrtc.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\printrtc.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\printrtc.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\printrtc.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\rep_strings_tar.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\rep_strings_tar.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\rep_strings_tar.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\rep_strings_tar.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\rep_strings_tar.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\report_tar.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\report_tar.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\report_tar.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\report_tar.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\report_tar.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\rs485.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\rs485.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\rs485.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\rs485.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\rs485.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\sound.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\sound.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\sound.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\sound.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\sound.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\spi.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\spi.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\spi.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\spi.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\spi.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\strings.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\strings.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\strings.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\strings.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\strings.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\syserror.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\syserror.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\syserror.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\syserror.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\syserror.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\test_tar.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\test_tar.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\test_tar.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\test_tar.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\test_tar.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\testsetup_tar.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\testsetup_tar.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\testsetup_tar.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\testsetup_tar.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\testsetup_tar.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\timedate.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\timedate.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\timedate.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\timedate.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\timedate.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\timer.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\timer.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\timer.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\timer.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\timer.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\updater.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\updater.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\updater.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\updater.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\updater.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\usb.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\usb.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\usb.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\usb.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\usb.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\version_tar.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\version_tar.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\version_tar.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\version_tar.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\version_tar.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\xtea.pbi : INDEXER C$:\git\firmware-China\TAR-22x\BrowseInfo\xtea.xcl |  $
+C$:\git\firmware-China\TAR-22x\C\xtea.c
+  flags = -out=C$:\git\firmware-China\TAR-22x\BrowseInfo\xtea.pbi -f C$:\git\firmware-China\TAR-22x\BrowseInfo\xtea.xcl
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\tar.pbw : MAKEBROWSE C$:\git\firmware-China\TAR-22x\BrowseInfo\tar.pbd
+  flags = C$:\git\firmware-China\TAR-22x\BrowseInfo\tar.pbd -output C$:\git\firmware-China\TAR-22x\BrowseInfo\tar.pbw
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part0.pbi : PDBLINK C$:\git\firmware-China\TAR-22x\BrowseInfo\confmenu_tar.pbi |  $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\control.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\crc.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\edit.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\eeprom_tar.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\eeprom_utils.pbi
+  flags = -M C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part0.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\confmenu_tar.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\control.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\crc.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\edit.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\eeprom_tar.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\eeprom_utils.pbi
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part1.pbi : PDBLINK C$:\git\firmware-China\TAR-22x\BrowseInfo\ekey.pbi |  $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\engineering_tar.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\external.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\font.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\global.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\kbd.pbi
+  flags = -M C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part1.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\ekey.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\engineering_tar.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\external.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\font.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\global.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\kbd.pbi
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part2.pbi : PDBLINK C$:\git\firmware-China\TAR-22x\BrowseInfo\led.pbi |  $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\main.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\menu.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\motor.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\parser_tar.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\printrtc.pbi
+  flags = -M C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part2.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\led.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\main.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\menu.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\motor.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\parser_tar.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\printrtc.pbi
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part3.pbi : PDBLINK C$:\git\firmware-China\TAR-22x\BrowseInfo\rep_strings_tar.pbi |  $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\report_tar.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\rs485.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\sound.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\spi.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\strings.pbi
+  flags = -M C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part3.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\rep_strings_tar.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\report_tar.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\rs485.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\sound.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\spi.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\strings.pbi
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part4.pbi : PDBLINK C$:\git\firmware-China\TAR-22x\BrowseInfo\syserror.pbi |  $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\test_tar.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\testsetup_tar.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\timedate.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\timer.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\updater.pbi
+  flags = -M C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part4.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\syserror.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\test_tar.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\testsetup_tar.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\timedate.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\timer.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\updater.pbi
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part5.pbi : PDBLINK C$:\git\firmware-China\TAR-22x\BrowseInfo\usb.pbi |  $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\version_tar.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\xtea.pbi
+  flags = -M C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part5.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\usb.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\version_tar.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\xtea.pbi
+
+build C$:\git\firmware-China\TAR-22x\BrowseInfo\tar.pbd : PDBLINK C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part0.pbi |  $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part1.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part2.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part3.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part4.pbi $
+C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part5.pbi
+  flags = -M C$:\git\firmware-China\TAR-22x\BrowseInfo\tar.pbd C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part0.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part1.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part2.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part3.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part4.pbi C$:\git\firmware-China\TAR-22x\BrowseInfo\tar_part5.pbi
+

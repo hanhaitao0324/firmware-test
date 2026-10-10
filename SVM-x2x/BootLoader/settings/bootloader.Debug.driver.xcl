@@ -1,0 +1,25 @@
+"--cpu=m128" 
+
+"--enhanced_core" 
+
+"-p" 
+
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\avr\Config\iom128.ddf" 
+
+"--eeprom_size" 
+
+"4096" 
+
+"--jtagice_clock=100000" 
+
+"--jtagice_leave_timers_running" 
+
+"--drv_set_putchar_breakpoint" 
+
+"--drv_set_getchar_breakpoint" 
+
+"--drv_communication=USB" 
+
+
+
+

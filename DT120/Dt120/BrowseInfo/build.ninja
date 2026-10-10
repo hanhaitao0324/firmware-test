@@ -1,0 +1,472 @@
+##IAR Ninja build file
+
+
+#Rules
+rule COMPILER_XCL
+  command = "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\XclFileGenerator.exe" $xclcommand -f "$rspfile_name"
+  description = IAR_NEW_TOOL+++COMPILER_XCL+++$in
+  rspfile = $rspfile_name
+  rspfile_content = $flags
+
+rule INDEXER
+  command = "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\SourceIndexer.exe" $flags
+  depfile = $out.dep
+  description = IAR_NEW_TOOL+++INDEXER+++$out
+
+rule MAKEBROWSE
+  command = "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\makeBrowseData.exe" $flags
+  description = IAR_NEW_TOOL+++MAKEBROWSE+++$out
+
+rule PDBLINK
+  command = "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\common\bin\PbdLink.exe" $flags
+  description = IAR_NEW_TOOL+++PDBLINK+++$out
+
+
+
+#Build steps
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\adc.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\adc.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\adc.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\adc.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\adc.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\adc.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\adc.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\calibrate.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\calibrate.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\calibrate.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\calibrate.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\calibrate.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\calibrate.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\calibrate.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\confmenu.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\confmenu.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\confmenu.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\confmenu.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\confmenu.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\confmenu.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\confmenu.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\control.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\control.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\control.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\control.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\control.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\control.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\control.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\crc.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\crc.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\crc.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\crc.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\crc.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\crc.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\crc.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dhc.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\dhc.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dhc.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dhc.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\dhc.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dhc.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dhc.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dropper.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\dropper.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dropper.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dropper.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\dropper.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dropper.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dropper.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\edit.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\edit.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\edit.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\edit.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\edit.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\edit.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\edit.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\eeprom.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\eeprom.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\eeprom.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\eeprom.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\eeprom.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\eeprom.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\eeprom.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\ekey.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\ekey.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\ekey.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\ekey.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\ekey.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\ekey.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\ekey.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\engineering.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\engineering.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\engineering.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\engineering.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\engineering.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\engineering.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\engineering.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\external.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\external.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\external.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\external.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\external.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\external.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\external.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\font.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\font.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\font.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\font.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\font.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\font.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\font.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\fram.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\fram.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\fram.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\fram.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\fram.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\fram.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\fram.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\global.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\global.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\global.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\global.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\global.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\global.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\global.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\kbd.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\kbd.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\kbd.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\kbd.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\kbd.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\kbd.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\kbd.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\led.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\led.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\led.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\led.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\led.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\led.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\led.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\lifter.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\lifter.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\lifter.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\lifter.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\lifter.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\lifter.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\lifter.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\main.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\main.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\main.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\main.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\main.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\main.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\main.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\menu.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\menu.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\menu.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\menu.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\menu.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\menu.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\menu.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\motor.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\motor.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\motor.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\motor.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\motor.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\motor.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\motor.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\parser.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\parser.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\parser.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\parser.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\parser.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\parser.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\parser.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\printrtc.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\printrtc.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\printrtc.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\printrtc.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\printrtc.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\printrtc.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\printrtc.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\report.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\report.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\report.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\report.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\report.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\report.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\report.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\rs232.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\rs232.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\rs232.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\rs232.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\rs232.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\rs232.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\rs232.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\rs485.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\rs485.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\rs485.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\rs485.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\rs485.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\rs485.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\rs485.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\sampler.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\sampler.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\sampler.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\sampler.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\sampler.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\sampler.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\sampler.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\sound.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\sound.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\sound.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\sound.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\sound.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\sound.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\sound.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\spi.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\spi.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\spi.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\spi.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\spi.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\spi.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\spi.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\stepper.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\stepper.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\stepper.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\stepper.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\stepper.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\stepper.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\stepper.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\strings.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\strings.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\strings.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\strings.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\strings.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\strings.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\strings.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\syserror.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\syserror.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\syserror.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\syserror.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\syserror.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\syserror.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\syserror.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\temp.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\temp.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\temp.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\temp.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\temp.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\temp.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\temp.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\test.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\test.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\test.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\test.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\test.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\test.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\test.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\testsetup.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\testsetup.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\testsetup.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\testsetup.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\testsetup.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\testsetup.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\testsetup.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\timedate.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\timedate.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\timedate.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\timedate.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\timedate.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\timedate.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\timedate.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\timer.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\timer.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\timer.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\timer.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\timer.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\timer.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\timer.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\updater.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\updater.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\updater.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\updater.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\updater.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\updater.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\updater.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\usb.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\usb.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\usb.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\usb.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\usb.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\usb.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\usb.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\utils.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\utils.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\utils.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\utils.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\utils.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\utils.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\utils.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\version.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\version.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\version.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\version.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\version.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\version.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\version.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\xtea.xcl : COMPILER_XCL 
+  xclcommand = -source_file C$:\git\firmware-China\DT120\Dt120\C\xtea.c -xcl_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\xtea.xcl -macro_file C$:\git\firmware-China\DT120\Dt120\BrowseInfo\xtea.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.1\avr\bin\iccavr.exe"
+  flags = C$:\git\firmware-China\DT120\Dt120\C\xtea.c --cpu=m128a -ms -o C$:\git\firmware-China\DT120\Dt120\Debug\Obj\ -lCN C$:\git\firmware-China\DT120\Dt120\Debug\List\ --remarks -y --initializers_in_flash --no_cse --no_inline --no_code_motion --no_cross_call --no_clustering --no_tbaa --cross_call_passes=2 --debug -DENABLE_BIT_DEFINITIONS --do_cross_call -e -I C$:\git\firmware-China\DT120\Dt120\Include\ --eeprom_size 4096 --clib -Ohz --predef_macros C$:\git\firmware-China\DT120\Dt120\BrowseInfo\xtea.tmp
+  rspfile_name = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\xtea.xcl.rsp
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\adc.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\adc.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\adc.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\adc.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\adc.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\calibrate.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\calibrate.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\calibrate.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\calibrate.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\calibrate.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\confmenu.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\confmenu.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\confmenu.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\confmenu.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\confmenu.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\control.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\control.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\control.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\control.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\control.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\crc.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\crc.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\crc.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\crc.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\crc.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dhc.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dhc.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\dhc.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dhc.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dhc.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dropper.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dropper.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\dropper.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dropper.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dropper.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\edit.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\edit.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\edit.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\edit.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\edit.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\eeprom.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\eeprom.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\eeprom.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\eeprom.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\eeprom.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\ekey.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\ekey.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\ekey.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\ekey.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\ekey.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\engineering.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\engineering.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\engineering.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\engineering.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\engineering.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\external.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\external.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\external.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\external.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\external.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\font.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\font.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\font.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\font.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\font.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\fram.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\fram.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\fram.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\fram.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\fram.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\global.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\global.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\global.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\global.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\global.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\kbd.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\kbd.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\kbd.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\kbd.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\kbd.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\led.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\led.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\led.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\led.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\led.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\lifter.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\lifter.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\lifter.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\lifter.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\lifter.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\main.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\main.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\main.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\main.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\main.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\menu.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\menu.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\menu.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\menu.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\menu.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\motor.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\motor.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\motor.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\motor.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\motor.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\parser.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\parser.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\parser.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\parser.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\parser.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\printrtc.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\printrtc.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\printrtc.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\printrtc.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\printrtc.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\report.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\report.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\report.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\report.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\report.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\rs232.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\rs232.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\rs232.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\rs232.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\rs232.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\rs485.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\rs485.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\rs485.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\rs485.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\rs485.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\sampler.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\sampler.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\sampler.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\sampler.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\sampler.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\sound.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\sound.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\sound.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\sound.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\sound.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\spi.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\spi.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\spi.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\spi.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\spi.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\stepper.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\stepper.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\stepper.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\stepper.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\stepper.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\strings.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\strings.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\strings.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\strings.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\strings.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\syserror.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\syserror.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\syserror.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\syserror.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\syserror.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\temp.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\temp.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\temp.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\temp.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\temp.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\test.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\test.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\test.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\test.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\test.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\testsetup.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\testsetup.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\testsetup.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\testsetup.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\testsetup.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\timedate.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\timedate.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\timedate.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\timedate.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\timedate.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\timer.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\timer.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\timer.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\timer.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\timer.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\updater.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\updater.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\updater.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\updater.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\updater.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\usb.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\usb.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\usb.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\usb.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\usb.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\utils.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\utils.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\utils.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\utils.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\utils.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\version.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\version.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\version.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\version.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\version.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\xtea.pbi : INDEXER C$:\git\firmware-China\DT120\Dt120\BrowseInfo\xtea.xcl |  $
+C$:\git\firmware-China\DT120\Dt120\C\xtea.c
+  flags = -out=C$:\git\firmware-China\DT120\Dt120\BrowseInfo\xtea.pbi -f C$:\git\firmware-China\DT120\Dt120\BrowseInfo\xtea.xcl
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120.pbw : MAKEBROWSE C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120.pbd
+  flags = C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120.pbd -output C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120.pbw
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part0.pbi : PDBLINK C$:\git\firmware-China\DT120\Dt120\BrowseInfo\adc.pbi |  $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\calibrate.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\confmenu.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\control.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\crc.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dhc.pbi
+  flags = -M C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part0.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\adc.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\calibrate.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\confmenu.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\control.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\crc.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dhc.pbi
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part1.pbi : PDBLINK C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dropper.pbi |  $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\edit.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\eeprom.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\ekey.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\engineering.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\external.pbi
+  flags = -M C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part1.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dropper.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\edit.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\eeprom.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\ekey.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\engineering.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\external.pbi
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part2.pbi : PDBLINK C$:\git\firmware-China\DT120\Dt120\BrowseInfo\font.pbi |  $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\fram.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\global.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\kbd.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\led.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\lifter.pbi
+  flags = -M C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part2.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\font.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\fram.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\global.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\kbd.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\led.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\lifter.pbi
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part3.pbi : PDBLINK C$:\git\firmware-China\DT120\Dt120\BrowseInfo\main.pbi |  $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\menu.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\motor.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\parser.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\printrtc.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\report.pbi
+  flags = -M C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part3.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\main.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\menu.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\motor.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\parser.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\printrtc.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\report.pbi
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part4.pbi : PDBLINK C$:\git\firmware-China\DT120\Dt120\BrowseInfo\rs232.pbi |  $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\rs485.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\sampler.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\sound.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\spi.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\stepper.pbi
+  flags = -M C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part4.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\rs232.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\rs485.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\sampler.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\sound.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\spi.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\stepper.pbi
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part5.pbi : PDBLINK C$:\git\firmware-China\DT120\Dt120\BrowseInfo\strings.pbi |  $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\syserror.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\temp.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\test.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\testsetup.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\timedate.pbi
+  flags = -M C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part5.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\strings.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\syserror.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\temp.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\test.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\testsetup.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\timedate.pbi
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part6.pbi : PDBLINK C$:\git\firmware-China\DT120\Dt120\BrowseInfo\timer.pbi |  $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\updater.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\usb.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\utils.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\version.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\xtea.pbi
+  flags = -M C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part6.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\timer.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\updater.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\usb.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\utils.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\version.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\xtea.pbi
+
+build C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120.pbd : PDBLINK C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part0.pbi |  $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part1.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part2.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part3.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part4.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part5.pbi $
+C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part6.pbi
+  flags = -M C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120.pbd C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part0.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part1.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part2.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part3.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part4.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part5.pbi C$:\git\firmware-China\DT120\Dt120\BrowseInfo\dt120_part6.pbi
+

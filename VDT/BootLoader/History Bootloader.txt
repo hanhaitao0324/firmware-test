@@ -1,0 +1,25 @@
+  ******************************************************************************
+  * @file    changes.txt
+  * @author  Erweka GmbH
+  * @date    06/22/2015
+  * @Project Bootloader for VDT, 
+  * @brief   THIS FILE DOCUMENTS THE CHANGES DURING DEVELOPMENT
+  ******************************************************************************/	
+
+FYI: die Bootloader Dtei für Inro war zu Groß, die FW hat den Bootloader am Ende überschrieben. Der Bootloader konnte so nicht mehr starten.
+
+Date
+V-0.01.0
+18.11.2015  FW, Button SB1 & SB6 (links oben,unten) kann man jetzt gleichzeitig drücken um Bootloader anzuhalten, ab HW Version V2.10.0 mit Brücke IC1 Pin27-28
+05.11.2015	Keil, One Elf Section per Function eingeschaltet, reduziert code size ! 
+			The One ELF Section per Function option tells the compiler to put all functions into their own individual ELF sections. This allows the linker to remove unused functions.  
+05.11.2015  FW, FLASH_PAGE_SIZE auf 1024 geändert da das löschen länger gedauert hat
+05.11.2015  FW, SERIAL_BAUDRATE auf 9600 für Bootloader kommunikation geändert
+22-06.2015  FW, DEVICE_ID auf 34 für VDT eingestellt
+22-06.2015  FW, Kommentare eingefügt
+22-06.2015  FW, LED PA15 blinkt wenn Bootloader Programmiert wurde
+22-06.2015  FW, Version auf 0.01.0 erhöht
+
+
+  
+  

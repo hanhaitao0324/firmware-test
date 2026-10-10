@@ -1,0 +1,358 @@
+成功打开串口监视, 进程: 6728     updater_2.0.0.13.exe
+
+COM3 Write(asc): 3(Bytes)
+
+COM3 Read(asc): 31(Bytes) Wrong or unsupported command
+>
+COM3 Write(asc): 6(Bytes)UPFW
+
+COM3 Read(asc): 2(Bytes) O
+
+COM3 Write(asc): 3(Bytes)uUE
+COM3 Read(asc): 1(Bytes) ?
+COM3 Write(asc): 3(Bytes)uUD
+COM3 Read(asc): 1(Bytes) 
+COM3 Write(asc): 3(Bytes)uUI
+COM3 Read(asc): 3(Bytes) ?
+COM3 Write(asc): 3(Bytes)uU0
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1	
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1	€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1 
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1 €
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1!
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1!€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1"
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1"€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1#
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1#€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1$
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1$€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1%
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1%€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1&
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1&€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1'
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1'€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1(
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1(€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1)
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1)€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1*
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1*€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1+
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1+€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1,
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1,€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1-
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1-€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1.
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1.€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1/
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1/€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU10
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU10€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU11
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU11€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU12
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU12€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU13
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU13€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU14
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU14€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU15
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU15€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU16
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU16€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU17
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU17€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU18
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU18€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU19
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU19€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1:
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1:€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1;
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1;€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1<
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1<€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1=
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1=€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1>
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1>€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1?
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1?€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1@
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1@€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1A
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1A€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1B
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1B€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1C
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1C€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1D
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1D€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1E
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1E€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1F
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1F€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1G
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1G€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1H
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1H€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1I
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1I€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1J
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1J€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1K
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1K€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1L
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1L€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1M
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1M€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1N
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1N€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1O
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1O€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1P
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1P€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1Q
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1Q€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 266(Bytes)uU1R
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 214(Bytes)uU1R€
+COM3 Read(asc): 1(Bytes) !
+COM3 Write(asc): 3(Bytes)uUR
+COM3: 关闭
+
+已关闭串口监视

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<Project>
+  <Desktop>
+    <Static>
+      <Debug-Log>
+        
+        
+      <ColumnWidth0>20</ColumnWidth0><ColumnWidth1>1382</ColumnWidth1></Debug-Log>
+      <Build>
+        <ColumnWidth0>20</ColumnWidth0>
+        <ColumnWidth1>1036</ColumnWidth1>
+        <ColumnWidth2>276</ColumnWidth2>
+        <ColumnWidth3>69</ColumnWidth3>
+      </Build>
+      <Workspace>
+        <ColumnWidths>
+          
+          
+          
+          
+        <Column0>193</Column0><Column1>27</Column1><Column2>27</Column2><Column3>27</Column3></ColumnWidths>
+      </Workspace>
+      <Disassembly>
+        
+        
+      <MixedMode>1</MixedMode><CodeCovShow>0</CodeCovShow></Disassembly>
+    <Watch><Format><struct_types/><watch_formats/></Format><Column0>100</Column0><Column1>100</Column1><Column2>100</Column2><Column3>100</Column3></Watch></Static>
+    <Windows>
+      
+      
+      
+    <Wnd4>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-18903-10274</Identity>
+            <TabName>Debug Log</TabName>
+            <Factory>Debug-Log</Factory>
+            <Session/>
+          </Tab>
+          <Tab>
+            <Identity>TabID-18381-10284</Identity>
+            <TabName>Build</TabName>
+            <Factory>Build</Factory>
+            <Session/>
+          </Tab>
+        </Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd4><Wnd5>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-29652-10277</Identity>
+            <TabName>Workspace</TabName>
+            <Factory>Workspace</Factory>
+            <Session>
+              
+            <NodeDict><ExpandedNode>&lt;ws></ExpandedNode><ExpandedNode>&lt;ws>/bootloader</ExpandedNode><ExpandedNode>&lt;ws>/dt520</ExpandedNode><ExpandedNode>&lt;ws>/dt720</ExpandedNode><ExpandedNode>dt520</ExpandedNode></NodeDict></Session>
+          </Tab>
+        </Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd5><Wnd6>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-7632-10281</Identity>
+            <TabName>Disassembly</TabName>
+            <Factory>Disassembly</Factory>
+            <Session/>
+          </Tab>
+        </Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd6><Wnd7><Tabs><Tab><Identity>TabID-8302-27787</Identity><TabName>Watch</TabName><Factory>Watch</Factory><Session><Expressions><Expression><Expression>RS485_Status</Expression></Expression></Expressions><TabId>0</TabId><Column0>100</Column0><Column1>100</Column1><Column2>100</Column2><Column3>100</Column3></Session></Tab></Tabs><SelectedTab>0</SelectedTab></Wnd7></Windows>
+    <Editor>
+      
+      
+      
+      
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\testsetup.c</Filename><XPos>0</XPos><YPos>157</YPos><SelStart>4638</SelStart><SelEnd>4638</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\control.c</Filename><XPos>0</XPos><YPos>23</YPos><SelStart>939</SelStart><SelEnd>939</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\led.c</Filename><XPos>0</XPos><YPos>292</YPos><SelStart>7865</SelStart><SelEnd>7865</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\utils.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>206</SelStart><SelEnd>206</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\syserror.c</Filename><XPos>0</XPos><YPos>5</YPos><SelStart>256</SelStart><SelEnd>256</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\dropper.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>534</SelStart><SelEnd>552</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\kbd.c</Filename><XPos>0</XPos><YPos>32</YPos><SelStart>966</SelStart><SelEnd>966</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\motor.c</Filename><XPos>0</XPos><YPos>167</YPos><SelStart>4047</SelStart><SelEnd>4047</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\stepper.c</Filename><XPos>0</XPos><YPos>34</YPos><SelStart>1157</SelStart><SelEnd>1157</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\confmenu.c</Filename><XPos>0</XPos><YPos>582</YPos><SelStart>13459</SelStart><SelEnd>13459</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\report.c</Filename><XPos>0</XPos><YPos>1391</YPos><SelStart>75762</SelStart><SelEnd>75762</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\menu.c</Filename><XPos>0</XPos><YPos>110</YPos><SelStart>2779</SelStart><SelEnd>2779</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\engineering.c</Filename><XPos>0</XPos><YPos>605</YPos><SelStart>16799</SelStart><SelEnd>16799</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\version.c</Filename><XPos>0</XPos><YPos>132</YPos><SelStart>6530</SelStart><SelEnd>6530</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\parser.c</Filename><XPos>0</XPos><YPos>798</YPos><SelStart>27939</SelStart><SelEnd>27942</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\strings.c</Filename><XPos>0</XPos><YPos>78</YPos><SelStart>3162</SelStart><SelEnd>3162</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\edit.c</Filename><XPos>0</XPos><YPos>555</YPos><SelStart>13693</SelStart><SelEnd>13693</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\dhc.c</Filename><XPos>0</XPos><YPos>111</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\Include\defines.h</Filename><XPos>0</XPos><YPos>19</YPos><SelStart>642</SelStart><SelEnd>642</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\Include\pins.h</Filename><XPos>0</XPos><YPos>127</YPos><SelStart>3763</SelStart><SelEnd>3763</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\rs232.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>128</SelStart><SelEnd>128</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\usb.c</Filename><XPos>0</XPos><YPos>120</YPos><SelStart>3362</SelStart><SelEnd>3372</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\updater.c</Filename><XPos>0</XPos><YPos>43</YPos><SelStart>1034</SelStart><SelEnd>1034</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\Include\const.h</Filename><XPos>0</XPos><YPos>248</YPos><SelStart>5659</SelStart><SelEnd>5659</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\main.c</Filename><XPos>0</XPos><YPos>132</YPos><SelStart>3201</SelStart><SelEnd>3201</SelEnd></Tab><ActiveTab>24</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\external.c</Filename><XPos>0</XPos><YPos>18</YPos><SelStart>693</SelStart><SelEnd>693</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\rs485.c</Filename><XPos>0</XPos><YPos>11</YPos><SelStart>676</SelStart><SelEnd>676</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\Include\rs485.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>79</SelStart><SelEnd>79</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\Include\commands.h</Filename><XPos>0</XPos><YPos>82</YPos><SelStart>2261</SelStart><SelEnd>2261</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\timer.c</Filename><XPos>0</XPos><YPos>122</YPos><SelStart>3539</SelStart><SelEnd>3539</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\sampler.c</Filename><XPos>0</XPos><YPos>100</YPos><SelStart>3115</SelStart><SelEnd>3115</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>D:\ProjectFile\&#x51eF;&#x7279;\DT520\SoftWare\DT52x-v1.00\Dt52x\C\test.c</Filename><XPos>0</XPos><YPos>677</YPos><SelStart>21824</SelStart><SelEnd>21824</SelEnd></Tab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
+    <Positions>
+      
+      
+      
+      
+      
+    <Top><Row0><Sizes><Toolbar-004adcc8><key>iaridepm.enu1</key></Toolbar-004adcc8></Sizes></Row0><Row1><Sizes><Toolbar-05f55d38><key>debuggergui.enu1</key></Toolbar-05f55d38></Sizes></Row1></Top><Left><Row0><Sizes><Wnd5><Rect><Top>-2</Top><Left>-2</Left><Bottom>614</Bottom><Right>283</Right><x>-2</x><y>-2</y><xscreen>157</xscreen><yscreen>181</yscreen><sizeHorzCX>109028</sizeHorzCX><sizeHorzCY>209977</sizeHorzCY><sizeVertCX>197917</sizeVertCX><sizeVertCY>714617</sizeVertCY></Rect></Wnd5></Sizes></Row0></Left><Right><Row0><Sizes><Wnd6><Rect><Top>-2</Top><Left>-2</Left><Bottom>614</Bottom><Right>403</Right><x>-2</x><y>-2</y><xscreen>157</xscreen><yscreen>181</yscreen><sizeHorzCX>109028</sizeHorzCX><sizeHorzCY>209977</sizeHorzCY><sizeVertCX>281250</sizeVertCX><sizeVertCY>714617</sizeVertCY></Rect></Wnd6></Sizes></Row0><Row1><Sizes><Wnd7><Rect><Top>-2</Top><Left>401</Left><Bottom>614</Bottom><Right>601</Right><x>401</x><y>-2</y><xscreen>200</xscreen><yscreen>200</yscreen><sizeHorzCX>138889</sizeHorzCX><sizeHorzCY>232019</sizeHorzCY><sizeVertCX>138889</sizeVertCX><sizeVertCY>714617</sizeVertCY></Rect></Wnd7></Sizes></Row1></Right><Bottom><Row0><Sizes><Wnd4><Rect><Top>-2</Top><Left>-2</Left><Bottom>179</Bottom><Right>1442</Right><x>-2</x><y>-2</y><xscreen>1444</xscreen><yscreen>181</yscreen><sizeHorzCX>1002778</sizeHorzCX><sizeHorzCY>209977</sizeHorzCY><sizeVertCX>109028</sizeVertCX><sizeVertCY>209977</sizeVertCY></Rect></Wnd4></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
+  </Desktop>
+</Project>
+
+

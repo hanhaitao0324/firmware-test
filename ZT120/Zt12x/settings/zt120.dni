@@ -1,0 +1,54 @@
+[Stack]
+FillEnabled=0
+OverflowWarningsEnabled=1
+WarningThreshold=90
+SpWarningsEnabled=1
+WarnLogOnly=1
+UseTrigger=1
+TriggerName=main
+LimitSize=0
+ByteLimit=50
+[DebugChecksum]
+Checksum=-7246078
+[CodeCoverage]
+Enabled=_ 0
+[CallStack]
+ShowArgs=0
+[Disassembly]
+MixedMode=1
+[CallStackLog]
+Enabled=0
+[DriverProfiling]
+Enabled=0
+Mode=1
+Graph=0
+Symbiont=0
+Exclusions=
+[DataLog]
+LogEnabled=0
+SumEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+ShowTimeSum=1
+[Breakpoints2]
+Count=0
+[Trace1]
+Enabled=0
+ShowSource=1
+[Log file]
+LoggingEnabled=_ 0
+LogFile=_ ""
+Category=_ 0
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
+[Breakpoints]
+Bp0=_ "STD_CODE" "CODE:0x009792" 0 0 0 0 "" 0 ""
+Count=1
+[Aliases]
+A0=_ "D:\ProjectFile-NBPC\凯特\ZT120\SoftWare\ZT120-v1.0\Zt12x\C\engineering.c" ""
+A1=_ "D:\ProjectFile-NBPC\凯特\ZT120\SoftWare\ZT120-v1.0\Zt12x\C\external.c" ""
+A2=_ "D:\ProjectFile-NBPC\凯特\ZT120\SoftWare\ZT120-v1.0\Zt12x\C\fram.c" ""
+A3=_ "D:\ProjectFile-NBPC\凯特\ZT120\SoftWare\ZT120-v1.0\Zt12x\C\main.c" "\\GAVIN_NBPC\ProjectFile-NBPC\凯特\ZT120\SoftWare\ZT120-v1.0\Zt12x\C\main.c"
+Count=4
+SuppressDialog=0

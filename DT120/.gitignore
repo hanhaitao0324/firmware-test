@@ -1,0 +1,45 @@
+# Ignore build directories
+**/Debug/
+**/Release/
+**/Output/
+
+# Ignore object files and static libraries
+*.o
+*.a
+*.lib
+
+# Ignore generated files
+*.lst
+*.map
+*.ewd
+*.ewp.bak
+*.eww
+*.dep
+*.err
+
+# Ignore temporary files and backups
+*.tmp
+*.bak
+*.log
+*~
+~*
+
+# Ignore IAR-generated files and directories
+**/.settings/
+**/outputs/
+**/module/
+**/target/
+
+# Ignore version control and IDE directories
+.git/
+.hg/
+.svn/
+.idea/
+.vscode/
+
+# Do not ignore the main project file
+!.ewp
+
+# Optional: include workspace files if shared
+!.ewd
+!.eww

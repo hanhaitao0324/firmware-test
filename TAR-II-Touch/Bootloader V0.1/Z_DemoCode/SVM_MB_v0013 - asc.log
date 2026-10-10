@@ -1,0 +1,745 @@
+成功打开串口监视, 进程: 11696    updater(v20016).exe
+COM4 Write(asc): 3(Bytes)
+
+COM4 Write(asc): 6(Bytes)UPFW
+
+COM4 Write(asc): 3(Bytes)uUE
+COM4 Read(asc): 1(Bytes) ?
+COM4 Write(asc): 3(Bytes)uUD
+COM4 Read(asc): 1(Bytes) (
+COM4 Write(asc): 3(Bytes)uUI
+COM4 Read(asc): 3(Bytes) "
+COM4 Write(asc): 3(Bytes)uU0
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1	
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1 
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1!
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1"
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1#
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1$
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1%
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1&
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1'
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1(
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1)
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1*
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1+
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1,
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1-
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1.
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1/
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU10
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU11
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU12
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU13
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU14
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU15
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU16
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU17
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU18
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU19
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1:
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1;
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1<
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1=
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1>
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1@
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1A
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1B
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1C
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1D
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1E
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1F
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1G
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1H
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1I
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1J
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1K
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1L
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1M
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1N
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1O
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1P
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1Q
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1R
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1S
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1T
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1U
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1V
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1W
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1X
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1Y
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1Z
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1[
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1\
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1]
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1^
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1_
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1`
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1a
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1b
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1c
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1d
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1e
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1f
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1g
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1h
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1i
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1j
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1k
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1l
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1m
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1n
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1o
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1p
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1q
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1r
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1s
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1t
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1u
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1v
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1w
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1x
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1y
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1z
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1{
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1|
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1}
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1~
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1€
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1	
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1 
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1!
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1"
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1#
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1$
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1%
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1&
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1'
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1(
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1)
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1*
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1+
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1,
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1-
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1.
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1/
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU10
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU11
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU12
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU13
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU14
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU15
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU16
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU17
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU18
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU19
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1:
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1;
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1<
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1=
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1>
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1?
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1@
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1A
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1B
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1C
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1D
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1E
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1F
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1G
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1H
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1I
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1J
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1K
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1L
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1M
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1N
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1O
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1P
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1Q
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1R
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1S
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1T
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1U
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1V
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1W
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1X
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1Y
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1Z
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1[
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1\
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1]
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1^
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1_
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1`
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1a
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1b
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1c
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1d
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1e
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1f
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1g
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 267(Bytes)uU1h
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 95(Bytes)uU1i
+COM4 Read(asc): 1(Bytes) !
+COM4 Write(asc): 3(Bytes)uUR
+COM4: 关闭
+
+已关闭串口监视

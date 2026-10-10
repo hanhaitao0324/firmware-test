@@ -1,0 +1,12 @@
+
+V 1.9.0.00		2024-05-09
+	- add device ID 42 as TBH II
+	- change device name from SVM NEXT control to SVM II Main
+	- change device name from SVM NEXT to SVM II Touch
+
+
+V 1.8.0.33		2020-01-01
+	- add controller STM32F103RBT6 and chip signture "20 01 01"
+	- add controller STM32F429IGT6 and chip singture "20 01 01"
+	- add device ID 40 as SVM NEXT control
+	- add device ID 41 as SVM NEXT
